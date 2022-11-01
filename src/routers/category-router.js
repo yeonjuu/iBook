@@ -85,4 +85,17 @@ categoryRouter.put("/:categoryId", async function (req, res, next) {
   }
 );
 
+categoryRouter.delete("/:categoryId", async function (req, res, next) {
+  try {
+    const categoryId = req.params.categoryId;
+
+    const category = await categoryService.removeProduct(categoryId);
+
+    res.status(200).json(category);
+  } catch (error) {
+    next(error);
+  }
+}
+);
+
 export { categoryRouter };
