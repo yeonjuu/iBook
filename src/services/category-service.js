@@ -1,12 +1,11 @@
 import { categoryModel } from "../db";
 
 class CategoryService {
-  // 본 파일의 맨 아래에서, new UserService(userModel) 하면, 이 함수의 인자로 전달됨
   constructor(categoryModel) {
     this.categoryModel = categoryModel;
   }
 
-  // 회원가입
+  // 카테고리 추가
   async addCategory(categoryInfo) {
     // 객체 destructuring
     const { name } = categoryInfo;
@@ -33,52 +32,29 @@ class CategoryService {
     return categories;
   }
 
-  // 카테고리정보 수정, 현재 비밀번호가 있어야 수정 가능함.
-  // async setUser(userInfoRequired, toUpdate) {
-  //   // 객체 destructuring
-  //   const { userId, currentPassword } = userInfoRequired;
+  // 카테고리정보 수정
+  async setCategory(categoryInfoRequired, toUpdate) {
+    // 객체 destructuring
+    const { categoryId } = categoryInfoRequired;
 
-  //   // 우선 해당 id의 유저가 db에 있는지 확인
-  //   let user = await this.userModel.findById(userId);
+    // 우선 해당 id의 카테고리가 db에 있는지 확인
+    let category = await this.categoryModel.findById(categoryId);
 
-  //   // db에서 찾지 못한 경우, 에러 메시지 반환
-  //   if (!user) {
-  //     throw new Error("가입 내역이 없습니다. 다시 한 번 확인해 주세요.");
-  //   }
+    // db에서 찾지 못한 경우, 에러 메시지 반환
+    if (!category) {
+      throw new Error("등록된 카테고리가 없습니다. 다시 한 번 확인해 주세요.");
+    }
 
-  //   // 이제, 정보 수정을 위해 사용자가 입력한 비밀번호가 올바른 값인지 확인해야 함
+    // 이제 드디어 업데이트 시작
 
-  //   // 비밀번호 일치 여부 확인
-  //   const correctPasswordHash = user.password;
-  //   const isPasswordCorrect = await bcrypt.compare(
-  //     currentPassword,
-  //     correctPasswordHash
-  //   );
+    // 업데이트 진행
+    category = await this.categoryModel.update({
+      categoryId,
+      update: toUpdate,
+    });
 
-  //   if (!isPasswordCorrect) {
-  //     throw new Error(
-  //       "현재 비밀번호가 일치하지 않습니다. 다시 한 번 확인해 주세요."
-  //     );
-  //   }
-
-  //   // 이제 드디어 업데이트 시작
-
-  //   // 비밀번호도 변경하는 경우에는, 회원가입 때처럼 해쉬화 해주어야 함.
-  //   const { password } = toUpdate;
-
-  //   if (password) {
-  //     const newPasswordHash = await bcrypt.hash(password, 10);
-  //     toUpdate.password = newPasswordHash;
-  //   }
-
-  //   // 업데이트 진행
-  //   user = await this.userModel.update({
-  //     userId,
-  //     update: toUpdate,
-  //   });
-
-  //   return user;
-  // }
+    return category;
+  }
 }
 
 const categoryService = new CategoryService(categoryModel);
