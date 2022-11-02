@@ -20,12 +20,12 @@ class ProductService {
   }
 
   async getProducts() {
-    const model = this.productModel.findAll();
+    const model = await this.productModel.findAll();
     return model;
   }
 
   async getProduct(productId) {
-    const product = this.productModel.findById(productId);
+    const product = await this.productModel.findById(productId);
     return product;
   }
 

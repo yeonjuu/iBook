@@ -25,12 +25,11 @@ const ProductSchema = new Schema(
     image: {
       type: String,
     },
-    // population 추후 추가 !!!!!!!!!!!!해야댐
-    // category: {
-    //   type: Schema.Types.ObjectId,
-    //   ref: 'Category',
-    //   reqruied: true
-    // },
+    category: {
+      type: Schema.Types.ObjectId,
+      ref: 'Category',
+      reqruied: true,
+    },
   },
   {
     collection: 'products',

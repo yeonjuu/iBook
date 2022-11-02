@@ -49,9 +49,9 @@ productRouter.get('/', async function (req, res, next) {
 productRouter.get('/:productId', async function (req, res, next) {
   try {
     const productId = req.params.productId;
-    const products = await productService.getProduct({ _id: productId });
+    const product = await productService.getProduct({ _id: productId });
     // 상품 목록(배열)을 JSON 형태로 프론트에 보냄
-    res.status(200).json(products);
+    res.status(200).json(product);
   } catch (error) {
     next(error);
   }
