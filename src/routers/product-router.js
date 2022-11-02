@@ -13,11 +13,11 @@ productRouter.post("/", async (req, res, next) => {
     }
 
     // req (request)의 body 에서 데이터 가져오기
-    const { title, author, price, publisher, images, description, rate } = req.body;
+    const { title, author, price, publisher, images, description, rate, categoryId } = req.body;
 
     // 위 데이터를 상품 db에 추가하기
     const newProduct = await productService.addProduct({
-      title, author, price, publisher, images, description, rate
+      title, author, price, publisher, images, description, rate, category: categoryId
     });
 
     res.status(201).json(newProduct);

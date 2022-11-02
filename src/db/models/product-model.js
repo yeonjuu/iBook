@@ -20,7 +20,7 @@ export class ProductModel {
   }
 
   async findAll() {
-    const products = await Product.find({});
+    const products = await Product.find({}).populate('category', '_id, name');
     return products;
   }
 

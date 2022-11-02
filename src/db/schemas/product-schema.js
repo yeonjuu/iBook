@@ -29,6 +29,11 @@ const ProductSchema = new Schema(
       type: Number,
       default: 0
     },
+    category: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'categories'
+    }
   },
   {
     collection: "products",
