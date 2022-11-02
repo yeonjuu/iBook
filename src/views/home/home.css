@@ -1,5 +1,6 @@
 * {
   font-family: 'Trispace', sans-serif;
+  text-decoration: none;
 }
 
 .mainBanner {
@@ -113,3 +114,14 @@
 .finalFooter {
   margin-bottom: 3rem;
 }
+
+.hidden {
+  display: none;
+}
+
+
+/* hamburger */
+
+
+
+/*  */
