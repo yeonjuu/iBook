@@ -17,9 +17,12 @@
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
     />
     <!-- 폰트 추가 -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Trispace:wght@200;300;400&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Trispace:wght@200;300;400&display=swap"
+      rel="stylesheet"
+    />
     <!-- 폰트 어썸: 아이콘 -->
     <script
       defer
@@ -28,37 +31,24 @@
     ></script>
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="home.css" />
-    <script src="home.js" type="module" defer></script>
+    <script src="home1.js" type="module" defer></script>
   </head>
   <body>
     <!-- 헤더 -->
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="container mt-3">
-
         <div class="navbar-brand">
           <!--햄버거 메뉴-->
 
           <nav id="navigation">
-
-            <div class ="hamburger">
-              <span class ="bar"></span>
-              <span class ="bar"></span>
-              <span class ="bar"></span>
+            <div class="hamburger">
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
             </div>
 
-              <ul id="hamburgerMenu">
-                <a href="#"><li>소설</li></a>
-                <a href="#"><li>에세이</li></a>
-                <a href="#"><li>여행</li></a>
-                <a href="#"><li>참고서</li></a>
-                <a href="#"><li>외국어</li></a>
-              </ul>
-
-
-            
-            
+            <ul id="hamburgerMenu" class="hidden"></ul>
           </nav>
-
 
           <!---->
 
@@ -75,7 +65,10 @@
             <li class="hidden"><a href="../home/home.html">주문정보조회</a></li>
 
             <li>
-              <a href="../register/register.html"><i class="fa-solid fa-user-plus"></i>회원가입</a></li>
+              <a href="../register/register.html"
+                ><i class="fa-solid fa-user-plus"></i>회원가입</a
+              >
+            </li>
             <li>
               <a href="#cart" aria-current="page">
                 <span class="icon">
@@ -89,47 +82,42 @@
       </div>
     </nav>
 
-      <div class="mainBanner">
+    <div class="mainBanner">
+      <div class="mainBannerImage"></div>
 
-        <div class="mainBannerImage"></div>
-
-        <div class="mainBooks">
-          <div id ="firstRow">
-            <box></box>
-          </div>
-          <div id ="secondRow"></div>
-          <div id ="thirdRow"></div>
+      <div class="mainBooks">
+        <div id="firstRow">
+          <box></box>
         </div>
+        <div id="secondRow"></div>
+        <div id="thirdRow"></div>
+      </div>
     </div>
 
-
-    
-
-
     <footer>
-      <div class = "footerbody">
-        <div class = "footerCompany">IBook</div>
-        <div class = "businessInfo">사업자 정보</div>
-        <div class = "footerContents">
+      <div class="footerbody">
+        <div class="footerCompany">IBook</div>
+        <div class="businessInfo">사업자 정보</div>
+        <div class="footerContents">
           <a href="#"><span>이용약관</span></a>
           <a href="#"><span>개인정보처리방침</span></a>
           <a href="#"><span>청소년보호정책</span></a>
           <a href="#"><span>대량주문안내</span></a>
           <a href="#"><span>채용공고</span></a>
         </div>
-        <div class = "businessDetailOne">
+        <div class="businessDetailOne">
           <span>대표이사 : iiiiii</span>
           <span>서울특별시 종로구 종로 1</span>
           <span>사업자등록번호 : 102-88-11234</span>
         </div>
-        <div class ="businessDetailTwo">
+        <div class="businessDetailTwo">
           <span>대표전화 : 1234-1234(발신자 부담전화)</span>
           <span>FAX : 0123-456-7899(지역번호 공통)</span>
-          <span>서울시  서울특별시 통신판매업신고번호 : 제 653호 </span>
+          <span>서울시 서울특별시 통신판매업신고번호 : 제 653호 </span>
           <button>사업자 정보 확인</button>
         </div>
         <div class="finalFooter">©I BOOK CENTRE</div>
       </div>
-    </footer>  
+    </footer>
   </body>
 </html>
