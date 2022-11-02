@@ -32,9 +32,8 @@ const ProductSchema = new Schema(
     },
     category: {
       type: Schema.Types.ObjectId,
-      ref: 'Category',
+      ref: 'categories',
       reqruied: true,
-      index: true,
     },
   },
   {
@@ -42,5 +41,4 @@ const ProductSchema = new Schema(
     timestamps: true,
   }
 );
-
 export { ProductSchema };

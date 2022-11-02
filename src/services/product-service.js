@@ -1,4 +1,4 @@
-import { productModel } from '../db';
+import { productModel, categoryModel } from '../db';
 
 class ProductService {
   constructor(productModel) {
@@ -7,14 +7,33 @@ class ProductService {
 
   //상품추가
   async addProduct(productInfo) {
-    const { title } = productInfo;
+    const {
+      title,
+      author,
+      publisher,
+      price,
+      images,
+      description,
+      categoryName,
+    } = productInfo;
+    console.log(productInfo);
+
+    const category = await categoryModel.findByCategory(categoryName);
 
     const product = await this.productModel.findByTitle(title);
     if (product) {
       throw new Error('이 상품은 현재 등록되어있습니다. 확인 부탁드립니다.');
     }
 
-    const NewProduct = await this.productModel.create(productInfo);
+    const NewProduct = await this.productModel.create({
+      title,
+      author,
+      publisher,
+      price,
+      images,
+      description,
+      category: category._id,
+    });
 
     return NewProduct;
   }
@@ -27,6 +46,11 @@ class ProductService {
   async getProduct(productId) {
     const product = await this.productModel.findById(productId);
     return product;
+  }
+
+  async getCategory(categoryId) {
+    const category = await this.productModel.findByCategoryId(categoryId);
+    return category;
   }
 
   // product가 있어야 수정 가능함.
