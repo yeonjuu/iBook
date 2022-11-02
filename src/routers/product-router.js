@@ -28,19 +28,14 @@ productRouter.post("/", async (req, res, next) => {
 
 productRouter.get("/", async function (req, res, next) {
   try {
-    const products = await productService.getProducts();
+    const categoryId = req.query.categoryId;
+    let products;
 
-    // 상품 목록(배열)을 JSON 형태로 프론트에 보냄
-    res.status(200).json(products);
-  } catch (error) {
-    next(error);
-  }
-});
-
-productRouter.get("/:categoryId/categories", async function (req, res, next) {
-  try {
-    const categoryId = req.params.categoryId
-    const products = await productService.getProductsByCategoryId(categoryId);
+    if (categoryId) {
+      products = await productService.getProductsByCategoryId(categoryId);
+    } else {
+      products = await productService.getProducts();
+    }
 
     // 상품 목록(배열)을 JSON 형태로 프론트에 보냄
     res.status(200).json(products);

@@ -15,7 +15,7 @@ export class ProductModel {
   }
 
   async findByCategoryId(categoryId) {
-    const products = await Product.find({ category: categoryId });
+    const products = await Product.find({ category: categoryId }).populate('category', '_id, name');
     return products;
   }
 
