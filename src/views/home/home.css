@@ -54,6 +54,7 @@
 
 .navbar-brand {
   display: flex;
+  flex: row;
   align-items: center;
   color: black;
 }
@@ -122,6 +123,17 @@
 
 /* hamburger */
 
+.hamburger .bar {
+  display: block;
+  width: 30px;
+  height: 7px;
+  margin-top: 3px;
+  border-radius: 3px;
+  background-color: gray;
+}
+
+.hamburgerMenu{
+}
 
 
 /*  */
