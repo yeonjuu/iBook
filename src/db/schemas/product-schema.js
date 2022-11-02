@@ -22,13 +22,19 @@ const ProductSchema = new Schema(
     description: {
       type: String,
     },
-    image: {
-      type: String,
+    images: {
+      type: [String],
+    },
+    rate: {
+      type: Number,
+      default: 0,
+      required: false,
     },
     category: {
       type: Schema.Types.ObjectId,
       ref: 'Category',
       reqruied: true,
+      index: true,
     },
   },
   {

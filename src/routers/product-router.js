@@ -13,8 +13,9 @@ productRouter.post('/', async function (req, res, next) {
         'headers의 Content-Type을 application/json으로 설정해주세요'
       );
     }
+
     // req (request) 에서 데이터 가져오기
-    const { title, author, publisher, price, image, description } = req.body;
+    const { title, author, publisher, price, images, description } = req.body;
 
     // 상품추가 진행
     const newProduct = await productService.addProduct({
@@ -22,7 +23,7 @@ productRouter.post('/', async function (req, res, next) {
       author,
       publisher,
       price,
-      image,
+      images,
       description,
     });
 
@@ -73,7 +74,7 @@ productRouter.put('/:productId', async function (req, res, next) {
 
     // body data 로부터 업데이트할 상품 정보를 추출함.
     // body data로부터, 확인용으로 수정할 상품 id를 추출함.
-    const { title, author, publisher, price, image, description } = req.body;
+    const { title, author, publisher, price, images, description } = req.body;
 
     const productInfoRequired = { productId };
 
@@ -84,7 +85,7 @@ productRouter.put('/:productId', async function (req, res, next) {
       ...(author && { author }),
       ...(publisher && { publisher }),
       ...(price && { price }),
-      ...(image && { image }),
+      ...(images && { images }),
       ...(description && { description }),
     };
 

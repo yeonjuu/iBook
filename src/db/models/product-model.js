@@ -1,5 +1,5 @@
 import { model } from 'mongoose';
-import { ProductSchema } from '../schemas/product-schema';
+import { ProductSchema, categorySchema } from '../schemas/product-schema';
 
 const Product = model('products', ProductSchema);
 
@@ -18,7 +18,9 @@ export class ProductModel {
   }
 
   async findById(productId) {
-    const product = await Product.findOne({ _id: productId });
+    const product = await Product.findOne({ _id: productId }).populate(
+      'category'
+    );
     return product;
   }
 
