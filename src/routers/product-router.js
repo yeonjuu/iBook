@@ -37,6 +37,18 @@ productRouter.get("/", async function (req, res, next) {
   }
 });
 
+productRouter.get("/:categoryId", async function (req, res, next) {
+  try {
+    const { categoryId } = req.params
+    const products = await productService.getProductsByCategoryId(categoryId);
+
+    // 상품 목록(배열)을 JSON 형태로 프론트에 보냄
+    res.status(200).json(products);
+  } catch (error) {
+    next(error);
+  }
+});
+
 // 상품 정보 수정
 productRouter.put("/:productId", async function (req, res, next) {
     try {

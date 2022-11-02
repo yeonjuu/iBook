@@ -30,6 +30,11 @@ class ProductService {
     return products;
   }
 
+  async getProductsByCategoryId(categoryId) {
+    const products = await this.productModel.findByCategoryId(categoryId);
+    return products;
+  }
+
   // 상품 정보 수정
   async setProduct(productInfoRequired, toUpdate) {
     // 객체 destructuring

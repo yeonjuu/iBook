@@ -14,6 +14,11 @@ export class ProductModel {
     return product;
   }
 
+  async findByCategoryId(categoryId) {
+    const products = await Product.find({ category: categoryId });
+    return products;
+  }
+
   async create(productInfo) {
     const createdNewProduct = await Product.create(productInfo);
     return createdNewProduct;
