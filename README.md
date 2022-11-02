@@ -25,7 +25,7 @@
 
 ### https://documenter.getpostman.com/view/23952739/2s847JrX6f
 
-### https://documenter.getpostman.com/view/23970613/2s8YRmHY6v : 상품AIP(카데고리내용 추가필요)
+### 
 
 <br>
 
