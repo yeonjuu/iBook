@@ -31,6 +31,11 @@ export class CategoryModel {
     const updatedCategory = await Category.findOneAndUpdate(filter, update, option);
     return updatedCategory;
   }
+
+  async delete(categoryId) {
+    const category = await Category.deleteOne({ _id: categoryId });
+    return category
+  }
 }
 
 const categoryModel = new CategoryModel();

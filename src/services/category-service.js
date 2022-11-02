@@ -55,6 +55,18 @@ class CategoryService {
 
     return category;
   }
+
+  async removeProduct(categoryId) {
+    let category = await this.categoryModel.findById(categoryId);
+
+    if (!category) {
+      throw new Error("등록된 상품이 없습니다. 다시 한 번 확인해 주세요.");
+    }
+
+    category = await this.categoryModel.delete(categoryId);
+
+    return category
+  }
 }
 
 const categoryService = new CategoryService(categoryModel);
