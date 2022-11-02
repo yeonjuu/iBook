@@ -35,6 +35,16 @@ class ProductService {
     return products;
   }
 
+  async getProduct(productId) {
+    const product = await this.productModel.findById(productId);
+
+    if (!product) {
+      throw new Error("등록된 상품이 없습니다. 다시 한 번 확인해 주세요.");
+    }
+
+    return product
+  }
+
   // 상품 정보 수정
   async setProduct(productInfoRequired, toUpdate) {
     // 객체 destructuring

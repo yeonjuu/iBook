@@ -37,13 +37,24 @@ productRouter.get("/", async function (req, res, next) {
   }
 });
 
-productRouter.get("/:categoryId", async function (req, res, next) {
+productRouter.get("/:categoryId/categories", async function (req, res, next) {
   try {
-    const { categoryId } = req.params
+    const categoryId = req.params.categoryId
     const products = await productService.getProductsByCategoryId(categoryId);
 
     // 상품 목록(배열)을 JSON 형태로 프론트에 보냄
     res.status(200).json(products);
+  } catch (error) {
+    next(error);
+  }
+});
+
+productRouter.get("/:productId", async function (req, res, next) {
+  try {
+    const productId = req.params.productId
+    const product = await productService.getProduct(productId);
+    
+    res.status(200).json(product);
   } catch (error) {
     next(error);
   }
