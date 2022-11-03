@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="order.css" />
     <title>Document</title>
   </head>
-  <body>
+  <body class="hidden">
     <header></header>
     <main>
       <span>주문</span>
@@ -20,18 +20,35 @@
             <div class="ordererInfoContents">
               <div class="orderer inputSort">
                 <div><strong>주문자</strong></div>
-                <div><input type="text" placeholder="이름을 입력하세요" /></div>
+                <div>
+                  <input
+                    id="orderer"
+                    type="text"
+                    placeholder="이름을 입력하세요"
+                    required
+                  />
+                </div>
               </div>
               <div class="email inputSort">
                 <div><strong>email</strong></div>
                 <div>
-                  <input type="text" placeholder="메일을 입력하세요" />
+                  <input
+                    id="email"
+                    type="text"
+                    placeholder="메일을 입력하세요"
+                    required
+                  />
                 </div>
               </div>
               <div class="phoneNumber inputSort">
                 <div><strong>연락처</strong></div>
                 <div>
-                  <input type="text" placeholder="연락처를 입력하세요" />
+                  <input
+                    id="phoneNumber"
+                    type="text"
+                    placeholder="연락처를 입력하세요"
+                    required
+                  />
                 </div>
               </div>
             </div>
@@ -44,19 +61,34 @@
               <div class="receiver inputSort">
                 <div><strong>수령인</strong></div>
                 <div>
-                  <input type="text" placeholder="이름을입력하세요" />
+                  <input
+                    id="receiver"
+                    type="text"
+                    placeholder="이름을입력하세요"
+                    required
+                  />
                 </div>
               </div>
               <div class="adress inputSort">
                 <div><strong>주소</strong></div>
                 <div>
-                  <input type="text" placeholder="주소를 입력하세요" />
+                  <input
+                    id="address"
+                    type="text"
+                    placeholder="주소를 입력하세요"
+                    required
+                  />
                 </div>
               </div>
               <div class="detailAdress inputSort">
                 <div><strong>상세주소</strong></div>
                 <div>
-                  <input type="text" placeholder="상세주소를 입력하세요" />
+                  <input
+                    id="detailAddress"
+                    type="text"
+                    placeholder="상세주소를 입력하세요"
+                    required
+                  />
                 </div>
               </div>
             </div>
@@ -86,9 +118,9 @@
           </div>
           <div>
             <p>동의</p>
-            <input type="checkbox" />
+            <input type="checkbox" required />
           </div>
-          <button>결제하기</button>
+          <button type="submit" class="submitBtn">결제하기</button>
         </div>
       </form>
       <div class="ordererInfoBox"></div>

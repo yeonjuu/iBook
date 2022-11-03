@@ -30,3 +30,6 @@ ul {
 .priceInfoBox {
   border: solid 1px;
 }
+.hidden {
+  display: none;
+}
