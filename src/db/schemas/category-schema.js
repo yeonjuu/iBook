@@ -6,6 +6,13 @@ const CategorySchema = new Schema(
       type: String,
       required: true,
     },
+    product: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'products',
+        reqruied: true,
+      },
+    ],
   },
   {
     collection: 'categories',

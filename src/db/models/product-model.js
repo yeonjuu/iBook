@@ -14,13 +14,14 @@ export class ProductModel {
     return NewProduct;
   }
   async findAll() {
-    const products = await Product.find({}).populate('category');
+    const products = await Product.find({}).populate('category', 'name');
     return products;
   }
 
   async findById(productId) {
     const product = await Product.findOne({ _id: productId }).populate(
-      'category'
+      'category',
+      'name'
     );
     return product;
   }
