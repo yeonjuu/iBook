@@ -32,7 +32,7 @@ function loadHandler() {
     const books = fakeData.map((e) => e.image);
 
     for (let i = 0; i < 5; i++) {
-        const imgTag = `<div><img src="${books[i]}"/></div>`;
+        const imgTag = `<div><a href=""><img src="${books[i]}"/></a></div>`;
         firstRow.insertAdjacentHTML('beforeend', imgTag);
         secondRow.insertAdjacentHTML('beforeend', imgTag);
         thirdRow.insertAdjacentHTML('beforeend', imgTag);
