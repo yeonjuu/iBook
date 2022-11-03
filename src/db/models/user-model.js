@@ -26,10 +26,15 @@ export class UserModel {
 
   async update({ userId, update }) {
     const filter = { _id: userId };
-    const option = { returnOriginal: false };
+    const option = { returnOriginal: ture };
 
     const updatedUser = await User.findOneAndUpdate(filter, update, option);
     return updatedUser;
+  }
+
+  async delete(userId) {
+    const deleteUser = await Product.deleteOne({ _id: userId });
+    return deleteUser;
   }
 }
 

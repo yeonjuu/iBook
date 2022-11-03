@@ -29,6 +29,20 @@ userRouter.post('/login', async function (req, res, next) {
   }
 });
 
+// //로그아웃
+userRouter.get('/logout', loginRequired, async function (req, res, next) {
+  try {
+    console.log(req);
+    const updatedUserInfo = await userService.setUser(req.currentUserId, {
+      token: '',
+    });
+    // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
+    res.status(200).json(updatedUserInfo);
+  } catch (error) {
+    next(error);
+  }
+});
+
 // 회원가입 api (아래는 / 이지만, 실제로는 /api/users 로 요청해야 함.)
 userRouter.post('/', async (req, res, next) => {
   try {
@@ -41,13 +55,15 @@ userRouter.post('/', async (req, res, next) => {
     }
 
     // req (request)의 body 에서 데이터 가져오기
-    const { fullName, email, password } = req.body;
+    const { fullName, email, password, address, role } = req.body;
 
     // 위 데이터를 유저 db에 추가하기
     const newUser = await userService.addUser({
       fullName,
       email,
       password,
+      address,
+      role,
     });
 
     // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
@@ -67,6 +83,18 @@ userRouter.get('/', loginRequired, async function (req, res, next) {
 
     // 사용자 목록(배열)을 JSON 형태로 프론트에 보냄
     res.status(200).json(users);
+  } catch (error) {
+    next(error);
+  }
+});
+
+//사용자정보를 가져옴
+userRouter.get('/:userId', async function (req, res, next) {
+  try {
+    const userId = req.params.userId;
+    const user = await userService.getUser({ _id: userId });
+    // 상품 목록(배열)을 JSON 형태로 프론트에 보냄
+    res.status(200).json(user);
   } catch (error) {
     next(error);
   }
