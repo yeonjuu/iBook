@@ -1,8 +1,29 @@
 import { Router } from "express";
 import is from "@sindresorhus/is";
 import { productService } from "../services";
+import multer from 'multer';
 
 const productRouter = Router();
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, 'src/views/uploads/')
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + '-' + file.originalname)
+  }
+})
+const upload = multer({ storage: storage });
+
+productRouter.post('/upload', upload.array('productImages', 10), async (req, res) => {
+  let images = [];
+  
+  for (let i = 0; i < req.files.length; i++) {
+    images.push(`./uploads/${i}-${req.files[i].filename}`)
+  }
+
+  res.json({ images });
+  console.log(req.files);
+});
 
 productRouter.post("/", async (req, res, next) => {
   try {
