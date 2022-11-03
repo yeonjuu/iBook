@@ -22,7 +22,7 @@
 
 ### 1-1. API 문서
 
-### https://documenter.getpostman.com/view/23952739/2s847JrX6f
+### https://documenter.getpostman.com/view/23970613/2s8YRqmAu6 (유저 API)
 ### https://documenter.getpostman.com/view/23953353/2s8YRgqEmv (카테고리 API)
 ### https://documenter.getpostman.com/view/23953353/2s8YRiMa3h (상품 API)
 

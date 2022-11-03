@@ -28,19 +28,7 @@ userRouter.post("/login", async function (req, res, next) {
     next(error);
   }
 });
-// // //로그아웃
-// userRouter.get('/logout', loginRequired, async function (req, res, next) {
-//   try {
-//     console.log(req);
-//     const updatedUserInfo = await userService.setUser(req.currentUserId, {
-//       token: '',
-//     });
-//     // 업데이트 이후의 유저 데이터를 프론트에 보내 줌
-//     res.status(200).json(updatedUserInfo);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
+
 // 회원가입 api (아래는 / 이지만, 실제로는 /api/users 로 요청해야 함.)
 userRouter.post("/", async (req, res, next) => {
   try {
