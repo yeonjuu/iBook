@@ -66,14 +66,14 @@ function productTemplate(img, title, price, count) {
 
 function submit(a) {
   a.preventDefault();
-  if (userCheck) {
-  } else {
-    if (checkPassword.value === password.value) {
-      alert("성공");
-    } else {
-      alert("주문조회 비밀번호가 같은지 확인해주세요");
-    }
-  }
+  //   if (userCheck) {
+  //   } else {
+  //     if (checkPassword.value === password.value) {
+  //       alert("성공");
+  //     } else {
+  //       alert("주문조회 비밀번호가 같은지 확인해주세요");
+  //     }
+  //   }
 }
 
 let b = {
@@ -124,7 +124,7 @@ if (userCheck) {
   a();
 } else {
   body.classList.remove("hidden");
-  ordererInfoContents.insertAdjacentHTML("beforeend", passwordHtml());
+  //   ordererInfoContents.insertAdjacentHTML("beforeend", passwordHtml());
   password = document.querySelector("#password");
   checkPassword = document.querySelector("#checkPassword");
 }
