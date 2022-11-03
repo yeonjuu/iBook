@@ -1,7 +1,7 @@
-import { model } from 'mongoose';
-import { UserSchema } from '../schemas/user-schema';
+import { model } from "mongoose";
+import { UserSchema } from "../schemas/user-schema";
 
-const User = model('users', UserSchema);
+const User = model("users", UserSchema);
 
 export class UserModel {
   async findByEmail(email) {
@@ -33,7 +33,7 @@ export class UserModel {
   }
 
   async delete(userId) {
-    const deleteUser = await Product.deleteOne({ _id: userId });
+    const deleteUser = await User.deleteOne({ _id: userId });
     return deleteUser;
   }
 }

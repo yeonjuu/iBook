@@ -16,3 +16,8 @@
 .login-form-box .button {
   font-weight: bold;
 }
+
+.has-text-link {
+  margin-left: 5px;
+  color: black;
+}
