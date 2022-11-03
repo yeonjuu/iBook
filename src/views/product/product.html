@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="product.css" />
+    <!-- <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    /> -->
+    <script src="product.js" defer></script>
+    <title>상품조회</title>
+  </head>
+  <body>
+    <header>
+      <h2>iBook</h2>
+      <div>
+        <span>Login</span>
+        <span>Cart</span>
+      </div>
+    </header>
+    <nav>
+      <a
+        role="button"
+        class="navbar-burger"
+        aria-label="menu"
+        aria-expanded="false"
+        data-target="navbarBasicExample"
+      >
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+      <ul>
+        <li>Home</li>
+      </ul>
+    </nav>
+    <div class="main-container">
+      <div class="product">
+        <div class="top p-5">
+          <div class="img-wrap">
+            <img src="" alt="책 이미지" />
+          </div>
+          <div class="product-explain">
+            <span class="title">제목</span>
+            <span class="author">작가</span>
+            <span class="publisher">출판사</span>
+            <spna class="category">카테고리</spna>
+            <span class="price">가격</span>
+            <span>수량</span>
+            <span class="count-wrap">
+              <button class="minus">-</button>
+              <span class="count">1</span>
+              <button class="plus">+</button>
+            </span>
+          </div>
+        </div>
+        <div class="order-wrap">
+          <span class="total">총 결제 금액</span>
+          <a href="#" class="btn cart">장바구니</a>
+          <a href="#" class="btn">바로구매</a>
+        </div>
+        <div class="bottom">
+          <h2>상세설명</h2>
+          <p class="description"></p>
+        </div>
+      </div>
+    </div>
+    <footer>footer 정보</footer>
+  </body>
+</html>
