@@ -29,18 +29,24 @@ const thirdRow = document.querySelector("#thirdRow");
 
 
 function loadHandler() {
-    const books = fakeData.map((e) => e.image);
+    const bookImage = fakeData.map((e) => e.image);
+    const bookTitle = fakeData.map((e) => e.title);
+
 
     for (let i = 0; i < 5; i++) {
-        const imgTag = `<div><a href=""><img src="${books[i]}"/></a></div>`;
-        firstRow.insertAdjacentHTML('beforeend', imgTag);
-        secondRow.insertAdjacentHTML('beforeend', imgTag);
-        thirdRow.insertAdjacentHTML('beforeend', imgTag);
+        const booktags = `<div><a href="">
+        <img src="${bookImage[i]}"/>
+        <span>${bookTitle[i]}</span>
+        </a></div>`;
+        firstRow.insertAdjacentHTML('beforeend', booktags);
+        secondRow.insertAdjacentHTML('beforeend', booktags);
+        thirdRow.insertAdjacentHTML('beforeend', booktags);
+
 
     }
 
+    }
 
-};
 
 
 document.addEventListener("DOMContentLoaded", loadHandler);
