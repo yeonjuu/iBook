@@ -12,7 +12,7 @@ class UserService {
   // 회원가입
   async addUser(userInfo) {
     // 객체 destructuring
-    const { email, fullName, password } = userInfo;
+    const { email, fullName, password, address, role } = userInfo;
 
     // 이메일 중복 확인
     const user = await this.userModel.findByEmail(email);
@@ -27,7 +27,13 @@ class UserService {
     // 우선 비밀번호 해쉬화(암호화)
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    const newUserInfo = { fullName, email, password: hashedPassword };
+    const newUserInfo = {
+      fullName,
+      email,
+      password: hashedPassword,
+      address,
+      role,
+    };
 
     // db에 저장
     const createdNewUser = await this.userModel.create(newUserInfo);
@@ -80,6 +86,12 @@ class UserService {
     return users;
   }
 
+  // 특정사용자 개인정보를 받음. = 사용자 조회
+  async getUser(userId) {
+    const users = await this.userModel.findById(userId);
+    return users;
+  }
+
   // 유저정보 수정, 현재 비밀번호가 있어야 수정 가능함.
   async setUser(userInfoRequired, toUpdate) {
     // 객체 destructuring
@@ -125,6 +137,19 @@ class UserService {
     });
 
     return user;
+  }
+
+  //사용자 삭제
+  async removeUser(userId) {
+    // 우선 해당 id의 상품 db에 있는지 확인
+    let User = await this.userModel.findById(userId);
+    // db에서 찾지 못한 경우, 에러 메시지 반환
+    if (!User) {
+      throw new Error('가입된 내역이 없습니다. 다시 한 번 확인해 주세요.');
+    }
+    // 삭제
+    User = await this.userModel.delete(userId);
+    return User;
   }
 }
 
