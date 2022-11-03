@@ -1,6 +1,22 @@
 * {
-  font-family: "Trispace", sans-serif;
+  font-family: 'Trispace', sans-serif;
   text-decoration: none;
+}
+
+.bookLogo {
+  width: 150px;
+  height: 90px;
+}
+
+#category {
+  margin-left: 5rem;
+  display: flex;
+}
+
+#category a {
+  margin-left: 15px;
+  font-size: 18px;
+  color: black;
 }
 
 .mainBanner {
@@ -8,13 +24,14 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+
 }
 
 .mainBannerImage {
+  background-image: url("https://cdn.pixabay.com/photo/2016/01/20/11/54/book-wall-1151405_1280.jpg");
   margin: 2rem;
   width: 90%;
   height: 60vh;
-  background-color: slateblue;
 }
 
 .mainBooks {
@@ -23,32 +40,38 @@
   justify-content: center;
   align-items: center;
   width: 90%;
-  height: 80vh;
-  background-color: floralwhite;
+  height: 100vh;
+  /* background-color: floralwhite; */
 }
 
 #firstRow,
-.mainBooks :nth-child(2),
-.mainBooks :nth-child(3) {
-  /* display: flex;
+#secondRow,
+#thirdRow {
+  display: flex;
   flex-direction: row;
-  align-items: center; */
+  align-items:center;
+  justify-content: space-around;
 
   margin: 1rem 2rem;
   width: 90%;
   height: 40vh;
-  background-color: darkgray;
 }
 
-/* #firstRow :nth-child(1),
-#firstRow :nth-child(2),
-#firstRow :nth-child(3),
-#firstRow :nth-child(4),
-#firstRow :last-child {
-  width: 160px;
-  height: 200px;
+#firstRow div,
+#secondRow div,
+#thirdRow div {
+  width: 180px;
+  height: 250px;
   background-color: hotpink;
-} */
+}
+
+#firstRow div img,
+#secondRow div img,
+#thirdRow div img {
+  width: 180px;
+  height: 250px;
+} 
+
 
 .navbar-brand {
   display: flex;
@@ -64,6 +87,7 @@
 .has-text-link {
   color: black;
 }
+
 
 .footerbody {
   margin-top: 3rem;
@@ -114,7 +138,9 @@
 
 .hidden {
   display: none;
+
 }
+
 
 /* hamburger */
 
@@ -126,5 +152,6 @@
   border-radius: 3px;
   background-color: gray;
 }
+
 
 /*  */
