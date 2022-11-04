@@ -27,6 +27,10 @@ const UserSchema = new Schema(
       required: false,
       default: 'basic-user',
     },
+    token: {
+      type: String,
+      required: false,
+    },
   },
   {
     collection: 'users',
