@@ -88,7 +88,12 @@ if (baskets.length > 0) {
   baskets.forEach((basket) => {
     li.insertAdjacentHTML(
       'beforeend',
-      productTemplate(basket.imgaes, basket.title, basket.price, basket.count)
+      productTemplate(
+        basket.imgaes[0],
+        basket.title,
+        basket.price,
+        basket.count
+      )
     );
     totalPriceValue += basket.price * basket.count;
   });
