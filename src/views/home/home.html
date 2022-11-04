@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>쇼핑-n팀</title>
+    <title>Book Store</title>
     <!-- 아이콘 -->
     <link
       rel="icon"
@@ -16,6 +16,13 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
     />
+    <!-- 폰트 추가 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Trispace:wght@200;300;400&display=swap"
+      rel="stylesheet"
+    />
     <!-- 폰트 어썸: 아이콘 -->
     <script
       defer
@@ -24,35 +31,49 @@
     ></script>
     <!-- 커스텀 css, js -->
     <link rel="stylesheet" href="home.css" />
+
     <script src="home.js" type="module" defer></script>
+    <!-- <script src="home1.js" type="module" defer></script> -->
+    <script src="banner.js" type="module" defer></script>
+    <script src="loginout.js" type="module" defer></script>
   </head>
   <body>
     <!-- 헤더 -->
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="container mt-3">
         <div class="navbar-brand">
-          <a class="navbar-item" href="/">
-            <img src="/elice-rabbit.png" width="30" height="30" />
-            <span class="has-text-link">쇼핑-n팀</span>
-          </a>
+          <!--햄버거 메뉴-->
 
-          <a
-            role="button"
-            class="navbar-burger"
-            aria-label="menu"
-            aria-expanded="false"
-            data-target="navbarBasicExample"
-          >
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
-            <span aria-hidden="true"></span>
+          <nav id="navigation">
+            <div class="hamburger">
+              <span class="bar"></span>
+              <span class="bar"></span>
+              <span class="bar"></span>
+            </div>
+
+            <ul id="hamburgerMenu" class="hidden"></ul>
+          </nav>
+
+          <!---->
+
+          <a class="mainLogo" href="/home">
+            <!-- <span class="has-text-link">IBOOK</span> -->
+            <img class="bookLogo" src="Ibook.png" />
           </a>
         </div>
 
         <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
           <ul id="navbar">
             <li><a href="/login">로그인</a></li>
-            <li><a href="/register">회원가입</a></li>
+            <li class="hidden"><a href="/home">로그아웃</a></li>
+            <li class="hidden"><a href="/edit">회원정보수정</a></li>
+            <li class="hidden"><a href="/home">주문정보조회</a></li>
+
+            <li>
+              <a href="../register/register.html"
+                ><i class="fa-solid fa-user-plus"></i>회원가입</a
+              >
+            </li>
             <li>
               <a href="#cart" aria-current="page">
                 <span class="icon">
@@ -66,13 +87,50 @@
       </div>
     </nav>
 
-    <div class="div-container">
-      <div class="landing" id="landingDiv">
-        <h1>랜딩 페이지</h1>
-      </div>
-      <div class="greeting" id="greetingDiv">
-        <h1>안녕하세요!</h1>
+    <ul id="category">
+      <a href="../productsList/productsList.html"><li>소설</li></a>
+      <a href="../productsList/productsList.html"><li>에세이</li></a>
+      <a href="../productsList/productsList.html"><li>여행</li></a>
+      <a href="../productsList/productsList.html"><li>참고서</li></a>
+      <a href="../productsList/productsList.html"><li>외국어</li></a>
+    </ul>
+
+    <div class="mainBanner">
+      <div class="mainBannerImage"></div>
+
+      <div class="mainBooks">
+        <div id="firstRow"></div>
+
+        <div id="secondRow"></div>
+
+        <div id="thirdRow"></div>
       </div>
     </div>
+
+    <footer>
+      <div class="footerbody">
+        <div class="footerCompany">IBook</div>
+        <div class="businessInfo">사업자 정보</div>
+        <div class="footerContents">
+          <a href="#"><span>이용약관</span></a>
+          <a href="#"><span>개인정보처리방침</span></a>
+          <a href="#"><span>청소년보호정책</span></a>
+          <a href="#"><span>대량주문안내</span></a>
+          <a href="#"><span>채용공고</span></a>
+        </div>
+        <div class="businessDetailOne">
+          <span>대표이사 : iiiiii</span>
+          <span>서울특별시 종로구 종로 1</span>
+          <span>사업자등록번호 : 102-88-11234</span>
+        </div>
+        <div class="businessDetailTwo">
+          <span>대표전화 : 1234-1234(발신자 부담전화)</span>
+          <span>FAX : 0123-456-7899(지역번호 공통)</span>
+          <span>서울시 서울특별시 통신판매업신고번호 : 제 653호 </span>
+          <button>사업자 정보 확인</button>
+        </div>
+        <div class="finalFooter">©I BOOK CENTRE</div>
+      </div>
+    </footer>
   </body>
 </html>

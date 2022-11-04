@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import { Schema } from 'mongoose';
 
 const ProductSchema = new Schema(
   {
@@ -13,7 +13,7 @@ const ProductSchema = new Schema(
     price: {
       type: Number,
       required: true,
-      default: 0
+      default: 0,
     },
     publisher: {
       type: String,
@@ -27,11 +27,16 @@ const ProductSchema = new Schema(
     },
     rate: {
       type: Number,
-      default: 0
+      default: 0,
+    },
+    category: {
+      type: Schema.Types.ObjectId,
+      required: true,
+      ref: 'categories',
     },
   },
   {
-    collection: "products",
+    collection: 'products',
     timestamps: true,
   }
 );

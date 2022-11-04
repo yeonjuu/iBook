@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="cart.css" />
+    <title>Document</title>
+  </head>
+  <body>
+    <form>
+      <input class="bookName" placeholder="book name" />
+      <input class="bookPrice" placeholder="book price" />
+      <button class="submit">추가하기</button>
+      <button class="selectDelBtn">선택항목 삭제</button>
+    </form>
+    <button class="selectAll"></button>
+    <main class="main">
+      <ul class="list"></ul>
+      <div class="totalProductInfo">
+        <div>
+          <p>
+            총 상품 금액
+            <span class="totalPrice"></span>
+            <span>원</span>
+          </p>
+        </div>
+        <button class="buy">구매하기</button>
+      </div>
+    </main>
+    <script src="cart.js"></script>
+  </body>
+</html>

@@ -1,4 +1,4 @@
-import { productModel } from "../db";
+import { productModel } from '../db';
 
 class ProductService {
   constructor(productModel) {
@@ -14,7 +14,7 @@ class ProductService {
     const product = await this.productModel.findByTitle(title);
     if (product) {
       throw new Error(
-        "이 상품명은 현재 사용중입니다. 다른 상품명으로 입력해 주세요."
+        '이 상품명은 현재 사용중입니다. 다른 상품명으로 입력해 주세요.'
       );
     }
 
@@ -30,6 +30,21 @@ class ProductService {
     return products;
   }
 
+  async getProductsByCategoryId(categoryId) {
+    const products = await this.productModel.findByCategoryId(categoryId);
+    return products;
+  }
+
+  async getProduct(productId) {
+    const product = await this.productModel.findById(productId);
+
+    if (!product) {
+      throw new Error('등록된 상품이 없습니다. 다시 한 번 확인해 주세요.');
+    }
+
+    return product;
+  }
+
   // 상품 정보 수정
   async setProduct(productInfoRequired, toUpdate) {
     // 객체 destructuring
@@ -40,7 +55,7 @@ class ProductService {
 
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!product) {
-      throw new Error("등록된 상품이 없습니다. 다시 한 번 확인해 주세요.");
+      throw new Error('등록된 상품이 없습니다. 다시 한 번 확인해 주세요.');
     }
 
     // 업데이트 진행
@@ -56,12 +71,12 @@ class ProductService {
     let product = await this.productModel.findById(productId);
 
     if (!product) {
-      throw new Error("등록된 상품이 없습니다. 다시 한 번 확인해 주세요.");
+      throw new Error('등록된 상품이 없습니다. 다시 한 번 확인해 주세요.');
     }
 
     product = await this.productModel.delete(productId);
 
-    return product
+    return product;
   }
 }
 
