@@ -1,25 +1,27 @@
-const li = document.querySelector(".li");
-const productPrice = document.querySelector(".productPrice");
-const totalPrice = document.querySelector(".totalPrice");
-const delivery = document.querySelector(".deliveryPrice");
-const body = document.querySelector(".hidden");
-const orderer = document.querySelector("#orderer");
-const email = document.querySelector("#email");
-const phoneNumber = document.querySelector("#phoneNumber");
-const ordererInfoContents = document.querySelector(".ordererInfoContents");
-const submitBtn = document.querySelector(".submitBtn");
-const Info = document.querySelector(".Info");
+import * as Api from '/api.js';
+
+const li = document.querySelector('.li');
+const productPrice = document.querySelector('.productPrice');
+const totalPrice = document.querySelector('.totalPrice');
+const delivery = document.querySelector('.deliveryPrice');
+const body = document.querySelector('.hidden');
+const orderer = document.querySelector('#orderer');
+const email = document.querySelector('#email');
+const phoneNumber = document.querySelector('#phoneNumber');
+const ordererInfoContents = document.querySelector('.ordererInfoContents');
+const submitBtn = document.querySelector('.submitBtn');
+const Info = document.querySelector('.Info');
 
 let password;
 let checkPassword;
-console.log(submitBtn);
-
 let userCheck = false;
 let deliveryPrice = 0;
-let baskets = JSON.parse(localStorage.getItem("carts")) || [];
+let baskets = JSON.parse(localStorage.getItem('carts')) || [];
 let totalPriceValue = 0;
 let deliveryMin = 30000;
-
+// if (sessionStorage.getItem('token')) {
+//   userCheck = true;
+// }
 function passwordHtml() {
   return `<div class="password inputSort">
     <div><strong>주문조회 비밀번호</strong></div>
@@ -77,15 +79,15 @@ function submit(a) {
 }
 
 let b = {
-  email: "tutor-sw2@elicer.com",
-  fullName: "tutor",
-  phoneNumber: "010-0000-0000",
+  email: 'tutor-sw2@elicer.com',
+  fullName: 'tutor',
+  phoneNumber: '010-0000-0000',
 };
 b = JSON.stringify(b);
 if (baskets.length > 0) {
   baskets.forEach((basket) => {
     li.insertAdjacentHTML(
-      "beforeend",
+      'beforeend',
       productTemplate(basket.imgaes, basket.title, basket.price, basket.count)
     );
     totalPriceValue += basket.price * basket.count;
@@ -99,33 +101,30 @@ if (totalPriceValue >= deliveryMin) {
 delivery.innerHTML = `${deliveryPrice}원`;
 totalPrice.innerHTML = `${totalPriceValue + deliveryPrice}`;
 
-async function fakefetch(url) {
-  // 가짜 백엔드 호출
-  return new Promise((resolve, reject) => {
-    return resolve(b);
-  });
-}
 function delay(ms) {
   // 카테고리 로딩 실험용
   return new Promise((reslove) => setTimeout(reslove, ms));
 }
 
+async function loadUserInfo() {
+  const user = await Api.get();
+}
 const a = async () => {
   await delay(1000);
-  const json = await fakefetch("url");
+  const json = await fakefetch('url');
   const data = JSON.parse(json);
-  body.classList.remove("hidden");
+  body.classList.remove('hidden');
   orderer.value = data.fullName;
   email.value = data.email;
   phoneNumber.value = data.phoneNumber;
 };
 
 if (userCheck) {
-  a();
+  loadUserInfo();
 } else {
-  body.classList.remove("hidden");
+  body.classList.remove('hidden');
   //   ordererInfoContents.insertAdjacentHTML("beforeend", passwordHtml());
-  password = document.querySelector("#password");
-  checkPassword = document.querySelector("#checkPassword");
+  password = document.querySelector('#password');
+  checkPassword = document.querySelector('#checkPassword');
 }
-Info.addEventListener("submit", submit);
+Info.addEventListener('submit', submit);
