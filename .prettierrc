@@ -1,0 +1,9 @@
+{
+  "singleQuote": true, // 문자열 입력 시 따옴표(') 사용
+  "semi": true, // 코드 끝에 항상 세미콜론 추가
+  "useTabs": false, // 탭 사용
+  "tabWidth": 2, // 탭을 누르면 스페이스 2칸 삽입
+  "trailingComma": "all", // 객체, 배열 등의 마지막 항목에 콤마(,) 추가
+  "printWidth": 80, // 한 줄에 최대 표시되는 글자를 80자로 설정
+  "bracketSpacing": true // 괄호 안에 데이터가 있을 때 공백 삽입
+}
