@@ -14,24 +14,26 @@ const totalSpan = document.querySelector('.total');
 const categorySpan = document.querySelector('.category');
 const cart = document.querySelector('.cart');
 
-// const productId = url.split('/')[2];
+const productId = url.split('/')[2];
 
-// const product = await Api.get('/api/products', productId);
+const product = await Api.get('/api/products', productId);
 
-const product = {
-  _id: '6364d13edfe25a059f7bd3f3',
-  title: '트렌드',
-  author: '2023',
-  price: 14000,
-  publisher: '새로운출판사',
-  images: ['./uploads/bookId3.jpg', 'url2'],
-  description: '상세설명',
-  rate: 0,
-  category: null,
-  createdAt: '2022-11-04T08:45:50.500Z',
-  updatedAt: '2022-11-04T08:45:50.500Z',
-  __v: 0,
-};
+//임시데이터
+// const product = {
+//   _id: '6364d13edfe25a059f7bd3f3',
+//   title: '트렌드',
+//   author: '2023',
+//   price: 14000,
+//   publisher: '새로운출판사',
+//   images: ['/uploads/bookId3.jpg', 'url2'],
+//   description: '상세설명',
+//   rate: 0,
+//   category: null,
+//   createdAt: '2022-11-04T08:45:50.500Z',
+//   updatedAt: '2022-11-04T08:45:50.500Z',
+//   __v: 0,
+// };
+
 //상품 정보 변수 저장
 const { title, author, price, publisher, images, description, category } =
   product;
@@ -41,6 +43,7 @@ console.log(images);
 //페이지에 텍스트 변수 전달
 productRender();
 
+//수량 변경
 let count = Number(countSpan.innerText);
 
 const span = document.createElement('span');
