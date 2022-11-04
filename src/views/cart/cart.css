@@ -1,0 +1,55 @@
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.product {
+  height: 150px;
+  display: grid;
+  grid-template-columns: 30px 100px 400px 90px 30px;
+}
+
+.countBtn {
+  height: 30px;
+  display: grid;
+  grid-template-columns: 30px 30px 30px;
+  border-radius: 20px;
+}
+
+.plus,
+.minus,
+.plus,
+#count:hover {
+  cursor: pointer;
+}
+
+#count {
+  text-align: center;
+}
+
+#select,
+.selectAll,
+.deleteBtn {
+  height: 30px;
+  width: 30px;
+  border-radius: 30px;
+  opacity: 0.4;
+}
+.select,
+.selectAll,
+.deleteBtn:hover {
+  cursor: pointer;
+}
+
+.totalPrice {
+  width: 300px;
+  text-align: center;
+}
+.totalProductInfo {
+}
+
+.main {
+  display: grid;
+  grid-template-columns: 70% 30%;
+}
