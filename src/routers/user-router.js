@@ -21,11 +21,6 @@ userRouter.post('/login', async function (req, res, next) {
     // 로그인 진행 (로그인 성공 시 jwt 토큰을 프론트에 보내 줌)
     const userToken = await userService.getUserToken({ email, password });
     
-    //로그인 할 경우, 해당 유저의 스키마에 token 이 저장됨
-    await userService.setUserodfToken(
-      email,
-      userToken
-    );
     // jwt 토큰을 프론트에 보냄 (jwt 토큰은, 문자열임)
     res.status(200).json(userToken);
   } catch (error) {

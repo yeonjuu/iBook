@@ -92,16 +92,6 @@ class UserService {
     const user = await this.userModel.findById(userId);
     return user;
   }
-  // 메일을 통해, 특정사용자 개인정보를 받음. = 사용자 조회
-  async getUserByEmail(email) {
-    const user = await this.userModel.findByEmail(email);
-    return user;
-  }
-  // 토큰을 통해, 특정사용자 개인정보를 받음. = 사용자 조회
-  async getUserByToken(token) {
-    const user = await this.userModel.findByToken(token);
-    return user;
-  }
 
   // 유저정보 수정, 현재 비밀번호가 있어야 수정 가능함.
   async setUser(userInfoRequired, toUpdate) {
@@ -149,21 +139,6 @@ class UserService {
 
     return user;
   }
-
-
-  //로그인 시, 유저 스키마내에 토큰 부여용
-  async setUserodfToken(email, toUpdate) {
-    // 객체 destructuring
-    // 우선 해당 id의 유저가 db에 있는지 확인
-    let user = await this.userModel.findByEmail(email);
-    // 업데이트 진행
-    user = await this.userModel.updateByeEmail({
-      email,
-      update: toUpdate,
-    });
-    return user;
-  }
-
 
   //사용자 삭제
   async removeUser(userId) {
