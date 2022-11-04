@@ -9,7 +9,7 @@ const storage = multer.diskStorage({
     cb(null, 'src/views/uploads/');
   },
   filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname);
+    cb(null, Math.floor(Math.random() * 1000000) + '-' + file.originalname);
   },
 });
 const upload = multer({ storage: storage });
@@ -21,7 +21,7 @@ productRouter.post(
     let images = [];
 
     for (let i = 0; i < req.files.length; i++) {
-      images.push(`./uploads/${i}-${req.files[i].filename}`);
+      images.push(`/uploads/${req.files[i].filename}`);
     }
 
     res.json({ images });
