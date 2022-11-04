@@ -12,7 +12,7 @@ class UserService {
   // 회원가입
   async addUser(userInfo) {
     // 객체 destructuring
-    const { email, fullName, password, address, role } = userInfo;
+    const { email, fullName, password, address, role, phoneNumber } = userInfo;
 
     // 이메일 중복 확인
     const user = await this.userModel.findByEmail(email);
@@ -33,6 +33,7 @@ class UserService {
       password: hashedPassword,
       address,
       role,
+      phoneNumber,
     };
 
     // db에 저장
