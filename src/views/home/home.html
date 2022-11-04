@@ -64,10 +64,10 @@
 
         <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
           <ul id="navbar">
-            <li><a href="/login">로그인</a></li>
-            <li class="hidden"><a href="/home">로그아웃</a></li>
-            <li class="hidden"><a href="/edit">회원정보수정</a></li>
-            <li class="hidden"><a href="/home">주문정보조회</a></li>
+            <li id = "loginBtn"><a href="/login">로그인</a></li>
+            <li id="logoutBtn" class="hidden"><a href="/">로그아웃</a></li>
+            <li id="editBtn" class="hidden"><a href="/edit">회원정보수정</a></li>
+            <li id="seeOrderBtn" class="hidden"><a href="/home">주문정보조회</a></li>
 
             <li>
               <a href="../register/register.html"
@@ -75,7 +75,7 @@
               >
             </li>
             <li>
-              <a href="#cart" aria-current="page">
+              <a href="/cart" aria-current="page">
                 <span class="icon">
                   <i class="fas fa-cart-shopping"></i>
                 </span>

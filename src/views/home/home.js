@@ -11,6 +11,7 @@ const secondRow = document.querySelector("#secondRow");
 const thirdRow = document.querySelector("#thirdRow");
 
 
+//책정보 받기
 getProductData();
 
 async function getProductData() {
@@ -22,9 +23,9 @@ async function getProductData() {
   const bookTitle = product.map((e) => e.title);
   const bookId = product.map(e => e._id);
 
-  console.log(bookImage);
-  console.log(bookTitle);
-  console.log(bookId);
+  // console.log(bookImage); 
+  // console.log(bookTitle);
+  // console.log(bookId);
 
   for (let i = 0; i < 5; i++) {
     const booktags = `<div><a href="/products/${bookId[i]}">
@@ -37,3 +38,28 @@ async function getProductData() {
   };
 
 };
+
+
+//로그인 여부에 따라 상단 메뉴 노출 유무 설정
+const loginBtn = document.querySelector("#loginBtn");
+const logoutBtn = document.querySelector("#logoutBtn");
+const editBtn = document.querySelector("#editBtn");
+const seeOrderBtn = document.querySelector("#seeOrderBtn");
+
+//유저 정보 받기
+getUserData();
+
+async function getUserData() {
+  const userData = await Api.get("api/users");
+  console.log(userData);
+
+  if(sessionStorage) {
+    loginBtn.classList.add("hidden");
+    logoutBtn.classList.remove("hidden");
+    editBtn.classList.remove("hidden");
+    seeOrderBtn.classList.remove("hidden");
+  }
+
+}
+
+//로그아웃 버튼 클릭시
