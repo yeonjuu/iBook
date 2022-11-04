@@ -45,6 +45,7 @@ const loginBtn = document.querySelector("#loginBtn");
 const logoutBtn = document.querySelector("#logoutBtn");
 const editBtn = document.querySelector("#editBtn");
 const seeOrderBtn = document.querySelector("#seeOrderBtn");
+const registerBtn = document.querySelector("#registerBtn");
 
 //유저 정보 받기
 getUserData();
@@ -55,11 +56,17 @@ async function getUserData() {
 
   if(sessionStorage) {
     loginBtn.classList.add("hidden");
+    registerBtn.classList.add("hidden");
     logoutBtn.classList.remove("hidden");
     editBtn.classList.remove("hidden");
     seeOrderBtn.classList.remove("hidden");
   }
 
 }
+//로그아웃 버튼 클릭시 토큰 삭제
 
-//로그아웃 버튼 클릭시
+function logoutHandler() {
+  sessionStorage.removeItem("token");
+}
+
+logoutBtn.addEventListener("click", logoutHandler)
