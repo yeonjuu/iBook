@@ -10,7 +10,7 @@ getProductData();
 async function getProductData() {
   const product = await Api.get("api/products");
 
-  console.log(product);
+  console.log(product); 
 }
 
 // 요소(element), input 혹은 상수
