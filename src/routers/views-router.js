@@ -10,6 +10,9 @@ viewsRouter.use("/", serveStatic("home"));
 viewsRouter.use("/register", serveStatic("register"));
 viewsRouter.use("/login", serveStatic("login"));
 
+//회원정보 수정
+viewsRouter.use("/edit", serveStatic("edit"));
+
 //현재 product api랑 파일명 불일치,
 viewsRouter.use("/products", serveStatic("product"));
 
