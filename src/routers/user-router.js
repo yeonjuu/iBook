@@ -18,16 +18,11 @@ userRouter.post('/login', async function (req, res, next) {
 
     // req (request) 에서 데이터 가져오기
     const { email, password } = req.body;
-    const user = await userService.getUser(email);
     // 로그인 진행 (로그인 성공 시 jwt 토큰을 프론트에 보내 줌)
     const userToken = await userService.getUserToken({ email, password });
-    const isAdmin = user.role !== 'basic-user' ? true : false;
-    const { token } = userToken;
+
     // jwt 토큰을 프론트에 보냄 (jwt 토큰은, 문자열임)
-    res.status(200).json({
-      token,
-      isAdmin,
-    });
+    res.status(200).json(userToken);
   } catch (error) {
     next(error);
   }
