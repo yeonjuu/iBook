@@ -87,13 +87,8 @@ class UserService {
   }
 
   // 특정사용자 개인정보를 받음. = 사용자 조회
-  // async getUser(userId) {
-  //   const users = await this.userModel.findById(userId);
-  //   return users;
-  // }
-  // 이메일로 조회
-  async getUser(email) {
-    const user = await this.userModel.findByEmail(email);
+  async getUser(userId) {
+    const user = await this.userModel.findById(userId);
     return user;
   }
 
