@@ -11,7 +11,7 @@ const phoneNumber = document.querySelector('#phoneNumber');
 const ordererInfoContents = document.querySelector('.ordererInfoContents');
 const submitBtn = document.querySelector('.submitBtn');
 const Info = document.querySelector('.Info');
-
+const address = document.querySelector('#address');
 let password;
 let checkPassword;
 let userCheck = false;
@@ -68,6 +68,34 @@ function productTemplate(img, title, price, count) {
 
 function submit(a) {
   a.preventDefault();
+  const d = [];
+  baskets.forEach((val) => {
+    d.push(val.title);
+  });
+  console.log(d);
+  let data = {
+    name: orderer.value,
+    phone: phoneNumber.value,
+    address: address.value,
+    paymentMethod: totalPrice.innerHTML,
+    email: email.value,
+    qty: 1,
+    password: 1234,
+    productIds: d,
+  };
+  data = {
+    name: '길동이',
+    phone: '010-1234-5678',
+    address: '여기가 어디 나는 누구?',
+    paymentMethod: '현금',
+    email: 'google@google.com',
+    qty: 10,
+    password: 1234,
+    productIds: ['63620e42617d39dce34454c1', '6362325d02731c2524d6955c'],
+  };
+  console.log(data);
+  Api.post('/api/orders', data);
+
   //   if (userCheck) {
   //   } else {
   //     if (checkPassword.value === password.value) {
@@ -114,15 +142,6 @@ function delay(ms) {
 async function loadUserInfo() {
   const user = await Api.get();
 }
-const a = async () => {
-  await delay(1000);
-  const json = await fakefetch('url');
-  const data = JSON.parse(json);
-  body.classList.remove('hidden');
-  orderer.value = data.fullName;
-  email.value = data.email;
-  phoneNumber.value = data.phoneNumber;
-};
 
 if (userCheck) {
   loadUserInfo();
