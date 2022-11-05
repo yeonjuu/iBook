@@ -1,4 +1,4 @@
-import * as Api from '/api.js';
+// import * as Api from '/api.js';
 
 const li = document.querySelector('.li');
 const productPrice = document.querySelector('.productPrice');
@@ -17,13 +17,16 @@ let password;
 let checkPassword;
 let userCheck = false;
 let deliveryPrice = 0;
-let baskets = JSON.parse(localStorage.getItem('carts')) || [];
+let carts = JSON.parse(localStorage.getItem('carts')) || {};
+carts = carts = new Map(Object.entries(carts));
 let cart = JSON.parse(localStorage.getItem('cart'));
 let totalPriceValue = 0;
 let deliveryMin = 30000;
 // if (sessionStorage.getItem('token')) {
 //   userCheck = true;
 // }
+
+rednerCarts();
 function passwordHtml() {
   return `<div class="password inputSort">
     <div><strong>주문조회 비밀번호</strong></div>
@@ -52,8 +55,8 @@ function passwordHtml() {
   </div>`;
 }
 
-function productTemplate(img, title, price, count) {
-  return `<li class="product">
+function productTemplate(img, title, price, count, id) {
+  return `<li class="product" id=${id}>
     <div>
       <img src=${img} />
     </div>
@@ -71,7 +74,7 @@ function productTemplate(img, title, price, count) {
 function submit(a) {
   a.preventDefault();
   const d = [];
-  baskets.forEach((val) => {
+  carts.forEach((val) => {
     // title이 아니라 id로 바꿔야됨
     d.push(val.title);
   });
@@ -110,33 +113,29 @@ function submit(a) {
   //   }
 }
 
-let b = {
-  email: 'tutor-sw2@elicer.com',
-  fullName: 'tutor',
-  phoneNumber: '010-0000-0000',
-};
-b = JSON.stringify(b);
-if (cart === null) {
-  if (baskets.length > 0) {
-    baskets.forEach((basket) => {
+function rednerCarts() {
+  if (cart === null) {
+    console.log(carts);
+    for (let [cartItemId, cartItem] of carts) {
       li.insertAdjacentHTML(
         'beforeend',
         productTemplate(
-          basket.imgaes[0],
-          basket.title,
-          basket.price,
-          basket.count
+          cartItem.imgaes[0],
+          cartItem.title,
+          cartItem.price,
+          cartItem.count,
+          cartItemId
         )
       );
-      totalPriceValue += basket.price * basket.count;
-    });
+      totalPriceValue += cartItem.price * cartItem.count;
+    }
+  } else {
+    li.insertAdjacentHTML(
+      'beforeend',
+      productTemplate(cart.imgaes[0], cart.title, cart.price, cart.count)
+    );
+    totalPriceValue += cart.price * cart.count;
   }
-} else {
-  li.insertAdjacentHTML(
-    'beforeend',
-    productTemplate(cart.imgaes[0], cart.title, cart.price, cart.count)
-  );
-  totalPriceValue += cart.price * cart.count;
 }
 productPrice.innerHTML = `${totalPriceValue}원`;
 if (totalPriceValue < deliveryMin) {
@@ -153,7 +152,7 @@ function delay(ms) {
 async function loadUserInfo() {
   const user = await Api.get();
 }
-
+console.log('?');
 if (userCheck) {
   loadUserInfo();
 } else {
