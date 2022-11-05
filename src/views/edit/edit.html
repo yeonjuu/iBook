@@ -27,15 +27,15 @@
     <!-- 카카오 OAuth -->
     <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
     <!-- 커스텀 css, js -->
-    <link rel="stylesheet" href="register.css" />
-    <script src="register.js" type="module" defer></script>
+    <link rel="stylesheet" href="edit.css" />
+    <script src="edit.js" type="module" defer></script>
   </head>
   <body>
     <!-- 헤더 -->
     <nav class="navbar" role="navigation" aria-label="main navigation">
       <div class="container mt-3">
         <div class="navbar-brand">
-          <a class="navbar-item" href="../home/home.html">
+          <a class="navbar-item" href="/">
             <i class="fa-solid fa-house-user"></i>
             <span class="has-text-link">홈화면</span>
           </a>
@@ -56,7 +56,7 @@
         <div id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
             <ul id="navbar">
-              <li><a href="../login/login.html">로그인</a></li>
+              <li id="logoutBtn"><a href="/">로그아웃</a></li>
               <li>
                 <a href="/cart" aria-current="page">
                   <span class="icon">
@@ -74,7 +74,7 @@
     <!-- 회원가입 폼(Form) -->
     <div class="register-user-form-container">
       <form class="box register-user-form-box" id="registerUserForm">
-        <p class="title is-5 has-text-primary">환영합니다!</p>
+        <p class="title is-5 has-text-primary">회원정보 수정</p>
         <div class="field">
           <label class="label" for="fullNameInput">이름</label>
           <div class="control">
@@ -82,7 +82,7 @@
               class="input"
               id="fullNameInput"
               type="text"
-              placeholder="유재석"
+              placeholder="엘리스"
               autocomplete="on"
             />
           </div>
@@ -153,9 +153,10 @@
           </div>
         </div>
 
-        <button class="button is-primary is-fullwidth" id="submitButton">
-          회원가입하기
+        <button id="editUserBtn" class="button is-primary">
+          정보 수정
         </button>
+        <button id = "deleteUserBtn" class="button is-danger">회원 탈퇴</button>
       </form>
     </div>
   </body>
