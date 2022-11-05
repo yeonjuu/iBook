@@ -12,11 +12,13 @@ const ordererInfoContents = document.querySelector('.ordererInfoContents');
 const submitBtn = document.querySelector('.submitBtn');
 const Info = document.querySelector('.Info');
 const address = document.querySelector('#address');
+
 let password;
 let checkPassword;
 let userCheck = false;
 let deliveryPrice = 0;
 let baskets = JSON.parse(localStorage.getItem('carts')) || [];
+let cart = JSON.parse(localStorage.getItem('cart'));
 let totalPriceValue = 0;
 let deliveryMin = 30000;
 // if (sessionStorage.getItem('token')) {
@@ -70,6 +72,7 @@ function submit(a) {
   a.preventDefault();
   const d = [];
   baskets.forEach((val) => {
+    // title이 아니라 id로 바꿔야됨
     d.push(val.title);
   });
   console.log(d);
@@ -83,6 +86,7 @@ function submit(a) {
     password: 1234,
     productIds: d,
   };
+  // 나중에 세션스토리지에 id 값 오면 수정
   data = {
     name: '길동이',
     phone: '010-1234-5678',
@@ -112,23 +116,30 @@ let b = {
   phoneNumber: '010-0000-0000',
 };
 b = JSON.stringify(b);
-if (baskets.length > 0) {
-  baskets.forEach((basket) => {
-    li.insertAdjacentHTML(
-      'beforeend',
-      productTemplate(
-        basket.imgaes[0],
-        basket.title,
-        basket.price,
-        basket.count
-      )
-    );
-    totalPriceValue += basket.price * basket.count;
-  });
+if (cart === null) {
+  if (baskets.length > 0) {
+    baskets.forEach((basket) => {
+      li.insertAdjacentHTML(
+        'beforeend',
+        productTemplate(
+          basket.imgaes[0],
+          basket.title,
+          basket.price,
+          basket.count
+        )
+      );
+      totalPriceValue += basket.price * basket.count;
+    });
+  }
+} else {
+  li.insertAdjacentHTML(
+    'beforeend',
+    productTemplate(cart.imgaes[0], cart.title, cart.price, cart.count)
+  );
+  totalPriceValue += cart.price * cart.count;
 }
-
 productPrice.innerHTML = `${totalPriceValue}원`;
-if (totalPriceValue >= deliveryMin) {
+if (totalPriceValue < deliveryMin) {
   deliveryPrice = 3000;
 }
 delivery.innerHTML = `${deliveryPrice}원`;

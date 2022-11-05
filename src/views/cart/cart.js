@@ -54,6 +54,7 @@ function addAllEvents() {
     inputPrice(input, eventBox);
   });
   buyBtn.addEventListener('click', function () {
+    localStorage.removeItem('cart');
     buyBtn.parentNode.href += `#id=${user}`;
   });
 }
