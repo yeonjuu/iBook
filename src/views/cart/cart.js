@@ -5,7 +5,7 @@ const bookPrice = document.querySelector('.bookPrice');
 const buyBtn = document.querySelector('.buy');
 const bookId = document.querySelector('.bookId');
 
-const li = document.querySelector('.list'); // 전체 장바구니 목록을 포함하는 ul
+const cartList = document.querySelector('.list'); // 전체 장바구니 목록을 포함하는 ul
 const selectDelBtn = document.querySelector('.selectDelBtn'); //선택 삭제 버튼
 const totalPrice = document.querySelector('.totalPrice');
 const selectAllBtn = document.querySelector('.selectAll');
@@ -218,7 +218,7 @@ function allSelect(allCartItems) {
 
 function rednerCarts() {
   for (let [cartItemId, cartItem] of carts) {
-    li.insertAdjacentHTML(
+    cartList.insertAdjacentHTML(
       'beforeend',
       template(
         cartItem.imgaes[0],
@@ -235,7 +235,7 @@ function rednerCarts() {
 totalPrice.innerHTML = totalPriceValue;
 const allCartItems = document.querySelectorAll('.product');
 let eventCartItem;
-li.onclick = (event) => {
+cartList.onclick = (event) => {
   const cartItem = event.target.closest('.product');
   if (event.target.classList.contains('plusBtn')) {
     addCount(cartItem);
@@ -247,10 +247,9 @@ li.onclick = (event) => {
     clickSelBtn(cartItem);
   }
 };
-li.onmousedown = (event) => {
+cartList.onmousedown = (event) => {
   const cartItem = event.target.closest('.product');
   if (event.target.classList.contains('count')) {
     eventCartItem = cartItem;
-    inputPriceCheck = true;
   }
 };

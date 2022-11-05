@@ -1,6 +1,6 @@
 // import * as Api from '/api.js';
 
-const li = document.querySelector('.li');
+const cartList = document.querySelector('.li');
 const productPrice = document.querySelector('.productPrice');
 const totalPrice = document.querySelector('.totalPrice');
 const delivery = document.querySelector('.deliveryPrice');
@@ -117,7 +117,7 @@ function rednerCarts() {
   if (cart === null) {
     console.log(carts);
     for (let [cartItemId, cartItem] of carts) {
-      li.insertAdjacentHTML(
+      cartList.insertAdjacentHTML(
         'beforeend',
         productTemplate(
           cartItem.imgaes[0],
@@ -130,7 +130,7 @@ function rednerCarts() {
       totalPriceValue += cartItem.price * cartItem.count;
     }
   } else {
-    li.insertAdjacentHTML(
+    cartList.insertAdjacentHTML(
       'beforeend',
       productTemplate(cart.imgaes[0], cart.title, cart.price, cart.count)
     );
