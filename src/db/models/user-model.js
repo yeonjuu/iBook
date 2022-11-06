@@ -5,12 +5,12 @@ const User = model('users', UserSchema);
 
 export class UserModel {
   async findByEmail(email) {
-    const user = await User.findOne({ email }, '-password');
+    const user = await User.findOne({ email });
     return user;
   }
 
   async findById(userId) {
-    const user = await User.findOne({ _id: userId }, '-password');
+    const user = await User.findOne({ _id: userId });
     return user;
   }
 
