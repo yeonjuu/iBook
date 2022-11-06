@@ -20,7 +20,7 @@ userRouter.post('/login', async function (req, res, next) {
     const { email, password } = req.body;
     // 로그인 진행 (로그인 성공 시 jwt 토큰을 프론트에 보내 줌)
     const userToken = await userService.getUserToken({ email, password });
-    
+
     // jwt 토큰을 프론트에 보냄 (jwt 토큰은, 문자열임)
     res.status(200).json(userToken);
   } catch (error) {
@@ -40,7 +40,7 @@ userRouter.post('/', async (req, res, next) => {
     }
 
     // req (request)의 body 에서 데이터 가져오기
-    const { fullName, email, password, address, phoneNumber, role } = req.body;
+    const { fullName, email, password, address, phoneNumber } = req.body;
     // 위 데이터를 유저 db에 추가하기
     const newUser = await userService.addUser({
       fullName,
@@ -48,7 +48,6 @@ userRouter.post('/', async (req, res, next) => {
       password,
       address,
       phoneNumber,
-      role,
     });
 
     // 추가된 유저의 db 데이터를 프론트에 다시 보내줌
@@ -59,7 +58,18 @@ userRouter.post('/', async (req, res, next) => {
   }
 });
 
-// 전체 유저 목록을 가져옴 (배열 형태임)
+//token으로 사용자 검색
+userRouter.get('/:token', loginRequired, async function (req, res, next) {
+  try {
+    const currentUserId = req.currentUserId;
+    const user = await userService.getUser({ _id: currentUserId });
+    res.status(200).json(user);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// 전체 사용자 목록을 가져옴 (배열 형태임)
 // 미들웨어로 loginRequired 를 썼음 (이로써, jwt 토큰이 없으면 사용 불가한 라우팅이 됨)
 userRouter.get('/', loginRequired, async function (req, res, next) {
   try {
@@ -74,11 +84,11 @@ userRouter.get('/', loginRequired, async function (req, res, next) {
 });
 
 //사용자정보를 가져옴
-userRouter.get('/:userId', async function (req, res, next) {
+userRouter.get('/:userId', loginRequired, async function (req, res, next) {
   try {
     const userId = req.params.userId;
     const user = await userService.getUser({ _id: userId });
-    // 상품 목록(배열)을 JSON 형태로 프론트에 보냄
+    // 사용자 정보를 JSON 형태로 프론트에 보냄
     res.status(200).json(user);
   } catch (error) {
     next(error);
@@ -134,11 +144,15 @@ userRouter.put('/:userId', loginRequired, async function (req, res, next) {
   }
 });
 
-userRouter.delete('/:userId', async function (req, res, next) {
+//회원 탈퇴용 : 로그인 되어있는 사용자의 id 와 삭제할 id값이 같을 경우
+userRouter.delete('/:userId', loginRequired, async function (req, res, next) {
   try {
+    const currentUserId = req.currentUserId;
     const userId = req.params.userId;
-    const user = await userService.removeUser(userId);
-
+    let user;
+    if (currentUserId === userId) {
+      user = await userService.removeUser(userId);
+    }
     res.status(200).json(user);
   } catch (error) {
     next(error);

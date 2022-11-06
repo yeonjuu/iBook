@@ -8,12 +8,12 @@
   height: 90px;
 }
 
-#category {
+#categoryMenu {
   margin-left: 5rem;
   display: flex;
 }
 
-#category a {
+#categoryMenu a {
   margin-left: 15px;
   font-size: 18px;
   color: black;

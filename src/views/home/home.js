@@ -9,13 +9,36 @@ const firstRow = document.querySelector('#firstRow');
 const secondRow = document.querySelector('#secondRow');
 const thirdRow = document.querySelector('#thirdRow');
 
+const categoryMenu = document.querySelector("#categoryMenu");
+
+// const scienceFiction = document.querySelector(".scienceFiction");
+// const essay = document.querySelector(".essay");
+// const travel = document.querySelector(".travel");
+// const referenceBook = document.querySelector(".referenceBook");
+// const foreignLanguage = document.querySelector(".foreignLanguage");
+
+//카테고리 메뉴 정보 받기
+getCategoryData();
+
+async function getCategoryData() {
+  const category = await Api.get('api/categories');
+
+  for(let i=0; i < category.length; i++) {
+  const showCategory = `<li><a href="/category/${category[i]._id}">${category[i].name}</a></li>`;
+  categoryMenu.insertAdjacentHTML('beforeend', showCategory);
+  }
+
+
+}
+
+
 //책정보 받기
 getProductData();
 
 async function getProductData() {
   const product = await Api.get('api/products');
 
-  console.log(product);
+  //console.log(product);
 
   const bookImage = await product.map((e) => e.images[0]);
   const bookTitle = product.map((e) => e.title);
@@ -25,6 +48,7 @@ async function getProductData() {
   // console.log(bookTitle);
   // console.log(bookId);
 
+  //메인배너 책 정보 뿌려주기
   for (let i = 0; i < 5; i++) {
     const booktags = `<div><a href="/products/${bookId[i]}">
         <img src=${bookImage[i]} />
@@ -33,7 +57,8 @@ async function getProductData() {
     firstRow.insertAdjacentHTML('beforeend', booktags);
     secondRow.insertAdjacentHTML('beforeend', booktags);
     thirdRow.insertAdjacentHTML('beforeend', booktags);
-  }
+  };
+
 }
 
 //로그인 여부에 따라 상단 메뉴 노출 유무 설정
@@ -48,7 +73,7 @@ getUserData();
 
 async function getUserData() {
   const userData = await Api.get('api/users');
-  console.log(userData);
+  //console.log(userData);
 
   if (sessionStorage) {
     loginBtn.classList.add('hidden');
