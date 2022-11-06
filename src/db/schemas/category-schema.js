@@ -1,4 +1,4 @@
-import { Schema } from "mongoose";
+import { Schema } from 'mongoose';
 
 const CategorySchema = new Schema(
   {
@@ -8,7 +8,7 @@ const CategorySchema = new Schema(
     },
   },
   {
-    collection: "categories",
+    collection: 'categories',
     timestamps: true,
   }
 );
