@@ -15,7 +15,7 @@ getProductData();
 async function getProductData() {
   const product = await Api.get('api/products');
 
-  console.log(product);
+  //console.log(product);
 
   const bookImage = await product.map((e) => e.images[0]);
   const bookTitle = product.map((e) => e.title);
