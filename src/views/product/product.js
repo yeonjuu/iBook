@@ -1,124 +1,109 @@
+//장바구니로 바로 가도록 연결해놓고 있음
+//장바구니이동 선택 시, 이동
 import * as Api from '/api.js';
 
 const pluseBtn = document.querySelector('.plus');
 const minusBtn = document.querySelector('.minus');
-const countSpan = document.querySelector('.count');
+const countEl = document.querySelector('.count');
 
-const titleSpan = document.querySelector('.title');
-const authorSpan = document.querySelector('.author');
-const publisherSpan = document.querySelector('.publisher');
-const priceSpan = document.querySelector('.price');
-const img = document.querySelector('.img-wrap >img');
-const descriptionSpan = document.querySelector('.description');
-const totalSpan = document.querySelector('.total');
-const categorySpan = document.querySelector('.category');
+const titleEl = document.querySelector('.title');
+const authorEl = document.querySelector('.author');
+const publisherEl = document.querySelector('.publisher');
+const priceEl = document.querySelector('.price');
+const descriptionEl = document.querySelector('.description');
+const categoryEl = document.querySelector('.category');
+const totalPriceEl = document.querySelector('.totalPrice');
+
 const cart = document.querySelector('.cart');
-
-const url = window.location.pathname;
-const productId = url.split('/')[2];
-
-const product = await Api.get('/api/products', productId);
-
-//임시데이터
-// const product = {
-//   _id: '6364d13edfe25a059f7bd3f3',
-//   title: '트렌드',
-//   author: '2023',
-//   price: 14000,
-//   publisher: '새로운출판사',
-//   images: ['/uploads/bookId3.jpg', 'url2'],
-//   description: '상세설명',
-//   rate: 0,
-//   category: null,
-//   createdAt: '2022-11-04T08:45:50.500Z',
-//   updatedAt: '2022-11-04T08:45:50.500Z',
-//   __v: 0,
-// };
+const img = document.querySelector('.img-wrap >img');
 
 //상품 정보 변수 저장
+const product = await loadData();
+
 const { title, author, price, publisher, images, description, category } =
   product;
 
-console.log(images);
-
 //페이지에 텍스트 변수 전달
-productRender();
+renderProduct();
 
-//수량 변경
-let count = Number(countSpan.innerText);
+let count = Number(countEl.innerText);
+totalPriceEl.textContent = `${addCommas(calTotalPrice(price, count))}원`;
 
-const span = document.createElement('span');
-span.className = 'totalPrice';
-totalSpan.appendChild(span);
+addAllEvents();
 
-let totalPrice = calculateTotalPrice();
+//함수
+//데이터 로드
+async function loadData() {
+  const url = window.location.pathname;
+  const productId = url.split('/')[2];
 
-//플러스 수량 증가
-pluseBtn.addEventListener('click', function () {
-  count++;
-  countSpan.textContent = count;
-  totalPrice = product.price * count;
-  calculateTotalPrice();
-});
+  const product = await Api.get('/api/products', productId);
+  return product;
+}
 
-//마이너스 수량 감소
-minusBtn.addEventListener('click', function () {
-  if (count == 1) {
-    console.log('수량확인');
-    return;
-  } else {
-    count--;
-    countSpan.textContent = count;
-    totalPrice = product.price * count;
-    calculateTotalPrice();
-  }
-});
+//데이터 랜더링
+function renderProduct() {
+  titleEl.textContent = title;
+  authorEl.textContent = author;
+  priceEl.textContent = addCommas(price);
+  publisherEl.textContent = publisher;
+  img.src = images[0];
+  descriptionEl.textContent = description;
+  categoryEl.textContent = category;
+}
 
-//장바구니 넣으면 로컬스토리지에 정보전달
-cart.addEventListener('click', addCarts);
+//이벤트 처리
+function addAllEvents() {
+  pluseBtn.addEventListener('click', function () {
+    count++;
+    countEl.textContent = count;
+    totalPriceEl.textContent = `${addCommas(calTotalPrice(price, count))}원`;
+  });
+  minusBtn.addEventListener('click', function () {
+    if (count == 1) {
+      console.log('수량확인');
+      return;
+    } else {
+      count--;
+      countEl.textContent = count;
+      totalPriceEl.textContent = `${addCommas(calTotalPrice(price, count))}원`;
+    }
+  });
+  cart.addEventListener('click', addCarts);
+}
 
+//장바구니 추가 함수
 function addCarts() {
-  let isCheck = false;
-  let carts = JSON.parse(localStorage.getItem('carts')) || [];
-  const cart = {
+  let carts = JSON.parse(localStorage.getItem('carts')) || {};
+  carts = new Map(Object.entries(carts));
+  const id = product._id;
+  const cartItem = {
     title: product.title,
     price: product.price,
     count: count,
-    totalPrice: totalPrice,
+    totalPrice: calTotalPrice(price, count),
     imgaes: product.images,
   };
-  carts.forEach((c, idx) => {
-    if (c.title == cart.title) {
-      carts[idx].count += count;
-      carts[idx].totalPrice += totalPrice;
-      localStorage.setItem('carts', JSON.stringify(carts));
-      isCheck = true;
-    }
-  });
-  if (!isCheck) {
-    carts.push(cart);
-    localStorage.setItem('carts', JSON.stringify(carts));
+
+  if (carts.has(id)) {
+    carts.get(id).count += 1;
+    localStorage.setItem('carts', JSON.stringify(Object.fromEntries(carts)));
+  } else {
+    carts.set(id, cartItem);
+    localStorage.setItem('carts', JSON.stringify(Object.fromEntries(carts)));
   }
-  console.log('store carts');
+  const isCart = confirm('장바구니로 이동하시겠습니까?');
+  if (isCart) {
+    window.location.href = '/cart';
+  }
 }
 
-//데이터 로드
-function productRender() {
-  titleSpan.textContent = title;
-  authorSpan.textContent = author;
-  priceSpan.textContent = addCommas(price);
-  publisherSpan.textContent = publisher;
-  img.src = images[0];
-  descriptionSpan.textContent = description;
-  categorySpan.textContent = category;
-}
 //단위
 function addCommas(price) {
   return price.toLocaleString('ko-kr');
 }
+
 //총 금액 계산 및 변경
-function calculateTotalPrice() {
-  let totalPrice = product.price * count;
-  span.innerText = `${addCommas(totalPrice)}원`;
-  return totalPrice;
+function calTotalPrice(price, count) {
+  return price * count;
 }
