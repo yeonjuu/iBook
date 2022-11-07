@@ -62,6 +62,7 @@ async function getProductData() {
 //로그인 여부에 따라 상단 메뉴 노출 유무 설정
 const login = document.querySelector('#login');
 const logout = document.querySelector('#logout');
+const adminPage = document.querySelector('#adminPage');
 const edit = document.querySelector('#edit');
 const editAtag = document.querySelector('#edit a');
 const seeOrder = document.querySelector('#seeOrder');
@@ -74,9 +75,11 @@ checkLogin();
 
 async function checkLogin() {
   const loginUser = await Api.get('/api/users', userToken);
-  //console.log(userData);
+  console.log(loginUser);
+  const isUser = loginUser.role === "basic-user";
+  const isAdmin = loginUser.role === "admin-user";
 
-  if (sessionStorage) {
+  if (sessionStorage && isUser) {
     login.classList.add('hidden');
     register.classList.add('hidden');
     logout.classList.remove('hidden');
@@ -85,6 +88,14 @@ async function checkLogin() {
 
     editAtag.innerText = `${loginUser.fullName}님의 프로필`;
     // alert(`${loginUser.fullName}님 안녕하세요!`);
+  }
+
+  //관리자 계정일 때
+  if (sessionStorage && isAdmin) {
+    login.classList.add('hidden');
+    register.classList.add('hidden');
+    adminPage.classList.remove('hidden');
+    logout.classList.remove('hidden');
   }
 
 
