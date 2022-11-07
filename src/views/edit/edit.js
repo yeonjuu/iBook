@@ -5,6 +5,7 @@ const fullNameInput = document.querySelector("#fullNameInput");
 const emailInput = document.querySelector("#emailInput");
 const phoneInput = document.querySelector("#phoneInput");
 const addressInput = document.querySelector("#addressInput");
+const currentPasswordInput = document.querySelector("#currentPasswordInput");
 const passwordInput = document.querySelector("#passwordInput");
 const passwordConfirmInput = document.querySelector("#passwordConfirmInput");
 
@@ -46,16 +47,17 @@ async function editUser(e) {
     const email = emailInput.value;
     const phoneNumber = phoneInput.value;
     const address = addressInput.value;
-    const currentPassword = passwordInput.value;
+    const currentPassword = currentPasswordInput.value;
+    const password = passwordInput.value;
     const passwordConfirm = passwordConfirmInput.value;
 
-    const isPasswordSame = currentPassword === passwordConfirm;
+    const isPasswordSame = password === passwordConfirm;
     const isEmailValid = validateEmail(email);
 
-    console.log(fullName, email, phoneNumber);
+    // console.log(fullName, email, phoneNumber);
 
     
-    if (!fullName || !email || !phoneNumber || !address || !currentPassword || !passwordConfirm) {
+    if (!fullName || !email || !phoneNumber || !address || !currentPassword || !password || !passwordConfirm) {
         return alert("모든 항목을 기입 해주세요");
     };
 
@@ -67,7 +69,7 @@ async function editUser(e) {
         return alert("이메일 형식이 맞지 않습니다.");
       };
 
-    const data = { fullName, email, phoneNumber, address, currentPassword };
+    const data = { fullName, email, phoneNumber, address, currentPassword, password };
 
     await Api.put('/api/users', loginId, data);
 
