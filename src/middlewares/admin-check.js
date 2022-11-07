@@ -27,7 +27,7 @@ function adminCheck(req, res, next) {
     const userRole = jwtDecoded.role;
 
     // 라우터에서 req.currentUserId를 통해 유저의 id에 접근 가능하게 됨
-    if (userRole !== 'admin-user') {
+    if (userRole !== 'admin') {
       console.log('서비스 사용 요청이 있습니다.하지만, 권한이 없음.');
 
       res.status(403).json({

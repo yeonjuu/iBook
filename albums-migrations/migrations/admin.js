@@ -4,7 +4,7 @@ module.exports = {
       {
         email: 'admin@ibook.com',
         fullName: '관리자',
-        role: 'admin-user',
+        role: 'admin',
         password:
           '$2b$10$6Eg7ove08IaFApmTj.1l4OflPqoXQMuBvCKSMksdn022nB4zU6IP2',
       },
