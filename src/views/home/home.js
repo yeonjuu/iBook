@@ -1,21 +1,10 @@
-// 아래는 현재 home.html 페이지에서 쓰이는 코드는 아닙니다.
-// 다만, 앞으로 ~.js 파일을 작성할 때 아래의 코드 구조를 참조할 수 있도록,
-// 코드 예시를 남겨 두었습니다.
-
 import * as Api from '/api.js';
-import { randomId } from '/useful-functions.js';
 
 const firstRow = document.querySelector('#firstRow');
 const secondRow = document.querySelector('#secondRow');
 const thirdRow = document.querySelector('#thirdRow');
 
 const categoryMenu = document.querySelector("#categoryMenu");
-
-// const scienceFiction = document.querySelector(".scienceFiction");
-// const essay = document.querySelector(".essay");
-// const travel = document.querySelector(".travel");
-// const referenceBook = document.querySelector(".referenceBook");
-// const foreignLanguage = document.querySelector(".foreignLanguage");
 
 //카테고리 메뉴 정보 받기
 getCategoryData();
@@ -27,7 +16,6 @@ async function getCategoryData() {
   const showCategory = `<li><a href="/category/${category[i]._id}">${category[i].name}</a></li>`;
   categoryMenu.insertAdjacentHTML('beforeend', showCategory);
   }
-
 
 }
 
@@ -62,26 +50,34 @@ async function getProductData() {
 }
 
 //로그인 여부에 따라 상단 메뉴 노출 유무 설정
-const loginBtn = document.querySelector('#loginBtn');
-const logoutBtn = document.querySelector('#logoutBtn');
-const editBtn = document.querySelector('#editBtn');
-const seeOrderBtn = document.querySelector('#seeOrderBtn');
-const registerBtn = document.querySelector('#registerBtn');
+const login = document.querySelector('#login');
+const logout = document.querySelector('#logout');
+const edit = document.querySelector('#edit');
+const editAtag = document.querySelector('#edit a');
+const seeOrder = document.querySelector('#seeOrder');
+const register = document.querySelector('#register');
 
-//유저 정보 받기
-getUserData();
+const userToken = sessionStorage.token;
 
-async function getUserData() {
-  const userData = await Api.get('api/users');
+//로그인 유저 확인
+checkLogin();
+
+async function checkLogin() {
+  const loginUser = await Api.get('/api/users', userToken);
   //console.log(userData);
 
   if (sessionStorage) {
-    loginBtn.classList.add('hidden');
-    registerBtn.classList.add('hidden');
-    logoutBtn.classList.remove('hidden');
-    editBtn.classList.remove('hidden');
-    seeOrderBtn.classList.remove('hidden');
+    login.classList.add('hidden');
+    register.classList.add('hidden');
+    logout.classList.remove('hidden');
+    edit.classList.remove('hidden');
+    seeOrder.classList.remove('hidden');
+
+    editAtag.innerText = `${loginUser.fullName}님의 프로필`;
+    alert(`${loginUser.fullName}님 안녕하세요!`);
   }
+
+
 }
 //로그아웃 버튼 클릭시 토큰 삭제
 
@@ -89,4 +85,4 @@ function logoutHandler() {
   sessionStorage.removeItem('token');
 }
 
-logoutBtn.addEventListener('click', logoutHandler);
+logout.addEventListener('click', logoutHandler);
