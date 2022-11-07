@@ -89,7 +89,7 @@ function add(e) {
     imgaes: 'url',
   };
 
-  if (carts.get(id)) {
+  if (carts.has(id)) {
     carts.get(id).count += 1;
     localStorage.setItem('carts', JSON.stringify(Object.fromEntries(carts)));
   } else {

@@ -1,0 +1,12 @@
+ul {
+  list-style: none;
+}
+
+.orderInfo {
+  width: 800px;
+  height: 150px;
+  border: solid 1px black;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}

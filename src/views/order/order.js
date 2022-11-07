@@ -1,4 +1,4 @@
-// import * as Api from '/api.js';
+import * as Api from '/api.js';
 
 const cartList = document.querySelector('.li');
 const productPrice = document.querySelector('.productPrice');
@@ -11,20 +11,19 @@ const phoneNumber = document.querySelector('#phoneNumber');
 const ordererInfoContents = document.querySelector('.ordererInfoContents');
 const submitBtn = document.querySelector('.submitBtn');
 const Info = document.querySelector('.Info');
-const address = document.querySelector('#address');
+const address = document.querySelector('.address');
+const detailAddress = document.querySelector('.detailAddress');
 
+let user;
 let password;
 let checkPassword;
-let userCheck = false;
+let token = sessionStorage.getItem('token');
 let deliveryPrice = 0;
 let carts = JSON.parse(localStorage.getItem('carts')) || {};
 carts = carts = new Map(Object.entries(carts));
 let cart = JSON.parse(localStorage.getItem('cart'));
 let totalPriceValue = 0;
 let deliveryMin = 30000;
-// if (sessionStorage.getItem('token')) {
-//   userCheck = true;
-// }
 
 rednerCarts();
 function passwordHtml() {
@@ -62,7 +61,7 @@ function productTemplate(img, title, price, count, id) {
     </div>
     <div id="productInfo">
       <div>${title}</div>
-      <div>${count}</div>
+      <div class="qty">${count}</div>
     </div>
     <div>
       <p>${price * count}</p>
@@ -73,36 +72,28 @@ function productTemplate(img, title, price, count, id) {
 
 function submit(a) {
   a.preventDefault();
+  let qty = 0;
   const d = [];
-  carts.forEach((val) => {
-    // title이 아니라 id로 바꿔야됨
-    d.push(val.title);
+  const productsInfo = [];
+  products.forEach((product) => {
+    qty += Number(document.querySelector('.qty').innerHTML);
+    productsInfo.push({
+      productId: product.id,
+      qty: Number(document.querySelector('.qty').innerHTML),
+    });
   });
-  console.log(d);
   let data = {
     name: orderer.value,
+    userId: user._id || 'none',
     phone: phoneNumber.value,
     address: address.value,
-    paymentMethod: totalPrice.innerHTML,
-    email: email.value,
-    qty: 1,
-    password: 1234,
-    productIds: d,
-  };
-  // 나중에 세션스토리지에 id 값 오면 수정
-  data = {
-    name: '길동이',
-    phone: '010-1234-5678',
-    address: '여기가 어디 나는 누구?',
     paymentMethod: '현금',
-    email: 'google@google.com',
-    qty: 10,
-    password: 1234,
-    productIds: ['63620e42617d39dce34454c1', '6362325d02731c2524d6955c'],
+    email: email.value,
+    qty: qty,
+    products: productsInfo,
   };
   console.log(data);
-  Api.post('/api/orders', data);
-
+  Api.post(`/api/orders/`, data);
   //   if (userCheck) {
   //   } else {
   //     if (checkPassword.value === password.value) {
@@ -150,11 +141,15 @@ function delay(ms) {
 }
 
 async function loadUserInfo() {
-  const user = await Api.get();
+  return await Api.get(`/api/users/${token}`);
 }
-console.log('?');
-if (userCheck) {
-  loadUserInfo();
+const products = document.querySelectorAll('.product');
+if (token) {
+  user = await loadUserInfo();
+  body.classList.remove('hidden');
+  orderer.value = user.fullName;
+  email.value = user.email;
+  phoneNumber.value = user.phoneNumber;
 } else {
   body.classList.remove('hidden');
   //   ordererInfoContents.insertAdjacentHTML("beforeend", passwordHtml());

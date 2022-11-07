@@ -1,0 +1,16 @@
+.compleBox {
+  display: grid;
+  grid-template-rows: 60% 40%;
+  height: 500px;
+  width: 900px;
+  border: solid 1px black;
+}
+.thankBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.buttonBox {
+  display: flex;
+  justify-content: space-around;
+}

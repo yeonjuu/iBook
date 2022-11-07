@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
   <head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -12,7 +12,11 @@
     <header></header>
     <main>
       <span>주문</span>
-      <form class="Info">
+      <form
+        class="Info"
+        action="http://localhost:5000/api/orders"
+        method="post"
+      >
         <div class="InfoBox">
           <div class="ordererInfoBox InfoBoxes">
             <div class="ordererInfo center">
@@ -77,7 +81,7 @@
                 <div><strong>주소</strong></div>
                 <div>
                   <input
-                    id="address"
+                    class="address"
                     type="text"
                     placeholder="주소를 입력하세요"
                     name="address"
