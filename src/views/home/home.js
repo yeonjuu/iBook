@@ -43,12 +43,12 @@ async function getProductData() {
         <span>${bookTitle[i]}</span>
         </a></div>`;
 
-    const secondRowBooks = `<div><a href="/products/${bookId[i]}">
+    const secondRowBooks = `<div><a href="/products/${bookId[i+5]}">
         <img src=${bookImage[i+5]} />
         <span>${bookTitle[i+5]}</span>
         </a></div>`; 
 
-    const thirdRowBooks = `<div><a href="/products/${bookId[i]}">
+    const thirdRowBooks = `<div><a href="/products/${bookId[i+10]}">
         <img src=${bookImage[i+10]} />
         <span>${bookTitle[i+10]}</span>
         </a></div>`; 
