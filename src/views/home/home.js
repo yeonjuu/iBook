@@ -38,13 +38,23 @@ async function getProductData() {
 
   //메인배너 책 정보 뿌려주기
   for (let i = 0; i < 5; i++) {
-    const booktags = `<div><a href="/products/${bookId[i]}">
+    const firstRowBooks = `<div><a href="/products/${bookId[i]}">
         <img src=${bookImage[i]} />
         <span>${bookTitle[i]}</span>
         </a></div>`;
-    firstRow.insertAdjacentHTML('beforeend', booktags);
-    secondRow.insertAdjacentHTML('beforeend', booktags);
-    thirdRow.insertAdjacentHTML('beforeend', booktags);
+
+    const secondRowBooks = `<div><a href="/products/${bookId[i]}">
+        <img src=${bookImage[i+5]} />
+        <span>${bookTitle[i+5]}</span>
+        </a></div>`; 
+
+    const thirdRowBooks = `<div><a href="/products/${bookId[i]}">
+        <img src=${bookImage[i+10]} />
+        <span>${bookTitle[i+10]}</span>
+        </a></div>`; 
+    firstRow.insertAdjacentHTML('beforeend', firstRowBooks);
+    secondRow.insertAdjacentHTML('beforeend', secondRowBooks);
+    thirdRow.insertAdjacentHTML('beforeend', thirdRowBooks);
   };
 
 }
@@ -74,7 +84,7 @@ async function checkLogin() {
     seeOrder.classList.remove('hidden');
 
     editAtag.innerText = `${loginUser.fullName}님의 프로필`;
-    alert(`${loginUser.fullName}님 안녕하세요!`);
+    // alert(`${loginUser.fullName}님 안녕하세요!`);
   }
 
 
