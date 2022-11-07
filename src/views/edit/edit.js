@@ -1,8 +1,6 @@
 import * as Api from "/api.js";
 import { validateEmail } from "/useful-functions.js";
 
-
-
 const fullNameInput = document.querySelector("#fullNameInput");
 const emailInput = document.querySelector("#emailInput");
 const phoneInput = document.querySelector("#phoneInput");
@@ -12,50 +10,52 @@ const passwordConfirmInput = document.querySelector("#passwordConfirmInput");
 
 const editUserBtn = document.querySelector("#editUserBtn");
 
+const userToken = sessionStorage.token;
+
+let loginId = "";
+
+
 //로그인 회원 정보 끌고 오기
 
 getLoginUserData()
 
 async function getLoginUserData() {
+    
+    const loginUser = await Api.get('/api/users', userToken);
+    //console.log(loginUser);
 
-    const userToken = sessionStorage.token;
-    //console.log(userToken);
-    console.log(`http://localhost:5000/api/users/${userToken}`);
-
-    const users = await Api.get(`http://localhost:5000/api/users/${userToken}`);
-    console.log(loginUser);
-
-    // const logginUser = users.filter(e => )
-}
-
-fullNameInput.value = "엘리스";
-emailInput.value = "s@n.com";
-phoneInput.value = 3;
-addressInput.value = 3;
-emailInput.value = 4;
+    loginId = loginUser._id;
+    // console.log(loginId);
 
 
+    const { fullName, email, phoneNumber, address } = loginUser;
 
-
+    fullNameInput.value = fullName;
+    emailInput.value = email;
+    phoneInput.value = phoneNumber;
+    addressInput.value = address;
+};
 
 
 //회원 정보 수정
 
 async function editUser(e) {
-    e.preventDefault()
+    e.preventDefault();
 
     const fullName = fullNameInput.value;
     const email = emailInput.value;
-    const phone = phoneInput.value;
+    const phoneNumber = phoneInput.value;
     const address = addressInput.value;
-    const password = passwordInput.value;
+    const currentPassword = passwordInput.value;
     const passwordConfirm = passwordConfirmInput.value;
 
-    const isPasswordSame = password === passwordConfirm;
+    const isPasswordSame = currentPassword === passwordConfirm;
     const isEmailValid = validateEmail(email);
 
+    console.log(fullName, email, phoneNumber);
+
     
-    if (!fullName || !email || !phone || !address || !password || !passwordConfirm) {
+    if (!fullName || !email || !phoneNumber || !address || !currentPassword || !passwordConfirm) {
         return alert("모든 항목을 기입 해주세요");
     };
 
@@ -67,14 +67,13 @@ async function editUser(e) {
         return alert("이메일 형식이 맞지 않습니다.");
       };
 
+    const data = { fullName, email, phoneNumber, address, currentPassword };
 
+    await Api.put('/api/users', loginId, data);
 
-    // const data = { fullName, email, phone, address, password };
-
-
-
-    // else alert("회원 정보가 수정되었습니다!");
-}
+    alert("회원 정보가 수정되었습니다!");
+    window.location.href = "/";
+};
 
 editUserBtn.addEventListener("click", editUser);
 
@@ -87,7 +86,18 @@ const deleteUserBtn = document.querySelector("#deleteUserBtn");
 
 
 async function deleteUser() {
+    const fullName = fullNameInput.value;
+    const email = emailInput.value;
+    const phoneNumber = phoneInput.value;
+    const address = addressInput.value;
 
+
+    await Api.delete('/api/users', loginId);
+    alert("회원 정보가 삭제 되었습니다");
+
+    sessionStorage.removeItem('token')
+
+    window.location.href = "http://localhost:5000";
 }
 
 deleteUserBtn.addEventListener("click", deleteUser);

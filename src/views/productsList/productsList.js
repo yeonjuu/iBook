@@ -28,7 +28,7 @@ async function showProductsList() {
     // const url = window.location.pathname;
     // const categoryId = url.split("/")[2];
     
-    const totalBooks = await Api.get("http://localhost:5000/api/products");
+    const totalBooks = await Api.get("/api/products");
     //console.log(totalBooks);
 
     //클릭한 카테고리 id 비교
@@ -37,7 +37,7 @@ async function showProductsList() {
 
     if(!productsList) {
         const nothingToShow = `<li>표시할 책 내용이 없습니다</li>`;
-        fictionList.insertAdjacentHTML('beforeend', toShow);
+        fictionList.insertAdjacentHTML('beforeend', nothingToShow);
     };
 
     for (let i=0; i < productsList.length; i++) {
