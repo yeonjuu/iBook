@@ -76,8 +76,8 @@ checkLogin();
 async function checkLogin() {
   const loginUser = await Api.get('/api/users', userToken);
   console.log(loginUser);
-  const isUser = loginUser.role === "basic-user";
-  const isAdmin = loginUser.role === "admin-user";
+  const isUser = loginUser.role === "user";
+  const isAdmin = loginUser.role === "admin";
 
   if (sessionStorage && isUser) {
     login.classList.add('hidden');
