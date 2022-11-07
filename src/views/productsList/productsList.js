@@ -24,16 +24,13 @@ async function showCategoryName() {
 showProductsList();
 
 async function showProductsList() {
-
-    // const url = window.location.pathname;
-    // const categoryId = url.split("/")[2];
     
     const totalBooks = await Api.get("/api/products");
     //console.log(totalBooks);
 
     //클릭한 카테고리 id 비교
     const productsList = totalBooks.filter( (e) => e.category._id === `${categoryId}` );
-    //console.log(productsList);
+    //console.log(productsList[0].images);
 
     if(productsList.length == 0) {
         const nothingToShow = `<span>표시할 책 내용이 없습니다</span>`;
@@ -42,7 +39,7 @@ async function showProductsList() {
 
     for (let i=0; i < productsList.length; i++) {
         const toShow = `
-        <div><img src="${productsList[i].images}"/></div>
+        <div><a href="/products/${productsList[i]._id}"><img src="${productsList[i].images[0]}"/></a></div>
         <li>책이름 : ${productsList[i].title}</li>
         <li>저자 :${productsList[i].author}</li>
         <li>출판사 : ${productsList[i].publisher}</li>
