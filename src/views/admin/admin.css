@@ -1,0 +1,40 @@
+* {
+  box-sizing: border-box;
+}
+a {
+  text-decoration: none;
+  color: #000000;
+}
+header {
+  width: 90%;
+  margin: 0 auto;
+}
+header > h1 > a {
+  display: block;
+  width: 200px;
+  height: 80px;
+  color: transparent;
+  background: url(../../images/main-logo.png) no-repeat;
+  background-size: contain;
+}
+
+div.main-container {
+  width: 90%;
+  height: 870px;
+  display: flex;
+  margin: 0 auto;
+}
+
+div.main-container > div.menu-bar {
+  width: 20%;
+  height: 100%;
+  background-color: rgb(179, 179, 179);
+  padding: 20px;
+}
+
+div.main-container > div.content {
+  width: 80%;
+  height: 100%;
+  background-color: #f7f7f7;
+  padding: 20px;
+}

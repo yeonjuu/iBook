@@ -1,0 +1,22 @@
+div.product {
+  background-color: #ffffff;
+  width: 80%;
+  height: 200px;
+  padding: 30px;
+}
+
+div.product-image {
+  width: 80px;
+  height: 120px;
+  background-color: #ff7070;
+  display: inline-block;
+}
+
+div.product-image > img {
+  width: 100%;
+  height: 100%;
+}
+
+.title {
+  font-weight: bold;
+}
