@@ -6,10 +6,7 @@ class ProductService {
   }
 
   // 상품 추가
-  async addProduct(productInfo) {
-    // 객체 destructuring(구조 분해 할당)
-    const { title } = productInfo;
-
+  async addProduct({ title }) {
     // 상품명 중복 확인
     const product = await this.productModel.findByTitle(title);
     if (product) {
