@@ -14,6 +14,7 @@ orderRouter.post('/', async (req, res, next) => {
 
     const {
       name,
+      userId,
       phone,
       address,
       paymentMethod,
@@ -25,6 +26,7 @@ orderRouter.post('/', async (req, res, next) => {
 
     const newOrder = await orderService.addOrder({
       name,
+      userId,
       phone,
       address,
       paymentMethod,
@@ -42,7 +44,14 @@ orderRouter.post('/', async (req, res, next) => {
 
 orderRouter.get('/', async function (req, res, next) {
   try {
-    const orders = await orderService.getOrders();
+    const userId = req.query.userId;
+    let orders;
+
+    if (userId) {
+      orders = await orderService.getOrdersByUserId(userId);
+    } else {
+      orders = await orderService.getOrders();
+    }
 
     res.status(200).json(orders);
   } catch (error) {

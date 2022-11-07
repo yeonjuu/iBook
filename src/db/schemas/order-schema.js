@@ -6,6 +6,10 @@ const OrderSchema = new Schema(
       type: String,
       required: true,
     },
+    userId: {
+      type: String,
+      required: true,
+    },
     phone: {
       type: String,
       required: true,

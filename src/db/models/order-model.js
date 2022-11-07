@@ -1,7 +1,7 @@
-import { model } from "mongoose";
-import { OrderSchema } from "../schemas/order-schema";
+import { model } from 'mongoose';
+import { OrderSchema } from '../schemas/order-schema';
 
-const Order = model("orders", OrderSchema);
+const Order = model('orders', OrderSchema);
 
 export class OrderModel {
   async create(orderInfo) {
@@ -11,6 +11,11 @@ export class OrderModel {
 
   async findAll() {
     const orders = await Order.find({}).populate('products');
+    return orders;
+  }
+
+  async findAllByUserId(userId) {
+    const orders = await Order.find({ userId }).populate('products');
     return orders;
   }
 
@@ -29,7 +34,7 @@ export class OrderModel {
 
   async delete(orderId) {
     const order = await Order.deleteOne({ _id: orderId });
-    return order
+    return order;
   }
 }
 
