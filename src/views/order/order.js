@@ -1,6 +1,6 @@
 import * as Api from '/api.js';
 
-const li = document.querySelector('.li');
+const cartList = document.querySelector('.li');
 const productPrice = document.querySelector('.productPrice');
 const totalPrice = document.querySelector('.totalPrice');
 const delivery = document.querySelector('.deliveryPrice');
@@ -11,17 +11,21 @@ const phoneNumber = document.querySelector('#phoneNumber');
 const ordererInfoContents = document.querySelector('.ordererInfoContents');
 const submitBtn = document.querySelector('.submitBtn');
 const Info = document.querySelector('.Info');
+const address = document.querySelector('.address');
+const detailAddress = document.querySelector('.detailAddress');
 
+let user;
 let password;
 let checkPassword;
-let userCheck = false;
+let token = sessionStorage.getItem('token');
 let deliveryPrice = 0;
-let baskets = JSON.parse(localStorage.getItem('carts')) || [];
+let carts = JSON.parse(localStorage.getItem('carts')) || {};
+carts = carts = new Map(Object.entries(carts));
+let cart = JSON.parse(localStorage.getItem('cart'));
 let totalPriceValue = 0;
 let deliveryMin = 30000;
-// if (sessionStorage.getItem('token')) {
-//   userCheck = true;
-// }
+
+rednerCarts();
 function passwordHtml() {
   return `<div class="password inputSort">
     <div><strong>주문조회 비밀번호</strong></div>
@@ -50,14 +54,14 @@ function passwordHtml() {
   </div>`;
 }
 
-function productTemplate(img, title, price, count) {
-  return `<li class="product">
+function productTemplate(img, title, price, count, id) {
+  return `<li class="product" id=${id}>
     <div>
       <img src=${img} />
     </div>
     <div id="productInfo">
       <div>${title}</div>
-      <div>${count}</div>
+      <div class="qty">${count}</div>
     </div>
     <div>
       <p>${price * count}</p>
@@ -68,6 +72,28 @@ function productTemplate(img, title, price, count) {
 
 function submit(a) {
   a.preventDefault();
+  let qty = 0;
+  const d = [];
+  const productsInfo = [];
+  products.forEach((product) => {
+    qty += Number(document.querySelector('.qty').innerHTML);
+    productsInfo.push({
+      productId: product.id,
+      qty: Number(document.querySelector('.qty').innerHTML),
+    });
+  });
+  let data = {
+    name: orderer.value,
+    userId: user._id || 'none',
+    phone: phoneNumber.value,
+    address: address.value,
+    paymentMethod: '현금',
+    email: email.value,
+    qty: qty,
+    products: productsInfo,
+  };
+  console.log(data);
+  Api.post(`/api/orders/`, data);
   //   if (userCheck) {
   //   } else {
   //     if (checkPassword.value === password.value) {
@@ -78,29 +104,32 @@ function submit(a) {
   //   }
 }
 
-let b = {
-  email: 'tutor-sw2@elicer.com',
-  fullName: 'tutor',
-  phoneNumber: '010-0000-0000',
-};
-b = JSON.stringify(b);
-if (baskets.length > 0) {
-  baskets.forEach((basket) => {
-    li.insertAdjacentHTML(
+function rednerCarts() {
+  if (cart === null) {
+    console.log(carts);
+    for (let [cartItemId, cartItem] of carts) {
+      cartList.insertAdjacentHTML(
+        'beforeend',
+        productTemplate(
+          cartItem.imgaes[0],
+          cartItem.title,
+          cartItem.price,
+          cartItem.count,
+          cartItemId
+        )
+      );
+      totalPriceValue += cartItem.price * cartItem.count;
+    }
+  } else {
+    cartList.insertAdjacentHTML(
       'beforeend',
-      productTemplate(
-        basket.imgaes[0],
-        basket.title,
-        basket.price,
-        basket.count
-      )
+      productTemplate(cart.imgaes[0], cart.title, cart.price, cart.count)
     );
-    totalPriceValue += basket.price * basket.count;
-  });
+    totalPriceValue += cart.price * cart.count;
+  }
 }
-
 productPrice.innerHTML = `${totalPriceValue}원`;
-if (totalPriceValue >= deliveryMin) {
+if (totalPriceValue < deliveryMin) {
   deliveryPrice = 3000;
 }
 delivery.innerHTML = `${deliveryPrice}원`;
@@ -112,20 +141,15 @@ function delay(ms) {
 }
 
 async function loadUserInfo() {
-  const user = await Api.get();
+  return await Api.get(`/api/users/${token}`);
 }
-const a = async () => {
-  await delay(1000);
-  const json = await fakefetch('url');
-  const data = JSON.parse(json);
+const products = document.querySelectorAll('.product');
+if (token) {
+  user = await loadUserInfo();
   body.classList.remove('hidden');
-  orderer.value = data.fullName;
-  email.value = data.email;
-  phoneNumber.value = data.phoneNumber;
-};
-
-if (userCheck) {
-  loadUserInfo();
+  orderer.value = user.fullName;
+  email.value = user.email;
+  phoneNumber.value = user.phoneNumber;
 } else {
   body.classList.remove('hidden');
   //   ordererInfoContents.insertAdjacentHTML("beforeend", passwordHtml());
