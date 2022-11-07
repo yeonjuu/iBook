@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import is from '@sindresorhus/is';
-import { orderService } from '../services';
+import { orderService, userService } from '../services';
+import { loginRequired } from '../middlewares';
 
 const orderRouter = Router();
 
@@ -115,11 +116,18 @@ orderRouter.put('/:orderId', async function (req, res, next) {
   }
 });
 
-orderRouter.delete('/:orderId', async function (req, res, next) {
+orderRouter.delete('/:orderId', loginRequired, async function (req, res, next) {
   try {
     const orderId = req.params.orderId;
+    const userId = req.currentUserId;
+    const user = await userService.getUser(userId);
+    let order;
 
-    const order = await orderService.removeOrder(orderId);
+    if (user.role == 'admin') {
+      order = await orderService.removeOrder(orderId);
+    } else {
+      throw new Error('어드민 권한일 때 삭제가 가능합니다.');
+    }
 
     res.status(200).json(order);
   } catch (error) {
