@@ -4,8 +4,28 @@ import { OrderSchema } from '../schemas/order-schema';
 const Order = model('orders', OrderSchema);
 
 export class OrderModel {
-  create(orderInfo) {
-    return Order.create(orderInfo);
+  create({
+    name,
+    userId,
+    phone,
+    address,
+    paymentMethod,
+    email,
+    qty,
+    password,
+    products,
+  }) {
+    return Order.create({
+      name,
+      userId,
+      phone,
+      address,
+      paymentMethod,
+      email,
+      qty,
+      password,
+      products,
+    });
   }
 
   findAll() {
