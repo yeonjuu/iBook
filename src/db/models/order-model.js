@@ -4,24 +4,20 @@ import { OrderSchema } from '../schemas/order-schema';
 const Order = model('orders', OrderSchema);
 
 export class OrderModel {
-  async create(orderInfo) {
-    const createdNewOrder = await Order.create(orderInfo);
-    return createdNewOrder;
+  create(orderInfo) {
+    return Order.create(orderInfo);
   }
 
-  async findAll() {
-    const orders = await Order.find({}).populate('products');
-    return orders;
+  findAll() {
+    return Order.find({}).populate('products');
   }
 
-  async findAllByUserId(userId) {
-    const orders = await Order.find({ userId }).populate('products');
-    return orders;
+  findAllByUserId(userId) {
+    return Order.find({ userId }).populate('products');
   }
 
-  async findById(orderId) {
-    const order = await Order.findOne({ _id: orderId }).populate('products');
-    return order;
+  findById(orderId) {
+    return Order.findOne({ _id: orderId }).populate('products');
   }
 
   async update({ orderId, update }) {
@@ -32,9 +28,8 @@ export class OrderModel {
     return updatedProduct;
   }
 
-  async delete(orderId) {
-    const order = await Order.deleteOne({ _id: orderId });
-    return order;
+  delete(orderId) {
+    return Order.deleteOne({ _id: orderId });
   }
 }
 
