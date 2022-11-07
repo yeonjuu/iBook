@@ -3,7 +3,7 @@ import { getProductAddTemplate } from './productTemplate.js';
 
 const add = document.querySelector('.add');
 const landing = document.querySelector('.landing');
-
+let imageUrl = '';
 add.addEventListener('click', getAddProduct);
 
 function getAddProduct() {
@@ -11,8 +11,8 @@ function getAddProduct() {
   landing.innerHTML = addHtml;
 
   window.onload = getOptionsCategory();
-  window.onload = loadImage();
-  window.onload = handleSubmit();
+  window.onload = handleImage();
+  window.onload = handleInfoSubmit();
 }
 
 async function getOptionsCategory() {
@@ -30,9 +30,9 @@ async function getOptionsCategory() {
   );
 }
 
-async function handleSubmit() {
+function handleInfoSubmit() {
   const productInfo = document.querySelector('#product-info');
-  const submitBtn = document.getElementById('submit-info');
+  const submitBtn = document.querySelector('#submit-info');
   const msg = document.querySelector('.msg');
   const categoryEl = document.querySelector('#category');
   let categoryId = '';
@@ -47,9 +47,10 @@ async function handleSubmit() {
       publisher: productInfo['publisher'].value,
       price: productInfo['price'].value,
       description: productInfo['description'].value,
-      images: ['uploads/smp1.jpg'],
+      images: imageUrl,
       categoryId: categoryId,
     };
+
     await Api.post('/api/products', product);
     alert('상품 추가 완료');
     msg.innerText = JSON.stringify(product);
@@ -57,20 +58,25 @@ async function handleSubmit() {
 }
 
 //이미지 처리하기
-function loadImage() {
+function handleImage() {
+  const imageInfo = document.querySelector('#image-info');
   const input = document.querySelector('#product-img');
-  const submitBtn = document.getElementById('upload');
   //스타일만들때 쓰기
   // input.style.opacity = 0;
 
   input.addEventListener('change', previewImage);
-  //submit 버튼 누르면 자동으로 경로를설정해줌(action)을 막고? response값을 받아온다? Fetch로?
-  //submit 클릭 시 경로이동은 iframe으로 이동 막는 방법,,,
-  //method = post 후 값(response)을 어떻게 받아오는지 -> formData method post ,
-  submitBtn.addEventListener('click', function (e) {
+  //사진업로드 제출하고 응답 값 받기 , 응답 값 형태 : { images : [url, ,,,]}
+  imageInfo.onsubmit = async (e) => {
     e.preventDefault();
-    console.log('complete upload.');
-  });
+    let res = await fetch('/api/products/upload', {
+      method: 'POST',
+      body: new FormData(imageInfo),
+    });
+    let result = await res.json();
+    imageUrl = result.images;
+    console.log('result', imageUrl);
+    console.log('complete upload');
+  };
 }
 
 function previewImage() {
