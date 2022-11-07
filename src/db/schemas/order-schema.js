@@ -37,9 +37,15 @@ const OrderSchema = new Schema(
     },
     products: [
       {
-        type: Schema.Types.ObjectId,
-        required: true,
-        ref: 'products',
+        productId: {
+          type: Schema.Types.ObjectId,
+          required: true,
+          ref: 'products',
+        },
+        qty: {
+          type: Number,
+          required: true,
+        },
       },
     ],
   },

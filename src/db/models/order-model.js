@@ -29,15 +29,15 @@ export class OrderModel {
   }
 
   findAll() {
-    return Order.find({}).populate('products');
+    return Order.find({}).populate('products.productId');
   }
 
   findAllByUserId(userId) {
-    return Order.find({ userId }).populate('products');
+    return Order.find({ userId }).populate('products.productId');
   }
 
   findById(orderId) {
-    return Order.findOne({ _id: orderId }).populate('products');
+    return Order.findOne({ _id: orderId }).populate('products.productId');
   }
 
   async update({ orderId, update }) {

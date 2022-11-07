@@ -21,7 +21,7 @@ orderRouter.post('/', async (req, res, next) => {
       email,
       qty,
       password,
-      productIds,
+      products,
     } = req.body;
 
     const newOrder = await orderService.addOrder({
@@ -33,7 +33,7 @@ orderRouter.post('/', async (req, res, next) => {
       email,
       qty,
       password,
-      products: productIds,
+      products,
     });
 
     res.status(201).json(newOrder);
