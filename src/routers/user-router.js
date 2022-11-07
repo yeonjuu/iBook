@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import is from '@sindresorhus/is';
 // 폴더에서 import하면, 자동으로 폴더의 index.js에서 가져옴
-import { loginRequired } from '../middlewares';
+import { loginRequired, adminCheck } from '../middlewares';
 import { userService } from '../services';
 
 const userRouter = Router();
@@ -154,6 +154,31 @@ userRouter.delete('/:userId', loginRequired, async function (req, res, next) {
       user = await userService.removeUser(userId);
     }
     res.status(200).json(user);
+  } catch (error) {
+    next(error);
+  }
+});
+
+// 관리자용 삭제
+userRouter.delete(
+  '/admin/:userId',
+  adminCheck,
+  async function (req, res, next) {
+    try {
+      const userId = req.params.userId;
+      const user = await userService.removeUser(userId);
+      res.status(200).json(user);
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+// 관리자 계정인지 확인용
+userRouter.get('/admin/check', adminCheck, async function (req, res, next) {
+  try {
+    // 미들웨어 adminOnly 를 통과했다는 것은, 관리자 토큰을 가진 것을 의미함.
+    res.status(200).json({ result: 'success' });
   } catch (error) {
     next(error);
   }

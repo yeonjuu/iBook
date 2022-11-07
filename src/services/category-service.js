@@ -1,4 +1,4 @@
-import { categoryModel } from "../db";
+import { categoryModel } from '../db';
 
 class CategoryService {
   constructor(categoryModel) {
@@ -14,7 +14,7 @@ class CategoryService {
     const category = await this.categoryModel.findByName(name);
     if (category) {
       throw new Error(
-        "이 카테고리명은 현재 사용중입니다. 다른 카테고리명으로 입력해 주세요."
+        '이 카테고리명은 현재 사용중입니다. 다른 카테고리명으로 입력해 주세요.'
       );
     }
 
@@ -42,7 +42,7 @@ class CategoryService {
 
     // db에서 찾지 못한 경우, 에러 메시지 반환
     if (!category) {
-      throw new Error("등록된 카테고리가 없습니다. 다시 한 번 확인해 주세요.");
+      throw new Error('등록된 카테고리가 없습니다. 다시 한 번 확인해 주세요.');
     }
 
     // 이제 드디어 업데이트 시작
@@ -56,16 +56,16 @@ class CategoryService {
     return category;
   }
 
-  async removeProduct(categoryId) {
+  async remove(categoryId) {
     let category = await this.categoryModel.findById(categoryId);
 
     if (!category) {
-      throw new Error("등록된 상품이 없습니다. 다시 한 번 확인해 주세요.");
+      throw new Error('등록된 상품이 없습니다. 다시 한 번 확인해 주세요.');
     }
 
     category = await this.categoryModel.delete(categoryId);
 
-    return category
+    return category;
   }
 }
 

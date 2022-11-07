@@ -4,32 +4,27 @@ import { ProductSchema } from '../schemas/product-schema';
 const Product = model('products', ProductSchema);
 
 export class ProductModel {
-  async findByTitle(title) {
-    const product = await Product.findOne({ title });
-    return product;
+  findByTitle(title) {
+    return Product.findOne({ title });
   }
 
-  async findById(productId) {
-    const product = await Product.findOne({ _id: productId });
-    return product;
+  findById(productId) {
+    return Product.findOne({ _id: productId });
   }
 
-  async findByCategoryId(categoryId) {
-    const products = await Product.find({ category: categoryId }).populate(
+  findByCategoryId(categoryId) {
+    return Product.find({ category: categoryId }).populate(
       'category',
       '_id, name'
     );
-    return products;
   }
 
-  async create(productInfo) {
-    const createdNewProduct = await Product.create(productInfo);
-    return createdNewProduct;
+  create(productInfo) {
+    return Product.create(productInfo);
   }
 
-  async findAll() {
-    const products = await Product.find({}).populate('category', '_id, name');
-    return products;
+  findAll() {
+    return Product.find({}).populate('category', '_id, name');
   }
 
   async update({ productId, update }) {
@@ -44,9 +39,8 @@ export class ProductModel {
     return updatedProduct;
   }
 
-  async delete(productId) {
-    const product = await Product.deleteOne({ _id: productId });
-    return product;
+  delete(productId) {
+    return Product.deleteOne({ _id: productId });
   }
 }
 
