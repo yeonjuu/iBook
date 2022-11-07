@@ -1,4 +1,4 @@
-import { orderModel } from "../db";
+import { orderModel } from '../db';
 
 class OrderService {
   constructor(orderModel) {
@@ -16,14 +16,19 @@ class OrderService {
     return orders;
   }
 
+  async getOrdersByUserId(userId) {
+    const orders = await this.orderModel.findAllByUserId(userId);
+    return orders;
+  }
+
   async getOrder(orderId) {
     const order = await this.orderModel.findById(orderId);
 
     if (!order) {
-      throw new Error("등록된 주문이 없습니다. 다시 한 번 확인해 주세요.");
+      throw new Error('등록된 주문이 없습니다. 다시 한 번 확인해 주세요.');
     }
 
-    return order
+    return order;
   }
 
   async setOrder(orderInfoRequired, toUpdate) {
@@ -32,7 +37,7 @@ class OrderService {
     let order = await this.orderModel.findById(orderId);
 
     if (!order) {
-      throw new Error("등록된 주문이 없습니다. 다시 한 번 확인해 주세요.");
+      throw new Error('등록된 주문이 없습니다. 다시 한 번 확인해 주세요.');
     }
 
     order = await this.orderModel.update({
@@ -47,12 +52,12 @@ class OrderService {
     let order = await this.orderModel.findById(orderId);
 
     if (!order) {
-      throw new Error("등록된 주문이 없습니다. 다시 한 번 확인해 주세요.");
+      throw new Error('등록된 주문이 없습니다. 다시 한 번 확인해 주세요.');
     }
 
     order = await this.orderModel.delete(orderId);
 
-    return order
+    return order;
   }
 }
 

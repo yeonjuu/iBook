@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import is from '@sindresorhus/is';
-import { orderService } from '../services';
+import { orderService, userService } from '../services';
+import { loginRequired } from '../middlewares';
 
 const orderRouter = Router();
 
@@ -14,24 +15,26 @@ orderRouter.post('/', async (req, res, next) => {
 
     const {
       name,
+      userId,
       phone,
       address,
       paymentMethod,
       email,
       qty,
       password,
-      productIds,
+      products,
     } = req.body;
 
     const newOrder = await orderService.addOrder({
       name,
+      userId,
       phone,
       address,
       paymentMethod,
       email,
       qty,
       password,
-      products: productIds,
+      products,
     });
 
     res.status(201).json(newOrder);
@@ -42,7 +45,14 @@ orderRouter.post('/', async (req, res, next) => {
 
 orderRouter.get('/', async function (req, res, next) {
   try {
-    const orders = await orderService.getOrders();
+    const userId = req.query.userId;
+    let orders;
+
+    if (userId) {
+      orders = await orderService.getOrdersByUserId(userId);
+    } else {
+      orders = await orderService.getOrders();
+    }
 
     res.status(200).json(orders);
   } catch (error) {
@@ -106,11 +116,18 @@ orderRouter.put('/:orderId', async function (req, res, next) {
   }
 });
 
-orderRouter.delete('/:orderId', async function (req, res, next) {
+orderRouter.delete('/:orderId', loginRequired, async function (req, res, next) {
   try {
     const orderId = req.params.orderId;
+    const userId = req.currentUserId;
+    const user = await userService.getUser(userId);
+    let order;
 
-    const order = await orderService.removeOrder(orderId);
+    if (user.role == 'admin') {
+      order = await orderService.removeOrder(orderId);
+    } else {
+      throw new Error('어드민 권한일 때 삭제가 가능합니다.');
+    }
 
     res.status(200).json(order);
   } catch (error) {
