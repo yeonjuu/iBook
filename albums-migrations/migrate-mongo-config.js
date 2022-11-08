@@ -3,7 +3,7 @@
 const config = {
   mongodb: {
     // TODO Change (or review) the url to your MongoDB:
-    url: 'mongodb+srv://elice:W8RsZsSX2Xs1ydE4@cluster0.4gz9ij3.mongodb.net/?retryWrites=true&w=majority',
+    url: 'mongodb+srv://<username>:<password>@cluster0.qumfotv.mongodb.net/?retryWrites=true&w=majority',
 
     // TODO Change this to your database name:
     databaseName: 'test',
