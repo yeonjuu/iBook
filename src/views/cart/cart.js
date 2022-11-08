@@ -224,19 +224,19 @@ function clickAllDelBtn(e) {
 }
 
 function rednerCarts() {
+  let tem = ``;
   for (let [cartItemId, cartItem] of carts) {
-    cartList.insertAdjacentHTML(
-      'beforeend',
+    tem +=
       template(
         cartItem.imgaes[0],
         cartItem.title,
         cartItem.price,
         cartItem.count,
         cartItemId
-      )
-    );
+      ) + '\n';
     totalPriceValue += cartItem.price * cartItem.count;
   }
+  cartList.insertAdjacentHTML('beforeend', tem);
 }
 
 totalPrice.innerHTML = totalPriceValue;
