@@ -1,6 +1,6 @@
 module.exports = {
   async up(db, client) {
-    return db.collection('users').updateOne([
+    return db.collection('users').create([
       {
         email: 'admin@ibook.com',
         fullName: '관리자',
