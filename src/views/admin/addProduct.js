@@ -54,7 +54,6 @@ function handleImage() {
 function handleInfoSubmit() {
   const productInfo = document.querySelector('#product-info');
   const submitBtn = document.querySelector('#submit-info');
-  const msg = document.querySelector('.msg');
   const categoryEl = document.querySelector('#category');
 
   let categoryId = '';
@@ -62,7 +61,8 @@ function handleInfoSubmit() {
     categoryId = categoryEl.options[categoryEl.selectedIndex].value;
   });
 
-  submitBtn.addEventListener('click', async function () {
+  submitBtn.addEventListener('submit', async function (e) {
+    e.preventDefault();
     const product = {
       title: productInfo.title.value,
       author: productInfo.author.value,

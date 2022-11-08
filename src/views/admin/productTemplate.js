@@ -39,20 +39,21 @@ export const getProductAddTemplate = function (h2) {
           name="productImages"
           accept="image/*"
           id="product-img"
+          required
         /><br />
         <div class="preview">사진 미리보기</div>
         <button type="submit" id="upload">사진 업로드</button>
         </form>
         <br>
         <form id="product-info">
-        제목 : <input type="text" name="title" class="title" /><br />
-        작가 : <input type="text" name="author" class="author" /><br />
+        제목 : <input type="text" name="title" class="title" required /><br />
+        작가 : <input type="text" name="author" class="author" required /><br />
         출판사 :
-        <input type="text" name="publisher" class="publisher" /><br />
+        <input type="text" name="publisher" class="publisher" required /><br />
         가격 :
-        <input type="number" min="0" name="price" class="price" /><br />
+        <input type="number" min="0" name="price" class="price" required/><br />
         카테고리 :
-        <select id="category">
+        <select id="category" required>
             <option value="empty">카테고리를 선택해주세요</option></select><br />
         상세설명 :
         <textarea
@@ -60,8 +61,8 @@ export const getProductAddTemplate = function (h2) {
           cols="50"
           placeholder="책에 대한 요약 내용"
           class="description"
+          required
         ></textarea>
         <button type="button" id="submit-info">저장</button>
-      </form>
-      <div class="msg"></div>`;
+      </form>`;
 };
