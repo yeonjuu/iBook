@@ -52,7 +52,7 @@ async function editUser(e) {
     const isPasswordSame = currentPassword === passwordConfirm;
     const isEmailValid = validateEmail(email);
 
-    console.log(fullName, email, phoneNumber);
+    //console.log(fullName, email, phoneNumber);
 
     
     if (!fullName || !email || !phoneNumber || !address || !currentPassword || !passwordConfirm) {
@@ -86,10 +86,10 @@ const deleteUserBtn = document.querySelector("#deleteUserBtn");
 
 
 async function deleteUser() {
-    const fullName = fullNameInput.value;
-    const email = emailInput.value;
-    const phoneNumber = phoneInput.value;
-    const address = addressInput.value;
+    // const fullName = fullNameInput.value;
+    // const email = emailInput.value;
+    // const phoneNumber = phoneInput.value;
+    // const address = addressInput.value;
 
 
     await Api.delete('/api/users', loginId);
