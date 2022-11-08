@@ -10,3 +10,12 @@ ul {
   justify-content: space-around;
   align-items: center;
 }
+.closeBtn {
+  height: 15px;
+  width: 15px;
+  border: solid black 1px;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
