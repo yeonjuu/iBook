@@ -6,7 +6,7 @@ const config = {
     url: 'mongodb+srv://elice:W8RsZsSX2Xs1ydE4@cluster0.4gz9ij3.mongodb.net/?retryWrites=true&w=majority',
 
     // TODO Change this to your database name:
-    databaseName: 'ibook',
+    databaseName: 'test',
 
     options: {
       useNewUrlParser: true, // removes a deprecation warning when connecting
