@@ -1,6 +1,6 @@
 module.exports = {
   async up(db, client) {
-    return db.collection('users').create([
+    return db.collection('users').insertMany([
       {
         email: 'admin@ibook.com',
         fullName: '관리자',
