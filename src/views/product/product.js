@@ -27,9 +27,29 @@ const { title, author, price, publisher, images, description, category } =
 renderProduct();
 
 let count = Number(countEl.innerText);
-totalPriceEl.textContent = `${addCommas(calTotalPrice(price, count))}원`;
+totalPriceEl.textContent = priceSToString(calTotalPrice(price, count));
 
 addAllEvents();
+
+//이벤트 처리
+function addAllEvents() {
+  pluseBtn.addEventListener('click', function () {
+    count++;
+    countEl.textContent = count;
+    totalPriceEl.textContent = priceSToString(calTotalPrice(price, count));
+  });
+  minusBtn.addEventListener('click', function () {
+    if (count == 1) {
+      console.log('수량확인');
+      return;
+    } else {
+      count--;
+      countEl.textContent = count;
+      totalPriceEl.textContent = priceSToString(calTotalPrice(price, count));
+    }
+  });
+  cart.addEventListener('click', addCarts);
+}
 
 //함수
 //데이터 로드
@@ -45,31 +65,11 @@ async function loadData() {
 function renderProduct() {
   titleEl.textContent = title;
   authorEl.textContent = author;
-  priceEl.textContent = addCommas(price);
+  priceEl.textContent = priceSToString(price);
   publisherEl.textContent = publisher;
   img.src = images[0];
   descriptionEl.textContent = description;
   categoryEl.textContent = category;
-}
-
-//이벤트 처리
-function addAllEvents() {
-  pluseBtn.addEventListener('click', function () {
-    count++;
-    countEl.textContent = count;
-    totalPriceEl.textContent = `${addCommas(calTotalPrice(price, count))}원`;
-  });
-  minusBtn.addEventListener('click', function () {
-    if (count == 1) {
-      console.log('수량확인');
-      return;
-    } else {
-      count--;
-      countEl.textContent = count;
-      totalPriceEl.textContent = `${addCommas(calTotalPrice(price, count))}원`;
-    }
-  });
-  cart.addEventListener('click', addCarts);
 }
 
 //장바구니 추가 함수
@@ -86,7 +86,8 @@ function addCarts() {
   };
 
   if (carts.has(id)) {
-    carts.get(id).count += 1;
+    carts.get(id).count += count;
+    carts.get(id).totalPrice += calTotalPrice(price, count);
     localStorage.setItem('carts', JSON.stringify(Object.fromEntries(carts)));
   } else {
     carts.set(id, cartItem);
@@ -96,11 +97,13 @@ function addCarts() {
   if (isCart) {
     window.location.href = '/cart';
   }
+  countEl.textContent = 1;
+  totalPriceEl.textContent = priceSToString(price);
 }
 
 //단위
-function addCommas(price) {
-  return price.toLocaleString('ko-kr');
+function priceSToString(price) {
+  return `${price.toLocaleString('ko-kr')}원`;
 }
 
 //총 금액 계산 및 변경

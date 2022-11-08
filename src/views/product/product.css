@@ -6,6 +6,15 @@ a {
   color: #000000;
 }
 
+header > h1 > a {
+  display: block;
+  width: 200px;
+  height: 80px;
+  color: transparent;
+  background: url(../main-logo.png) no-repeat;
+  background-size: contain;
+}
+
 div.product {
   margin: 0 auto;
   width: 80%;
