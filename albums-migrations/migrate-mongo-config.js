@@ -3,10 +3,10 @@
 const config = {
   mongodb: {
     // TODO Change (or review) the url to your MongoDB:
-    url: 'mongodb://localhost:27017',
+    url: 'mongodb+srv://elice:W8RsZsSX2Xs1ydE4@cluster0.4gz9ij3.mongodb.net/?retryWrites=true&w=majority',
 
     // TODO Change this to your database name:
-    databaseName: 'test',
+    databaseName: 'ibook',
 
     options: {
       useNewUrlParser: true, // removes a deprecation warning when connecting
