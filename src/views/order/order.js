@@ -12,8 +12,9 @@ const ordererInfoContents = document.querySelector('.ordererInfoContents');
 const submitBtn = document.querySelector('.submitBtn');
 const Info = document.querySelector('.Info');
 const address = document.querySelector('.address');
-const detailAddress = document.querySelector('.detailAddress');
+const detailAddress = document.querySelector('#detailAddress');
 
+let reviseOrder = localStorage.getItem('orderId');
 let user;
 let password;
 let checkPassword;
@@ -23,9 +24,8 @@ let carts = JSON.parse(localStorage.getItem('carts')) || {};
 carts = carts = new Map(Object.entries(carts));
 let cart = JSON.parse(localStorage.getItem('cart'));
 let totalPriceValue = 0;
-let deliveryMin = 30000;
+let deliveryMin = 0;
 
-rednerCarts();
 function passwordHtml() {
   return `<div class="password inputSort">
     <div><strong>주문조회 비밀번호</strong></div>
@@ -70,30 +70,35 @@ function productTemplate(img, title, price, count, id) {
   </li>`;
 }
 
-function submit(a) {
+function buy(a) {
   a.preventDefault();
+  const products = document.querySelectorAll('.product');
+  const count = document.querySelectorAll('.qty');
   let qty = 0;
   const d = [];
   const productsInfo = [];
-  products.forEach((product) => {
-    qty += Number(document.querySelector('.qty').innerHTML);
+  let address1 = address.value + detailAddress.value;
+  products.forEach((product, idx) => {
+    qty += Number(count[idx].innerHTML);
     productsInfo.push({
       productId: product.id,
-      qty: Number(document.querySelector('.qty').innerHTML),
+      qty: Number(count[idx].innerHTML),
     });
   });
   let data = {
     name: orderer.value,
     userId: user._id || 'none',
     phone: phoneNumber.value,
-    address: address.value,
+    address: address1,
     paymentMethod: '현금',
     email: email.value,
     qty: qty,
     products: productsInfo,
   };
+
   console.log(data);
   Api.post(`/api/orders/`, data);
+  location.replace('/orderComplete');
   //   if (userCheck) {
   //   } else {
   //     if (checkPassword.value === password.value) {
@@ -103,23 +108,67 @@ function submit(a) {
   //     }
   //   }
 }
+async function revise(e) {
+  e.preventDefault();
+  const order = await loadOrderInfo();
+  if (order.status !== '주문완료') {
+    alert('배송이 시작된 주문건 입니다 고객센터에 문의 해주시길 바랍니다');
+    localStorage.removeItem('orderId');
+    return;
+  } else if (order.status === '주문취소') {
+    alert('이미 취소된 주문건 입니다');
+    localStorage.removeItem('orderId');
+  }
+  console.log(detailAddress.value);
+  let address1 = address.value + detailAddress.value;
+  let data = {
+    name: orderer.value,
+    userId: user._id || 'none',
+    phone: phoneNumber.value,
+    address: address1,
+    paymentMethod: '현금',
+    email: email.value,
+    qty: order.qty,
+    products: order.products,
+  };
+  console.log(order._id);
+  Api.put(`/api/orders/`, order._id, data);
+  localStorage.removeItem('orderId');
+  location.replace('/orderComplete');
+}
 
 function rednerCarts() {
   if (cart === null) {
     console.log(carts);
+    // cartList.insertAdjacentElement(
+    //   'beforeend',
+    //   carts
+    //     .map(([cartItemId, cartItem]) => {
+    //       totalPriceValue += cartItem.price * cartItem.count;
+    //       return productTemplate(
+    //         cartItem.imgaes[0],
+    //         cartItem.title,
+    //         cartItem.price,
+    //         cartItem.count,
+    //         cartItemId
+    //       );
+    //     })
+    //     .join('')
+    // );
+    let tem = ``;
     for (let [cartItemId, cartItem] of carts) {
-      cartList.insertAdjacentHTML(
-        'beforeend',
+      tem +=
+        '\n' +
         productTemplate(
           cartItem.imgaes[0],
           cartItem.title,
           cartItem.price,
           cartItem.count,
           cartItemId
-        )
-      );
+        );
       totalPriceValue += cartItem.price * cartItem.count;
     }
+    cartList.insertAdjacentHTML('beforeend', tem);
   } else {
     cartList.insertAdjacentHTML(
       'beforeend',
@@ -128,12 +177,32 @@ function rednerCarts() {
     totalPriceValue += cart.price * cart.count;
   }
 }
-productPrice.innerHTML = `${totalPriceValue}원`;
-if (totalPriceValue < deliveryMin) {
-  deliveryPrice = 3000;
+
+function rednerReviseOrder(order) {
+  const products = order.products;
+  cartList.insertAdjacentHTML(
+    'beforeend',
+    products
+      .map((product) => {
+        totalPriceValue += product.productId.price * product.qty;
+        return productTemplate(
+          product.productId.images[0],
+          product.productId.title,
+          product.productId.price,
+          product.qty
+        );
+      })
+      .join('')
+  );
 }
-delivery.innerHTML = `${deliveryPrice}원`;
-totalPrice.innerHTML = `${totalPriceValue + deliveryPrice}`;
+function renderPrice() {
+  productPrice.innerHTML = `${totalPriceValue}원`;
+  if (totalPriceValue < deliveryMin) {
+    deliveryPrice = 3000;
+  }
+  delivery.innerHTML = `${deliveryPrice}원`;
+  totalPrice.innerHTML = `${totalPriceValue + deliveryPrice}`;
+}
 
 function delay(ms) {
   // 카테고리 로딩 실험용
@@ -143,17 +212,37 @@ function delay(ms) {
 async function loadUserInfo() {
   return await Api.get(`/api/users/${token}`);
 }
-const products = document.querySelectorAll('.product');
-if (token) {
+async function loadOrderInfo() {
+  return await Api.get(`/api/orders/${reviseOrder}`);
+}
+
+if (reviseOrder) {
+  body.classList.remove('hidden');
   user = await loadUserInfo();
+  const order = await loadOrderInfo();
+  submitBtn.innerHTML = '수정하기';
+  orderer.value = user.fullName;
+  email.value = user.email;
+  phoneNumber.value = user.phoneNumber;
+  rednerReviseOrder(order);
+  renderPrice();
+  Info.addEventListener('submit', revise);
+} else if (token) {
+  user = await loadUserInfo();
+  console.log(user);
   body.classList.remove('hidden');
   orderer.value = user.fullName;
   email.value = user.email;
   phoneNumber.value = user.phoneNumber;
+  rednerCarts();
+  renderPrice();
+  Info.addEventListener('submit', buy);
 } else {
   body.classList.remove('hidden');
   //   ordererInfoContents.insertAdjacentHTML("beforeend", passwordHtml());
   password = document.querySelector('#password');
   checkPassword = document.querySelector('#checkPassword');
+  rednerCarts();
+  renderPrice();
+  Info.addEventListener('submit', buy);
 }
-Info.addEventListener('submit', submit);

@@ -9,6 +9,7 @@ const cartList = document.querySelector('.list'); // 전체 장바구니 목록�
 const selectDelBtn = document.querySelector('.selectDelBtn'); //선택 삭제 버튼
 const totalPrice = document.querySelector('.totalPrice');
 const selectAllBtn = document.querySelector('.selectAll');
+const allDelBtn = document.querySelector('.allDelBtn');
 
 let checkList = [];
 let totalPriceValue = 0;
@@ -58,9 +59,11 @@ function addAllEvents() {
     inputPrice(eventCartItem);
   });
   buyBtn.addEventListener('click', function () {
+    localStorage.removeItem('orderId');
     localStorage.removeItem('cart');
     location.replace('/order');
   });
+  allDelBtn.addEventListener('click', clickAllDelBtn);
 }
 
 function setItem(id, type) {
@@ -216,20 +219,24 @@ function allSelect(allCartItems) {
   }
 }
 
+function clickAllDelBtn(e) {
+  localStorage.removeItem('carts');
+}
+
 function rednerCarts() {
+  let tem = ``;
   for (let [cartItemId, cartItem] of carts) {
-    cartList.insertAdjacentHTML(
-      'beforeend',
+    tem +=
       template(
         cartItem.imgaes[0],
         cartItem.title,
         cartItem.price,
         cartItem.count,
         cartItemId
-      )
-    );
+      ) + '\n';
     totalPriceValue += cartItem.price * cartItem.count;
   }
+  cartList.insertAdjacentHTML('beforeend', tem);
 }
 
 totalPrice.innerHTML = totalPriceValue;
