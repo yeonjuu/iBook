@@ -1,6 +1,6 @@
 import * as Api from '/api.js';
 
-const fictionList = document.querySelector(".fictionList");
+const booksList = document.querySelector(".booksList");
 const categoryName = document.querySelector(".categoryName");
 
 const url = window.location.href;
@@ -33,21 +33,31 @@ async function showProductsList() {
 
     if(productsList.length == 0) {
         const nothingToShow = `<span>표시할 책 내용이 없습니다</span>`;
-        fictionList.insertAdjacentHTML('beforeend', nothingToShow);
+        booksList.insertAdjacentHTML('beforeend', nothingToShow);
     };
 
     for (let i=0; i < productsList.length; i++) {
         const toShow = `
-        <div><a href="/products/${productsList[i]._id}"><img src="${productsList[i].images[0]}"/></a></div>
-        <li>책이름 : ${productsList[i].title}</li>
-        <li>저자 :${productsList[i].author}</li>
-        <li>출판사 : ${productsList[i].publisher}</li>
-        <li>상세정보 : ${productsList[i].description}</li>
-        <li>금액 : ${productsList[i].price}원</li>
+        <div class="categoryBooksList">
+            <a href="/products/${productsList[i]._id}"><img class="booksImage" src="${productsList[i].images[0]}"/></a>
+            <div class="booksInformation">
+            <h3 class="title">${productsList[i].title}</h3>
+            <h4 class="price">${productsList[i].price}원</h4>
+            <h5 class="author">저자 : ${productsList[i].author}</h5>
+            <h5 class="publisher">출판사 : ${productsList[i].publisher}</h5>
+            <h5 class="description">${productsList[i].description}</h5>
+            </div>
+            <div class="buttons">
+            <button class="button is-primary">장바구니</button>
+            <button class="button is-info">구매하기</button>
+            </div>
         </div>
+        <div class="bottomLine"></div>
         `;
+        // <div class="booksImage"><a href="/products/${productsList[i]._id}"><img src="${productsList[i].images[0]}"/></a></div>
 
-        fictionList.insertAdjacentHTML('beforeend', toShow);
+
+        booksList.insertAdjacentHTML('beforeend', toShow);
     };
 
 

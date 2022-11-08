@@ -58,6 +58,7 @@ async function categoryHandler() {
 
             const toDeleteCategoryId = e.target.parentElement.id;
             await Api.delete('/api/categories', toDeleteCategoryId);
+            alert("삭제되었습니다!");
         };
 
         if(e.target.innerText === '수정') {
@@ -66,6 +67,7 @@ async function categoryHandler() {
             const data = { name };
             const toEditCategoryId = e.target.parentElement.id;
             await Api.put('/api/categories', toEditCategoryId, data);
+            alert("수정되었습니다!");
         };
 
     };
