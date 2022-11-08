@@ -6,7 +6,16 @@ class ProductService {
   }
 
   // 상품 추가
-  async addProduct({ title }) {
+  async addProduct({
+    title,
+    author,
+    price,
+    publisher,
+    images,
+    description,
+    rate,
+    category,
+  }) {
     // 상품명 중복 확인
     const product = await this.productModel.findByTitle(title);
     if (product) {
@@ -16,7 +25,16 @@ class ProductService {
     }
 
     // db에 저장
-    const createdNewProduct = await this.productModel.create(productInfo);
+    const createdNewProduct = await this.productModel.create({
+      title,
+      author,
+      price,
+      publisher,
+      images,
+      description,
+      rate,
+      category,
+    });
 
     return createdNewProduct;
   }
