@@ -62,11 +62,11 @@ async function getProductData() {
 //로그인 여부에 따라 상단 메뉴 노출 유무 설정
 const login = document.querySelector('#login');
 const logout = document.querySelector('#logout');
+const adminPage = document.querySelector('#adminPage');
 const edit = document.querySelector('#edit');
 const editAtag = document.querySelector('#edit a');
 const seeOrder = document.querySelector('#seeOrder');
 const register = document.querySelector('#register');
-const admin = document.querySelector('#admin');
 
 const userToken = sessionStorage.token;
 
@@ -74,12 +74,11 @@ const userToken = sessionStorage.token;
 checkLogin();
 
 async function checkLogin() {
-
   const loginUser = await Api.get('/api/users', userToken);
-  console.log(loginUser.role);
+  const isUser = loginUser.role === "user";
+  const isAdmin = loginUser.role === "admin";
 
-//로그인 유저 고객인 경우
-  if (sessionStorage && loginUser.role === "user") {
+  if (sessionStorage && isUser) {
     login.classList.add('hidden');
     register.classList.add('hidden');
     logout.classList.remove('hidden');
@@ -87,19 +86,16 @@ async function checkLogin() {
     seeOrder.classList.remove('hidden');
 
     editAtag.innerText = `${loginUser.fullName}님의 프로필`;
+    // alert(`${loginUser.fullName}님 안녕하세요!`);
   }
 
-//로그인 유저 관리자인 경우
-
-if (sessionStorage && loginUser.role === "admin") {
-  login.classList.add('hidden');
-  register.classList.add('hidden');
-  logout.classList.remove('hidden');
-  admin.classList.remove('hidden');
-  edit.classList.remove('hidden');
-
-  editAtag.innerText = `${loginUser.fullName}님의 프로필`;
-}
+  //관리자 계정일 때
+  if (sessionStorage && isAdmin) {
+    login.classList.add('hidden');
+    register.classList.add('hidden');
+    adminPage.classList.remove('hidden');
+    logout.classList.remove('hidden');
+  }
 
 
 }

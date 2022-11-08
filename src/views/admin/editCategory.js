@@ -7,7 +7,7 @@ const category = document.querySelector(".category");
 async function categoryHandler() {
 
     //전체 카테고리 정보 추출
-    const categoryList = await Api.get('http://localhost:5000/api/categories');
+    const categoryList = await Api.get('/api/categories');
     //console.log(categoryList);
 
     landing.innerHTML = `
@@ -43,7 +43,7 @@ async function categoryHandler() {
     async function addHandler() {
         const name = addCategoryInput.value;
         const data = { name };
-        await Api.post('http://localhost:5000/api/categories', data);
+        await Api.post('/api/categories', data);
 
         categoryHandler();
     };
@@ -57,7 +57,7 @@ async function categoryHandler() {
             toDleteCategory.remove();
 
             const toDeleteCategoryId = e.target.parentElement.id;
-            await Api.delete('http://localhost:5000/api/categories', toDeleteCategoryId);
+            await Api.delete('/api/categories', toDeleteCategoryId);
         };
 
         if(e.target.innerText === '수정') {
@@ -65,7 +65,7 @@ async function categoryHandler() {
 
             const data = { name };
             const toEditCategoryId = e.target.parentElement.id;
-            await Api.put('http://localhost:5000/api/categories', toEditCategoryId, data);
+            await Api.put('/api/categories', toEditCategoryId, data);
         };
 
     };
