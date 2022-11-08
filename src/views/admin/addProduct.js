@@ -7,7 +7,7 @@ let imageUrl = '';
 add.addEventListener('click', getAddProduct);
 
 function getAddProduct() {
-  const addHtml = getProductAddTemplate('상품추가');
+  const addHtml = getProductAddTemplate('도서추가');
   landing.innerHTML = addHtml;
 
   window.onload = getOptionsCategory();
@@ -30,34 +30,6 @@ async function getOptionsCategory() {
   );
 }
 
-function handleInfoSubmit() {
-  const productInfo = document.querySelector('#product-info');
-  const submitBtn = document.querySelector('#submit-info');
-  const msg = document.querySelector('.msg');
-  const categoryEl = document.querySelector('#category');
-  let categoryId = '';
-  categoryEl.addEventListener('change', function () {
-    categoryId = categoryEl.options[categoryEl.selectedIndex].value;
-  });
-
-  submitBtn.addEventListener('click', async function () {
-    const product = {
-      title: productInfo['title'].value,
-      author: productInfo['author'].value,
-      publisher: productInfo['publisher'].value,
-      price: productInfo['price'].value,
-      description: productInfo['description'].value,
-      images: imageUrl,
-      categoryId: categoryId,
-    };
-
-    await Api.post('/api/products', product);
-    alert('상품 추가 완료');
-    msg.innerText = JSON.stringify(product);
-  });
-}
-
-//이미지 처리하기
 function handleImage() {
   const imageInfo = document.querySelector('#image-info');
   const input = document.querySelector('#product-img');
@@ -79,6 +51,38 @@ function handleImage() {
   };
 }
 
+function handleInfoSubmit() {
+  const productInfo = document.querySelector('#product-info');
+  const submitBtn = document.querySelector('#submit-info');
+  const msg = document.querySelector('.msg');
+  const categoryEl = document.querySelector('#category');
+
+  let categoryId = '';
+  categoryEl.addEventListener('change', function () {
+    categoryId = categoryEl.options[categoryEl.selectedIndex].value;
+  });
+
+  submitBtn.addEventListener('click', async function () {
+    const product = {
+      title: productInfo.title.value,
+      author: productInfo.author.value,
+      price: productInfo.price.value,
+      publisher: productInfo.publisher.value,
+      description: productInfo.description.value,
+      images: imageUrl,
+      categoryId: categoryId,
+    };
+    console.log('productInfo', JSON.stringify(productInfo));
+    try {
+      await Api.post('/api/products', product);
+      alert('상품추가완료');
+    } catch (err) {
+      console.log(err);
+    }
+  });
+}
+
+//이미지 처리하기
 function previewImage() {
   const input = document.querySelector('#product-img');
   const preview = document.querySelector('.preview');

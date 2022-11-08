@@ -10,18 +10,20 @@ export const serachTemplate = function (h2) {
 };
 
 export const productTemplate = function (product) {
-  const { title, author, price, images, publisher } = product;
+  const { title, author, price, images, publisher, _id } = product;
 
   return `
-    <div class="product-image">
-        <img src = "${images[0]}" alt = "${title} 대표이미지"/> 
-    </div>
-    제목 : <span class="title">${title}</span>
-    작가 : <span class="author">${author}</span>
-    출판사 : <span class="publisher">${publisher}</span>
-    가격 : <span class="price">${price}</span>
-    <input type="button" value="수정" class="update" />
-    <input type="button" value="삭제" class="delete" />
+  <div class="product" data-id = "${_id}">
+  <div class="product-image">
+    <img src="${images[0]}" alt="${title} 대표이미지" />
+  </div>
+  제목 : <span class="title">${title}</span> 작가 :
+  <span class="author">${author}</span> 출판사 :
+  <span class="publisher">${publisher}</span> 가격 :
+  <span class="price">${price}</span>
+  <input type="button" value="수정" class="update" />
+  <input type="button" value="삭제" class="delete" />
+</div>
     `;
 };
 
@@ -40,7 +42,6 @@ export const getProductAddTemplate = function (h2) {
         /><br />
         <div class="preview">사진 미리보기</div>
         <button type="submit" id="upload">사진 업로드</button>
-        <iframe id="iframe1" name="iframe1" style="display:none"></iframe>
         </form>
         <br>
         <form id="product-info">

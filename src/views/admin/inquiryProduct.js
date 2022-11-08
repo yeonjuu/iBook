@@ -1,4 +1,5 @@
 import * as Api from '../api.js';
+import { serachTemplate, productTemplate } from './productTemplate.js';
 
 const products = document.querySelector('.products');
 
@@ -7,7 +8,7 @@ const landing = document.querySelector('.landing');
 products.addEventListener('click', inquiryProduct);
 
 async function inquiryProduct() {
-  const inquiryHtml = serachTemplate('상품조회');
+  const inquiryHtml = serachTemplate('도서조회');
   landing.innerHTML = inquiryHtml;
 
   const searchInput = document.querySelector('.searchInput');
@@ -29,33 +30,39 @@ async function loadData() {
 
 async function searchAll() {
   const products = await loadData();
-  console.log('complete load!');
-  console.log(products);
-  const listEl = document.querySelector('.list');
+  if (products.length == 0) {
+    alert('상품이 없습니다');
+  } else {
+    console.log('complete load!');
 
-  listEl.onclick = (event) => {
-    let target = event.target;
-    let products = target.closet('product');
-    //product를 받아서, target -> update / delete 선택했는지 확인하기
-    //target.contain('classname") 이런느낌으로 if(~~~) else if(~~~~)
-  };
+    const listEl = document.querySelector('.list');
 
-  products.forEach((product) => {
-    console.log('product : ', product);
-    const { _id } = product;
-    const productEl = document.createElement('div');
-    productEl.className = 'product';
-    productEl.id = _id;
-    productEl.innerHTML = productTemplate(product);
-    listEl.appendChild(productEl);
-  });
+    listEl.insertAdjacentHTML(
+      'beforeend',
+      products.map((p) => productTemplate(p)).join('')
+    );
+
+    listEl.onclick = async (event) => {
+      let target = event.target;
+      let targetProduct = target.closet('product');
+      if (target.contain('update')) {
+        //update
+      } else if (target.contain('delete')) {
+        //delete
+        console.log('target', targetProduct.id);
+        let isDel = confirm('도서를 삭제하시겠습니까?');
+        if (isDel) {
+          await Api.delete('/api/products', targetProduct.id);
+          targetProduct.style.display = 'none';
+          alert('상품삭제완료');
+        } else {
+          alert('상품삭제취소');
+        }
+      }
+    };
+  }
 }
 
-function update() {
-  const udpateBtn = documet.querySelector('.update');
-}
-
-function del() {
-  const deleteBtn = document.querySelector('.delete');
-  deleteBtn.addEventListener('click');
+async function update(id) {
+  await Api.update('/api/products', id, changeData);
 }
