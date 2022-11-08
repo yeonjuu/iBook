@@ -10,18 +10,20 @@ export const serachTemplate = function (h2) {
 };
 
 export const productTemplate = function (product) {
-  const { title, author, price, images, publisher } = product;
+  const { title, author, price, images, publisher, _id } = product;
 
   return `
-    <div class="product-image">
-        <img src = "${images[0]}" alt = "${title} 대표이미지"/> 
-    </div>
-    제목 : <span class="title">${title}</span>
-    작가 : <span class="author">${author}</span>
-    출판사 : <span class="publisher">${publisher}</span>
-    가격 : <span class="price">${price}</span>
-    <input type="button" value="수정" class="update" />
-    <input type="button" value="삭제" class="delete" />
+  <div class="product" data-id = "${_id}">
+  <div class="product-image">
+    <img src="${images[0]}" alt="${title} 대표이미지" />
+  </div>
+  제목 : <span class="title">${title}</span> 작가 :
+  <span class="author">${author}</span> 출판사 :
+  <span class="publisher">${publisher}</span> 가격 :
+  <span class="price">${price}</span>
+  <input type="button" value="수정" class="update" />
+  <input type="button" value="삭제" class="delete" />
+</div>
     `;
 };
 
@@ -29,8 +31,7 @@ export const getProductAddTemplate = function (h2) {
   return `
       <h2>${h2}</h2>
       <form
-        action="/api/products/upload"
-        method="post"
+        id="image-info"
         enctype="multipart/form-data"
         target="iframe1">
         <input
@@ -40,8 +41,7 @@ export const getProductAddTemplate = function (h2) {
           id="product-img"
         /><br />
         <div class="preview">사진 미리보기</div>
-        <button type="button" id="upload">사진 업로드</button>
-        <iframe id="iframe1" name="iframe1" style="display:none"></iframe>
+        <button type="submit" id="upload">사진 업로드</button>
         </form>
         <br>
         <form id="product-info">
@@ -52,8 +52,8 @@ export const getProductAddTemplate = function (h2) {
         가격 :
         <input type="number" min="0" name="price" class="price" /><br />
         카테고리 :
-        <select id="category"><opiton value="">카테고리 선택</opiton>
-        </select><br />
+        <select id="category">
+            <option value="empty">카테고리를 선택해주세요</option></select><br />
         상세설명 :
         <textarea
           name="description"
