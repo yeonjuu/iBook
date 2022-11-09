@@ -123,6 +123,8 @@ async function update(product) {
   curPublisher.value = publisher;
   curPdescription.value = description;
   curPrice.value = price;
+  //사진값 필수 아님
+  input.required = false;
 
   //이미지 띄우기
   preview.insertAdjacentHTML('beforeend', curtImage(images[0], curTitle));
