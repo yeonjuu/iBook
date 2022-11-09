@@ -111,10 +111,8 @@ userRouter.put('/:userId', loginRequired, async function (req, res, next) {
     const userId = req.params.userId;
 
     // body data 로부터 업데이트할 사용자 정보를 추출함.
-    // body data로부터, 확인용으로 사용할 현재 비밀번호를 추출함.
-    const { fullName, password, address, phoneNumber, role, currentPassword } =
+    const { fullName, password, address, phoneNumber, currentPassword } =
       req.body;
-
     // currentPassword 없을 시, 진행 불가
     if (!currentPassword) {
       throw new Error('정보를 변경하려면, 현재의 비밀번호가 필요합니다.');
@@ -129,7 +127,6 @@ userRouter.put('/:userId', loginRequired, async function (req, res, next) {
       ...(password && { password }),
       ...(address && { address }),
       ...(phoneNumber && { phoneNumber }),
-      ...(role && { role }),
     };
     // 사용자 정보를 업데이트함.
     const updatedUserInfo = await userService.setUser(
@@ -154,6 +151,41 @@ userRouter.delete('/:userId', loginRequired, async function (req, res, next) {
       user = await userService.removeUser(userId);
     }
     res.status(200).json(user);
+  } catch (error) {
+    next(error);
+  }
+});
+
+//이하 관리자용
+// 사용자 정보 수정
+userRouter.put('/admin/:userId', adminCheck, async function (req, res, next) {
+  try {
+    if (is.emptyObject(req.body)) {
+      throw new Error(
+        'headers의 Content-Type을 application/json으로 설정해주세요'
+      );
+    }
+    const userId = req.params.userId;
+    console.log(req.body);
+    const { fullName, password, address, phoneNumber, role, currentPassword } =
+      req.body;
+
+    const userInfoRequired = { userId, currentPassword };
+
+    // 관리자일 경우, 역할도 부여해줄 수 있음
+    const toUpdate = {
+      ...(fullName && { fullName }),
+      ...(password && { password }),
+      ...(address && { address }),
+      ...(phoneNumber && { phoneNumber }),
+      ...(role && { role }),
+    };
+    const updatedUserInfo = await userService.setUserByAdmin(
+      userInfoRequired,
+      toUpdate
+    );
+
+    res.status(200).json(updatedUserInfo);
   } catch (error) {
     next(error);
   }
