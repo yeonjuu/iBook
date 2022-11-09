@@ -17,7 +17,6 @@ const upload = multer({ storage: storage });
 
 productRouter.post(
   '/upload',
-  adminCheck,
   upload.array('productImages', 10),
   async (req, res) => {
     let images = [];
