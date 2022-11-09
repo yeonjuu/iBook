@@ -10,7 +10,7 @@ const categoryMenu = document.querySelector("#categoryMenu");
 getCategoryData();
 
 async function getCategoryData() {
-  const category = await Api.get('api/categories');
+  const category = await Api.get('/api/categories');
 
   for(let i=0; i < category.length; i++) {
   const showCategory = `<li><a href="/category/${category[i]._id}">${category[i].name}</a></li>`;
@@ -24,7 +24,7 @@ async function getCategoryData() {
 getProductData();
 
 async function getProductData() {
-  const product = await Api.get('api/products');
+  const product = await Api.get('/api/products');
 
   //console.log(product);
 
