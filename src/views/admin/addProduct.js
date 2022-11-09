@@ -49,6 +49,7 @@ function handleInfoSubmit() {
   let categoryId = '';
   categoryEl.addEventListener('change', function () {
     categoryId = categoryEl.options[categoryEl.selectedIndex].value;
+    console.log(categoryId);
   });
 
   submitBtn.addEventListener('click', async function (e) {
