@@ -1,3 +1,9 @@
+@import url('reset.css');
+
+body {
+  width: 1180px;
+  margin: 0 auto;
+}
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -5,9 +11,16 @@ input::-webkit-inner-spin-button {
 }
 
 .product {
-  height: 150px;
+  padding: 20px 0;
+  height: 120px;
   display: grid;
-  grid-template-columns: 30px 100px 400px 90px 30px;
+  grid-template-columns: 5% 10% 60% 20% 10%;
+}
+.info {
+  display: flex;
+  margin-left: 20px;
+  flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .countBtn {
@@ -15,6 +28,8 @@ input::-webkit-inner-spin-button {
   display: grid;
   grid-template-columns: 30px 30px 30px;
   border-radius: 20px;
+  margin-top: 15px;
+  border: 1px solid black;
 }
 
 .plus,
@@ -41,17 +56,19 @@ input::-webkit-inner-spin-button {
 .deleteBtn:hover {
   cursor: pointer;
 }
+.select,
+.selectAll,
+.deleteBt {
+  height: 30px;
+  border: 1px solid gray;
+}
 
 .totalPrice {
   width: 300px;
   text-align: center;
+  font-size: 20px;
 }
 .totalProductInfo {
-}
-
-.main {
-  display: grid;
-  grid-template-columns: 70% 30%;
 }
 
 .selected {
@@ -61,4 +78,193 @@ input::-webkit-inner-spin-button {
 
 .hidden {
   display: none;
+}
+
+.searchWrap {
+  display: flex;
+  align-items: center;
+}
+.logoBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.logoLink {
+  display: block;
+  height: 80px;
+  width: 160px;
+}
+
+.logoImg {
+  height: 100%;
+  width: 100%;
+}
+.searchKeyword {
+  width: 300px;
+  border: none;
+  outline: none;
+}
+.searchInputWrap {
+  border: 1px solid #5055b1;
+  border-radius: 30px;
+  width: 600px;
+  height: 40px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.userMenuList {
+  display: flex;
+  align-items: center;
+  margin-left: 300px;
+}
+.userMenuCart {
+  padding-right: 30px;
+}
+.userIconBackground {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+
+  border-radius: 30px;
+  background-color: #00ff00;
+}
+.fa-regular {
+  color: white;
+}
+
+.cartBody {
+  display: flex;
+  justify-content: space-between;
+}
+.cartBodyHead {
+  height: 60px;
+  width: 800px;
+  border-top: 1px solid black;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+  display: flex;
+
+  align-items: center;
+}
+.cartName {
+  font-size: 40px;
+  margin: 50px 0px;
+}
+.bookImg {
+  height: 100%;
+  width: 100%;
+}
+.selectAll {
+  margin-right: 10px;
+}
+.countContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.count {
+  outline: none;
+  border: 0px;
+}
+.totalProductInfo {
+  height: 260px;
+  width: 260px;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+}
+.productInfoWrap {
+  width: 100%;
+}
+.productPrice {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  margin-top: 30px;
+  font-size: 15px;
+  margin-bottom: 10px;
+}
+.deliveryWrap {
+  width: 100%;
+  font-size: 15px;
+}
+.deliveryPrice {
+  margin-left: 30px;
+  margin-right: 122px;
+}
+.buyWrap {
+  margin-top: 110px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+.buy {
+  height: 48px;
+  width: 230px;
+  border: 1px solid black;
+  border-radius: 10px;
+  color: white;
+  background-color: #5055b1;
+}
+* {
+  font-family: 'Trispace', sans-serif;
+  text-decoration: none;
+}
+
+.bookLogo {
+  width: 150px;
+  height: 90px;
+}
+
+.footerbody {
+  margin-top: 3rem;
+  margin-left: 5.5rem;
+  display: flex;
+  flex-direction: column;
+  font-size: small;
+}
+
+.footerCompany {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.businessInfo {
+  margin-bottom: 10px;
+}
+
+.footerContents {
+  margin-bottom: 10px;
+}
+
+.footerContents a {
+  margin-right: 10px;
+  color: black;
+  opacity: 0.5;
+}
+
+.businessDetailOne {
+  margin-bottom: 10px;
+}
+
+.businessDetailOne span {
+  margin-right: 5px;
+}
+
+.businessDetailTwo {
+  margin-bottom: 10px;
+}
+
+.businessDetailTwo span {
+  margin-right: 5px;
+}
+
+.finalFooter {
+  margin-bottom: 3rem;
+}
+.footerbody {
+  margin: 0px;
 }
