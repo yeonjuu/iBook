@@ -37,7 +37,9 @@ export class OrderModel {
   }
 
   findById(orderId) {
-    return Order.findOne({ _id: orderId }).populate('products.productId');
+    return Order.findOne({ _id: orderId }, '-__v -products._id').populate(
+      'products.productId'
+    );
   }
 
   async update({ orderId, update }) {
