@@ -15,6 +15,7 @@ const categoryEl = document.querySelector('.category');
 const totalPriceEl = document.querySelector('.totalPrice');
 
 const cart = document.querySelector('.cart');
+const order = document.querySelector('.order');
 const img = document.querySelector('.img-wrap >img');
 
 //상품 정보 변수 저장
@@ -27,7 +28,7 @@ const { title, author, price, publisher, images, description, category } =
 renderProduct();
 
 let count = Number(countEl.innerText);
-totalPriceEl.textContent = `${addCommas(calTotalPrice(price, count))}원`;
+totalPriceEl.textContent = priceToString(calTotalPrice(price, count));
 
 addAllEvents();
 
@@ -42,14 +43,21 @@ async function loadData() {
 }
 
 //데이터 랜더링
-function renderProduct() {
+async function renderProduct() {
   titleEl.textContent = title;
   authorEl.textContent = author;
-  priceEl.textContent = addCommas(price);
+  priceEl.textContent = priceToString(price);
   publisherEl.textContent = publisher;
   img.src = images[0];
   descriptionEl.textContent = description;
-  categoryEl.textContent = category;
+  categoryEl.textContent = await getCategoryName();
+}
+
+async function getCategoryName() {
+  const categories = await Api.get('/api/categories');
+  // const curtCategory = await Api.get('/api/categories', category);
+  const curtCategory = categories.filter((c) => c._id == category);
+  return curtCategory[0].name;
 }
 
 //이벤트 처리
@@ -57,7 +65,7 @@ function addAllEvents() {
   pluseBtn.addEventListener('click', function () {
     count++;
     countEl.textContent = count;
-    totalPriceEl.textContent = `${addCommas(calTotalPrice(price, count))}원`;
+    totalPriceEl.textContent = priceToString(calTotalPrice(price, count));
   });
   minusBtn.addEventListener('click', function () {
     if (count == 1) {
@@ -66,13 +74,13 @@ function addAllEvents() {
     } else {
       count--;
       countEl.textContent = count;
-      totalPriceEl.textContent = `${addCommas(calTotalPrice(price, count))}원`;
+      totalPriceEl.textContent = priceToString(calTotalPrice(price, count));
     }
   });
   cart.addEventListener('click', addCarts);
+  order.addEventListener('click', orderProduct);
 }
 
-//장바구니 추가 함수
 function addCarts() {
   let carts = JSON.parse(localStorage.getItem('carts')) || {};
   carts = new Map(Object.entries(carts));
@@ -81,12 +89,13 @@ function addCarts() {
     title: product.title,
     price: product.price,
     count: count,
-    totalPrice: calTotalPrice(price, count),
+    totalPrice: calTotalPrice(product.price, count),
     imgaes: product.images,
   };
 
   if (carts.has(id)) {
-    carts.get(id).count += 1;
+    carts.get(id).count += count;
+    carts.get(id).totalPrice += calTotalPrice(product.price, count);
     localStorage.setItem('carts', JSON.stringify(Object.fromEntries(carts)));
   } else {
     carts.set(id, cartItem);
@@ -98,9 +107,18 @@ function addCarts() {
   }
 }
 
-//단위
-function addCommas(price) {
-  return price.toLocaleString('ko-kr');
+function orderProduct() {
+  const cartItem = {
+    id: product._id,
+    title: product.title,
+    price: product.price,
+    count: count,
+    totalPrice: calTotalPrice(product.price, count),
+    images: product.images,
+  };
+  console.log(cartItem);
+  localStorage.setItem('cart', JSON.stringify(cartItem));
+  window.location.href = '/order';
 }
 
 //총 금액 계산 및 변경
@@ -108,6 +126,10 @@ function calTotalPrice(price, count) {
   return price * count;
 }
 
+//단위
+function priceToString(price) {
+  return `${price.toLocaleString('ko-kr')}원`;
+}
 
 //헤더부분
 //로그인 여부에 따라 상단 메뉴 노출 유무 설정
@@ -125,12 +147,12 @@ const isLogin = Boolean(userToken);
 //로그인 유저 확인
 if (isLogin) {
   checkLogin();
-};
+}
 
 async function checkLogin() {
   const loginUser = await Api.get('/api/users', userToken);
-  const isUser = loginUser.role === "user";
-  const isAdmin = loginUser.role === "admin";
+  const isUser = loginUser.role === 'user';
+  const isAdmin = loginUser.role === 'admin';
 
   if (sessionStorage && isUser) {
     login.classList.add('hidden');
@@ -150,11 +172,8 @@ async function checkLogin() {
     adminPage.classList.remove('hidden');
     logout.classList.remove('hidden');
   }
-
-
 }
 //로그아웃 버튼 클릭시 토큰 삭제
-
 function logoutHandler() {
   sessionStorage.removeItem('token');
 }
