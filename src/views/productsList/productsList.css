@@ -20,7 +20,6 @@
   }
 
 
-
 .navbar-brand {
     display: flex;
     flex: row;
@@ -38,7 +37,7 @@
   
   
   .footerbody {
-    margin-top: 3rem;
+    margin-top: 6rem;
     margin-left: 5.5rem;
     display: flex;
     flex-direction: column;
@@ -88,16 +87,114 @@
     display: none !important;
   
   }
-  
-  
-  /* hamburger */
-  
-  .hamburger .bar {
-    display: block;
-    width: 30px;
-    height: 7px;
-    margin-top: 3px;
-    border-radius: 3px;
-    background-color: gray;
+
+  #categoryMenu {
+    margin-bottom: 3rem;
+  }
+
+  .categoryName {
+    font-size:xx-large;
+    font-weight: bold;
+    margin-bottom: 3rem;
   }
   
+
+  .categoryBooks {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .booksList {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .categoryBooksList {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    
+    /* background-color: antiquewhite; */
+    width: 900px;
+    height: 300px;
+
+    margin-bottom: 2rem;
+  }
+
+  .booksImage {
+    width: 180px;
+    height: 250px;
+  }
+
+  .booksInformation {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 400px;
+  }
+
+  .buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  #cartBtn {
+    width: 110px;
+    height: 50px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #3f8ed0;
+    color: antiquewhite;
+    font-size: medium;
+    font-weight: bold;
+    border-style: none;
+  }
+
+  #buyBtn {
+    width: 110px;
+    height: 50px;
+    border-radius: 5px;
+    background-color: #03d1b2;
+    color: antiquewhite;
+    font-size: medium;
+    font-weight: bold;
+    border-style: none;
+  }
+
+  .bottomLine {
+    width: 900px;
+    height: 3px;
+    background-color: rgba(0,0,0,0.1);
+    border-radius: 10px;
+    margin-bottom: 2rem;
+  }
+
+  .title {
+    font-weight: 200;
+  }
+
+  .title a {
+    text-decoration: none;
+    color: black;
+  }
+
+
+  .price {
+    font-weight: bold;
+    margin-bottom: 3px;
+  }
+
+  .author {
+    margin-bottom: 3px;
+  }
+
+  .publisher {
+    margin-bottom: 3px;
+  }

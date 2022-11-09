@@ -10,18 +10,20 @@ export const serachTemplate = function (h2) {
 };
 
 export const productTemplate = function (product) {
-  const { title, author, price, images, publisher } = product;
+  const { title, author, price, images, publisher, _id } = product;
 
   return `
-    <div class="product-image">
-        <img src = "${images[0]}" alt = "${title} 대표이미지"/> 
-    </div>
-    제목 : <span class="title">${title}</span>
-    작가 : <span class="author">${author}</span>
-    출판사 : <span class="publisher">${publisher}</span>
-    가격 : <span class="price">${price}</span>
-    <input type="button" value="수정" class="update" />
-    <input type="button" value="삭제" class="delete" />
+  <div class="product" data-id = "${_id}">
+  <div class="product-image">
+    <img src="${images[0]}" alt="${title} 대표이미지" />
+  </div>
+  제목 : <span class="title">${title}</span> 작가 :
+  <span class="author">${author}</span> 출판사 :
+  <span class="publisher">${publisher}</span> 가격 :
+  <span class="price">${price}</span>
+  <input type="button" value="수정" class="update" />
+  <input type="button" value="삭제" class="delete" />
+</div>
     `;
 };
 
@@ -29,8 +31,7 @@ export const getProductAddTemplate = function (h2) {
   return `
       <h2>${h2}</h2>
       <form
-        action="/api/products/upload"
-        method="post"
+        id="image-info"
         enctype="multipart/form-data"
         target="iframe1">
         <input
@@ -38,30 +39,29 @@ export const getProductAddTemplate = function (h2) {
           name="productImages"
           accept="image/*"
           id="product-img"
+          required
         /><br />
         <div class="preview">사진 미리보기</div>
-        <button type="button" id="upload">사진 업로드</button>
-        <iframe id="iframe1" name="iframe1" style="display:none"></iframe>
         </form>
         <br>
         <form id="product-info">
-        제목 : <input type="text" name="title" class="title" /><br />
-        작가 : <input type="text" name="author" class="author" /><br />
+        제목 : <input type="text" name="title" class="title" required /><br />
+        작가 : <input type="text" name="author" class="author" required /><br />
         출판사 :
-        <input type="text" name="publisher" class="publisher" /><br />
+        <input type="text" name="publisher" class="publisher" required /><br />
         가격 :
-        <input type="number" min="0" name="price" class="price" /><br />
+        <input type="number" min="0" name="price" class="price" required/><br />
         카테고리 :
-        <select id="category"><opiton value="">카테고리 선택</opiton>
-        </select><br />
+        <select id="category" required>
+            <option value="empty">카테고리를 선택해주세요</option></select><br />
         상세설명 :
         <textarea
           name="description"
           cols="50"
           placeholder="책에 대한 요약 내용"
           class="description"
+          required
         ></textarea>
         <button type="button" id="submit-info">저장</button>
-      </form>
-      <div class="msg"></div>`;
+      </form>`;
 };
