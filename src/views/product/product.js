@@ -27,29 +27,9 @@ const { title, author, price, publisher, images, description, category } =
 renderProduct();
 
 let count = Number(countEl.innerText);
-totalPriceEl.textContent = priceSToString(calTotalPrice(price, count));
+totalPriceEl.textContent = `${addCommas(calTotalPrice(price, count))}원`;
 
 addAllEvents();
-
-//이벤트 처리
-function addAllEvents() {
-  pluseBtn.addEventListener('click', function () {
-    count++;
-    countEl.textContent = count;
-    totalPriceEl.textContent = priceSToString(calTotalPrice(price, count));
-  });
-  minusBtn.addEventListener('click', function () {
-    if (count == 1) {
-      console.log('수량확인');
-      return;
-    } else {
-      count--;
-      countEl.textContent = count;
-      totalPriceEl.textContent = priceSToString(calTotalPrice(price, count));
-    }
-  });
-  cart.addEventListener('click', addCarts);
-}
 
 //함수
 //데이터 로드
@@ -65,11 +45,31 @@ async function loadData() {
 function renderProduct() {
   titleEl.textContent = title;
   authorEl.textContent = author;
-  priceEl.textContent = priceSToString(price);
+  priceEl.textContent = addCommas(price);
   publisherEl.textContent = publisher;
   img.src = images[0];
   descriptionEl.textContent = description;
   categoryEl.textContent = category;
+}
+
+//이벤트 처리
+function addAllEvents() {
+  pluseBtn.addEventListener('click', function () {
+    count++;
+    countEl.textContent = count;
+    totalPriceEl.textContent = `${addCommas(calTotalPrice(price, count))}원`;
+  });
+  minusBtn.addEventListener('click', function () {
+    if (count == 1) {
+      console.log('수량확인');
+      return;
+    } else {
+      count--;
+      countEl.textContent = count;
+      totalPriceEl.textContent = `${addCommas(calTotalPrice(price, count))}원`;
+    }
+  });
+  cart.addEventListener('click', addCarts);
 }
 
 //장바구니 추가 함수
@@ -86,8 +86,7 @@ function addCarts() {
   };
 
   if (carts.has(id)) {
-    carts.get(id).count += count;
-    carts.get(id).totalPrice += calTotalPrice(price, count);
+    carts.get(id).count += 1;
     localStorage.setItem('carts', JSON.stringify(Object.fromEntries(carts)));
   } else {
     carts.set(id, cartItem);
@@ -97,16 +96,64 @@ function addCarts() {
   if (isCart) {
     window.location.href = '/cart';
   }
-  countEl.textContent = 1;
-  totalPriceEl.textContent = priceSToString(price);
 }
 
 //단위
-function priceSToString(price) {
-  return `${price.toLocaleString('ko-kr')}원`;
+function addCommas(price) {
+  return price.toLocaleString('ko-kr');
 }
 
 //총 금액 계산 및 변경
 function calTotalPrice(price, count) {
   return price * count;
 }
+
+
+//헤더부분
+//로그인 여부에 따라 상단 메뉴 노출 유무 설정
+const login = document.querySelector('#login');
+const logout = document.querySelector('#logout');
+const adminPage = document.querySelector('#adminPage');
+const edit = document.querySelector('#edit');
+const editAtag = document.querySelector('#edit a');
+const seeOrder = document.querySelector('#seeOrder');
+const register = document.querySelector('#register');
+
+const userToken = sessionStorage.token;
+
+//로그인 유저 확인
+checkLogin();
+
+async function checkLogin() {
+  const loginUser = await Api.get('/api/users', userToken);
+  const isUser = loginUser.role === "user";
+  const isAdmin = loginUser.role === "admin";
+
+  if (sessionStorage && isUser) {
+    login.classList.add('hidden');
+    register.classList.add('hidden');
+    logout.classList.remove('hidden');
+    edit.classList.remove('hidden');
+    seeOrder.classList.remove('hidden');
+
+    editAtag.innerText = `${loginUser.fullName}님의 프로필`;
+    // alert(`${loginUser.fullName}님 안녕하세요!`);
+  }
+
+  //관리자 계정일 때
+  if (sessionStorage && isAdmin) {
+    login.classList.add('hidden');
+    register.classList.add('hidden');
+    adminPage.classList.remove('hidden');
+    logout.classList.remove('hidden');
+  }
+
+
+}
+//로그아웃 버튼 클릭시 토큰 삭제
+
+function logoutHandler() {
+  sessionStorage.removeItem('token');
+}
+
+logout.addEventListener('click', logoutHandler);
