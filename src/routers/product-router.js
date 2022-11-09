@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import is from '@sindresorhus/is';
 import { productService } from '../services';
+import { adminCheck } from '../middlewares';
 import multer from 'multer';
 
 const productRouter = Router();
@@ -16,6 +17,7 @@ const upload = multer({ storage: storage });
 
 productRouter.post(
   '/upload',
+  adminCheck,
   upload.array('productImages', 10),
   async (req, res) => {
     let images = [];
@@ -29,7 +31,7 @@ productRouter.post(
   }
 );
 
-productRouter.post('/', async (req, res, next) => {
+productRouter.post('/', adminCheck, async (req, res, next) => {
   try {
     if (is.emptyObject(req.body)) {
       throw new Error(
@@ -97,7 +99,7 @@ productRouter.get('/:productId', async function (req, res, next) {
 });
 
 // 상품 정보 수정
-productRouter.put('/:productId', async function (req, res, next) {
+productRouter.put('/:productId', adminCheck, async function (req, res, next) {
   try {
     if (is.emptyObject(req.body)) {
       throw new Error(
@@ -137,16 +139,20 @@ productRouter.put('/:productId', async function (req, res, next) {
   }
 });
 
-productRouter.delete('/:productId', async function (req, res, next) {
-  try {
-    const productId = req.params.productId;
+productRouter.delete(
+  '/:productId',
+  adminCheck,
+  async function (req, res, next) {
+    try {
+      const productId = req.params.productId;
 
-    const product = await productService.removeProduct(productId);
+      const product = await productService.removeProduct(productId);
 
-    res.status(200).json(product);
-  } catch (error) {
-    next(error);
+      res.status(200).json(product);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 export { productRouter };
