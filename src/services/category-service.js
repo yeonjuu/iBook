@@ -31,6 +31,11 @@ class CategoryService {
     const categories = await this.categoryModel.findAll();
     return categories;
   }
+  // 원하는 하나의 카테고리를 받음.
+  async getCategory(categoryId) {
+    const category = await this.categoryModel.findById(categoryId);
+    return category;
+  }
 
   // 카테고리정보 수정
   async setCategory(categoryInfoRequired, toUpdate) {
