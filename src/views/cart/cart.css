@@ -58,3 +58,7 @@ input::-webkit-inner-spin-button {
   background-color: blue;
   opacity: 1;
 }
+
+.hidden {
+  display: none;
+}
