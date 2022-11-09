@@ -10,7 +10,7 @@ const serachTemplate = function (h2) {
             <div class="search-wrap">
               <input class="searchInput" placeholder="제품명 입력.." />
               <input type="button" value="검색" class="searchBtn" />
-              <input type="button" value="전체조회" class="searchAll" />
+              <input type="button" value="전체조회" class="searchAll2" />
             </div>
             <ul class="list"></ul>
             <button class="revise">수정</button>`;
@@ -133,7 +133,7 @@ landing.onclick = (event) => {
   } else if (event.target.classList.contains('revise')) {
     const allOrder = document.querySelectorAll('.orderInfo');
     reviseOrder(allOrder);
-  } else if (event.target.classList.contains('searchAll')) {
+  } else if (event.target.classList.contains('searchAll2')) {
     allOrderListRender();
   } else if (event.target.classList.contains('searchBtn')) {
     search();

@@ -7,7 +7,7 @@ const bookId = document.querySelector('.bookId');
 
 const cartList = document.querySelector('.list'); // 전체 장바구니 목록을 포함하는 ul
 const selectDelBtn = document.querySelector('.selectDelBtn'); //선택 삭제 버튼
-const totalPrice = document.querySelector('.totalPrice');
+const totalPrice = document.querySelector('.totalPrice1');
 const selectAllBtn = document.querySelector('.selectAll');
 const allDelBtn = document.querySelector('.allDelBtn');
 
@@ -20,21 +20,18 @@ function template(img, name, price, count, id) {
   //상품 리스트 템플릿
   return `<li class="product" id=${id}>
     <div>
-      <button class="select"></button>
+      <button class="select"><i class="fa-solid fa-check sel"></i></button>
     </div>
     <div class="imgBox">
-      이미지
-      <img src=${img} />
+      <img class="bookImg" src="smp1.jpg" />
     </div>
-    <div>
       <div class="info">
         <div class="bookName">${name}</div>
         <div class="price">${price}</div>
       </div>
-    </div>
     <div class="countContainer">
-      <span class="totalPrice">${price * count}</span>
-      <span>원</span>
+      <span class="totalPrice">${price * count} 원</span>
+      
       <div class="countBtn">
         <button class="minusBtn">-</button>
         <input class="count"  maxlength="3" type="number" value="${count}"}/>
@@ -42,7 +39,7 @@ function template(img, name, price, count, id) {
       </div>
     </div>
     <div>
-      <button class="deleteBtn">X</button>
+      <button class="deleteBtn"><i class="fa-solid fa-x"></i></button>
     </div>
   </li>`;
 }
@@ -61,7 +58,15 @@ function addAllEvents() {
   buyBtn.addEventListener('click', function () {
     localStorage.removeItem('orderId');
     localStorage.removeItem('cart');
-    location.replace('/order');
+    if (checkList.length === 0) {
+      alert('1개 이상의 상품은 필수입니다');
+    } else {
+      checkList.forEach((val) => {
+        const cartItem = carts.get(val);
+        console.log(cartItem);
+      });
+      // location.replace('/order');
+    }
   });
   allDelBtn.addEventListener('click', clickAllDelBtn);
 }
@@ -108,10 +113,10 @@ function minusCount(cartItem) {
   const price = cartItem.querySelector('.price');
 
   if (inputVal <= 1) {
-    return (totalPrice1.innerHTML = price.innerHTML);
+    return (totalPrice1.innerHTML = `${price.innerHTML} 원`);
   }
   input.value = Number(inputVal) - 1;
-  totalPrice1.innerHTML = `${Number(price.innerHTML) * Number(input.value)}`;
+  totalPrice1.innerHTML = `${Number(price.innerHTML) * Number(input.value)} 원`;
   totalPriceValue = totalPriceValue - Number(price.innerHTML);
   totalPrice.innerHTML = totalPriceValue;
   setItem(id, 'minus');
@@ -128,7 +133,9 @@ function addCount(cartItem) {
     input.value = 999;
   } else {
     input.value = Number(inputVal) + 1;
-    totalPrice1.innerHTML = `${Number(price.innerHTML) * Number(input.value)}`;
+    totalPrice1.innerHTML = `${
+      Number(price.innerHTML) * Number(input.value)
+    } 원`;
     totalPriceValue = totalPriceValue + Number(price.innerHTML);
     totalPrice.innerHTML = totalPriceValue;
     setItem(id, 'plus');
@@ -158,7 +165,7 @@ function inputPrice(cartItem) {
     totalPriceValue += a;
     totalPrice.innerHTML = totalPriceValue;
   }
-  totalPrice1.innerHTML = `${Number(price) * Number(inputBox.value)}`;
+  totalPrice1.innerHTML = `${Number(price) * Number(inputBox.value)} 원`;
   setItem(id, inputBox.value);
 }
 
@@ -250,7 +257,10 @@ cartList.onclick = (event) => {
     minusCount(cartItem);
   } else if (event.target.classList.contains('deleteBtn')) {
     clickDelBtn(cartItem);
-  } else if (event.target.classList.contains('select')) {
+  } else if (
+    event.target.classList.contains('select') ||
+    event.target.classList.contains('sel')
+  ) {
     clickSelBtn(cartItem);
   }
 };
