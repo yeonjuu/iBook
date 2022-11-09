@@ -69,9 +69,12 @@ const seeOrder = document.querySelector('#seeOrder');
 const register = document.querySelector('#register');
 
 const userToken = sessionStorage.token;
+const isLogin = Boolean(userToken);
 
 //로그인 유저 확인
-checkLogin();
+if (isLogin) {
+  checkLogin();
+};
 
 async function checkLogin() {
   const loginUser = await Api.get('/api/users', userToken);
@@ -79,7 +82,7 @@ async function checkLogin() {
   const isUser = loginUser.role === "user";
   const isAdmin = loginUser.role === "admin";
 
-  if (sessionStorage && isUser) {
+  if (isUser) {
     login.classList.add('hidden');
     register.classList.add('hidden');
     logout.classList.remove('hidden');
@@ -91,7 +94,7 @@ async function checkLogin() {
   }
 
   //관리자 계정일 때
-  if (sessionStorage && isAdmin) {
+  if (isAdmin) {
     login.classList.add('hidden');
     register.classList.add('hidden');
     adminPage.classList.remove('hidden');
