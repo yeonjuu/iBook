@@ -3,16 +3,15 @@ import {
   serachTemplate,
   productTemplate,
   getProductAddTemplate,
+  curtImage,
 } from './productTemplate.js';
-// import { getOptionsCategory } from './addProduct.js';
+import { getOptionsCategory, previewImage } from './addProduct.js';
 
-const products = document.querySelector('.products');
-const landing = document.querySelector('.landing');
 let imageUrl = '';
 
-products.addEventListener('click', inquiryProduct);
+const landing = document.querySelector('.landing');
 
-async function inquiryProduct() {
+export async function inquiryProduct() {
   const inquiryHtml = serachTemplate('도서조회');
   landing.innerHTML = inquiryHtml;
 
@@ -22,6 +21,8 @@ async function inquiryProduct() {
   const searchBtn = document.querySelector('.searchBtn');
   const searchAllBtn = document.querySelector('.searchAll');
 
+  searchAll();
+
   searchBtn.addEventListener('click', function () {
     const search = searchInput.value;
     const filterProduct = products.filter((product) =>
@@ -30,7 +31,7 @@ async function inquiryProduct() {
     if (filterProduct.length == 0) {
       alert('검색 결과가 없습니다.');
     } else {
-      loadProdcutList(filterProduct);
+      renderProdcutList(filterProduct);
     }
   });
   searchAllBtn.addEventListener('click', searchAll);
@@ -48,11 +49,11 @@ async function searchAll() {
   } else {
     //이미 로드 했으면 밑에 child 전체 삭제하고 다시 로드하기
     console.log('complete load!');
-    loadProdcutList(products);
+    renderProdcutList(products);
   }
 }
 
-async function loadProdcutList(products) {
+async function renderProdcutList(products) {
   const listEl = document.querySelector('.list');
   while (listEl.firstChild) {
     listEl.removeChild(listEl.firstChild);
@@ -102,11 +103,11 @@ async function update(product) {
     _id,
     category,
   } = product;
-  console.log(product);
   //카테고리 로드
   await getOptionsCategory();
 
   const productInfo = document.querySelector('#product-info');
+  const input = document.querySelector('#product-img');
   const curTitle = document.querySelector('.title');
   const curAuthor = document.querySelector('.author');
   const curPublisher = document.querySelector('.publisher');
@@ -114,7 +115,6 @@ async function update(product) {
   const curPdescription = document.querySelector('.description');
   const curCategory = document.querySelector('#category');
   const preview = document.querySelector('.preview');
-  const submitBtn = document.querySelector('#submit-info');
 
   imageUrl = images[0];
   //기존 도서의 정보 로드
@@ -132,13 +132,25 @@ async function update(product) {
       curCategory.options[i].selected = true;
     }
   }
-
+  input.addEventListener('change', previewImage);
   //정보수정 후,
-  //이미지 저장
-  handleImage();
   //정보저장
-  submitBtn.addEventListener('click', async function (e) {
+  productInfo.addEventListener('submit', async function (e) {
     e.preventDefault();
+    //이미지가 변경되지 않ㅇ을 경우
+    if (input.files[0] !== undefined) {
+      let formData = new FormData();
+      formData.append('productImages', input.files[0]);
+      let res = await fetch('/api/products/upload', {
+        method: 'POST',
+        body: formData,
+      });
+
+      let result = await res.json();
+      imageUrl = result.images;
+      console.log('result', imageUrl);
+    }
+
     const changeInfo = {
       title: productInfo.title.value,
       author: productInfo.author.value,
@@ -152,6 +164,7 @@ async function update(product) {
     await Api.put('/api/products', _id, changeInfo);
 
     alert('도서수정완료');
+    //조회 페이지로
     window.location.href = '/admin';
   });
 }
@@ -164,77 +177,4 @@ async function del(id) {
   } else {
     alert('도서삭제취소');
   }
-}
-//3개 함수 addProduct 에서 가져옴 , addProduct refactory 필요...
-async function getOptionsCategory() {
-  const categories = await Api.get('/api/categories');
-  const categoryEl = document.querySelector('#category');
-  const category_template = (c) =>
-    `<option value="${c._id}">${c.name}</option> `;
-  categoryEl.insertAdjacentHTML(
-    'beforeend',
-    categories
-      .map((c) => {
-        return category_template(c);
-      })
-      .join('')
-  );
-}
-
-function handleImage() {
-  const imageInfo = document.querySelector('#image-info');
-  const input = document.querySelector('#product-img');
-  //스타일만들때 쓰기
-  // input.style.opacity = 0;
-
-  input.addEventListener('change', previewImage);
-  //사진업로드 제출하고 응답 값 받기 , 응답 값 형태 : { images : [url, ,,,]}
-  imageInfo.onsubmit = async (e) => {
-    e.preventDefault();
-    let res = await fetch('/api/products/upload', {
-      method: 'POST',
-      body: new FormData(imageInfo),
-    });
-    let result = await res.json();
-    imageUrl = result.images;
-    console.log('result', imageUrl);
-    console.log('complete upload');
-  };
-}
-
-function previewImage() {
-  const input = document.querySelector('#product-img');
-  const preview = document.querySelector('.preview');
-  while (preview.firstChild) {
-    preview.removeChild(preview.firstChild);
-  }
-
-  const curtFile = input.files;
-  console.log(curtFile);
-  if (curtFile.length === 0) {
-    const para = document.createElement('p');
-    para.textContent = 'No files currently selected for upload';
-    preview.appendChild(para);
-  } else {
-    const div = document.createElement('div');
-    preview.appendChild(div);
-
-    for (const file of curtFile) {
-      console.log('file', file);
-      const para = document.createElement('p');
-      para.textContent = `File name : ${file.name}`;
-      const image = document.createElement('img');
-      image.src = URL.createObjectURL(file);
-
-      div.appendChild(image);
-      div.appendChild(para);
-    }
-  }
-}
-function curtImage(src, title) {
-  return `
-  <div>
-  <img src = "${src}" alt = "${title} 대표이미지" />
-  </div>
-  `;
 }
