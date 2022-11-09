@@ -40,16 +40,18 @@ async function showProductsList() {
         const toShow = `
         <div class="categoryBooksList">
             <a href="/products/${productsList[i]._id}"><img class="booksImage" src="${productsList[i].images[0]}"/></a>
+            
             <div class="booksInformation">
-            <h3 class="title">${productsList[i].title}</h3>
+            <h3 class="title"><a href="/products/${productsList[i]._id}">${productsList[i].title}</a></h3>
             <h4 class="price">${productsList[i].price}원</h4>
             <h5 class="author">저자 : ${productsList[i].author}</h5>
             <h5 class="publisher">출판사 : ${productsList[i].publisher}</h5>
             <h5 class="description">${productsList[i].description}</h5>
             </div>
+
             <div class="buttons">
-            <button class="button is-primary">장바구니</button>
-            <button class="button is-info">구매하기</button>
+            <button class="cartBtn">장바구니</button>
+            <button class="buyBtn">구매하기</button>
             </div>
         </div>
         <div class="bottomLine"></div>
