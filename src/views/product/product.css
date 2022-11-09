@@ -8,60 +8,7 @@ a {
   color: #000000;
 }
 
-/* div.product {
-  margin: 0 auto;
-  width: 80%;
-  display: flex;
-  flex-direction: column;
-}
-
-div.top {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 20px;
-}
-
-div.top > div.img-wrap {
-  width: 30%;
-  text-align: center;
-}
-div.top > div.product-explain {
-  width: 70%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding-left: 20px;
-}
-
-div.order-wrap {
-  height: 150px;
-  background-color: #d6d8d8;
-  padding: 30px;
-  display: flex;
-  flex-direction: column;
-}
-
-a.btn {
-  font-size: 1.2em;
-}
-
-a.btn:hover {
-  color: darkred;
-}
-
-span.title {
-  font-size: 1.5em;
-  font-weight: bold;
-}
-
-span.totalPrice {
-  margin-left: 10px;
-  font-size: 1.2em;
-  font-weight: bold;
-} */
-
 /*헤더*/
-
 .bookLogo {
   width: 150px;
   height: 90px;
@@ -71,7 +18,6 @@ span.totalPrice {
   display: none !important;
 
 }
-
 
 
 /*푸터*/
@@ -179,8 +125,20 @@ span.totalPrice {
   align-items: flex-start;
 }
 
+.quantity {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+
 .count-wrap {
-  margin-left: 7px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: 2rem;
   border: 2px solid rgba(0,0,0,0.1);
   border-radius: 2px;
 }
@@ -188,11 +146,13 @@ span.totalPrice {
 .plus {
   border-style: none;
   background-color: unset;
+  margin-left: 5px;
 }
 
 .minus {
   border-style: none;
   background-color: unset;
+  margin-right: 5px;
 }
 
 .order-wrap {

@@ -78,7 +78,7 @@ if (isLogin) {
 
 async function checkLogin() {
   const loginUser = await Api.get('/api/users', userToken);
-  console.log(loginUser);
+  //console.log(loginUser);
   const isUser = loginUser.role === "user";
   const isAdmin = loginUser.role === "admin";
 
