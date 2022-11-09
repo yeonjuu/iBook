@@ -1,0 +1,17 @@
+* {
+    font-family: 'Trispace', sans-serif;
+    text-decoration: none;
+  }
+
+  .bookLogo {
+    width: 150px;
+    height: 90px;
+  }
+
+  .hidden {
+    display: none !important;
+  
+  }
+
+  
+  
