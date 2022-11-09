@@ -32,7 +32,7 @@
           <div class="navbar-brand">
   
             <a class="mainLogo" href="/">
-            <img class="bookLogo" src="src/images/main-logo.png"/>
+            <img class="bookLogo" src="/api/../images/main-logo.png"/>
             </a>
           </div>
   
@@ -40,6 +40,7 @@
             <ul id="navbar">
               <li id="login"><a href="/login">로그인</a></li>
               <li id="logout" class="hidden"><a href="/">로그아웃</a></li>
+            <li id="adminPage" class="hidden"><a href="/admin">관리자 페이지</a></li>
               <li id="edit" class="hidden">
                 <a href="/edit">회원정보수정</a>
               </li>
@@ -63,16 +64,20 @@
             </ul>
           </div>
         </div>
-      </nav>
-  
-      <ul id="categoryMenu">
-      </ul>
-    <container class="productsList">
-        <h1 class="categoryName"></h1>
-        <div class="fiction">
-            <p class="fictionList">상품 모음</p>
-        </div>
-    </container>
+    </nav>
+
+    <ul id="categoryMenu">
+    </ul>
+
+    <main class="categoryBooks">
+
+      <h1 class="categoryName"></h1>
+
+      <div class="booksList">
+      </div>
+      
+    </main>
+
 
 
     <footer>

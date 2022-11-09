@@ -3,16 +3,16 @@ import { getProductAddTemplate } from './productTemplate.js';
 
 const add = document.querySelector('.add');
 const landing = document.querySelector('.landing');
-
+let imageUrl = '';
 add.addEventListener('click', getAddProduct);
 
 function getAddProduct() {
-  const addHtml = getProductAddTemplate('상품추가');
+  const addHtml = getProductAddTemplate('도서추가');
   landing.innerHTML = addHtml;
 
   window.onload = getOptionsCategory();
-  window.onload = loadImage();
-  window.onload = handleSubmit();
+  window.onload = handleImage();
+  window.onload = handleInfoSubmit();
 }
 
 async function getOptionsCategory() {
@@ -30,49 +30,65 @@ async function getOptionsCategory() {
   );
 }
 
-async function handleSubmit() {
+function handleImage() {
+  const input = document.querySelector('#product-img');
+  //스타일만들때 쓰기
+  //input.style.opacity = 0;
+
+  input.addEventListener('change', previewImage);
+  //사진업로드 제출하고 응답 값 받기 , 응답 값 형태 : { images : [url, ,,,]}
+}
+
+function handleInfoSubmit() {
   const productInfo = document.querySelector('#product-info');
-  const submitBtn = document.getElementById('submit-info');
-  const msg = document.querySelector('.msg');
+  const submitBtn = document.querySelector('#submit-info');
   const categoryEl = document.querySelector('#category');
+  const imageInfo = document.querySelector('#image-info');
+  const preview = document.querySelector('.preview');
+
   let categoryId = '';
   categoryEl.addEventListener('change', function () {
     categoryId = categoryEl.options[categoryEl.selectedIndex].value;
   });
 
-  submitBtn.addEventListener('click', async function () {
+  submitBtn.addEventListener('click', async function (e) {
+    e.preventDefault();
+    imageInfo.onsubmit = async (e) => {
+      e.preventDefault();
+      let res = await fetch('/api/products/upload', {
+        method: 'POST',
+        body: new FormData(imageInfo),
+      });
+      let result = await res.json();
+      imageUrl = result.images;
+      console.log('result', imageUrl);
+      console.log('complete upload');
+    };
+
     const product = {
-      title: productInfo['title'].value,
-      author: productInfo['author'].value,
-      publisher: productInfo['publisher'].value,
-      price: productInfo['price'].value,
-      description: productInfo['description'].value,
-      images: ['uploads/smp1.jpg'],
+      title: productInfo.title.value,
+      author: productInfo.author.value,
+      price: productInfo.price.value,
+      publisher: productInfo.publisher.value,
+      description: productInfo.description.value,
+      images: imageUrl,
       categoryId: categoryId,
     };
-    await Api.post('/api/products', product);
-    alert('상품 추가 완료');
-    msg.innerText = JSON.stringify(product);
+    console.log('productInfo', JSON.stringify(productInfo));
+    try {
+      await Api.post('/api/products', product);
+      alert('상품추가완료');
+      //form reset
+      imageInfo.reset();
+      preview.removeChild(preview.firstChild);
+      productInfo.reset();
+    } catch (err) {
+      console.log(err);
+    }
   });
 }
 
-//이미지 처리하기
-function loadImage() {
-  const input = document.querySelector('#product-img');
-  const submitBtn = document.getElementById('upload');
-  //스타일만들때 쓰기
-  // input.style.opacity = 0;
-
-  input.addEventListener('change', previewImage);
-  //submit 버튼 누르면 자동으로 경로를설정해줌(action)을 막고? response값을 받아온다? Fetch로?
-  //submit 클릭 시 경로이동은 iframe으로 이동 막는 방법,,,
-  //method = post 후 값(response)을 어떻게 받아오는지 -> formData method post ,
-  submitBtn.addEventListener('click', function (e) {
-    e.preventDefault();
-    console.log('complete upload.');
-  });
-}
-
+//이미지 미리보기
 function previewImage() {
   const input = document.querySelector('#product-img');
   const preview = document.querySelector('.preview');
