@@ -111,12 +111,12 @@ function buy(a) {
 async function revise(e) {
   e.preventDefault();
   const order = await loadOrderInfo();
-  if (order.status !== '주문완료') {
-    alert('배송이 시작된 주문건 입니다 고객센터에 문의 해주시길 바랍니다');
+  if (order.status === '주문취소') {
+    alert('이미 취소된 주문건 입니다');
     localStorage.removeItem('orderId');
     return;
-  } else if (order.status === '주문취소') {
-    alert('이미 취소된 주문건 입니다');
+  } else if (order.status !== '주문완료') {
+    alert('배송이 시작된 주문건 입니다 고객센터에 문의 해주시길 바랍니다');
     localStorage.removeItem('orderId');
   }
   console.log(detailAddress.value);
