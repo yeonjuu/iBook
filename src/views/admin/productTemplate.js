@@ -38,6 +38,7 @@ export function getProductAddTemplate(h2) {
           name="productImages"
           accept="image/*"
           id="product-img"
+          required
         /><br />
         <div class="preview">사진 미리보기</div>
         <br>
@@ -49,7 +50,7 @@ export function getProductAddTemplate(h2) {
         <input type="number" min="0" name="price" class="price" required/><br />
         카테고리 :
         <select id="category" required>
-            <option value="empty">카테고리를 선택해주세요</option></select><br />
+            <option value="" selected disabled hidden>카테고리를 선택해주세요</option></select><br />
         상세설명 :
         <textarea
           name="description"
