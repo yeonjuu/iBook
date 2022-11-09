@@ -11,10 +11,10 @@
     />
     <!-- 폰트 어썸: 아이콘 -->
     <script
-    defer
-    src="https://kit.fontawesome.com/9daa42bcef.js"
-    crossorigin="anonymous"
-  ></script>
+      defer
+      src="https://kit.fontawesome.com/9daa42bcef.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="product.js" type="module" defer></script>
     <title>상품조회</title>
   </head>
@@ -24,7 +24,7 @@
         <div class="container mt-3">
           <div class="navbar-brand">
             <!--햄버거 메뉴-->
-  
+
             <!-- <nav id="navigation">
               <div class="hamburger">
                 <span class="bar"></span>
@@ -34,27 +34,29 @@
   
               <ul id="hamburgerMenu" class="hidden"></ul>
             </nav> -->
-  
+
             <!---->
-  
+
             <a class="mainLogo" href="/">
               <!-- <span class="has-text-link">IBOOK</span> -->
               <img class="bookLogo" src="/api/../images/main-logo.png" />
             </a>
           </div>
-  
+
           <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
             <ul class="headerMenu" id="navbar">
               <li id="login"><a href="/login">로그인</a></li>
               <li id="logout" class="hidden"><a href="/">로그아웃</a></li>
-              <li id="adminPage" class="hidden"><a href="/admin">관리자 페이지</a></li>
+              <li id="adminPage" class="hidden">
+                <a href="/admin">관리자 페이지</a>
+              </li>
               <li id="edit" class="hidden">
                 <a href="/edit">회원정보수정</a>
               </li>
               <li id="seeOrder" class="hidden">
                 <a href="/order">주문정보조회</a>
               </li>
-  
+
               <li id="register">
                 <a href="/register"
                   ><i class="fa-solid fa-user-plus"></i>회원가입</a
@@ -97,7 +99,7 @@
         <div class="order-wrap">
           <span>총 결제 금액<span class="totalPrice">0</span></span>
           <a class="btn cart">장바구니</a>
-          <a href="/order" class="btn">바로구매</a>
+          <a class="btn order">바로구매</a>
         </div>
         <div class="bottom">
           <h2>상세설명</h2>
