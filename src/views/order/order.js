@@ -172,7 +172,7 @@ function rednerCarts() {
   } else {
     cartList.insertAdjacentHTML(
       'beforeend',
-      productTemplate(cart.imgaes[0], cart.title, cart.price, cart.count)
+      productTemplate(cart.images, cart.title, cart.price, cart.count)
     );
     totalPriceValue += cart.price * cart.count;
   }
