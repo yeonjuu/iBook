@@ -1,21 +1,18 @@
 import * as Api from '../api.js';
 import { getProductAddTemplate } from './productTemplate.js';
 
-const add = document.querySelector('.add');
 const landing = document.querySelector('.landing');
 let imageUrl = '';
-add.addEventListener('click', getAddProduct);
 
-function getAddProduct() {
+export async function getAddProduct() {
   const addHtml = getProductAddTemplate('도서추가');
   landing.innerHTML = addHtml;
 
-  window.onload = getOptionsCategory();
-  window.onload = handleImage();
-  window.onload = handleInfoSubmit();
+  await getOptionsCategory();
+  handleSubmit();
 }
 
-async function getOptionsCategory() {
+export async function getOptionsCategory() {
   const categories = await Api.get('/api/categories');
   const categoryEl = document.querySelector('#category');
   const category_template = (c) =>
@@ -30,20 +27,10 @@ async function getOptionsCategory() {
   );
 }
 
-function handleImage() {
-  const input = document.querySelector('#product-img');
-  //스타일만들때 쓰기
-  //input.style.opacity = 0;
-
-  input.addEventListener('change', previewImage);
-  //사진업로드 제출하고 응답 값 받기 , 응답 값 형태 : { images : [url, ,,,]}
-}
-
-function handleInfoSubmit() {
+function handleSubmit() {
   const productInfo = document.querySelector('#product-info');
-  const submitBtn = document.querySelector('#submit-info');
+  const input = document.querySelector('#product-img');
   const categoryEl = document.querySelector('#category');
-  const imageInfo = document.querySelector('#image-info');
   const preview = document.querySelector('.preview');
 
   let categoryId = '';
@@ -51,19 +38,20 @@ function handleInfoSubmit() {
     categoryId = categoryEl.options[categoryEl.selectedIndex].value;
   });
 
-  submitBtn.addEventListener('click', async function (e) {
+  input.addEventListener('change', previewImage);
+
+  productInfo.addEventListener('submit', async function (e) {
     e.preventDefault();
-    imageInfo.onsubmit = async (e) => {
-      e.preventDefault();
-      let res = await fetch('/api/products/upload', {
-        method: 'POST',
-        body: new FormData(imageInfo),
-      });
-      let result = await res.json();
-      imageUrl = result.images;
-      console.log('result', imageUrl);
-      console.log('complete upload');
-    };
+    let formData = new FormData();
+    formData.append('productImages', input.files[0]);
+    let res = await fetch('/api/products/upload', {
+      method: 'POST',
+      body: formData,
+    });
+
+    let result = await res.json();
+    imageUrl = result.images;
+    console.log('result', imageUrl);
 
     const product = {
       title: productInfo.title.value,
@@ -74,12 +62,11 @@ function handleInfoSubmit() {
       images: imageUrl,
       categoryId: categoryId,
     };
-    console.log('productInfo', JSON.stringify(productInfo));
+
     try {
       await Api.post('/api/products', product);
       alert('상품추가완료');
       //form reset
-      imageInfo.reset();
       preview.removeChild(preview.firstChild);
       productInfo.reset();
     } catch (err) {
@@ -87,9 +74,8 @@ function handleInfoSubmit() {
     }
   });
 }
-
 //이미지 미리보기
-function previewImage() {
+export function previewImage() {
   const input = document.querySelector('#product-img');
   const preview = document.querySelector('.preview');
   while (preview.firstChild) {
