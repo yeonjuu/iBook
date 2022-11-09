@@ -1,14 +1,14 @@
 * {
   box-sizing: border-box;
   font-family: 'Trispace', sans-serif;
-  text-decoration: none;
 }
+
 a {
   text-decoration: none;
   color: #000000;
 }
 
-div.product {
+/* div.product {
   margin: 0 auto;
   width: 80%;
   display: flex;
@@ -58,7 +58,7 @@ span.totalPrice {
   margin-left: 10px;
   font-size: 1.2em;
   font-weight: bold;
-}
+} */
 
 /*헤더*/
 
@@ -131,4 +131,148 @@ span.totalPrice {
 
 .finalFooter {
   margin-bottom: 3rem;
+}
+
+/*메인*/
+
+.main-container {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
+.product {
+  display: flex;
+  width: 70%;
+  height: 130vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  /* background-color: whitesmoke; */
+  border-radius: 10px;
+}
+
+.top {
+  /* background-color: aliceblue; */
+  /* border-bottom: 3px solid rgba(0,0,0,0.1); */
+  width: 90%;
+  height: 70vh;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.img-wrap > img{
+  width: 350px;
+  height: 470px;
+}
+
+.product-explain {
+  height: 100%;
+  width: 30%;
+  padding-top: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: flex-start;
+}
+
+.count-wrap {
+  margin-left: 7px;
+  border: 2px solid rgba(0,0,0,0.1);
+  border-radius: 2px;
+}
+
+.plus {
+  border-style: none;
+  background-color: unset;
+}
+
+.minus {
+  border-style: none;
+  background-color: unset;
+}
+
+.order-wrap {
+  display: flex;
+  flex-direction: column;
+}
+
+.btns {
+  display: flex;
+  flex-direction: row;
+  margin-top: 3rem;
+}
+
+.cart {
+  width: 110px;
+  height: 50px;
+  margin-right: 10px;
+  border-radius: 5px;
+  background-color: #3f8ed0;
+  color: antiquewhite;
+  font-size: medium;
+  font-weight: bold;
+  border-style: none;
+}
+
+.cart a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.buyBtn {
+  cursor: pointer;
+  width: 110px;
+  height: 50px;
+  border-radius: 5px;
+  background-color: #03d1b2;
+  color: antiquewhite;
+  font-size: medium;
+  font-weight: bold;
+  border-style: none;
+}
+
+.buyBtn a {
+  color: white;
+  text-decoration: none;
+  color: inherit;
+}
+
+.mediumLine {
+  margin-top: 2.5rem;
+  width: 90%;
+  height: 3px;
+  background-color: rgba(0,0,0,0.1);
+  border-radius: 10px;
+  margin-bottom: 1rem;
+}
+
+.bottom {
+  /* background-color: rgba(0,0,0,0.02); */
+  width: 80%;
+  height: 30%;
+  margin-top: 10px;
+  margin-bottom: 3rem;
+  margin-left: 3rem;
+  padding: 1rem 0 0 2rem;
+}
+
+.bottom h2 {
+  font-size: large;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+/*글자효과*/
+
+.product-explain {
+  font-size: large;
+}
+
+.order-wrap span {
+  font-size: larger;
+  font-weight: bolder;
 }

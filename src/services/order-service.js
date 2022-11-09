@@ -22,13 +22,21 @@ class OrderService {
   }
 
   async getOrder(orderId) {
-    const order = await this.orderModel.findById(orderId);
+    const order = await this.orderModel.findById(orderId).lean();
 
     if (!order) {
       throw new Error('등록된 주문이 없습니다. 다시 한 번 확인해 주세요.');
     }
 
-    return order;
+    let totalPrice = 0;
+
+    for (let i = 0; i < order.products.length; i++) {
+      totalPrice += order.products[i].productId.price * order.products[i].qty;
+    }
+
+    console.log(order.products);
+
+    return { ...order, totalPrice };
   }
 
   async setOrder(orderInfoRequired, toUpdate) {

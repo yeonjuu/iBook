@@ -45,7 +45,16 @@ categoryRouter.get('/', async function (req, res, next) {
     next(error);
   }
 });
+categoryRouter.get('/:categoryId', async function (req, res, next) {
+  try {
+    const categoryId = req.params.categoryId;
+    const category = await categoryService.getCategory(categoryId);
 
+    res.status(200).json(category);
+  } catch (error) {
+    next(error);
+  }
+});
 // 카테고리 정보 수정
 categoryRouter.put('/:categoryId', adminCheck, async function (req, res, next) {
   try {

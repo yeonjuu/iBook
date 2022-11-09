@@ -142,9 +142,12 @@ const seeOrder = document.querySelector('#seeOrder');
 const register = document.querySelector('#register');
 
 const userToken = sessionStorage.token;
+const isLogin = Boolean(userToken);
 
 //로그인 유저 확인
-checkLogin();
+if (isLogin) {
+  checkLogin();
+};
 
 async function checkLogin() {
   const loginUser = await Api.get('/api/users', userToken);
