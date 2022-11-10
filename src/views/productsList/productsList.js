@@ -73,14 +73,13 @@ async function showProductsList() {
         </div>
         <div class="bottomLine"></div>
         `;
-        // <div class="booksImage"><a href="/products/${productsList[i]._id}"><img src="${productsList[i].images[0]}"/></a></div>
 
 
         booksList.insertAdjacentHTML('beforeend', toShow);
     };
 
     //장바구니 버튼
-    const cartBtn = document.querySelector("#cartBtn");
+    const cartBtn = document.querySelectorAll("#cartBtn");
 
     async function cartHandler(e) {
       const id = e.target.classList[0];
@@ -108,12 +107,13 @@ async function showProductsList() {
         window.location.href = '/cart';
       }
 
-    }
-    cartBtn.addEventListener("click", cartHandler);
+    };
+
+    cartBtn.forEach((i) => i.addEventListener("click", cartHandler));
 
 
     //구매 버튼
-    const buyBtn = document.querySelector("#buyBtn");
+    const buyBtn = document.querySelectorAll("#buyBtn");
 
     async function buyHandler(e) {
       const id = e.target.classList[0];
@@ -133,7 +133,7 @@ async function showProductsList() {
 
     }
 
-    buyBtn.addEventListener("click", buyHandler);
+    buyBtn.forEach((i) => i.addEventListener("click", buyHandler));
     
     }
 
