@@ -1,5 +1,6 @@
 import express from 'express';
 import path from 'path';
+import { adminCheck } from '../middlewares';
 
 const viewsRouter = express.Router();
 
