@@ -16,8 +16,10 @@ function orderListTemplate(id, bookList, totalPrice, orderStatus) {
       <div>${useful.addCommas(totalPrice)} 원</div>
     </div>
     <div class="orderStatus">
-      <div>주문상태</div>
       <span class="tag is-info is-medium">${orderStatus}</span>
+    </div>
+    <div class-"editOrder">
+    <span class="editOrderBtn tag is-link is-medium">주문수정</span>
     </div>
   </li>`;
 }
