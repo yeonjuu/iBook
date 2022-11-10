@@ -5,45 +5,89 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="cart.css" />
+    <!-- 아이콘 -->
+    <link
+    rel="icon"
+    type="image/png"
+    sizes="16x16"
+    href="/api/../pageLogo.png"
+    />
+    <!-- bulma css -->
+    <link
+        rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
+    <!-- 폰트 추가 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Trispace:wght@200;300;400&display=swap"
+      rel="stylesheet"
+    />
+    <!-- 폰트 어썸: 아이콘 -->
     <script
-      src="https://kit.fontawesome.com/1008239bb7.js"
+      defer
+      src="https://kit.fontawesome.com/9daa42bcef.js"
       crossorigin="anonymous"
     ></script>
-    <title>Document</title>
+    <title>장바구니</title>
   </head>
   <body>
     <header>
-      <div>
-        <div class="searchWrap">
-          <h1 class="logoBox">
-            <a href="http://kdt-sw3-team02.elicecoding.com/" class="logoLink"
-              ><img class="logoImg" src="Ibook.png"
-            /></a>
-          </h1>
-          <div class="searchBox">
-            <div class="searchInputWrap">
-              <input
-                class="searchKeyword"
-                type="search"
-                placeholder="책 이름을 검색하세요"
-              />
-              <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+          <div class="container mt-3">
+            <div class="navbar-brand">
+              <!--햄버거 메뉴-->
+    
+              <!-- <nav id="navigation">
+                <div class="hamburger">
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </div>
+    
+                <ul id="hamburgerMenu" class="hidden"></ul>
+              </nav> -->
+    
+              <!---->
+    
+              <a class="mainLogo" href="/">
+                <!-- <span class="has-text-link">IBOOK</span> -->
+                <img class="bookLogo" src="/api/../main-logo.png" />
+              </a>
+            </div>
+    
+            <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
+              <ul class="headerMenu" id="navbar">
+                <li id="login"><a href="/login">로그인</a></li>
+                <li id="logout" class="hidden"><a href="/">로그아웃</a></li>
+                <li id="adminPage" class="hidden"><a href="/admin">관리자 페이지</a></li>
+                <li id="edit" class="hidden">
+                  <a href="/edit">회원정보수정</a>
+                </li>
+                <li id="seeOrder" class="hidden">
+                  <a href="/order">주문정보조회</a>
+                </li>
+    
+                <li id="register">
+                  <a href="/register"
+                    ><i class="fa-solid fa-user-plus"></i>회원가입</a
+                  >
+                </li>
+                <li>
+                  <a href="/cart" aria-current="page">
+                    <span class="icon">
+                      <i class="fas fa-cart-shopping"></i>
+                    </span>
+                    <span>카트</span>
+                  </a>
+                </li>
+              </ul>
             </div>
           </div>
-          <ul class="userMenuList">
-            <li class="userMenuCart">
-              <a href=""><i class="fa-solid fa-cart-shopping fa-2x"></i></a>
-            </li>
-            <li class="userMenuMypage">
-              <a href=""
-                ><div class="userIconBackground">
-                  <i class="fa-regular fa-user fa-2x"></i></div
-              ></a>
-            </li>
-          </ul>
-        </div>
-      </div>
+      </nav>
     </header>
+
     <form class="hidden">
       <input class="bookName" placeholder="book name" />
       <input class="bookPrice" placeholder="book price" />
@@ -88,6 +132,7 @@
         </div>
       </div>
     </main>
+
     <footer>
       <div class="footerbody">
         <div class="footerCompany">IBook</div>

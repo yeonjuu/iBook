@@ -1,9 +1,17 @@
 @import url('reset.css');
 
-body {
+/* body {
   width: 1180px;
   margin: 0 auto;
+} */
+
+.main {
+  /* background-color: aliceblue; */
+  width: 85%;
+  margin: auto;
+  margin-bottom: 10rem;
 }
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -209,9 +217,10 @@ input::-webkit-inner-spin-button {
   color: white;
   background-color: #5055b1;
 }
+
+/*header*/
 * {
   font-family: 'Trispace', sans-serif;
-  text-decoration: none;
 }
 
 .bookLogo {
@@ -219,6 +228,7 @@ input::-webkit-inner-spin-button {
   height: 90px;
 }
 
+/*footer*/
 .footerbody {
   margin-top: 3rem;
   margin-left: 5.5rem;
@@ -265,6 +275,4 @@ input::-webkit-inner-spin-button {
 .finalFooter {
   margin-bottom: 3rem;
 }
-.footerbody {
-  margin: 0px;
-}
+

@@ -2,6 +2,7 @@ import * as Api from '/api.js';
 
 const booksList = document.querySelector(".booksList");
 const categoryName = document.querySelector(".categoryName");
+const categoryTitle = document.querySelector(".categoryTitle");
 
 const url = window.location.href;
 const categoryId = url.split("/")[4];
@@ -30,6 +31,7 @@ async function showCategoryName() {
   const currentCategoryName = currentCategory[0].name;
 
   categoryName.innerText = currentCategoryName;
+  categoryTitle.innerText = currentCategoryName;
 
 }
 
