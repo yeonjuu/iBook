@@ -71,16 +71,11 @@ async function renderProdcutList(products) {
     if (target.classList.contains('update')) {
       //update
       //product 정보가져오기
-      let isUpdate = confirm('도서를 수정하시겠습니까?');
-      if (isUpdate) {
-        const curProduct = await Api.get(
-          '/api/products',
-          targetProduct.dataset.id
-        );
-        await update(curProduct);
-      } else {
-        alert('도서수정취소');
-      }
+      const curProduct = await Api.get(
+        '/api/products',
+        targetProduct.dataset.id
+      );
+      await update(curProduct);
     } else if (target.classList.contains('delete')) {
       //delete
       await del(targetProduct);
@@ -115,58 +110,71 @@ async function update(product) {
   const curCategory = document.querySelector('#category');
   const preview = document.querySelector('.preview');
 
-  imageUrl = images[0];
   //기존 도서의 정보 로드
   curTitle.value = title;
   curAuthor.value = author;
   curPublisher.value = publisher;
   curPdescription.value = description;
   curPrice.value = price;
+  imageUrl = images[0];
+  //카테고리 값 설정
+  for (let i = 0; i < curCategory.options.length; i++) {
+    if (curCategory.options[i].value == category) {
+      curCategory.options[i].selected = true;
+    }
+  }
+
   //사진값 필수 아님
   input.required = false;
 
   //이미지 띄우기
   preview.insertAdjacentHTML('beforeend', curtImage(images[0], curTitle));
 
-  for (let i = 0; i < curCategory.options.length; i++) {
-    if (curCategory.options[i].value == category) {
-      curCategory.options[i].selected = true;
-    }
-  }
   input.addEventListener('change', previewImage);
+  //카테고리 변경 시,
+  let categoryId = category;
+  curCategory.addEventListener('change', function () {
+    categoryId = curCategory.options[curCategory.selectedIndex].value;
+  });
+
   //정보수정 후,
   //정보저장
   productInfo.addEventListener('submit', async function (e) {
     e.preventDefault();
-    //이미지가 변경되지 않ㅇ을 경우
-    if (input.files[0] !== undefined) {
-      let formData = new FormData();
-      formData.append('productImages', input.files[0]);
-      let res = await fetch('/api/products/upload', {
-        method: 'POST',
-        body: formData,
-      });
+    const isUpdate = confirm('도서 정보를 수정하시겠습니까?');
+    if (isUpdate) {
+      //이미지가 변경되지 않ㅇ을 경우
+      if (input.files[0] !== undefined) {
+        let formData = new FormData();
+        formData.append('productImages', input.files[0]);
+        let res = await fetch('/api/products/upload', {
+          method: 'POST',
+          body: formData,
+        });
 
-      let result = await res.json();
-      imageUrl = result.images;
-      console.log('result', imageUrl);
+        let result = await res.json();
+        imageUrl = result.images;
+        console.log('result', imageUrl);
+      }
+
+      const changeInfo = {
+        title: productInfo.title.value,
+        author: productInfo.author.value,
+        price: productInfo.price.value,
+        publisher: productInfo.publisher.value,
+        description: productInfo.description.value,
+        images: imageUrl,
+        categoryId: categoryId,
+      };
+
+      await Api.put('/api/products', _id, changeInfo);
+
+      alert('도서수정완료');
+      //조회 페이지로
+      window.location.href = '/admin';
+    } else {
+      alert('도서수정취소');
     }
-
-    const changeInfo = {
-      title: productInfo.title.value,
-      author: productInfo.author.value,
-      price: productInfo.price.value,
-      publisher: productInfo.publisher.value,
-      description: productInfo.description.value,
-      images: imageUrl,
-      categoryId: category,
-    };
-
-    await Api.put('/api/products', _id, changeInfo);
-
-    alert('도서수정완료');
-    //조회 페이지로
-    // window.location.href = '/admin';
   });
 }
 
