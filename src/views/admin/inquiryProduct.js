@@ -83,8 +83,7 @@ async function renderProdcutList(products) {
       }
     } else if (target.classList.contains('delete')) {
       //delete
-      await del(targetProduct.dataset.id);
-      targetProduct.style.display = 'none';
+      await del(targetProduct);
     }
   };
 }
@@ -167,15 +166,17 @@ async function update(product) {
 
     alert('도서수정완료');
     //조회 페이지로
-    window.location.href = '/admin';
+    // window.location.href = '/admin';
   });
 }
 
-async function del(id) {
+async function del(targetProduct) {
+  let id = targetProduct.dataset.id;
   let isDel = confirm('도서를 삭제하시겠습니까?');
   if (isDel) {
     await Api.delete('/api/products', id);
     alert('도서삭제완료');
+    targetProduct.style.display = 'none';
   } else {
     alert('도서삭제취소');
   }
