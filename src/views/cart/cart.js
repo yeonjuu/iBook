@@ -1,7 +1,6 @@
 import * as useful from '/useful-functions.js';
 import * as Api from '/api.js';
 
-
 const addBtn = document.querySelector('.addBtn');
 const bookName = document.querySelector('.bookName');
 const bookPrice = document.querySelector('.bookPrice');
@@ -55,6 +54,7 @@ function addAllEvents() {
   selectDelBtn.addEventListener('click', clickSelDelBtn);
   addBtn.addEventListener('click', add);
   selectAllBtn.addEventListener('click', function () {
+    allCartItems = document.querySelectorAll('.product');
     allSelect(allCartItems);
   });
   document.addEventListener('mousedown', function () {
@@ -211,6 +211,7 @@ function clickDelBtn(cartItem) {
     }
     carts.delete(id);
     localStorage.setItem('carts', JSON.stringify(Object.fromEntries(carts)));
+    location.reload();
   }
 }
 
@@ -253,6 +254,7 @@ function clickSelBtn2(cartItem, check) {
   const id = cartItem.id;
   const count = cartItem.querySelector('.count').value;
   const price = carts.get(id).price;
+  console.log(price, count);
   if (selectBtn.classList.contains('selected') && check === true) {
     selectBtn.classList.remove('selected');
     totalPriceValue -= count * price;
@@ -268,7 +270,6 @@ function clickSelBtn2(cartItem, check) {
     totalPriceValue += count * price;
     totalPrice.innerHTML = useful.addCommas(totalPriceValue);
   }
-  console.log(checkList);
 }
 function allSelect(allCartItems) {
   if (selectAllBtn.classList.contains('selected')) {
@@ -310,9 +311,10 @@ function renderCarts() {
 }
 
 totalPrice.innerHTML = totalPriceValue;
-const allCartItems = document.querySelectorAll('.product');
+let allCartItems = document.querySelectorAll('.product');
 let eventCartItem;
 cartList.onclick = (event) => {
+  allCartItems = document.querySelectorAll('.product');
   const cartItem = event.target.closest('.product');
   if (event.target.classList.contains('plusBtn')) {
     addCount(cartItem);
@@ -336,8 +338,6 @@ cartList.onmousedown = (event) => {
 
 allSelect(allCartItems);
 
-
-
 //로그인 여부에 따라 상단 메뉴 노출 유무 설정
 const login = document.querySelector('#login');
 const logout = document.querySelector('#logout');
@@ -353,13 +353,13 @@ const isLogin = Boolean(userToken);
 //로그인 유저 확인
 if (isLogin) {
   checkLogin();
-};
+}
 
 async function checkLogin() {
   const loginUser = await Api.get('/api/users', userToken);
   //console.log(loginUser);
-  const isUser = loginUser.role === "user";
-  const isAdmin = loginUser.role === "admin";
+  const isUser = loginUser.role === 'user';
+  const isAdmin = loginUser.role === 'admin';
 
   if (isUser) {
     login.classList.add('hidden');
@@ -379,8 +379,6 @@ async function checkLogin() {
     adminPage.classList.remove('hidden');
     logout.classList.remove('hidden');
   }
-
-
 }
 //로그아웃 버튼 클릭시 토큰 삭제
 
