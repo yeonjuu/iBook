@@ -6,6 +6,8 @@ const pluseBtn = document.querySelector('.plus');
 const minusBtn = document.querySelector('.minus');
 const countEl = document.querySelector('.count');
 
+const productTitle = document.querySelector('.productTitle');
+
 const titleEl = document.querySelector('.title');
 const authorEl = document.querySelector('.author');
 const publisherEl = document.querySelector('.publisher');
@@ -39,6 +41,7 @@ async function loadData() {
   const productId = url.split('/')[2];
 
   const product = await Api.get('/api/products', productId);
+  productTitle.innerText = product.title;
   return product;
 }
 
