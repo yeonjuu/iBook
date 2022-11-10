@@ -9,7 +9,10 @@ export class ProductModel {
   }
 
   findById(productId) {
-    return Product.findOne({ _id: productId });
+    return Product.findOne({ _id: productId }).populate(
+      'category',
+      '_id, name'
+    );
   }
 
   findByCategoryId(categoryId) {
