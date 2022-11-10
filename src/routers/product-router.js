@@ -108,8 +108,16 @@ productRouter.put('/:productId', adminCheck, async function (req, res, next) {
 
     const productId = req.params.productId;
 
-    const { title, author, price, publisher, images, description, rate } =
-      req.body;
+    const {
+      title,
+      author,
+      price,
+      publisher,
+      images,
+      description,
+      rate,
+      categoryId,
+    } = req.body;
 
     const productInfoRequired = { productId };
 
@@ -123,6 +131,7 @@ productRouter.put('/:productId', adminCheck, async function (req, res, next) {
       ...(images && { images }),
       ...(description && { description }),
       ...(rate && { rate }),
+      ...(categoryId && { category: categoryId }),
     };
 
     // 상품 정보를 업데이트함.
