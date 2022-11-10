@@ -198,6 +198,7 @@ function inputPrice(cartItem) {
 }
 
 function clickDelBtn(cartItem) {
+  console.log(cartItem);
   const id = cartItem.id;
   const totalPrice1 = cartItem.querySelector('.totalPrice');
   const selCheck = cartItem.querySelector('.selected');
