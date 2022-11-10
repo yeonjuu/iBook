@@ -55,14 +55,14 @@ export function getProductAddTemplate(h2) {
     </div>
     <div class="right">
       <span>제목</span>
-      <input type="text" name="title" class="title" required /><br />
+      <input type="text" name="title" class="title input" required /><br />
       <span>작가</span>
-      <input type="text" name="author" class="author" required /><br />
+      <input type="text" name="author" class="author input" required /><br />
       <span>출판사</span>
       <input
         type="text"
         name="publisher"
-        class="publisher"
+        class="publisher input"
         required
       /><br />
       <span>가격</span>
@@ -70,7 +70,7 @@ export function getProductAddTemplate(h2) {
         type="number"
         min="0"
         name="price"
-        class="price"
+        class="price input"
         required
       /><br />
       <span>카테고리</span>
@@ -83,7 +83,7 @@ export function getProductAddTemplate(h2) {
       <textarea
         name="description"
         cols="50"
-        class="description"
+        class="description input"
         required
       ></textarea>
       <button type="submit" id="submit-info">저장</button>
