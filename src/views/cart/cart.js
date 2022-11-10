@@ -24,7 +24,7 @@ function template(img, name, price, count, id) {
       <button class="select"></button>
     </div>
     <div class="imgBox">
-      <img class="bookImg" src="smp1.jpg" />
+      <img src=${img} class="bookImg"/>
     </div>
       <div class="info">
         <div class="bookName">${name}</div>
