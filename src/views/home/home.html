@@ -5,12 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>iBook</title>
     <!-- 아이콘 -->
-    <link
-      rel="icon"
-      type="image/png"
-      sizes="16x16"
-      href="../pageLogo.png"
-    />
+    <link rel="icon" type="image/png" sizes="16x16" href="../pageLogo.png" />
     <!-- bulma css -->
     <link
       rel="stylesheet"
@@ -65,7 +60,9 @@
           <ul class="headerMenu" id="navbar">
             <li id="login"><a href="/login">로그인</a></li>
             <li id="logout" class="hidden"><a href="/">로그아웃</a></li>
-            <li id="adminPage" class="hidden"><a href="../admin/admin.html">관리자 페이지</a></li>
+            <li id="adminPage" class="hidden">
+              <a href="/admin">관리자 페이지</a>
+            </li>
             <li id="edit" class="hidden">
               <a href="/edit">회원정보수정</a>
             </li>
@@ -91,8 +88,7 @@
       </div>
     </nav>
 
-    <ul id="categoryMenu">
-    </ul>
+    <ul id="categoryMenu"></ul>
 
     <div class="mainBanner">
       <div class="mainBannerImage"></div>
