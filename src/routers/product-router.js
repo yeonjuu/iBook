@@ -72,7 +72,6 @@ productRouter.get('/', async function (req, res, next) {
   try {
     const categoryId = req.query.categoryId;
     let products;
-    console.log(categoryId);
     if (categoryId) {
       products = await productService.getProductsByCategoryId(categoryId);
     } else {
