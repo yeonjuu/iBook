@@ -57,14 +57,14 @@ function passwordHtml() {
 
 function productTemplate(img, title, price, count, id) {
   return `<li class="product" id=${id}>
-    <div>
-      <img src=${img} />
+    <div class="bookImageBox">
+      <img src=${img} class="bookImage" />
     </div>
     <div id="productInfo">
       <div>${title}</div>
       <div class="qty">${count}</div>
     </div>
-    <div>
+    <div class="priceInfo">
       <p>${useful.addCommas(price * count)}</p>
       <p>원</p>
     </div>
@@ -102,7 +102,7 @@ function buy(a) {
   Api.post(`/api/orders/`, data);
   localStorage.removeItem('carts');
   localStorage.removeItem('cart');
-  // location.replace('/orderComplete');
+  location.replace('/orderComplete');
   //   if (userCheck) {
   //   } else {
   //     if (checkPassword.value === password.value) {
@@ -202,7 +202,9 @@ function renderPrice() {
     deliveryPrice = 3000;
   }
   delivery.innerHTML = `${deliveryPrice}원`;
-  totalPrice.innerHTML = `${useful.addCommas(totalPriceValue + deliveryPrice)}`;
+  totalPrice.innerHTML = `${useful.addCommas(
+    totalPriceValue + deliveryPrice
+  )}원`;
 }
 
 function delay(ms) {

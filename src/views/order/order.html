@@ -5,13 +5,72 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="order.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
+    />
     <script src="order.js" type="module" defer></script>
     <title>Order</title>
   </head>
   <body>
-    <header></header>
-    <main>
-      <span>주문</span>
+    <header>
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="container mt-3">
+          <div class="navbar-brand">
+            <!--햄버거 메뉴-->
+
+            <!-- <nav id="navigation">
+                <div class="hamburger">
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </div>
+    
+                <ul id="hamburgerMenu" class="hidden"></ul>
+              </nav> -->
+
+            <!---->
+
+            <a class="mainLogo" href="/">
+              <!-- <span class="has-text-link">IBOOK</span> -->
+              <img class="bookLogo" src="../main-logo.png" />
+            </a>
+          </div>
+
+          <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
+            <ul class="headerMenu" id="navbar">
+              <li id="login"><a href="/login">로그인</a></li>
+              <li id="logout" class="hidden"><a href="/">로그아웃</a></li>
+              <li id="adminPage" class="hidden">
+                <a href="/admin">관리자 페이지</a>
+              </li>
+              <li id="edit" class="hidden">
+                <a href="/edit">회원정보수정</a>
+              </li>
+              <li id="seeOrder" class="hidden">
+                <a href="/order">주문정보조회</a>
+              </li>
+
+              <li id="register">
+                <a href="/register"
+                  ><i class="fa-solid fa-user-plus"></i>회원가입</a
+                >
+              </li>
+              <li>
+                <a href="/cart" aria-current="page">
+                  <span class="icon">
+                    <i class="fas fa-cart-shopping"></i>
+                  </span>
+                  <span>카트</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main class="main">
+      <div class="orderAndBuy">주문/결제</div>
       <form class="Info">
         <div class="InfoBox">
           <div class="ordererInfoBox InfoBoxes">
@@ -20,21 +79,22 @@
             </div>
             <div class="ordererInfoContents">
               <div class="orderer inputSort">
-                <div><strong>주문자</strong></div>
-                <div>
+                <label class="label">주문자</label>
+                <div class="control">
                   <input
                     id="orderer"
+                    class="input is-link is-rounded"
                     type="text"
-                    placeholder="이름을 입력하세요"
-                    name="name"
+                    placeholder="이름을 입력해 주세요"
                     required
                   />
                 </div>
               </div>
               <div class="email inputSort">
-                <div><strong>email</strong></div>
+                <label class="label">Email</label>
                 <div>
                   <input
+                    class="input is-link is-rounded"
                     id="email"
                     type="email"
                     placeholder="메일을 입력하세요"
@@ -44,10 +104,11 @@
                 </div>
               </div>
               <div class="phoneNumber inputSort">
-                <div><strong>연락처</strong></div>
+                <label class="label">연락처</label>
                 <div>
                   <input
                     id="phoneNumber"
+                    class="input is-link is-rounded"
                     maxlength="13"
                     type="text"
                     placeholder="연락처를 입력하세요"
@@ -64,9 +125,10 @@
             </div>
             <div class="deliveryInfoContents">
               <div class="receiver inputSort">
-                <div><strong>수령인</strong></div>
+                <label class="label">수령인</label>
                 <div>
                   <input
+                    class="input is-link is-rounded"
                     id="receiver"
                     type="text"
                     placeholder="이름을입력하세요"
@@ -75,10 +137,10 @@
                 </div>
               </div>
               <div class="adress inputSort">
-                <div><strong>주소</strong></div>
+                <label class="label">주소</label>
                 <div>
                   <input
-                    class="address"
+                    class="input is-link is-rounded address"
                     type="text"
                     placeholder="주소를 입력하세요"
                     name="address"
@@ -87,9 +149,10 @@
                 </div>
               </div>
               <div class="detailAdress inputSort">
-                <div><strong>상세주소</strong></div>
+                <label class="label">상세주소</label>
                 <div>
                   <input
+                    class="input is-link is-rounded"
                     id="detailAddress"
                     type="text"
                     placeholder="상세주소를 입력하세요"
@@ -109,19 +172,19 @@
           </div>
         </div>
         <div class="priceInfoBox">
-          <div>
+          <div class="center">
             <p>상품금액</p>
             <p class="productPrice"></p>
           </div>
-          <div>
+          <div class="center">
             <p>배송비</p>
             <p class="deliveryPrice"></p>
           </div>
-          <div>
+          <div class="center">
             <p>총 결제금액</p>
             <p class="totalPrice"></p>
           </div>
-          <div>
+          <div class="center">
             <p>동의</p>
             <input type="checkbox" required />
           </div>
@@ -130,6 +193,31 @@
       </form>
       <div class="ordererInfoBox"></div>
     </main>
+    <footer>
+      <div class="footerbody">
+        <div class="footerCompany">IBook</div>
+        <div class="businessInfo">사업자 정보</div>
+        <div class="footerContents">
+          <a href="#"><span>이용약관</span></a>
+          <a href="#"><span>개인정보처리방침</span></a>
+          <a href="#"><span>청소년보호정책</span></a>
+          <a href="#"><span>대량주문안내</span></a>
+          <a href="#"><span>채용공고</span></a>
+        </div>
+        <div class="businessDetailOne">
+          <span>대표이사 : iiiiii</span>
+          <span>서울특별시 종로구 종로 1</span>
+          <span>사업자등록번호 : 102-88-11234</span>
+        </div>
+        <div class="businessDetailTwo">
+          <span>대표전화 : 1234-1234(발신자 부담전화)</span>
+          <span>FAX : 0123-456-7899(지역번호 공통)</span>
+          <span>서울시 서울특별시 통신판매업신고번호 : 제 653호 </span>
+          <button>사업자 정보 확인</button>
+        </div>
+        <div class="finalFooter">©I BOOK CENTRE</div>
+      </div>
+    </footer>
     <script src="order.js" type="module"></script>
   </body>
 </html>
