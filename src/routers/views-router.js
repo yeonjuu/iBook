@@ -15,6 +15,7 @@ viewsRouter.use('/products', serveStatic('product'));
 viewsRouter.use('/products/:productId', serveStatic('product'));
 viewsRouter.use('/cart', serveStatic('cart'));
 viewsRouter.use('/order', serveStatic('order'));
+viewsRouter.use('/orderComplete', serveStatic('orderComplete'));
 viewsRouter.use('/category/:categoryId', serveStatic('productsList'));
 
 viewsRouter.use('/admin', serveStatic('admin'));
