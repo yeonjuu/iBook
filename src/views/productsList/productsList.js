@@ -1,4 +1,5 @@
 import * as Api from '/api.js';
+// import { addCarts, orderProduct } from '/product.js';
 
 const booksList = document.querySelector(".booksList");
 const categoryName = document.querySelector(".categoryName");
@@ -66,28 +67,73 @@ async function showProductsList() {
             </div>
 
             <div class="buttons">
-            <button id="cartBtn">장바구니</button>
-            <button id="buyBtn">구매하기</button>
+            <button class="${productsList[i]._id}" id="cartBtn">장바구니</button>
+            <button class="${productsList[i]._id}" id="buyBtn">구매하기</button>
             </div>
         </div>
         <div class="bottomLine"></div>
         `;
-        // <div class="booksImage"><a href="/products/${productsList[i]._id}"><img src="${productsList[i].images[0]}"/></a></div>
 
 
         booksList.insertAdjacentHTML('beforeend', toShow);
     };
 
     //장바구니 버튼
-    // const cartBtn = document.querySelector("#cartBtn");
+    const cartBtn = document.querySelectorAll("#cartBtn");
 
+    async function cartHandler(e) {
+      const id = e.target.classList[0];
+      const product = await Api.get('/api/products', id);
 
-    // cartBtn.addEventListener("click", cartHandler);
+      let carts = JSON.parse(localStorage.getItem('carts')) || {};
+      carts = new Map(Object.entries(carts));
+
+      const cartItem = {
+        title: product.title,
+        price: product.price,
+        count: 1,
+        totalPrice: product.price,
+        imgaes: product.images,
+      };
+
+      if (carts.has(id)) {
+        localStorage.setItem('carts', JSON.stringify(Object.fromEntries(carts)));
+      } else {
+        carts.set(id, cartItem);
+        localStorage.setItem('carts', JSON.stringify(Object.fromEntries(carts)));
+      }
+      const isCart = confirm('장바구니로 이동하시겠습니까?');
+      if (isCart) {
+        window.location.href = '/cart';
+      }
+
+    };
+
+    cartBtn.forEach((i) => i.addEventListener("click", cartHandler));
 
 
     //구매 버튼
-    // const buyBtn = document.querySelector("#buyBtn");
+    const buyBtn = document.querySelectorAll("#buyBtn");
 
+    async function buyHandler(e) {
+      const id = e.target.classList[0];
+      const product = await Api.get('/api/products', id);
+
+      const cartItem = {
+        id,
+        title: product.title,
+        price: product.price,
+        count: 1,
+        totalPrice: product.price,
+        images: product.images,
+      };
+      console.log(cartItem);
+      localStorage.setItem('cart', JSON.stringify(cartItem));
+      window.location.href = '/order';
+
+    }
+
+    buyBtn.forEach((i) => i.addEventListener("click", buyHandler));
     
     }
 
