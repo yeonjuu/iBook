@@ -1,4 +1,5 @@
 import * as Api from '/api.js';
+import * as useful from '/useful-functions.js';
 
 const cartList = document.querySelector('.li');
 const productPrice = document.querySelector('.productPrice');
@@ -64,7 +65,7 @@ function productTemplate(img, title, price, count, id) {
       <div class="qty">${count}</div>
     </div>
     <div>
-      <p>${price * count}</p>
+      <p>${useful.addCommas(price * count)}</p>
       <p>원</p>
     </div>
   </li>`;
@@ -73,6 +74,7 @@ function productTemplate(img, title, price, count, id) {
 function buy(a) {
   a.preventDefault();
   const products = document.querySelectorAll('.product');
+
   const count = document.querySelectorAll('.qty');
   let qty = 0;
   const d = [];
@@ -85,7 +87,7 @@ function buy(a) {
       qty: Number(count[idx].innerHTML),
     });
   });
-  console.log(user);
+
   let data = {
     name: orderer.value,
     userId: user._id || 'none',
@@ -97,11 +99,10 @@ function buy(a) {
     products: productsInfo,
   };
 
-  console.log(data);
   Api.post(`/api/orders/`, data);
   localStorage.removeItem('carts');
   localStorage.removeItem('cart');
-  location.replace('/orderComplete');
+  // location.replace('/orderComplete');
   //   if (userCheck) {
   //   } else {
   //     if (checkPassword.value === password.value) {
@@ -122,7 +123,6 @@ async function revise(e) {
     alert('배송이 시작된 주문건 입니다 고객센터에 문의 해주시길 바랍니다');
     localStorage.removeItem('orderId');
   }
-  console.log(detailAddress.value);
   let address1 = address.value + detailAddress.value;
   let data = {
     name: orderer.value,
@@ -134,7 +134,6 @@ async function revise(e) {
     qty: order.qty,
     products: order.products,
   };
-  console.log(order._id);
   Api.put(`/api/orders/`, order._id, data);
   localStorage.removeItem('orderId');
   location.replace('/orderChange');
@@ -142,7 +141,6 @@ async function revise(e) {
 
 function rednerCarts() {
   if (cart === null) {
-    console.log(carts);
     // cartList.insertAdjacentElement(
     //   'beforeend',
     //   carts
@@ -175,7 +173,7 @@ function rednerCarts() {
   } else {
     cartList.insertAdjacentHTML(
       'beforeend',
-      productTemplate(cart.images, cart.title, cart.price, cart.count)
+      productTemplate(cart.images, cart.title, cart.price, cart.count, cart.id)
     );
     totalPriceValue += cart.price * cart.count;
   }
@@ -199,12 +197,12 @@ function rednerReviseOrder(order) {
   );
 }
 function renderPrice() {
-  productPrice.innerHTML = `${totalPriceValue}원`;
+  productPrice.innerHTML = `${useful.addCommas(totalPriceValue)}원`;
   if (totalPriceValue < deliveryMin) {
     deliveryPrice = 3000;
   }
   delivery.innerHTML = `${deliveryPrice}원`;
-  totalPrice.innerHTML = `${totalPriceValue + deliveryPrice}`;
+  totalPrice.innerHTML = `${useful.addCommas(totalPriceValue + deliveryPrice)}`;
 }
 
 function delay(ms) {
@@ -231,7 +229,6 @@ if (reviseOrder) {
   Info.addEventListener('submit', revise);
 } else if (token) {
   user = await loadUserInfo();
-  console.log(user);
 
   orderer.value = user.fullName;
   email.value = user.email;
