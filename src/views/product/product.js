@@ -179,3 +179,17 @@ function logoutHandler() {
 }
 
 logout.addEventListener('click', logoutHandler);
+
+
+//카테고리 메뉴 정보 받기
+getCategoryData();
+
+async function getCategoryData() {
+  const category = await Api.get('/api/categories');
+
+  for(let i=0; i < category.length; i++) {
+  const showCategory = `<li><a href="/category/${category[i]._id}">${category[i].name}</a></li>`;
+  categoryMenu.insertAdjacentHTML('beforeend', showCategory);
+  }
+
+}
