@@ -17,7 +17,7 @@
   margin-left: 15px;
   font-size: 18px;
   font-weight: bold;
-  color: black;
+  color: rgba(0,0,0,0.8);
 }
 
 .mainBanner {
@@ -45,6 +45,18 @@
   /* background-color: floralwhite; */
 }
 
+.displayBooks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rowBooks a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 600;
+}
+
 #firstRow,
 #secondRow,
 #thirdRow {
@@ -63,7 +75,7 @@
 #thirdRow div {
   width: 180px;
   height: 250px;
-  background-color: hotpink;
+  background-color: aliceblue;
 }
 
 #firstRow div img,

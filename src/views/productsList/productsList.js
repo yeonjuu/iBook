@@ -1,5 +1,5 @@
 import * as Api from '/api.js';
-// import { addCarts, orderProduct } from '/product.js';
+import * as useful from '/useful-functions.js';
 
 const booksList = document.querySelector(".booksList");
 const categoryName = document.querySelector(".categoryName");
@@ -60,7 +60,7 @@ async function showProductsList() {
             
             <div class="booksInformation">
             <h3 class="title"><a href="/products/${productsList[i]._id}">${productsList[i].title}</a></h3>
-            <h4 class="price">${productsList[i].price}원</h4>
+            <h4 class="price">${useful.addCommas(productsList[i].price)}원</h4>
             <h5 class="author">저자 : ${productsList[i].author}</h5>
             <h5 class="publisher">출판사 : ${productsList[i].publisher}</h5>
             <h5 class="description">${productsList[i].description}</h5>
