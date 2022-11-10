@@ -13,7 +13,8 @@ async function getCategoryData() {
   const category = await Api.get('/api/categories');
 
   for(let i=0; i < category.length; i++) {
-  const showCategory = `<li><a href="/category/${category[i]._id}">${category[i].name}</a></li>`;
+  const showCategory = `
+  <li><a href="/category/${category[i]._id}">${category[i].name}</a></li>`;
   categoryMenu.insertAdjacentHTML('beforeend', showCategory);
   }
 
@@ -26,31 +27,33 @@ getProductData();
 async function getProductData() {
   const product = await Api.get('/api/products');
 
-  //console.log(product);
-
   const bookImage = await product.map((e) => e.images[0]);
   const bookTitle = product.map((e) => e.title);
   const bookId = product.map((e) => e._id);
 
-  // console.log(bookImage);
-  // console.log(bookTitle);
-  // console.log(bookId);
-
   //메인배너 책 정보 뿌려주기
   for (let i = 0; i < 5; i++) {
-    const firstRowBooks = `<div><a href="/products/${bookId[i]}">
+    const firstRowBooks = `<div class="rowBooks"><a href="/products/${bookId[i]}">
+        <div class="displayBooks">
         <img src=${bookImage[i]} />
         <span>${bookTitle[i]}</span>
+        </div>
+
         </a></div>`;
 
-    const secondRowBooks = `<div><a href="/products/${bookId[i+5]}">
+    const secondRowBooks = `<div class="rowBooks"><a href="/products/${bookId[i+5]}">
+        <div class="displayBooks">
         <img src=${bookImage[i+5]} />
         <span>${bookTitle[i+5]}</span>
+        </div>
         </a></div>`; 
 
-    const thirdRowBooks = `<div><a href="/products/${bookId[i+10]}">
-        <img src=${bookImage[i+10]} />
-        <span>${bookTitle[i+10]}</span>
+    const thirdRowBooks = `<div class="rowBooks"><a href="/products/${bookId[i+10]}">
+       <div class="displayBooks">
+       <img src=${bookImage[i+10]} />
+       <span>${bookTitle[i+10]}</span>
+       </div>
+
         </a></div>`; 
     firstRow.insertAdjacentHTML('beforeend', firstRowBooks);
     secondRow.insertAdjacentHTML('beforeend', secondRowBooks);
