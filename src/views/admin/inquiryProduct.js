@@ -1,4 +1,5 @@
 import * as Api from '../api.js';
+
 import {
   serachTemplate,
   productTemplate,
@@ -76,7 +77,7 @@ async function renderProdcutList(products) {
         targetProduct.dataset.id
       );
       await update(curProduct);
-    } else if (target.classList.contains('delete')) {
+    } else if (target.classList.contains('del')) {
       //delete
       await del(targetProduct);
     }
