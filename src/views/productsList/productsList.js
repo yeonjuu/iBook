@@ -127,7 +127,7 @@ async function showProductsList() {
         totalPrice: product.price,
         images: product.images,
       };
-      console.log(cartItem);
+      //console.log(cartItem);
       localStorage.setItem('cart', JSON.stringify(cartItem));
       window.location.href = '/order';
 
