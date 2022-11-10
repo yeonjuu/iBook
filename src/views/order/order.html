@@ -8,15 +8,11 @@
     <script src="order.js" type="module" defer></script>
     <title>Order</title>
   </head>
-  <body class="hidden">
+  <body>
     <header></header>
     <main>
       <span>주문</span>
-      <form
-        class="Info"
-        action="http://localhost:5000/api/orders"
-        method="post"
-      >
+      <form class="Info">
         <div class="InfoBox">
           <div class="ordererInfoBox InfoBoxes">
             <div class="ordererInfo center">
@@ -40,7 +36,7 @@
                 <div>
                   <input
                     id="email"
-                    type="text"
+                    type="email"
                     placeholder="메일을 입력하세요"
                     name="email"
                     required
@@ -52,6 +48,7 @@
                 <div>
                   <input
                     id="phoneNumber"
+                    maxlength="13"
                     type="text"
                     placeholder="연락처를 입력하세요"
                     name="phone"

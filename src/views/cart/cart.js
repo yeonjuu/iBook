@@ -30,7 +30,8 @@ function template(img, name, price, count, id) {
         <div class="price">${price}</div>
       </div>
     <div class="countContainer">
-      <span class="totalPrice">${price * count} 원</span>
+      <span class="totalPrice">${price * count} </span>
+      <span>원</span>
       
       <div class="countBtn">
         <button class="minusBtn">-</button>
@@ -61,11 +62,17 @@ function addAllEvents() {
     if (checkList.length === 0) {
       alert('1개 이상의 상품은 필수입니다');
     } else {
+      const newCarts = new Map();
       checkList.forEach((val) => {
         const cartItem = carts.get(val);
-        console.log(cartItem);
+        newCarts.set(val, cartItem);
       });
-      // location.replace('/order');
+      localStorage.setItem(
+        'carts',
+        JSON.stringify(Object.fromEntries(newCarts))
+      );
+
+      location.replace('/order');
     }
   });
   allDelBtn.addEventListener('click', clickAllDelBtn);
@@ -109,22 +116,28 @@ function minusCount(cartItem) {
   const input = cartItem.querySelector('.count');
   const inputVal = input.value;
   const id = cartItem.id;
+  const selCheck = cartItem.querySelector('.selected');
   const totalPrice1 = cartItem.querySelector('.totalPrice');
   const price = cartItem.querySelector('.price');
 
   if (inputVal <= 1) {
-    return (totalPrice1.innerHTML = `${price.innerHTML} 원`);
+    return (totalPrice1.innerHTML = `${price.innerHTML} `);
   }
   input.value = Number(inputVal) - 1;
-  totalPrice1.innerHTML = `${Number(price.innerHTML) * Number(input.value)} 원`;
-  totalPriceValue = totalPriceValue - Number(price.innerHTML);
-  totalPrice.innerHTML = totalPriceValue;
+  totalPrice1.innerHTML = `${Number(price.innerHTML) * Number(input.value)} `;
+  if (selCheck !== null) {
+    totalPriceValue = totalPriceValue - Number(price.innerHTML);
+    totalPrice.innerHTML = totalPriceValue;
+  }
+
   setItem(id, 'minus');
 }
 
 function addCount(cartItem) {
   const input = cartItem.querySelector('.count');
   const inputVal = input.value;
+  const selCheck = cartItem.querySelector('.selected');
+  console.log(selCheck);
   const id = cartItem.id;
   const totalPrice1 = cartItem.querySelector('.totalPrice');
   const price = cartItem.querySelector('.price');
@@ -133,11 +146,12 @@ function addCount(cartItem) {
     input.value = 999;
   } else {
     input.value = Number(inputVal) + 1;
-    totalPrice1.innerHTML = `${
-      Number(price.innerHTML) * Number(input.value)
-    } 원`;
-    totalPriceValue = totalPriceValue + Number(price.innerHTML);
-    totalPrice.innerHTML = totalPriceValue;
+    totalPrice1.innerHTML = `${Number(price.innerHTML) * Number(input.value)} `;
+    if (selCheck !== null) {
+      totalPriceValue = totalPriceValue + Number(price.innerHTML);
+      totalPrice.innerHTML = totalPriceValue;
+    }
+
     setItem(id, 'plus');
   }
 }
@@ -146,9 +160,10 @@ function inputPrice(cartItem) {
   if (cartItem === undefined) {
     return;
   }
+
   const totalPrice1 = cartItem.querySelector('.totalPrice');
   const inputBox = cartItem.querySelector('.count');
-
+  const selCheck = cartItem.querySelector('.selected');
   const id = cartItem.id;
   const price = carts.get(id).price;
   inputBox.value = Number(inputBox.value);
@@ -157,77 +172,107 @@ function inputPrice(cartItem) {
   } else if (inputBox.value <= 0) {
     inputBox.value = 1;
   }
-
   const a =
     Number(price) * Number(inputBox.value) - Number(totalPrice1.innerHTML);
-  console.log(a);
-  if (a != 0) {
+
+  if (a != 0 && selCheck !== null) {
     totalPriceValue += a;
     totalPrice.innerHTML = totalPriceValue;
   }
-  totalPrice1.innerHTML = `${Number(price) * Number(inputBox.value)} 원`;
+  totalPrice1.innerHTML = `${Number(price) * Number(inputBox.value)} `;
   setItem(id, inputBox.value);
 }
 
 function clickDelBtn(cartItem) {
   const id = cartItem.id;
   const totalPrice1 = cartItem.querySelector('.totalPrice');
+  const selCheck = cartItem.querySelector('.selected');
   cartItem.style.display = 'none';
-
-  carts.delete(id);
-
-  localStorage.setItem('carts', JSON.stringify(Object.fromEntries(carts)));
-  totalPriceValue -= Number(totalPrice1.innerHTML);
-  totalPrice.innerHTML = totalPriceValue;
+  if (confirm('삭제 하시겠습니까?')) {
+    carts.delete(id);
+    if (selCheck !== null) {
+      totalPriceValue -= Number(totalPrice1.innerHTML);
+      totalPrice.innerHTML = totalPriceValue;
+    }
+    localStorage.setItem('carts', JSON.stringify(Object.fromEntries(carts)));
+  }
 }
 
 function clickSelBtn(cartItem) {
   const selectBtn = cartItem.querySelector('.select');
   const id = cartItem.id;
+  const count = cartItem.querySelector('.count').value;
+  const price = carts.get(id).price;
   if (selectBtn.classList.contains('selected')) {
     selectBtn.classList.remove('selected');
-
+    totalPriceValue -= count * price;
+    totalPrice.innerHTML = totalPriceValue;
     checkList = checkList.filter((val) => {
       return val != id;
     });
   } else {
     selectBtn.classList.add('selected');
     checkList.push(id);
+    totalPriceValue += count * price;
+    totalPrice.innerHTML = totalPriceValue;
   }
   console.log(checkList);
 }
 
-function clickSelDelBtn() {
-  console.log(checkList);
-  checkList.forEach((id) => {
-    carts.delete(id);
+function clickSelDelBtn(e) {
+  e.preventDefault();
+  if (confirm('삭제 하시겠습니까?')) {
+    checkList.forEach((id) => {
+      carts.delete(id);
 
-    localStorage.setItem('carts', JSON.stringify(Object.fromEntries(carts)));
-  });
+      localStorage.setItem('carts', JSON.stringify(Object.fromEntries(carts)));
+    });
+    location.reload();
+  }
 }
 
+function clickSelBtn2(cartItem, check) {
+  const selectBtn = cartItem.querySelector('.select');
+  const id = cartItem.id;
+  const count = cartItem.querySelector('.count').value;
+  const price = carts.get(id).price;
+  if (selectBtn.classList.contains('selected') || check === true) {
+    selectBtn.classList.remove('selected');
+    totalPriceValue -= count * price;
+    totalPrice.innerHTML = totalPriceValue;
+    checkList = checkList.filter((val) => {
+      return val != id;
+    });
+  } else {
+    selectBtn.classList.add('selected');
+    checkList.push(id);
+    totalPriceValue += count * price;
+    totalPrice.innerHTML = totalPriceValue;
+  }
+  console.log(checkList);
+}
 function allSelect(allCartItems) {
   if (selectAllBtn.classList.contains('selected')) {
     selectAllBtn.classList.remove('selected');
     checkList = [];
     allCartItems.forEach((cartItem) => {
-      const selectBtn = cartItem.querySelector('.select');
-      selectBtn.classList.remove('selected');
+      clickSelBtn2(cartItem, true);
     });
   } else {
     selectAllBtn.classList.add('selected');
     checkList = [];
     allCartItems.forEach((cartItem) => {
-      const selectBtn = cartItem.querySelector('.select');
-      const id = cartItem.id;
-      selectBtn.classList.add('selected');
-      checkList.push(id);
+      clickSelBtn2(cartItem, false);
     });
   }
 }
 
 function clickAllDelBtn(e) {
-  localStorage.removeItem('carts');
+  e.preventDefault();
+  if (confirm('삭제 하시겠습니까?')) {
+    localStorage.removeItem('carts');
+    location.reload();
+  }
 }
 
 function rednerCarts() {
@@ -241,7 +286,6 @@ function rednerCarts() {
         cartItem.count,
         cartItemId
       ) + '\n';
-    totalPriceValue += cartItem.price * cartItem.count;
   }
   cartList.insertAdjacentHTML('beforeend', tem);
 }
@@ -270,3 +314,5 @@ cartList.onmousedown = (event) => {
     eventCartItem = cartItem;
   }
 };
+
+allSelect(allCartItems);

@@ -85,6 +85,7 @@ function buy(a) {
       qty: Number(count[idx].innerHTML),
     });
   });
+  console.log(user);
   let data = {
     name: orderer.value,
     userId: user._id || 'none',
@@ -98,6 +99,8 @@ function buy(a) {
 
   console.log(data);
   Api.post(`/api/orders/`, data);
+  localStorage.removeItem('carts');
+  localStorage.removeItem('cart');
   location.replace('/orderComplete');
   //   if (userCheck) {
   //   } else {
@@ -134,7 +137,7 @@ async function revise(e) {
   console.log(order._id);
   Api.put(`/api/orders/`, order._id, data);
   localStorage.removeItem('orderId');
-  location.replace('/orderComplete');
+  location.replace('/orderChange');
 }
 
 function rednerCarts() {
@@ -217,7 +220,6 @@ async function loadOrderInfo() {
 }
 
 if (reviseOrder) {
-  body.classList.remove('hidden');
   user = await loadUserInfo();
   const order = await loadOrderInfo();
   submitBtn.innerHTML = '수정하기';
@@ -230,7 +232,7 @@ if (reviseOrder) {
 } else if (token) {
   user = await loadUserInfo();
   console.log(user);
-  body.classList.remove('hidden');
+
   orderer.value = user.fullName;
   email.value = user.email;
   phoneNumber.value = user.phoneNumber;
@@ -238,7 +240,6 @@ if (reviseOrder) {
   renderPrice();
   Info.addEventListener('submit', buy);
 } else {
-  body.classList.remove('hidden');
   //   ordererInfoContents.insertAdjacentHTML("beforeend", passwordHtml());
   password = document.querySelector('#password');
   checkPassword = document.querySelector('#checkPassword');
