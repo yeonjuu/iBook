@@ -4,6 +4,24 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- 폰트 추가 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Trispace:wght@200;300;400&display=swap"
+      rel="stylesheet"
+    />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script
+    defer
+    src="https://kit.fontawesome.com/9daa42bcef.js"
+    crossorigin="anonymous"
+    ></script>
+    <!-- bulma css -->
+    <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+    />
     <link rel="stylesheet" href="admin.css" />
     <link rel="stylesheet" href="inquiryProduct.css" />
     <script src="admin.js" type="module" defer></script>
@@ -14,15 +32,77 @@
     <title>관리자</title>
   </head>
   <body>
-    <header>s</header>
+    <header>
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+          <div class="container mt-3">
+            <div class="navbar-brand">
+              <!--햄버거 메뉴-->
+    
+              <!-- <nav id="navigation">
+                <div class="hamburger">
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                </div>
+    
+                <ul id="hamburgerMenu" class="hidden"></ul>
+              </nav> -->
+    
+              <!---->
+    
+              <a class="mainLogo" href="/">
+                <!-- <span class="has-text-link">IBOOK</span> -->
+                <img class="bookLogo" src="/api/../main-logo.png" />
+              </a>
+            </div>
+    
+            <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
+              <ul class="headerMenu" id="navbar">
+                <li id="login"><a href="/login">로그인</a></li>
+                <li id="logout" class="hidden"><a href="/">로그아웃</a></li>
+                <li id="adminPage" class="hidden"><a href="/admin">관리자 페이지</a></li>
+                <li id="edit" class="hidden">
+                  <a href="/edit">회원정보수정</a>
+                </li>
+                <li id="seeOrder" class="hidden">
+                  <a href="/order">주문정보조회</a>
+                </li>
+    
+                <li id="register">
+                  <a href="/register"
+                    ><i class="fa-solid fa-user-plus"></i>회원가입</a
+                  >
+                </li>
+                <li>
+                  <a href="/cart" aria-current="page">
+                    <span class="icon">
+                      <i class="fas fa-cart-shopping"></i>
+                    </span>
+                    <span>카트</span>
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </div>
+      </nav>
+    </header>
+
+    <ul id="categoryMenu">
+      <li class="products">도서조회</li>
+      <li class="add">도서추가</li>
+      <li class="category">카테고리</li>
+      <li class="orders">주문관리</li>
+    </ul>
+
     <div class="main-container">
-      <div class="menu-bar">
+
+      <!-- <div class="menu-bar">
         <span>관리자님</span>
         <div class="product-menu">
           상품
           <ul>
-            <li class="products">도서 조회</li>
-            <li class="add">도서 추가</li>
+            <li class="products">도서조회</li>
+            <li class="add">도서추가</li>
             <li class="category">카테고리 관리</li>
           </ul>
         </div>
@@ -31,7 +111,8 @@
           <ul>
             <li class="orders">조회</li>
           </ul>
-        </div>
+        </div> -->
+        
         <!-- <div class="user-menu">
           사용자
           <ul>
@@ -39,10 +120,38 @@
             <li class="management">관리</li>
           </ul>
         </div> -->
-      </div>
+      <!-- </div> -->
+
       <div class="content">
         <div class="landing">사용하실 메뉴바를 클릭해주세요 :)</div>
       </div>
+
     </div>
+
+    <footer>
+      <div class="footerbody">
+        <div class="footerCompany">IBook</div>
+        <div class="businessInfo">사업자 정보</div>
+        <div class="footerContents">
+          <a href="#"><span>이용약관</span></a>
+          <a href="#"><span>개인정보처리방침</span></a>
+          <a href="#"><span>청소년보호정책</span></a>
+          <a href="#"><span>대량주문안내</span></a>
+          <a href="#"><span>채용공고</span></a>
+        </div>
+        <div class="businessDetailOne">
+          <span>대표이사 : iiiiii</span>
+          <span>서울특별시 종로구 종로 1</span>
+          <span>사업자등록번호 : 102-88-11234</span>
+        </div>
+        <div class="businessDetailTwo">
+          <span>대표전화 : 1234-1234(발신자 부담전화)</span>
+          <span>FAX : 0123-456-7899(지역번호 공통)</span>
+          <span>서울시 서울특별시 통신판매업신고번호 : 제 653호 </span>
+          <button>사업자 정보 확인</button>
+        </div>
+        <div class="finalFooter">©I BOOK CENTRE</div>
+      </div>
+    </footer>
   </body>
 </html>

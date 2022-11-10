@@ -14,8 +14,10 @@ async function categoryHandler() {
     <h2>카테고리 관리</h2>
     <div class="categoryDiv">
         <div class ="addCategory">
-            <input id="addCategoryInput" class="input categoryInput" type="text" placeholder="Category">
-            <button id="addBtn" class="button is-primary">추가</button>
+            <div class="addCategoryInputDiv">
+            <input id="addCategoryInput" class="input categoryInput" type="text" placeholder="카테고리명을 입력해주세요">
+            </div>
+            <button id="addBtn" class="button is-primary">추가하기</button>
         </div>
 
         <div class="editDeleteCategory">
@@ -32,9 +34,12 @@ async function categoryHandler() {
     for(let i=0; i < categoryList.length; i++) {
         const editDeleteCategoryLists = `
         <div class="editDeleteDiv" id="${categoryList[i]._id}">
+
         <input class="input categoryInput" type="text" value="${categoryList[i].name}">
-        <button class="deleteBtn button is-danger">수정</button>
-        <button class="deleteBtn button is-danger">❌</button>
+
+        <button class="editBtn button is-info">수정</button>
+        <button class="deleteBtn button is-danger">삭제</button>
+
         </div>`;
         editDeleteCategory.insertAdjacentHTML('beforeend', editDeleteCategoryLists);
     };
@@ -44,6 +49,7 @@ async function categoryHandler() {
         const name = addCategoryInput.value;
         const data = { name };
         await Api.post('/api/categories', data);
+        alert("추가되었습니다!");
 
         categoryHandler();
     };
@@ -52,22 +58,34 @@ async function categoryHandler() {
 
     //카테고리 수정 삭제
     async function deleteEditHandler(e) {
-        if(e.target.innerText === '❌') {
-            const toDleteCategory = e.target.parentElement;
-            toDleteCategory.remove();
+        if(e.target.innerText === '삭제') {
+            const name = e.target.parentElement.childNodes[1].value;
 
-            const toDeleteCategoryId = e.target.parentElement.id;
-            await Api.delete('/api/categories', toDeleteCategoryId);
-            alert("삭제되었습니다!");
+            let deleteConfirm = window.confirm(`카테고리 "${name}" 을/를 삭제 하시겠습니까?`);
+
+            if(deleteConfirm) {
+                const toDleteCategory = e.target.parentElement;
+                toDleteCategory.remove();
+    
+                const toDeleteCategoryId = e.target.parentElement.id;
+                await Api.delete('/api/categories', toDeleteCategoryId);
+                alert("삭제되었습니다!");
+            }
+
         };
 
         if(e.target.innerText === '수정') {
             const name = e.target.parentElement.childNodes[1].value;
 
-            const data = { name };
-            const toEditCategoryId = e.target.parentElement.id;
-            await Api.put('/api/categories', toEditCategoryId, data);
-            alert("수정되었습니다!");
+            let editConfirm = window.confirm(`카테고리 "${name}" 을/를 수정 하시겠습니까?`);
+
+            if(editConfirm) {
+                const data = { name };
+                const toEditCategoryId = e.target.parentElement.id;
+                await Api.put('/api/categories', toEditCategoryId, data);
+                alert("수정되었습니다!");
+            }
+
         };
 
     };
