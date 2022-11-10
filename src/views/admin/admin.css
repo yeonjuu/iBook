@@ -20,9 +20,10 @@
 }
 
 #categoryMenu li {
-  margin-right: 15px;
+  margin-left: 15px;
   font-size: 18px;
-  color: black;
+  font-weight: bold;
+  color: rgba(0,0,0,0.8);
 }
 
 
