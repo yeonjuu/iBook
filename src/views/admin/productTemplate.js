@@ -1,3 +1,5 @@
+import { addCommas } from '../useful-functions.js';
+
 export function serachTemplate(h2) {
   return `
           <h2>${h2}</h2>
@@ -17,12 +19,16 @@ export function productTemplate(product) {
   <div class="product-image">
     <img src="${images[0]}" alt="${title} 대표이미지" />
   </div>
-  제목 : <span class="title">${title}</span> 작가 :
-  <span class="author">${author}</span> 출판사 :
-  <span class="publisher">${publisher}</span> 가격 :
-  <span class="price">${price}</span>
+  <div class="info-wrap">
+  제목 : <span class="title">${title}</span>
+  작가 : <span class="author">${author}</span> 
+  출판사 : <span class="publisher">${publisher}</span> 
+  가격 :<span class="price">${addCommas(price)}원</span>
+  </div>
+  <div class= "btn-wrap">
   <input type="button" value="수정" class="update" />
-  <input type="button" value="삭제" class="delete" />
+  <input type="button" value="삭제" class="del" />
+  </div>
 </div>
     `;
 }
