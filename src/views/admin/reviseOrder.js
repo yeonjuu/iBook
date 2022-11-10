@@ -60,6 +60,7 @@ function changeMap(orders) {
 
 async function allOrderListRender() {
   ordersInfo = await Api.get('/api/orders');
+  console.log(ordersInfo);
   mapOrdersInfo = changeMap(ordersInfo);
   render(ordersInfo);
 }
@@ -125,14 +126,14 @@ async function search() {
 landing.onclick = (event) => {
   if (event.target.classList.contains('orderDel')) {
     const target = event.target.closest('.orderInfo');
-    if (mapOrdersInfo.get(target.dataset.id).status === '주문취소') {
+    if (confirm('삭제 하시겠습니까?')) {
       delOrder(target);
-    } else {
-      alert('주문 취소된 건만 삭제 가능합니다');
     }
   } else if (event.target.classList.contains('revise')) {
-    const allOrder = document.querySelectorAll('.orderInfo');
-    reviseOrder(allOrder);
+    if (confirm('수정 하시겠습니까')) {
+      const allOrder = document.querySelectorAll('.orderInfo');
+      reviseOrder(allOrder);
+    }
   } else if (event.target.classList.contains('searchAll2')) {
     allOrderListRender();
   } else if (event.target.classList.contains('searchBtn')) {
