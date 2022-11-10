@@ -2,7 +2,10 @@
   box-sizing: border-box;
   font-family: 'Trispace', sans-serif;
 }
-
+body {
+  width: 90%;
+  margin: 0 auto;
+}
 .bookLogo {
   width: 150px;
   height: 90px;
@@ -10,28 +13,29 @@
 
 .hidden {
   display: none !important;
-
 }
 
 /*상단 메뉴*/
 #categoryMenu {
   margin-left: 5rem;
   display: flex;
+  height: 50px;
 }
 
 #categoryMenu li {
-  margin-left: 15px;
+  margin: auto 0;
+  margin-right: 15px;
   font-size: 18px;
-  font-weight: bold;
-  color: rgba(0,0,0,0.8);
+  color: black;
+  cursor: pointer;
 }
-
 
 /*메인영역*/
 .landing {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 90%;
 }
 
 .landing h2 {
@@ -41,27 +45,20 @@
 .main-container {
   width: 90%;
   height: 130vh;
-  
   display: flex;
   justify-content: center;
   margin: 2rem auto;
 }
 
-/* .menu-bar {
-  width: 20%;
-  height: 100%;
-  background-color: rgb(179, 179, 179);
-  padding: 20px;
-} */
-
 .content {
   padding-top: 1rem;
   width: 100%;
+  max-width: 970px;
+  min-width: 500px;
   display: flex;
   justify-content: center;
   /* background-color: #f7f7f7; */
 }
-
 
 /*푸터*/
 .footerbody {
@@ -110,7 +107,6 @@
 .finalFooter {
   margin-bottom: 3rem;
 }
-
 
 /*카테고리 수정*/
 

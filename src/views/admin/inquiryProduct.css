@@ -1,22 +1,116 @@
-div.product {
-  background-color: #ffffff;
-  width: 80%;
-  height: 200px;
-  padding: 30px;
+div.search-wrap {
+  width: 70%;
+  height: 50px;
+  margin-bottom: 1em;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
 }
-
-div.product-image {
+div.search-wrap > .searchInput {
+  width: 70%;
+  height: 35px;
+  border-radius: 7px;
+  font-size: 1em;
+  text-indent: 15px;
+  border: 2px solid #bebebe;
+}
+div.search-wrap > input[type='button'] {
   width: 80px;
-  height: 120px;
-  background-color: #ff7070;
-  display: inline-block;
+  height: 35px;
+  border-radius: 5px;
+  border: none;
+  background-color: #bebebe;
+  font-size: medium;
+}
+div.search-wrap > input[type='button']:hover {
+  background-color: #3f8ed0;
+  color: antiquewhite;
+  font-size: medium;
 }
 
+div.list {
+  height: 900px;
+  overflow: auto;
+}
+.list::-webkit-scrollbar {
+  display: none;
+}
+
+div.product {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  position: relative;
+  width: 100%;
+  height: 200px;
+  padding: 20px;
+}
+div.product::after {
+  position: absolute;
+  left: 0px;
+  bottom: 2px;
+  content: '';
+  width: 100%;
+  height: 3px;
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+}
+div.product-image {
+  width: 110px;
+  height: 100%;
+  background-color: #ff7070;
+}
 div.product-image > img {
   width: 100%;
   height: 100%;
 }
+div.info-wrap {
+  width: 580px;
+  padding: 10px 0 0 20px;
+}
+div.info-wrap > span {
+  display: block;
+  cursor: default;
+}
+div.info-wrap > .title {
+  margin-bottom: 1rem;
+  font-size: large;
+}
+div.info-wrap > .title:hover {
+  text-decoration: underline;
+}
+div.btn-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
 
-.title {
+div.btn-wrap > .update {
+  width: 90px;
+  height: 40px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #3f8ed0;
+  color: antiquewhite;
+  font-size: medium;
   font-weight: bold;
+  border-style: none;
+}
+
+div.btn-wrap > .del {
+  width: 90px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: #f14668;
+  color: antiquewhite;
+  font-size: medium;
+  font-weight: bold;
+  border-style: none;
+}
+div.btn-wrap > .update:hover {
+  background-color: #3274aa;
+}
+div.btn-wrap > .del:hover {
+  background-color: #bd3651;
 }
