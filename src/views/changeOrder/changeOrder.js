@@ -4,7 +4,7 @@ import * as useful from '/useful-functions.js';
 function orderListTemplate(id, bookList, totalPrice, orderStatus) {
   return `<li class="orderInfo" data-id=${id}>
     <div class="orderNumber">
-      <div>주문번호</div>
+      <div class="orderNum">주문번호</div>
       <div>${id}</div>
     </div>
     <div class="orderDetail">
@@ -17,7 +17,7 @@ function orderListTemplate(id, bookList, totalPrice, orderStatus) {
     </div>
     <div class="orderStatus">
       <div>주문상태</div>
-      <div>${orderStatus}</div>
+      <span class="tag is-info is-medium">${orderStatus}</span>
     </div>
   </li>`;
 }
