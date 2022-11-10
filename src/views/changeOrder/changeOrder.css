@@ -14,7 +14,7 @@ ul {
 }
 
 .mainContents h2 {
-  font-size:xx-large;
+  font-size: xx-large;
   font-weight: bold;
   margin-bottom: 3rem;
 }
@@ -22,18 +22,17 @@ ul {
 .orderInfo {
   width: 1000px;
   height: 150px;
-  border-bottom: solid 2px rgba(0,0,0,0.1);
+  border-bottom: solid 2px rgba(0, 0, 0, 0.1);
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
 
-.orderNumber{
+.orderNumber {
   width: 30%;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-
 }
 
 .orderNum,
@@ -48,7 +47,7 @@ ul {
   width: 35%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start
+  align-items: flex-start;
 }
 
 .totalPrice,
@@ -82,9 +81,7 @@ ul {
 
 .hidden {
   display: none !important;
-
 }
-
 
 /*푸터*/
 
@@ -133,4 +130,70 @@ ul {
 
 .finalFooter {
   margin-bottom: 3rem;
+}
+
+/* 모달 */
+.modal-content {
+  background-color: white;
+  border-radius: 20px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.productInfoBox {
+  display: flex;
+  width: 80%;
+  height: 80%;
+  flex-direction: column;
+}
+.productLi {
+  font-size: 25px;
+  margin-bottom: 50px;
+}
+.ordererInfoBox,
+.addressLocation {
+  font-size: 25px;
+  display: grid;
+  grid-template-columns: 40% 60%;
+  margin-bottom: 40px;
+}
+.orderInfoBox {
+  display: grid;
+  grid-template-columns: 20% 70%;
+}
+.productList {
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.product {
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+  margin: 15px 0 15px 15px;
+}
+.bookImageBox {
+  height: 70px;
+  margin-right: 15px;
+}
+.bookImage {
+  height: 100%;
+}
+.productInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.orderInfoList {
+  width: 100%;
+}
+.productTotalPrice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.orderBtnBox {
+  display: flex;
+  justify-content: space-around;
 }

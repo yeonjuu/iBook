@@ -22,11 +22,14 @@ let checkPassword;
 let token = sessionStorage.getItem('token');
 let deliveryPrice = 0;
 let carts = JSON.parse(localStorage.getItem('carts')) || {};
-carts = carts = new Map(Object.entries(carts));
+carts = new Map(Object.entries(carts));
 let cart = JSON.parse(localStorage.getItem('cart'));
 let totalPriceValue = 0;
 let deliveryMin = 0;
 
+if (cart) {
+  localStorage.removeItem('orderId');
+}
 function passwordHtml() {
   return `<div class="password inputSort">
     <div><strong>주문조회 비밀번호</strong></div>
@@ -72,6 +75,9 @@ function productTemplate(img, title, price, count, id) {
 }
 
 function buy(a) {
+  if (confirm('구매하시겠습니까?') === false) {
+    return;
+  }
   a.preventDefault();
   const products = document.querySelectorAll('.product');
 
@@ -113,6 +119,9 @@ function buy(a) {
   //   }
 }
 async function revise(e) {
+  if (confirm('수정하시겠습니까?') === false) {
+    return;
+  }
   e.preventDefault();
   const order = await loadOrderInfo();
   if (order.status === '주문취소') {
@@ -136,7 +145,7 @@ async function revise(e) {
   };
   Api.put(`/api/orders/`, order._id, data);
   localStorage.removeItem('orderId');
-  location.replace('/orderChange');
+  location.replace('/changeOrder');
 }
 
 function rednerCarts() {
@@ -223,6 +232,8 @@ if (reviseOrder) {
   user = await loadUserInfo();
   const order = await loadOrderInfo();
   submitBtn.innerHTML = '수정하기';
+  document.querySelector('.orderAndBuy').innerHTML = '주문/수정';
+
   orderer.value = user.fullName;
   email.value = user.email;
   phoneNumber.value = user.phoneNumber;
@@ -262,12 +273,12 @@ const isLogin = Boolean(userToken);
 //로그인 유저 확인
 if (isLogin) {
   checkLogin();
-};
+}
 
 async function checkLogin() {
   const loginUser = await Api.get('/api/users', userToken);
-  const isUser = loginUser.role === "user";
-  const isAdmin = loginUser.role === "admin";
+  const isUser = loginUser.role === 'user';
+  const isAdmin = loginUser.role === 'admin';
 
   if (sessionStorage && isUser) {
     login.classList.add('hidden');
@@ -287,8 +298,6 @@ async function checkLogin() {
     adminPage.classList.remove('hidden');
     logout.classList.remove('hidden');
   }
-
-
 }
 //로그아웃 버튼 클릭시 토큰 삭제
 

@@ -5,16 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- 아이콘 -->
-    <link
-    rel="icon"
-    type="image/png"
-    sizes="16x16"
-    href="../pageLogo.png"
-  />
+    <link rel="icon" type="image/png" sizes="16x16" href="../pageLogo.png" />
     <!-- bulma css -->
     <link
-        rel="stylesheet"
-        href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
     />
     <!-- 폰트 추가 -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -33,12 +28,13 @@
     <title>주문조회</title>
   </head>
   <body>
-    <header>
-      <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="background">
+      <header>
+        <nav class="navbar" role="navigation" aria-label="main navigation">
           <div class="container mt-3">
             <div class="navbar-brand">
               <!--햄버거 메뉴-->
-    
+
               <!-- <nav id="navigation">
                 <div class="hamburger">
                   <span class="bar"></span>
@@ -48,27 +44,29 @@
     
                 <ul id="hamburgerMenu" class="hidden"></ul>
               </nav> -->
-    
+
               <!---->
-    
+
               <a class="mainLogo" href="/">
                 <!-- <span class="has-text-link">IBOOK</span> -->
                 <img class="bookLogo" src="../main-logo.png" />
               </a>
             </div>
-    
+
             <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
               <ul class="headerMenu" id="navbar">
                 <li id="login"><a href="/login">로그인</a></li>
                 <li id="logout" class="hidden"><a href="/">로그아웃</a></li>
-                <li id="adminPage" class="hidden"><a href="/admin">관리자 페이지</a></li>
+                <li id="adminPage" class="hidden">
+                  <a href="/admin">관리자 페이지</a>
+                </li>
                 <li id="edit" class="hidden">
                   <a href="/edit">회원정보수정</a>
                 </li>
                 <li id="seeOrder" class="hidden">
                   <a href="/changeOrder">주문정보조회</a>
                 </li>
-    
+
                 <li id="register">
                   <a href="/register"
                     ><i class="fa-solid fa-user-plus"></i>회원가입</a
@@ -85,40 +83,69 @@
               </ul>
             </div>
           </div>
-      </nav>
-    </header>
+        </nav>
+      </header>
 
-    <main class="mainContents">
-      <h2>주문조회</h2>
-      <ul class="orderList"></ul>
-    </main>
+      <main class="mainContents">
+        <h2>주문조회</h2>
+        <ul class="orderList"></ul>
+      </main>
 
-    <footer>
-      <div class="footerbody">
-        <div class="footerCompany">IBook</div>
-        <div class="businessInfo">사업자 정보</div>
-        <div class="footerContents">
-          <a href="#"><span>이용약관</span></a>
-          <a href="#"><span>개인정보처리방침</span></a>
-          <a href="#"><span>청소년보호정책</span></a>
-          <a href="#"><span>대량주문안내</span></a>
-          <a href="#"><span>채용공고</span></a>
+      <footer>
+        <div class="footerbody">
+          <div class="footerCompany">IBook</div>
+          <div class="businessInfo">사업자 정보</div>
+          <div class="footerContents">
+            <a href="#"><span>이용약관</span></a>
+            <a href="#"><span>개인정보처리방침</span></a>
+            <a href="#"><span>청소년보호정책</span></a>
+            <a href="#"><span>대량주문안내</span></a>
+            <a href="#"><span>채용공고</span></a>
+          </div>
+          <div class="businessDetailOne">
+            <span>대표이사 : iiiiii</span>
+            <span>서울특별시 종로구 종로 1</span>
+            <span>사업자등록번호 : 102-88-11234</span>
+          </div>
+          <div class="businessDetailTwo">
+            <span>대표전화 : 1234-1234(발신자 부담전화)</span>
+            <span>FAX : 0123-456-7899(지역번호 공통)</span>
+            <span>서울시 서울특별시 통신판매업신고번호 : 제 653호 </span>
+            <button>사업자 정보 확인</button>
+          </div>
+          <div class="finalFooter">©I BOOK CENTRE</div>
         </div>
-        <div class="businessDetailOne">
-          <span>대표이사 : iiiiii</span>
-          <span>서울특별시 종로구 종로 1</span>
-          <span>사업자등록번호 : 102-88-11234</span>
+      </footer>
+      
+  
+      <script src="changeOrder.js" type="module"></script>
+
+  <!-- <div class="modal is-active">
+    <div class="modal-background"></div>
+    <div class="modal-content is-active">
+      <div class="productInfoBox">
+        <div class="productLi">
+          <p><strong>제품목록</strong></p>
         </div>
-        <div class="businessDetailTwo">
-          <span>대표전화 : 1234-1234(발신자 부담전화)</span>
-          <span>FAX : 0123-456-7899(지역번호 공통)</span>
-          <span>서울시 서울특별시 통신판매업신고번호 : 제 653호 </span>
-          <button>사업자 정보 확인</button>
+        <div>
+          <button class="cancelOrderBtn">주문취소</button>
+          <button class="reviseOrderBtn">주문수정</button>
         </div>
-        <div class="finalFooter">©I BOOK CENTRE</div>
+        <div>
+          <div>주문자</div>
+          <div class="orderer"> ${orders.name}<div>  
+        </div>
+        <div>
+          <div>받는곳</div>
+          <div class="address">${orders.address}<div>  
+        </div>
+        <div>
+          <ul class="orderInfoList"></ul>
+        </div>
       </div>
-    </footer>
-    
-    <script src="changeOrder.js" type="module"></script>
+    </div>
+  </div>
+    <button class="modal-close is-large" aria-label="close"></button>
+  </div> -->
   </body>
 </html>

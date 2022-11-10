@@ -26,14 +26,14 @@ function orderListTemplate(id, bookList, totalPrice, orderStatus) {
 
 function orderInfoTemplate(id, img, title, count, price) {
   return `<li class="product" data-id=${id}>
-    <div>
-      <img src=${img} />
+    <div class="bookImageBox">
+      <img src=${img} class="bookImage"/>
     </div>
-    <div id="productInfo">
+    <div class="productInfo">
       <div>${title}</div>
       <div>${count}</div>
     </div>
-    <div>
+    <div class="productTotalPrice">
       <p>${useful.addCommas(price * count)} 원</p>
     </div>
   </li>`;
@@ -43,30 +43,34 @@ function createDeatailOrderInfo(targetId) {
   ischeck = false;
   const orders = ordersMap.get(targetId);
   const orderProducts = ordersMap.get(targetId).products;
-  const modalEl = `<div class="productInfoBox">
-  <div class="productLi">
-    <p><strong>제품목록</strong></p>
-  </div>
-  <div>
-    <button class="cancelOrderBtn">주문취소</button>
-    <button class="reviseOrderBtn">주문수정</button>
-  </div>
-  <div>
-    <div>주문자</div>
-    <div class="orderer"> ${orders.name}<div>  
-  </div>
-  <div>
-    <div>받는곳</div>
-    <div class="address">${orders.address}<div>  
-  </div>
-  <div>
-    <ul class="orderInfoList"></ul>
-  </div>
-  <div>
-    <div class="closeBtn">
-      <div>X</div>
+  const modalEl = `<div class="modal is-active">
+  <div class="modal-background"></div>
+  <div class="modal-content">
+    <div class="productInfoBox">
+      <div class="productLi">
+        상세정보
+      </div>
+      <div>
+        <div class="ordererInfoBox">
+          <div>주문자</div>
+          <div class="orderer"> ${orders.name}</div>  
+        </div>
+      </div>
+      <div>
+        <div class="addressLocation">
+          <div>배달장소</div>
+          <div class="address">${orders.address}</div>  
+        </div>
+      </div>
+      <div class="orderInfoBox">
+        <div class="productList">제품목록</div>
+        <ul class="orderInfoList"></ul>
+      </div>
+      <div class="orderBtnBox">
+        <button class="cancelOrderBtn tag is-link is-medium">주문취소</button>
+        <button class="reviseOrderBtn tag is-link is-medium">주문수정</button>
+      </div>
     </div>
-  </div>
   </div>`;
   document.querySelector('body').insertAdjacentHTML('afterbegin', modalEl);
   const orderInfoList = document.querySelector('.orderInfoList');
@@ -111,9 +115,10 @@ function createDeatailOrderInfo(targetId) {
     }
   });
 
-  document.querySelector('.closeBtn').addEventListener('click', () => {
-    const productInfoBox = document.querySelector('.productInfoBox');
-    document.querySelector('body').removeChild(productInfoBox);
+  document.querySelector('.modal-background').addEventListener('click', () => {
+    const modal = document.querySelector('.modal');
+    modal.classList.remove('is-active');
+    document.querySelector('body').removeChild(modal);
     ischeck = true;
   });
 }
@@ -179,7 +184,7 @@ let ischeck = true;
 let bookDatas;
 const orderList = document.querySelector('.orderList');
 orderList.onclick = (event) => {
-  if (ischeck) {
+  if (ischeck && event.target.classList.contains('editOrderBtn')) {
     const targetId = event.target.closest('.orderInfo').dataset.id;
     createDeatailOrderInfo(targetId);
   }
@@ -187,7 +192,6 @@ orderList.onclick = (event) => {
 
 renderOrderList();
 const ordersMap = changeMap(orders);
-
 
 //로그인 여부에 따라 상단 메뉴 노출 유무 설정
 const login = document.querySelector('#login');
@@ -204,12 +208,12 @@ const isLogin = Boolean(userToken);
 //로그인 유저 확인
 if (isLogin) {
   checkLogin();
-};
+}
 
 async function checkLogin() {
   const loginUser = await Api.get('/api/users', userToken);
-  const isUser = loginUser.role === "user";
-  const isAdmin = loginUser.role === "admin";
+  const isUser = loginUser.role === 'user';
+  const isAdmin = loginUser.role === 'admin';
 
   if (sessionStorage && isUser) {
     login.classList.add('hidden');
@@ -229,8 +233,6 @@ async function checkLogin() {
     adminPage.classList.remove('hidden');
     logout.classList.remove('hidden');
   }
-
-
 }
 //로그아웃 버튼 클릭시 토큰 삭제
 
@@ -239,4 +241,3 @@ function logoutHandler() {
 }
 
 logout.addEventListener('click', logoutHandler);
-
