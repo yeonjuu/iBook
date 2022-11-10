@@ -1,4 +1,5 @@
 import * as Api from '../api.js';
+import * as useful from '/useful-functions.js';
 
 const landing = document.querySelector('.landing');
 const orders = document.querySelector('.orders');
@@ -28,7 +29,7 @@ function orderListTemplate(id, bookList, totalPrice, orderStatus) {
         </div>
         <div class="totalPrice">
           <div>총 결제금액</div>
-          <div>${totalPrice}</div>
+          <div>${useful.addCommas(totalPrice)}</div>
         </div>
         <div class="orderStatus">
           <div>주문상태</div>
@@ -140,4 +141,5 @@ landing.onclick = (event) => {
     search();
   }
 };
+allOrderListRender();
 orders.addEventListener('click', renderOrderInfo);

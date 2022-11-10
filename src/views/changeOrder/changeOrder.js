@@ -1,4 +1,6 @@
 import * as Api from '/api.js';
+import * as useful from '/useful-functions.js';
+
 function orderListTemplate(id, bookList, totalPrice, orderStatus) {
   return `<li class="orderInfo" data-id=${id}>
     <div class="orderNumber">
@@ -11,7 +13,7 @@ function orderListTemplate(id, bookList, totalPrice, orderStatus) {
     </div>
     <div class="totalPrice">
       <div>총 결제금액</div>
-      <div>${totalPrice}</div>
+      <div>${useful.addCommas(totalPrice)} 원</div>
     </div>
     <div class="orderStatus">
       <div>주문상태</div>
@@ -30,8 +32,7 @@ function orderInfoTemplate(id, img, title, count, price) {
       <div>${count}</div>
     </div>
     <div>
-      <p>${price * count}</p>
-      <p>원</p>
+      <p>${useful.addCommas(price * count)} 원</p>
     </div>
   </li>`;
 }

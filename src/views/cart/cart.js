@@ -1,4 +1,5 @@
-// 이 아래 3 변수는 임의로 데이터를 추가하기 위한 변수임
+import * as useful from '/useful-functions.js';
+
 const addBtn = document.querySelector('.addBtn');
 const bookName = document.querySelector('.bookName');
 const bookPrice = document.querySelector('.bookPrice');
@@ -20,17 +21,18 @@ function template(img, name, price, count, id) {
   //상품 리스트 템플릿
   return `<li class="product" id=${id}>
     <div>
-      <button class="select"><i class="fa-solid fa-check sel"></i></button>
+      <button class="select"></button>
     </div>
     <div class="imgBox">
       <img class="bookImg" src="smp1.jpg" />
     </div>
       <div class="info">
         <div class="bookName">${name}</div>
-        <div class="price">${price}</div>
+        <div class="price">${useful.addCommas(price)}</div>
+        <div>원</div>
       </div>
     <div class="countContainer">
-      <span class="totalPrice">${price * count} </span>
+      <span class="totalPrice">${useful.addCommas(price * count)} </span>
       <span>원</span>
       
       <div class="countBtn">
@@ -40,12 +42,12 @@ function template(img, name, price, count, id) {
       </div>
     </div>
     <div>
-      <button class="deleteBtn"><i class="fa-solid fa-x"></i></button>
+      <button class="deleteBtn"><i class="fa-solid fa-x del"></i></button>
     </div>
   </li>`;
 }
 addAllEvents();
-rednerCarts();
+renderCarts();
 
 function addAllEvents() {
   selectDelBtn.addEventListener('click', clickSelDelBtn);
@@ -124,10 +126,14 @@ function minusCount(cartItem) {
     return (totalPrice1.innerHTML = `${price.innerHTML} `);
   }
   input.value = Number(inputVal) - 1;
-  totalPrice1.innerHTML = `${Number(price.innerHTML) * Number(input.value)} `;
+  totalPrice1.innerHTML = useful.addCommas(
+    Number(useful.convertToNumber(price.innerHTML)) * Number(input.value)
+  );
   if (selCheck !== null) {
-    totalPriceValue = totalPriceValue - Number(price.innerHTML);
-    totalPrice.innerHTML = totalPriceValue;
+    totalPriceValue =
+      totalPriceValue - Number(useful.convertToNumber(price.innerHTML));
+    totalPrice.innerHTML = totalPrice.innerHTML =
+      useful.addCommas(totalPriceValue);
   }
 
   setItem(id, 'minus');
@@ -137,7 +143,6 @@ function addCount(cartItem) {
   const input = cartItem.querySelector('.count');
   const inputVal = input.value;
   const selCheck = cartItem.querySelector('.selected');
-  console.log(selCheck);
   const id = cartItem.id;
   const totalPrice1 = cartItem.querySelector('.totalPrice');
   const price = cartItem.querySelector('.price');
@@ -146,10 +151,14 @@ function addCount(cartItem) {
     input.value = 999;
   } else {
     input.value = Number(inputVal) + 1;
-    totalPrice1.innerHTML = `${Number(price.innerHTML) * Number(input.value)} `;
+
+    totalPrice1.innerHTML = useful.addCommas(
+      Number(useful.convertToNumber(price.innerHTML)) * Number(input.value)
+    );
     if (selCheck !== null) {
-      totalPriceValue = totalPriceValue + Number(price.innerHTML);
-      totalPrice.innerHTML = totalPriceValue;
+      totalPriceValue =
+        totalPriceValue + Number(useful.convertToNumber(price.innerHTML));
+      totalPrice.innerHTML = useful.addCommas(totalPriceValue);
     }
 
     setItem(id, 'plus');
@@ -173,13 +182,16 @@ function inputPrice(cartItem) {
     inputBox.value = 1;
   }
   const a =
-    Number(price) * Number(inputBox.value) - Number(totalPrice1.innerHTML);
+    Number(price) * Number(inputBox.value) -
+    Number(useful.convertToNumber(totalPrice1.innerHTML));
 
   if (a != 0 && selCheck !== null) {
     totalPriceValue += a;
-    totalPrice.innerHTML = totalPriceValue;
+    totalPrice.innerHTML = useful.addCommas(totalPriceValue);
   }
-  totalPrice1.innerHTML = `${Number(price) * Number(inputBox.value)} `;
+
+  totalPrice1.innerHTML = useful.addCommas(price * Number(inputBox.value));
+
   setItem(id, inputBox.value);
 }
 
@@ -187,13 +199,15 @@ function clickDelBtn(cartItem) {
   const id = cartItem.id;
   const totalPrice1 = cartItem.querySelector('.totalPrice');
   const selCheck = cartItem.querySelector('.selected');
-  cartItem.style.display = 'none';
+
   if (confirm('삭제 하시겠습니까?')) {
-    carts.delete(id);
+    cartItem.style.display = 'none';
+
     if (selCheck !== null) {
-      totalPriceValue -= Number(totalPrice1.innerHTML);
-      totalPrice.innerHTML = totalPriceValue;
+      totalPriceValue -= useful.convertToNumber(totalPrice1.innerHTML);
+      totalPrice.innerHTML = useful.addCommas(totalPriceValue);
     }
+    carts.delete(id);
     localStorage.setItem('carts', JSON.stringify(Object.fromEntries(carts)));
   }
 }
@@ -204,9 +218,10 @@ function clickSelBtn(cartItem) {
   const count = cartItem.querySelector('.count').value;
   const price = carts.get(id).price;
   if (selectBtn.classList.contains('selected')) {
+    selectAllBtn.classList.remove('selected');
     selectBtn.classList.remove('selected');
     totalPriceValue -= count * price;
-    totalPrice.innerHTML = totalPriceValue;
+    totalPrice.innerHTML = useful.addCommas(totalPriceValue);
     checkList = checkList.filter((val) => {
       return val != id;
     });
@@ -214,7 +229,7 @@ function clickSelBtn(cartItem) {
     selectBtn.classList.add('selected');
     checkList.push(id);
     totalPriceValue += count * price;
-    totalPrice.innerHTML = totalPriceValue;
+    totalPrice.innerHTML = useful.addCommas(totalPriceValue);
   }
   console.log(checkList);
 }
@@ -236,18 +251,20 @@ function clickSelBtn2(cartItem, check) {
   const id = cartItem.id;
   const count = cartItem.querySelector('.count').value;
   const price = carts.get(id).price;
-  if (selectBtn.classList.contains('selected') || check === true) {
+  if (selectBtn.classList.contains('selected') && check === true) {
     selectBtn.classList.remove('selected');
     totalPriceValue -= count * price;
-    totalPrice.innerHTML = totalPriceValue;
+    totalPrice.innerHTML = useful.addCommas(totalPriceValue);
     checkList = checkList.filter((val) => {
       return val != id;
     });
+  } else if (selectBtn.classList.contains('selected') && check === false) {
+    return;
   } else {
     selectBtn.classList.add('selected');
     checkList.push(id);
     totalPriceValue += count * price;
-    totalPrice.innerHTML = totalPriceValue;
+    totalPrice.innerHTML = useful.addCommas(totalPriceValue);
   }
   console.log(checkList);
 }
@@ -275,7 +292,7 @@ function clickAllDelBtn(e) {
   }
 }
 
-function rednerCarts() {
+function renderCarts() {
   let tem = ``;
   for (let [cartItemId, cartItem] of carts) {
     tem +=
@@ -299,12 +316,12 @@ cartList.onclick = (event) => {
     addCount(cartItem);
   } else if (event.target.classList.contains('minusBtn')) {
     minusCount(cartItem);
-  } else if (event.target.classList.contains('deleteBtn')) {
-    clickDelBtn(cartItem);
   } else if (
-    event.target.classList.contains('select') ||
-    event.target.classList.contains('sel')
+    event.target.classList.contains('deleteBtn') ||
+    event.target.classList.contains('del')
   ) {
+    clickDelBtn(cartItem);
+  } else if (event.target.classList.contains('select')) {
     clickSelBtn(cartItem);
   }
 };
