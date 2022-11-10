@@ -136,8 +136,7 @@ body {
   margin-bottom: 1rem;
 }
 
-.editDeleteDiv input {
-  width: 300px;
+.editDeleteDiv {
   height: 50px;
 }
 

@@ -85,7 +85,7 @@ input::-webkit-inner-spin-button {
 }
 
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .searchWrap {

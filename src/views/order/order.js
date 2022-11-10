@@ -57,14 +57,14 @@ function passwordHtml() {
 
 function productTemplate(img, title, price, count, id) {
   return `<li class="product" id=${id}>
-    <div>
-      <img src=${img} />
+    <div class="bookImageBox">
+      <img src=${img} class="bookImage" />
     </div>
     <div id="productInfo">
       <div>${title}</div>
       <div class="qty">${count}</div>
     </div>
-    <div>
+    <div class="priceInfo">
       <p>${useful.addCommas(price * count)}</p>
       <p>원</p>
     </div>
@@ -102,7 +102,7 @@ function buy(a) {
   Api.post(`/api/orders/`, data);
   localStorage.removeItem('carts');
   localStorage.removeItem('cart');
-  // location.replace('/orderComplete');
+  location.replace('/orderComplete');
   //   if (userCheck) {
   //   } else {
   //     if (checkPassword.value === password.value) {
@@ -202,7 +202,9 @@ function renderPrice() {
     deliveryPrice = 3000;
   }
   delivery.innerHTML = `${deliveryPrice}원`;
-  totalPrice.innerHTML = `${useful.addCommas(totalPriceValue + deliveryPrice)}`;
+  totalPrice.innerHTML = `${useful.addCommas(
+    totalPriceValue + deliveryPrice
+  )}원`;
 }
 
 function delay(ms) {
@@ -244,3 +246,54 @@ if (reviseOrder) {
   renderPrice();
   Info.addEventListener('submit', buy);
 }
+
+//로그인 여부에 따라 상단 메뉴 노출 유무 설정
+const login = document.querySelector('#login');
+const logout = document.querySelector('#logout');
+const adminPage = document.querySelector('#adminPage');
+const edit = document.querySelector('#edit');
+const editAtag = document.querySelector('#edit a');
+const seeOrder = document.querySelector('#seeOrder');
+const register = document.querySelector('#register');
+
+const userToken = sessionStorage.token;
+const isLogin = Boolean(userToken);
+
+//로그인 유저 확인
+if (isLogin) {
+  checkLogin();
+};
+
+async function checkLogin() {
+  const loginUser = await Api.get('/api/users', userToken);
+  const isUser = loginUser.role === "user";
+  const isAdmin = loginUser.role === "admin";
+
+  if (sessionStorage && isUser) {
+    login.classList.add('hidden');
+    register.classList.add('hidden');
+    logout.classList.remove('hidden');
+    edit.classList.remove('hidden');
+    seeOrder.classList.remove('hidden');
+
+    editAtag.innerText = `${loginUser.fullName}님의 프로필`;
+    // alert(`${loginUser.fullName}님 안녕하세요!`);
+  }
+
+  //관리자 계정일 때
+  if (sessionStorage && isAdmin) {
+    login.classList.add('hidden');
+    register.classList.add('hidden');
+    adminPage.classList.remove('hidden');
+    logout.classList.remove('hidden');
+  }
+
+
+}
+//로그아웃 버튼 클릭시 토큰 삭제
+
+function logoutHandler() {
+  sessionStorage.removeItem('token');
+}
+
+logout.addEventListener('click', logoutHandler);

@@ -2,14 +2,63 @@ ul {
   list-style: none;
 }
 
+/*메인영역*/
+
+.mainContents {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mainContents h2 {
+  font-size:xx-large;
+  font-weight: bold;
+  margin-bottom: 3rem;
+}
+
 .orderInfo {
-  width: 800px;
+  width: 1000px;
   height: 150px;
-  border: solid 1px black;
+  border-bottom: solid 2px rgba(0,0,0,0.1);
   display: flex;
   justify-content: space-around;
   align-items: center;
 }
+
+.orderNumber{
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+}
+
+.orderNum,
+.orderDetail div:first-child,
+.totalPrice div:first-child,
+.orderStatus div:first-child {
+  font-size: larger;
+  font-weight: bold;
+}
+
+.orderDetail {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start
+}
+
+.totalPrice,
+.orderStatus {
+  width: 12%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .closeBtn {
   height: 15px;
   width: 15px;
@@ -18,4 +67,70 @@ ul {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+* {
+  font-family: 'Trispace', sans-serif;
+}
+
+/*헤더*/
+
+.bookLogo {
+  width: 150px;
+  height: 90px;
+}
+
+.hidden {
+  display: none !important;
+
+}
+
+
+/*푸터*/
+
+.footerbody {
+  margin-top: 3rem;
+  margin-left: 5.5rem;
+  display: flex;
+  flex-direction: column;
+  font-size: small;
+}
+
+.footerCompany {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.businessInfo {
+  margin-bottom: 10px;
+}
+
+.footerContents {
+  margin-bottom: 10px;
+}
+
+.footerContents a {
+  margin-right: 10px;
+  color: black;
+  opacity: 0.5;
+}
+
+.businessDetailOne {
+  margin-bottom: 10px;
+}
+
+.businessDetailOne span {
+  margin-right: 5px;
+}
+
+.businessDetailTwo {
+  margin-bottom: 10px;
+}
+
+.businessDetailTwo span {
+  margin-right: 5px;
+}
+
+.finalFooter {
+  margin-bottom: 3rem;
 }

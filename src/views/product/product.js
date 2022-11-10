@@ -6,6 +6,8 @@ const pluseBtn = document.querySelector('.plus');
 const minusBtn = document.querySelector('.minus');
 const countEl = document.querySelector('.count');
 
+const productTitle = document.querySelector('.productTitle');
+
 const titleEl = document.querySelector('.title');
 const authorEl = document.querySelector('.author');
 const publisherEl = document.querySelector('.publisher');
@@ -39,6 +41,7 @@ async function loadData() {
   const productId = url.split('/')[2];
 
   const product = await Api.get('/api/products', productId);
+  productTitle.innerText = product.title;
   return product;
 }
 
@@ -179,3 +182,17 @@ function logoutHandler() {
 }
 
 logout.addEventListener('click', logoutHandler);
+
+
+//카테고리 메뉴 정보 받기
+getCategoryData();
+
+async function getCategoryData() {
+  const category = await Api.get('/api/categories');
+
+  for(let i=0; i < category.length; i++) {
+  const showCategory = `<li><a href="/category/${category[i]._id}">${category[i].name}</a></li>`;
+  categoryMenu.insertAdjacentHTML('beforeend', showCategory);
+  }
+
+}
