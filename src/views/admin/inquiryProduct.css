@@ -102,9 +102,15 @@ div.btn-wrap > .del {
   width: 90px;
   height: 40px;
   border-radius: 5px;
-  background-color: #03d1b2;
+  background-color: #f14668;
   color: antiquewhite;
   font-size: medium;
   font-weight: bold;
   border-style: none;
+}
+div.btn-wrap > .update:hover {
+  background-color: #3274aa;
+}
+div.btn-wrap > .del:hover {
+  background-color: #bd3651;
 }

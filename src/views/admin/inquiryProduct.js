@@ -129,6 +129,10 @@ async function update(product) {
   input.required = false;
 
   //이미지 띄우기
+  //기존 샘플 이미지 삭제
+  while (preview.firstChild) {
+    preview.removeChild(preview.firstChild);
+  }
   preview.insertAdjacentHTML('beforeend', curtImage(images[0], curTitle));
 
   input.addEventListener('change', previewImage);
