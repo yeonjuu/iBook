@@ -27,6 +27,16 @@
 
 
 /*메인영역*/
+.landing {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.landing h2 {
+  margin-bottom: 2rem;
+}
+
 .main-container {
   width: 90%;
   height: 130vh;
@@ -48,7 +58,7 @@
   width: 100%;
   display: flex;
   justify-content: center;
-  background-color: #f7f7f7;
+  /* background-color: #f7f7f7; */
 }
 
 
@@ -100,3 +110,40 @@
   margin-bottom: 3rem;
 }
 
+
+/*카테고리 수정*/
+
+.addCategoryInputDiv {
+  width: 300px;
+  height: 50px;
+}
+
+.addCategory {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1rem;
+}
+
+.addCategory button {
+  width: 130px;
+}
+
+.editDeleteCategory {
+  display: flex;
+  flex-direction: column;
+}
+
+.editDeleteDiv {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1rem;
+}
+
+.editDeleteDiv input {
+  width: 300px;
+  height: 50px;
+}
+
+.editDeleteDiv .editBtn {
+  margin-right: 5px;
+}
