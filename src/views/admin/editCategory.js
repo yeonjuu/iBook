@@ -9,7 +9,7 @@ async function categoryHandler() {
   //console.log(categoryList);
 
   landing.innerHTML = `
-    <h2>카테고리 관리</h2>
+    <h2>카테고리관리</h2>
     <div class="categoryDiv">
         <div class ="addCategory">
             <div class="addCategoryInputDiv">
