@@ -46,12 +46,12 @@ export class CategoryModel {
   async update({ categoryId, update }) {
     const filter = { _id: categoryId };
     const option = { returnOriginal: false };
-
     const updatedCategory = await Category.findOneAndUpdate(
       filter,
       update,
       option
     );
+
     return updatedCategory;
   }
 

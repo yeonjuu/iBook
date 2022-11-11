@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import is from '@sindresorhus/is';
-import { orderService, userService } from '../services';
-import { adminCheck, loginRequired } from '../middlewares';
+import { orderService } from '../services';
+import { adminCheck } from '../middlewares';
 
 const orderRouter = Router();
 
@@ -80,7 +80,6 @@ orderRouter.put('/:orderId', async function (req, res, next) {
     }
 
     const orderId = req.params.orderId;
-
     const {
       name,
       phone,
@@ -92,9 +91,7 @@ orderRouter.put('/:orderId', async function (req, res, next) {
       password,
       productIds,
     } = req.body;
-
     const orderInfoRequired = { orderId };
-
     const toUpdate = {
       ...(name && { name }),
       ...(phone && { phone }),
@@ -106,7 +103,6 @@ orderRouter.put('/:orderId', async function (req, res, next) {
       ...(password && { password }),
       ...(productIds && { products: productIds }),
     };
-
     const updatedOrderInfo = await orderService.setOrder(
       orderInfoRequired,
       toUpdate

@@ -47,7 +47,6 @@ productRouter.post('/', adminCheck, async (req, res, next) => {
       rate,
       categoryId,
     } = req.body;
-
     const newProduct = await productService.addProduct({
       title,
       author,
@@ -104,7 +103,6 @@ productRouter.put('/:productId', adminCheck, async function (req, res, next) {
     }
 
     const productId = req.params.productId;
-
     const {
       title,
       author,
@@ -115,7 +113,6 @@ productRouter.put('/:productId', adminCheck, async function (req, res, next) {
       rate,
       categoryId,
     } = req.body;
-
     const productInfoRequired = { productId };
     const toUpdate = {
       ...(title && { title }),
