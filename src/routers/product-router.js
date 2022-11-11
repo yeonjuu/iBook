@@ -26,7 +26,6 @@ productRouter.post(
     }
 
     res.json({ images });
-    console.log(req.files);
   }
 );
 
@@ -38,7 +37,6 @@ productRouter.post('/', adminCheck, async (req, res, next) => {
       );
     }
 
-    // req (request)의 body 에서 데이터 가져오기
     const {
       title,
       author,
@@ -50,7 +48,6 @@ productRouter.post('/', adminCheck, async (req, res, next) => {
       categoryId,
     } = req.body;
 
-    // 위 데이터를 상품 db에 추가하기
     const newProduct = await productService.addProduct({
       title,
       author,
@@ -71,14 +68,16 @@ productRouter.post('/', adminCheck, async (req, res, next) => {
 productRouter.get('/', async function (req, res, next) {
   try {
     const categoryId = req.query.categoryId;
+    const page = req.query.page;
+    const perPage = req.query.perPage;
     let products;
+
     if (categoryId) {
       products = await productService.getProductsByCategoryId(categoryId);
     } else {
-      products = await productService.getProducts();
+      products = await productService.getProducts(page, perPage);
     }
 
-    // 상품 목록(배열)을 JSON 형태로 프론트에 보냄
     res.status(200).json(products);
   } catch (error) {
     next(error);
@@ -96,7 +95,6 @@ productRouter.get('/:productId', async function (req, res, next) {
   }
 });
 
-// 상품 정보 수정
 productRouter.put('/:productId', adminCheck, async function (req, res, next) {
   try {
     if (is.emptyObject(req.body)) {
@@ -119,9 +117,6 @@ productRouter.put('/:productId', adminCheck, async function (req, res, next) {
     } = req.body;
 
     const productInfoRequired = { productId };
-
-    // 위 데이터가 undefined가 아니라면, 즉, 프론트에서 업데이트를 위해
-    // 보내주었다면, 업데이트용 객체에 삽입함.
     const toUpdate = {
       ...(title && { title }),
       ...(author && { author }),
@@ -132,14 +127,11 @@ productRouter.put('/:productId', adminCheck, async function (req, res, next) {
       ...(rate && { rate }),
       ...(categoryId && { category: categoryId }),
     };
-
-    // 상품 정보를 업데이트함.
     const updatedProductInfo = await productService.setProduct(
       productInfoRequired,
       toUpdate
     );
 
-    // 업데이트 이후의 상품 데이터를 프론트에 보내 줌
     res.status(200).json(updatedProductInfo);
   } catch (error) {
     next(error);
@@ -152,7 +144,6 @@ productRouter.delete(
   async function (req, res, next) {
     try {
       const productId = req.params.productId;
-
       const product = await productService.removeProduct(productId);
 
       res.status(200).json(product);
