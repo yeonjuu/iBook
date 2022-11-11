@@ -4,43 +4,53 @@
 
 /*헤더*/
 
-.header>nav {
-  background-color: aliceblue;
-  position: fixed;
+.header nav {
+  display: flex;
+  flex-direction: row;
   top: 0;
   left: 0;
   right: 0;
 }
 
-  .bookLogo {
-    width: 150px;
-    height: 90px;
-  }
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
 
-  .hidden {
-    display: none !important;
-  
-  }
+.header nav .menuOnTopright {
+  /* background-color: antiquewhite; */
+}
 
-  .header .menuOnTopright .headerMenu li a {
-    color: black;
-    opacity: 60%;
-    font-weight: 500;
-    margin-left: 15px;
-  }
+.header .menuOnTopright .headerMenu li a {
+  color: black;
+  opacity: 60%;
+  font-weight: 500;
+  margin-left: 15px;
+}
 
-  .header .menuOnTopright .headerMenu li a:hover {
-    color: #bd3651;
-    opacity: 60%;
-    font-weight: 500;
-    margin-left: 15px;
-  }
-  
-  
-  .menuOnTopright .headerMenu {
-    display: flex;
-    flex-direction: row;
-  }
+.header .menuOnTopright .headerMenu li a:hover {
+  color: #bd3651;
+  opacity: 60%;
+  font-weight: 500;
+  margin-left: 15px;
+}
+
+
+.menuOnTopright .headerMenu {
+  display: flex;
+  flex-direction: row;
+}
+
+.bookLogo {
+  width: 150px;
+  height: 90px;
+}
+
+.hidden {
+  display: none !important;
+}
 
 
   /*푸터*/
