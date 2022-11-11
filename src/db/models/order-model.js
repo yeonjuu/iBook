@@ -45,8 +45,8 @@ export class OrderModel {
   async update({ orderId, update }) {
     const filter = { _id: orderId };
     const option = { returnOriginal: false };
-
     const updatedProduct = await Order.findOneAndUpdate(filter, update, option);
+
     return updatedProduct;
   }
 

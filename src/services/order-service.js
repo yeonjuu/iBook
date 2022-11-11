@@ -13,11 +13,13 @@ class OrderService {
 
   async getOrders() {
     const orders = await this.orderModel.findAll();
+
     return orders;
   }
 
   async getOrdersByUserId(userId) {
     const orders = await this.orderModel.findAllByUserId(userId);
+
     return orders;
   }
 
@@ -34,14 +36,11 @@ class OrderService {
       totalPrice += order.products[i].productId.price * order.products[i].qty;
     }
 
-    console.log(order.products);
-
     return { ...order, totalPrice };
   }
 
   async setOrder(orderInfoRequired, toUpdate) {
     const { orderId } = orderInfoRequired;
-
     let order = await this.orderModel.findById(orderId);
 
     if (!order) {
