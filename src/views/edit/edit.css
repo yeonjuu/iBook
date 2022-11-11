@@ -1,0 +1,54 @@
+.bookLogo {
+  width: 150px;
+  height: 90px;
+}
+
+.hidden {
+  display: none !important;
+
+}
+
+.header .menuOnTopright .headerMenu li a {
+  color: black;
+  opacity: 60%;
+  font-weight: 500;
+  margin-left: 15px;
+}
+
+.header .menuOnTopright .headerMenu li a:hover {
+  color: #bd3651;
+  opacity: 60%;
+  font-weight: 500;
+  margin-left: 15px;
+}
+
+
+.menuOnTopright .headerMenu {
+  display: flex;
+  flex-direction: row;
+}
+
+.register-user-form-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 85vh;
+  }
+  
+  .register-user-form-box {
+    width: 30rem;
+  }
+  
+  .register-user-form-box .title {
+    text-align: center;
+  }
+  
+  .register-user-form-box .button {
+    font-weight: bold;
+  }
+  
+  .register-user-form-box .input:focus {
+    border-color: #00d1b2;
+    box-shadow: 0 0 0 0.125em rgba(0, 209, 178, 0.25);
+  }
+  

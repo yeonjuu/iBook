@@ -1,0 +1,178 @@
+@import url('reset.css');
+
+.main {
+  width: 85%;
+  margin: auto;
+  margin-bottom: 10rem;
+}
+
+.InfoBoxes {
+  display: grid;
+  grid-template-columns: 20% 80%;
+  border: 1px solid rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  margin: 30px 0;
+}
+
+.ordererInfoBox {
+  border: 1px solid black rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  margin-top: 0px;
+}
+
+ul {
+  list-style: none;
+  padding: 0px;
+}
+
+.center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.inputSort {
+  display: flex;
+  flex-direction: column;
+  grid-template-columns: 20% 80%;
+  margin: 15px 0;
+}
+.submitBtn {
+  height: 50px;
+  width: 80%;
+  background-color: #5055b1;
+  color: white;
+  border-radius: 10px;
+}
+.orderAndBuy {
+  margin: 30px 0;
+  font-size: 30px;
+}
+.Info {
+  display: grid;
+  grid-template-columns: 70% 30%;
+}
+
+.product {
+  display: grid;
+  grid-template-columns: 15% 60% 20%;
+}
+.priceInfoBox {
+  height: 300px;
+  width: 272px;
+  margin-left: 50px;
+  border: solid 1px rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items: center;
+}
+.bookImageBox {
+  height: 120px;
+  width: 80%;
+}
+.bookImage {
+  height: 100%;
+  width: 100%;
+}
+.hidden {
+  display: none;
+}
+.product {
+  margin: 15px 0;
+}
+#productInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.priceInfo {
+  display: flex;
+  align-items: center;
+}
+* {
+  font-family: 'Trispace', sans-serif;
+}
+
+/*헤더*/
+
+.header .menuOnTopright .headerMenu li a {
+  color: black;
+  opacity: 60%;
+  font-weight: 500;
+  margin-left: 15px;
+}
+
+.header .menuOnTopright .headerMenu li a:hover {
+  color: #bd3651;
+  opacity: 60%;
+  font-weight: 500;
+  margin-left: 15px;
+}
+
+.menuOnTopright .headerMenu {
+  display: flex;
+  flex-direction: row;
+}
+
+.bookLogo {
+  width: 150px;
+  height: 90px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/*푸터*/
+
+.footerbody {
+  margin-top: 3rem;
+  margin-left: 5.5rem;
+  display: flex;
+  flex-direction: column;
+  font-size: small;
+}
+
+.footerCompany {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.businessInfo {
+  margin-bottom: 10px;
+}
+
+.footerContents {
+  margin-bottom: 10px;
+}
+
+.footerContents a {
+  margin-right: 10px;
+  color: black;
+  opacity: 0.5;
+}
+
+.businessDetailOne {
+  margin-bottom: 10px;
+}
+
+.businessDetailOne span {
+  margin-right: 5px;
+}
+
+.businessDetailTwo {
+  margin-bottom: 10px;
+}
+
+.businessDetailTwo span {
+  margin-right: 5px;
+}
+
+.finalFooter {
+  margin-bottom: 3rem;
+}
+.inputBox {
+  width: 85%;
+}

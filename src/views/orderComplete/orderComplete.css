@@ -1,0 +1,131 @@
+.compleBox {
+  /* display: grid;
+  grid-template-rows: 70% 30%; */
+  height: 500px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: solid 2px rgba(0,0,0,0.1);
+  border-radius: 10px;
+}
+.thankBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.thankBox h2,
+.thankBox h3 {
+  font-size: 45px;
+  margin-bottom: 5px;
+}
+
+.buttonBox {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.goHome {
+  margin-right: 2rem;
+}
+
+.mainContents {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 5rem;
+}
+
+* {
+  font-family: 'Trispace', sans-serif;
+}
+
+/*헤더*/
+
+.header .menuOnTopright .headerMenu li a {
+  color: black;
+  opacity: 60%;
+  font-weight: 500;
+  margin-left: 15px;
+}
+
+.header .menuOnTopright .headerMenu li a:hover {
+  color: #bd3651;
+  opacity: 60%;
+  font-weight: 500;
+  margin-left: 15px;
+}
+
+
+.menuOnTopright .headerMenu {
+  display: flex;
+  flex-direction: row;
+}
+
+.bookLogo {
+  width: 150px;
+  height: 90px;
+}
+
+.hidden {
+  display: none !important;
+
+}
+
+
+/*푸터*/
+
+.footerbody {
+  margin-top: 3rem;
+  margin-left: 5.5rem;
+  display: flex;
+  flex-direction: column;
+  font-size: small;
+}
+
+.footerCompany {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.businessInfo {
+  margin-bottom: 10px;
+}
+
+.footerContents {
+  margin-bottom: 10px;
+}
+
+.footerContents a {
+  margin-right: 10px;
+  color: black;
+  opacity: 0.5;
+}
+
+.businessDetailOne {
+  margin-bottom: 10px;
+}
+
+.businessDetailOne span {
+  margin-right: 5px;
+}
+
+.businessDetailTwo {
+  margin-bottom: 10px;
+}
+
+.businessDetailTwo span {
+  margin-right: 5px;
+}
+
+.finalFooter {
+  margin-bottom: 3rem;
+}
+
+
+

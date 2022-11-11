@@ -16,3 +16,38 @@
 .login-form-box .button {
   font-weight: bold;
 }
+
+.has-text-link {
+  margin-left: 5px;
+  color: black;
+}
+
+* {
+  font-family: 'Trispace', sans-serif;
+  text-decoration: none;
+}
+
+.header .menuOnTopright .headerMenu li a {
+  color: black;
+  opacity: 60%;
+  font-weight: 500;
+  margin-left: 15px;
+}
+
+.header .menuOnTopright .headerMenu li a:hover {
+  color: #bd3651;
+  opacity: 60%;
+  font-weight: 500;
+  margin-left: 15px;
+}
+
+
+.menuOnTopright .headerMenu {
+  display: flex;
+  flex-direction: row;
+}
+
+.bookLogo {
+  width: 150px;
+  height: 90px;
+}

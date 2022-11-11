@@ -1,0 +1,237 @@
+ul {
+  list-style: none;
+}
+
+* {
+  font-family: 'Trispace', sans-serif;
+}
+
+/*메인영역*/
+
+.mainContents {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.mainContents h2 {
+  font-size: xx-large;
+  font-weight: bold;
+  margin-bottom: 3rem;
+}
+
+.orderInfo {
+  width: 1000px;
+  height: 150px;
+  border-bottom: solid 2px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.orderNumber {
+  width: 30%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.orderNum,
+.orderDetail div:first-child,
+.totalPrice div:first-child,
+.orderStatus div:first-child {
+  font-size: larger;
+  font-weight: bold;
+}
+
+.orderDetail {
+  width: 35%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.totalPrice,
+.orderStatus {
+  width: 12%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.editOrder span:first-child {
+  cursor: pointer;
+}
+
+.closeBtn {
+  height: 15px;
+  width: 15px;
+  border: solid black 1px;
+  border-radius: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/*헤더*/
+
+.bookLogo {
+  width: 150px;
+  height: 90px;
+}
+
+.header .menuOnTopright .headerMenu li a {
+  color: black;
+  opacity: 60%;
+  font-weight: 500;
+  margin-left: 15px;
+}
+
+.header .menuOnTopright .headerMenu li a:hover {
+  color: #bd3651;
+  opacity: 60%;
+  font-weight: 500;
+  margin-left: 15px;
+}
+
+.menuOnTopright .headerMenu {
+  display: flex;
+  flex-direction: row;
+}
+
+.hidden {
+  display: none !important;
+}
+
+/*푸터*/
+
+.footerbody {
+  margin-top: 3rem;
+  margin-left: 5.5rem;
+  display: flex;
+  flex-direction: column;
+  font-size: small;
+}
+
+.footerCompany {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.businessInfo {
+  margin-bottom: 10px;
+}
+
+.footerContents {
+  margin-bottom: 10px;
+}
+
+.footerContents a {
+  margin-right: 10px;
+  color: black;
+  opacity: 0.5;
+}
+
+.businessDetailOne {
+  margin-bottom: 10px;
+}
+
+.businessDetailOne span {
+  margin-right: 5px;
+}
+
+.businessDetailTwo {
+  margin-bottom: 10px;
+}
+
+.businessDetailTwo span {
+  margin-right: 5px;
+}
+
+.finalFooter {
+  margin-bottom: 3rem;
+}
+
+/* 모달 */
+.modal-content {
+  background-color: white;
+  border-radius: 20px;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.productInfoBox {
+  display: flex;
+  width: 80%;
+  height: 80%;
+  flex-direction: column;
+}
+.productLi {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 50px;
+}
+
+.ordererInfoBox,
+.addressLocation {
+  font-size: 25px;
+  display: grid;
+  grid-template-columns: 40% 60%;
+  margin-bottom: 40px;
+}
+
+.orderInfoBox {
+  display: grid;
+  grid-template-columns: 20% 70%;
+}
+.productList {
+  font-size: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.product {
+  display: grid;
+  grid-template-columns: 20% 60% 20%;
+  margin: 15px 0 15px 15px;
+}
+.bookImageBox {
+  height: 70px;
+  margin-right: 15px;
+}
+.bookImage {
+  height: 100%;
+}
+.productInfo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.orderInfoList {
+  width: 100%;
+}
+.productTotalPrice {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.orderBtnBox {
+  display: flex;
+  justify-content: space-around;
+}
+
+.orderBtnBox button:first-child {
+  cursor: pointer;
+}
+
+.orderBtnBox button:last-child {
+  cursor: pointer;
+}
+.delBtnBox {
+  display: flex;
+  justify-content: flex-end;
+}

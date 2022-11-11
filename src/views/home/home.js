@@ -1,60 +1,115 @@
-// 아래는 현재 home.html 페이지에서 쓰이는 코드는 아닙니다.
-// 다만, 앞으로 ~.js 파일을 작성할 때 아래의 코드 구조를 참조할 수 있도록,
-// 코드 예시를 남겨 두었습니다.
+import * as Api from '/api.js';
 
-import * as Api from "/api.js";
-import { randomId } from "/useful-functions.js";
+const firstRow = document.querySelector('#firstRow');
+const secondRow = document.querySelector('#secondRow');
+const thirdRow = document.querySelector('#thirdRow');
 
-// 요소(element), input 혹은 상수
-const landingDiv = document.querySelector("#landingDiv");
-const greetingDiv = document.querySelector("#greetingDiv");
+const categoryMenu = document.querySelector("#categoryMenu");
 
-addAllElements();
-addAllEvents();
+//카테고리 메뉴 정보 받기
+getCategoryData();
 
-// html에 요소를 추가하는 함수들을 묶어주어서 코드를 깔끔하게 하는 역할임.
-async function addAllElements() {
-  insertTextToLanding();
-  insertTextToGreeting();
+async function getCategoryData() {
+  const category = await Api.get('/api/categories');
+
+  for(let i=0; i < category.length; i++) {
+  const showCategory = `
+  <li><a href="/category/${category[i]._id}">${category[i].name}</a></li>`;
+  categoryMenu.insertAdjacentHTML('beforeend', showCategory);
+  }
+
 }
 
-// 여러 개의 addEventListener들을 묶어주어서 코드를 깔끔하게 하는 역할임.
-function addAllEvents() {
-  landingDiv.addEventListener("click", alertLandingText);
-  greetingDiv.addEventListener("click", alertGreetingText);
+
+//책정보 받기
+getProductData();
+
+async function getProductData() {
+  const product = await Api.get('/api/products');
+
+  const bookImage = await product.map((e) => e.images[0]);
+  const bookTitle = product.map((e) => e.title);
+  const bookId = product.map((e) => e._id);
+
+  //메인배너 책 정보 뿌려주기
+  for (let i = 0; i < 5; i++) {
+    const firstRowBooks = `<div class="rowBooks"><a href="/products/${bookId[i]}">
+        <div class="displayBooks">
+        <img class="bookImages" src=${bookImage[i]} />
+        <span>${bookTitle[i]}</span>
+        </div>
+
+        </a></div>`;
+
+    const secondRowBooks = `<div class="rowBooks"><a href="/products/${bookId[i+5]}">
+        <div class="displayBooks">
+        <img class="bookImages" src=${bookImage[i+5]} />
+        <span>${bookTitle[i+5]}</span>
+        </div>
+        </a></div>`; 
+
+    const thirdRowBooks = `<div class="rowBooks"><a href="/products/${bookId[i+10]}">
+       <div class="displayBooks">
+       <img class="bookImages" src=${bookImage[i+10]} />
+       <span>${bookTitle[i+10]}</span>
+       </div>
+
+        </a></div>`; 
+    firstRow.insertAdjacentHTML('beforeend', firstRowBooks);
+    secondRow.insertAdjacentHTML('beforeend', secondRowBooks);
+    thirdRow.insertAdjacentHTML('beforeend', thirdRowBooks);
+  };
+
 }
 
-function insertTextToLanding() {
-  landingDiv.insertAdjacentHTML(
-    "beforeend",
-    `
-      <h2>n팀 쇼핑몰의 랜딩 페이지입니다. 자바스크립트 파일에서 삽입되었습니다.</h2>
-    `
-  );
+//로그인 여부에 따라 상단 메뉴 노출 유무 설정
+const login = document.querySelector('#login');
+const logout = document.querySelector('#logout');
+const adminPage = document.querySelector('#adminPage');
+const edit = document.querySelector('#edit');
+const editAtag = document.querySelector('#edit a');
+const seeOrder = document.querySelector('#seeOrder');
+const register = document.querySelector('#register');
+
+const userToken = sessionStorage.token;
+const isLogin = Boolean(userToken);
+
+//로그인 유저 확인
+if (isLogin) {
+  checkLogin();
+};
+
+async function checkLogin() {
+  const loginUser = await Api.get('/api/users', userToken);
+  //console.log(loginUser);
+  const isUser = loginUser.role === "user";
+  const isAdmin = loginUser.role === "admin";
+
+  if (isUser) {
+    login.classList.add('hidden');
+    register.classList.add('hidden');
+    logout.classList.remove('hidden');
+    edit.classList.remove('hidden');
+    seeOrder.classList.remove('hidden');
+
+    editAtag.innerText = `${loginUser.fullName}님의 프로필`;
+    // alert(`${loginUser.fullName}님 안녕하세요!`);
+  }
+
+  //관리자 계정일 때
+  if (isAdmin) {
+    login.classList.add('hidden');
+    register.classList.add('hidden');
+    adminPage.classList.remove('hidden');
+    logout.classList.remove('hidden');
+  }
+
+
+}
+//로그아웃 버튼 클릭시 토큰 삭제
+
+function logoutHandler() {
+  sessionStorage.removeItem('token');
 }
 
-function insertTextToGreeting() {
-  greetingDiv.insertAdjacentHTML(
-    "beforeend",
-    `
-      <h1>반갑습니다! 자바스크립트 파일에서 삽입되었습니다.</h1>
-    `
-  );
-}
-
-function alertLandingText() {
-  alert("n팀 쇼핑몰입니다. 안녕하세요.");
-}
-
-function alertGreetingText() {
-  alert("n팀 쇼핑몰에 오신 것을 환영합니다");
-}
-
-async function getDataFromApi() {
-  // 예시 URI입니다. 현재 주어진 프로젝트 코드에는 없는 URI입니다.
-  const data = await Api.get("/api/user/data");
-  const random = randomId();
-
-  console.log({ data });
-  console.log({ random });
-}
+logout.addEventListener('click', logoutHandler);

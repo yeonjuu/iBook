@@ -4,6 +4,8 @@ import { validateEmail } from "/useful-functions.js";
 // 요소(element), input 혹은 상수
 const fullNameInput = document.querySelector("#fullNameInput");
 const emailInput = document.querySelector("#emailInput");
+const phoneInput = document.querySelector("#phoneInput");
+const addressInput = document.querySelector("#addressInput");
 const passwordInput = document.querySelector("#passwordInput");
 const passwordConfirmInput = document.querySelector("#passwordConfirmInput");
 const submitButton = document.querySelector("#submitButton");
@@ -25,8 +27,13 @@ async function handleSubmit(e) {
 
   const fullName = fullNameInput.value;
   const email = emailInput.value;
+  const phoneNumber = phoneInput.value;
+  const address = addressInput.value;
   const password = passwordInput.value;
   const passwordConfirm = passwordConfirmInput.value;
+  
+  console.log(password);
+  console.log(passwordConfirm);
 
   // 잘 입력했는지 확인
   const isFullNameValid = fullName.length >= 2;
@@ -48,7 +55,7 @@ async function handleSubmit(e) {
 
   // 회원가입 api 요청
   try {
-    const data = { fullName, email, password };
+    const data = { fullName, email, password, phoneNumber, address };
 
     await Api.post("/api/users", data);
 
