@@ -18,33 +18,25 @@
 }
 
 .register-user-form-box .input:focus {
-  border-color: #00d1b2;
-  box-shadow: 0 0 0 0.125em rgba(0, 209, 178, 0.25);
+  border-color: #5055b1;
+  box-shadow: 0 0 0 0.125em rgba(80, 85, 177, 0.25);
 }
 
 
-
+/*헤더*/
 .bookLogo {
   width: 150px;
   height: 90px;
 }
 
-.header .menuOnTopright .headerMenu li a {
-  color: black;
-  opacity: 60%;
-  font-weight: 500;
-  margin-left: 15px;
+.welcomeBtn button:first-child{
+  background-color: #5055b1;
 }
 
-.header .menuOnTopright .headerMenu li a:hover {
-  color: #bd3651;
-  opacity: 60%;
-  font-weight: 500;
-  margin-left: 15px;
+.welcomeBtn button:first-child:hover{
+  background-color: ;
 }
 
-
-.menuOnTopright .headerMenu {
-  display: flex;
-  flex-direction: row;
+.welcomeTitle {
+  color: #414591 !important;
 }

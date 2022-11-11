@@ -94,22 +94,17 @@
   height: 40vh;
 }
 
-#firstRow div,
-#secondRow div,
-#thirdRow div {
+.rowBooks {
+  background-color: aliceblue;
   width: 170px;
   height: 250px;
-  /* object-fit: cover; */
-  background-color: aliceblue;
 }
 
-#firstRow div img,
-#secondRow div img,
-#thirdRow div img {
+.bookImages {
   width: 170px;
   height: 250px;
   object-fit: cover;
-} 
+}
 
 
 .navbar-brand {

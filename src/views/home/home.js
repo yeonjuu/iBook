@@ -35,7 +35,7 @@ async function getProductData() {
   for (let i = 0; i < 5; i++) {
     const firstRowBooks = `<div class="rowBooks"><a href="/products/${bookId[i]}">
         <div class="displayBooks">
-        <img src=${bookImage[i]} />
+        <img class="bookImages" src=${bookImage[i]} />
         <span>${bookTitle[i]}</span>
         </div>
 
@@ -43,14 +43,14 @@ async function getProductData() {
 
     const secondRowBooks = `<div class="rowBooks"><a href="/products/${bookId[i+5]}">
         <div class="displayBooks">
-        <img src=${bookImage[i+5]} />
+        <img class="bookImages" src=${bookImage[i+5]} />
         <span>${bookTitle[i+5]}</span>
         </div>
         </a></div>`; 
 
     const thirdRowBooks = `<div class="rowBooks"><a href="/products/${bookId[i+10]}">
        <div class="displayBooks">
-       <img src=${bookImage[i+10]} />
+       <img class="bookImages" src=${bookImage[i+10]} />
        <span>${bookTitle[i+10]}</span>
        </div>
 
