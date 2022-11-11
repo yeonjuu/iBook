@@ -75,7 +75,7 @@
 #thirdRow div {
   width: 170px;
   height: 250px;
-  object-fit: cover;
+  /* object-fit: cover; */
   background-color: aliceblue;
 }
 

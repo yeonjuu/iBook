@@ -51,6 +51,14 @@ input::-webkit-inner-spin-button {
   text-align: center;
 }
 
+.deleteSelected {
+  font-size: medium;
+}
+
+.allDelBtn {
+  font-size: medium;
+}
+
 .select,
 .selectAll,
 .deleteBtn {
