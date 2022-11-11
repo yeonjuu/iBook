@@ -8,42 +8,45 @@ let mapOrdersInfo;
 const serachTemplate = function (h2) {
   return `
             <h2>${h2}</h2>
-            <div class="search-wrap">
-              <input class="searchInput" placeholder="제품명 입력.." />
-              <input type="button" value="검색" class="searchBtn" />
+            <div class="search-wrap search-order">
+              <input class="searchInput" placeholder="주문번호 입력.." />
+              <input type="button" value="검색" class="searchBtn2" />
               <input type="button" value="전체조회" class="searchAll2" />
-            </div>
+              <button class="revise">수정</button>
+              </div>
             <ul class="list"></ul>
-            <button class="revise">수정</button>`;
+            `;
 };
 
 function orderListTemplate(id, bookList, totalPrice, orderStatus) {
   return `<li class="orderInfo" data-id=${id}>
-        <div class="orderNumber">
-          <div>주문번호</div>
-          <div>${id}</div>
-        </div>
-        <div class="orderDetail">
-          <div>주문내역</div>
-          <div>${bookList}</div>
-        </div>
-        <div class="totalPrice">
-          <div>총 결제금액</div>
-          <div>${useful.addCommas(totalPrice)}</div>
-        </div>
-        <div class="orderStatus">
-          <div>주문상태</div>
-          <div>${orderStatus}</div>
-          <select name="status" class="status">
-            <option value="상태선택">상태선택</option>
-            <option value="주문취소">주문취소</option>
-            <option value="주문완료">주문완료</option>
-            <option value="배송시작">배송시작</option>
-            <option value="배송완료">배송완료</option>
-          </select>
-        </div>
-        <button class="orderDel">삭제</button>
-      </li>`;
+  <div class="order-wrap">
+      <div class="orderNumber">
+        <div>주문번호</div>
+        <div>${id}</div>
+      </div>
+      <div class="orderDetail">
+        <div>주문내역</div>
+        <div>${bookList}</div>
+      </div>
+      <div class="totalPrice">
+        <div>총 결제금액</div>
+        <div>${useful.addCommas(totalPrice)}원</div>
+      </div>
+    </div>
+    <div class="orderStatus">
+      <div>주문상태</div>
+      <div>${orderStatus}</div>
+      <select name="status" class="status">
+        <option value="상태선택">상태선택</option>
+        <option value="주문취소">주문취소</option>
+        <option value="주문완료">주문완료</option>
+        <option value="배송시작">배송시작</option>
+        <option value="배송완료">배송완료</option>
+      </select>
+    </div>
+    <button class="orderDel">삭제</button>
+  </li>`;
 }
 
 async function renderOrderInfo() {
@@ -137,7 +140,7 @@ landing.onclick = (event) => {
     }
   } else if (event.target.classList.contains('searchAll2')) {
     allOrderListRender();
-  } else if (event.target.classList.contains('searchBtn')) {
+  } else if (event.target.classList.contains('searchBtn2')) {
     search();
   }
 };

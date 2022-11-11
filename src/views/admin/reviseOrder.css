@@ -1,12 +1,96 @@
 ul {
   list-style: none;
 }
+.list {
+  width: 100%;
+  overflow: auto;
+}
 
 .orderInfo {
-  width: 800px;
-  height: 150px;
-  border: solid 1px black;
+  font-size: 16px;
+  width: 100%;
+  height: 200px;
   display: flex;
   justify-content: space-around;
   align-items: center;
+  padding: 10px;
+  position: relative;
+}
+.orderInfo::after {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  display: inline-block;
+  content: '';
+  width: 100%;
+  height: 3px;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.orderInfo > .order-wrap {
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+}
+.orderInfo > .order-wrap > div {
+  margin-bottom: 1rem;
+}
+.orderInfo > .order-wrap > div:last-child {
+  margin-bottom: 0;
+}
+
+.orderInfo > .order-wrap > .orderNumber > div:first-child,
+.orderInfo > .order-wrap > .orderDetail > div:first-child,
+.orderInfo > .order-wrap > .totalPrice > div:first-child,
+.orderInfo > .orderStatus > div:first-child {
+  font-weight: bold;
+}
+
+.orderDel {
+  width: 90px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: #f14668;
+  color: antiquewhite;
+  font-size: medium;
+  font-weight: bold;
+  border-style: none;
+}
+
+.orderDel:hover {
+  background-color: #bd3651;
+}
+.orderStatus {
+  width: 20%;
+  text-align: center;
+}
+.orderStatus > div {
+  margin-bottom: 1rem;
+}
+
+.orderStatus > select.status {
+  width: 100px;
+  height: 30px;
+  border-radius: 5px;
+  text-indent: 10px;
+  font-size: 15px;
+}
+div.search-order {
+  width: 80%;
+}
+div.search-order > .searchInput {
+  width: 60%;
+}
+div.search-order > button.revise {
+  width: 80px;
+  height: 35px;
+  background-color: #3f8ed0;
+  color: antiquewhite;
+  font-size: medium;
+  font-weight: bold;
+  border-style: none;
+  border-radius: 5px;
+}
+div.search-order > button.revise:hover {
+  background-color: #3274aa;
 }
