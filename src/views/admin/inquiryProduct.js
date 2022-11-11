@@ -105,6 +105,8 @@ async function update(product) {
   //카테고리 로드
   await getOptionsCategory();
 
+  console.log('category', category._id);
+
   const productInfo = document.querySelector('#product-info');
   const input = document.querySelector('#product-img');
   const curTitle = document.querySelector('.title');
@@ -122,9 +124,10 @@ async function update(product) {
   curPdescription.value = description;
   curPrice.value = price;
   imageUrl = images[0];
+
   //카테고리 값 설정
   for (let i = 0; i < curCategory.options.length; i++) {
-    if (curCategory.options[i].value == category) {
+    if (curCategory.options[i].value == category._id) {
       curCategory.options[i].selected = true;
     }
   }
@@ -214,8 +217,8 @@ async function getProduct(targetProduct) {
     curtImage(product.images[0], product.title)
   );
 
-  const categoryName = await Api.get('/api/categories', product.category);
-  categoryEl.textContent = categoryName.name;
+  const categoryName = await Api.get('/api/categories', product.category._id);
+  categoryEl.textContent = categoryName[0].name;
 
   checkBtn.addEventListener('click', function () {
     window.location.href = '/admin';

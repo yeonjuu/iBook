@@ -20,6 +20,9 @@ const cart = document.querySelector('.cart');
 const order = document.querySelector('.order');
 const img = document.querySelector('.img-wrap >img');
 
+const userToken = sessionStorage.token;
+const isLogin = Boolean(userToken);
+
 //상품 정보 변수 저장
 const product = await loadData();
 
@@ -111,19 +114,28 @@ function addCarts() {
 }
 
 function orderProduct() {
-  localStorage.removeItem('orderId');
+  if (!isLogin) {
+    let isGo = confirm(
+      '로그인이 필요한 서비스입니다. \n로그인창으로 이동하시겠습니까?'
+    );
+    if (isGo) {
+      window.location.href = '/login';
+    }
+  } else {
+    localStorage.removeItem('orderId');
 
-  const cartItem = {
-    id: product._id,
-    title: product.title,
-    price: product.price,
-    count: count,
-    totalPrice: calTotalPrice(product.price, count),
-    images: product.images,
-  };
-  console.log(cartItem);
-  localStorage.setItem('cart', JSON.stringify(cartItem));
-  window.location.href = '/order';
+    const cartItem = {
+      id: product._id,
+      title: product.title,
+      price: product.price,
+      count: count,
+      totalPrice: calTotalPrice(product.price, count),
+      images: product.images,
+    };
+    console.log(cartItem);
+    localStorage.setItem('cart', JSON.stringify(cartItem));
+    window.location.href = '/order';
+  }
 }
 
 //총 금액 계산 및 변경
@@ -145,9 +157,6 @@ const edit = document.querySelector('#edit');
 const editAtag = document.querySelector('#edit a');
 const seeOrder = document.querySelector('#seeOrder');
 const register = document.querySelector('#register');
-
-const userToken = sessionStorage.token;
-const isLogin = Boolean(userToken);
 
 //로그인 유저 확인
 if (isLogin) {

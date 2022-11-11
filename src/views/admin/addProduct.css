@@ -18,6 +18,7 @@ div.left > label {
   line-height: 35px;
   border-radius: 5px;
   margin-top: 1rem;
+  cursor: pointer;
 }
 div.left > label:hover {
   background-color: #3f8ed0;
@@ -69,13 +70,9 @@ input[type='number'] {
 
 /* 화살표 제거 후 백그라운드 주기 */
 div.right > select {
-  -webkit-appearance: none;
-  appearance: none;
   width: 360px;
   height: 30px;
   font-size: 15px;
-  background: url('https://cdn.pixabay.com/photo/2013/07/12/13/43/arrow-147172_1280.png')
-    calc(100% - 5px) center no-repeat;
   background-size: 20px;
   border-radius: 5px;
   text-indent: 10px;
@@ -98,6 +95,7 @@ div.right > textarea {
   font-size: medium;
   font-weight: bold;
   border-style: none;
+  cursor: pointer;
 }
 #submit-info:hover {
   background-color: #3274aa;

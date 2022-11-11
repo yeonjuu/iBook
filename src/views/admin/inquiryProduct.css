@@ -21,6 +21,7 @@ div.search-wrap > input[type='button'] {
   border: none;
   background-color: #bebebe;
   font-size: medium;
+  cursor: pointer;
 }
 div.search-wrap > input[type='button']:hover {
   background-color: #3f8ed0;
@@ -75,6 +76,7 @@ div.info-wrap > span {
 div.info-wrap > .title {
   margin-bottom: 1rem;
   font-size: large;
+  cursor: pointer;
 }
 div.info-wrap > .title:hover {
   text-decoration: underline;
@@ -96,6 +98,7 @@ div.btn-wrap > .update {
   font-size: medium;
   font-weight: bold;
   border-style: none;
+  cursor: pointer;
 }
 
 div.btn-wrap > .del {
@@ -107,7 +110,9 @@ div.btn-wrap > .del {
   font-size: medium;
   font-weight: bold;
   border-style: none;
+  cursor: pointer;
 }
+
 div.btn-wrap > .update:hover,
 div.product-explain > .check:hover {
   background-color: #3274aa;
@@ -123,6 +128,9 @@ div.product-explain {
   flex-direction: column;
   margin-left: 1rem;
   padding: 1rem 0 0 1rem;
+}
+div.product-explain > span {
+  margin-bottom: 1rem;
 }
 div.product-explain > .check {
   width: 90px;

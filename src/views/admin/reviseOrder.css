@@ -55,6 +55,7 @@ ul {
   font-size: medium;
   font-weight: bold;
   border-style: none;
+  cursor: pointer;
 }
 
 .orderDel:hover {
@@ -90,6 +91,7 @@ div.search-order > button.revise {
   font-weight: bold;
   border-style: none;
   border-radius: 5px;
+  cursor: pointer;
 }
 div.search-order > button.revise:hover {
   background-color: #3274aa;
