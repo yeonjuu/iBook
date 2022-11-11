@@ -8,6 +8,28 @@ a {
   color: #000000;
 }
 
+.bookLogo {
+  width: 150px;
+  height: 90px;
+}
+
+.hidden {
+  display: none !important;
+
+}
+
+.header .menuOnTopright .headerMenu li a {
+  color: black;
+  opacity: 60%;
+  font-weight: 500;
+  margin-left: 15px;
+}
+
+.menuOnTopright .headerMenu {
+  display: flex;
+  flex-direction: row;
+}
+
 /*카테고리*/
 #categoryMenu {
   margin-left: 5rem;

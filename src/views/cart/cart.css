@@ -237,6 +237,18 @@ input::-webkit-inner-spin-button {
   height: 90px;
 }
 
+.header .menuOnTopright .headerMenu li a {
+  color: black;
+  opacity: 60%;
+  font-weight: 500;
+  margin-left: 15px;
+}
+
+.menuOnTopright .headerMenu {
+  display: flex;
+  flex-direction: row;
+}
+
 /*footer*/
 .footerbody {
   margin-top: 3rem;
