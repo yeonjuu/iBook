@@ -1,7 +1,6 @@
 import { Router } from 'express';
-import is from '@sindresorhus/is';
 import { productService } from '../services';
-import { adminCheck } from '../middlewares';
+import { adminCheck, emptyObejctCheck } from '../middlewares';
 import multer from 'multer';
 
 const productRouter = Router();
@@ -29,40 +28,39 @@ productRouter.post(
   }
 );
 
-productRouter.post('/', adminCheck, async (req, res, next) => {
-  try {
-    if (is.emptyObject(req.body)) {
-      throw new Error(
-        'headers의 Content-Type을 application/json으로 설정해주세요'
-      );
+productRouter.post(
+  '/',
+  adminCheck,
+  emptyObejctCheck,
+  async (req, res, next) => {
+    try {
+      const {
+        title,
+        author,
+        price,
+        publisher,
+        images,
+        description,
+        rate,
+        categoryId,
+      } = req.body;
+      const newProduct = await productService.addProduct({
+        title,
+        author,
+        price,
+        publisher,
+        images,
+        description,
+        rate,
+        category: categoryId,
+      });
+
+      res.status(201).json(newProduct);
+    } catch (error) {
+      next(error);
     }
-
-    const {
-      title,
-      author,
-      price,
-      publisher,
-      images,
-      description,
-      rate,
-      categoryId,
-    } = req.body;
-    const newProduct = await productService.addProduct({
-      title,
-      author,
-      price,
-      publisher,
-      images,
-      description,
-      rate,
-      category: categoryId,
-    });
-
-    res.status(201).json(newProduct);
-  } catch (error) {
-    next(error);
   }
-});
+);
 
 productRouter.get('/', async function (req, res, next) {
   try {
@@ -94,46 +92,45 @@ productRouter.get('/:productId', async function (req, res, next) {
   }
 });
 
-productRouter.put('/:productId', adminCheck, async function (req, res, next) {
-  try {
-    if (is.emptyObject(req.body)) {
-      throw new Error(
-        'headers의 Content-Type을 application/json으로 설정해주세요'
+productRouter.put(
+  '/:productId',
+  adminCheck,
+  emptyObejctCheck,
+  async function (req, res, next) {
+    try {
+      const productId = req.params.productId;
+      const {
+        title,
+        author,
+        price,
+        publisher,
+        images,
+        description,
+        rate,
+        categoryId,
+      } = req.body;
+      const productInfoRequired = { productId };
+      const toUpdate = {
+        ...(title && { title }),
+        ...(author && { author }),
+        ...(price && { price }),
+        ...(publisher && { publisher }),
+        ...(images && { images }),
+        ...(description && { description }),
+        ...(rate && { rate }),
+        ...(categoryId && { category: categoryId }),
+      };
+      const updatedProductInfo = await productService.setProduct(
+        productInfoRequired,
+        toUpdate
       );
+
+      res.status(200).json(updatedProductInfo);
+    } catch (error) {
+      next(error);
     }
-
-    const productId = req.params.productId;
-    const {
-      title,
-      author,
-      price,
-      publisher,
-      images,
-      description,
-      rate,
-      categoryId,
-    } = req.body;
-    const productInfoRequired = { productId };
-    const toUpdate = {
-      ...(title && { title }),
-      ...(author && { author }),
-      ...(price && { price }),
-      ...(publisher && { publisher }),
-      ...(images && { images }),
-      ...(description && { description }),
-      ...(rate && { rate }),
-      ...(categoryId && { category: categoryId }),
-    };
-    const updatedProductInfo = await productService.setProduct(
-      productInfoRequired,
-      toUpdate
-    );
-
-    res.status(200).json(updatedProductInfo);
-  } catch (error) {
-    next(error);
   }
-});
+);
 
 productRouter.delete(
   '/:productId',
