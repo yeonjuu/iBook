@@ -192,15 +192,23 @@
     border-style: none;
   }
 
+  #cartBtn.hover {
+    background-color: #3274aa;
+  }
+
   #buyBtn {
     width: 110px;
     height: 50px;
     border-radius: 5px;
-    background-color: #03d1b2;
+    background-color: #5055b1;
     color: antiquewhite;
     font-size: medium;
     font-weight: bold;
     border-style: none;
+  }
+
+  #buyBtn:hover {
+    background-color: #424695;
   }
 
   .bottomLine {
