@@ -173,6 +173,11 @@
     width: 400px;
   }
 
+  /* .description {
+    width: 400px;
+    height: 200px;
+  } */
+
   .buttons {
     display: flex;
     flex-direction: column;
