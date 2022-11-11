@@ -1,7 +1,6 @@
 import * as useful from '/useful-functions.js';
 import * as Api from '/api.js';
 
-
 const addBtn = document.querySelector('.addBtn');
 const bookName = document.querySelector('.bookName');
 const bookPrice = document.querySelector('.bookPrice');
@@ -23,7 +22,7 @@ function template(img, name, price, count, id) {
   //상품 리스트 템플릿
   return `<li class="product" id=${id}>
     <div>
-      <button class="select"></button>
+      <button class="select1"><i class="fa-solid fa-check sel1"></i></button>
     </div>
     <div class="imgBox">
       <img src=${img} class="bookImg"/>
@@ -215,7 +214,7 @@ function clickDelBtn(cartItem) {
 }
 
 function clickSelBtn(cartItem) {
-  const selectBtn = cartItem.querySelector('.select');
+  const selectBtn = cartItem.querySelector('.select1');
   const id = cartItem.id;
   const count = cartItem.querySelector('.count').value;
   const price = carts.get(id).price;
@@ -233,12 +232,11 @@ function clickSelBtn(cartItem) {
     totalPriceValue += count * price;
     totalPrice.innerHTML = useful.addCommas(totalPriceValue);
   }
-  console.log(checkList);
 }
 
 function clickSelDelBtn(e) {
   e.preventDefault();
-  if (confirm('삭제 하시겠습니까?')) {
+  if (confirm('선택하신 상품들을 삭제 하시겠습니까?')) {
     checkList.forEach((id) => {
       carts.delete(id);
 
@@ -249,7 +247,7 @@ function clickSelDelBtn(e) {
 }
 
 function clickSelBtn2(cartItem, check) {
-  const selectBtn = cartItem.querySelector('.select');
+  const selectBtn = cartItem.querySelector('.select1');
   const id = cartItem.id;
   const count = cartItem.querySelector('.count').value;
   const price = carts.get(id).price;
@@ -268,7 +266,6 @@ function clickSelBtn2(cartItem, check) {
     totalPriceValue += count * price;
     totalPrice.innerHTML = useful.addCommas(totalPriceValue);
   }
-  console.log(checkList);
 }
 function allSelect(allCartItems) {
   if (selectAllBtn.classList.contains('selected')) {
@@ -288,7 +285,7 @@ function allSelect(allCartItems) {
 
 function clickAllDelBtn(e) {
   e.preventDefault();
-  if (confirm('삭제 하시겠습니까?')) {
+  if (confirm('전체삭제 하시겠습니까?')) {
     localStorage.removeItem('carts');
     location.reload();
   }
@@ -323,7 +320,10 @@ cartList.onclick = (event) => {
     event.target.classList.contains('del')
   ) {
     clickDelBtn(cartItem);
-  } else if (event.target.classList.contains('select')) {
+  } else if (
+    event.target.classList.contains('select1') ||
+    event.target.classList.contains('sel1')
+  ) {
     clickSelBtn(cartItem);
   }
 };
@@ -335,8 +335,6 @@ cartList.onmousedown = (event) => {
 };
 
 allSelect(allCartItems);
-
-
 
 //로그인 여부에 따라 상단 메뉴 노출 유무 설정
 const login = document.querySelector('#login');
@@ -353,13 +351,13 @@ const isLogin = Boolean(userToken);
 //로그인 유저 확인
 if (isLogin) {
   checkLogin();
-};
+}
 
 async function checkLogin() {
   const loginUser = await Api.get('/api/users', userToken);
   //console.log(loginUser);
-  const isUser = loginUser.role === "user";
-  const isAdmin = loginUser.role === "admin";
+  const isUser = loginUser.role === 'user';
+  const isAdmin = loginUser.role === 'admin';
 
   if (isUser) {
     login.classList.add('hidden');
@@ -379,8 +377,6 @@ async function checkLogin() {
     adminPage.classList.remove('hidden');
     logout.classList.remove('hidden');
   }
-
-
 }
 //로그아웃 버튼 클릭시 토큰 삭제
 

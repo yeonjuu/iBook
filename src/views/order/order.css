@@ -55,7 +55,7 @@ ul {
 
 .product {
   display: grid;
-  grid-template-columns: 20% 60% 20%;
+  grid-template-columns: 15% 60% 20%;
 }
 .priceInfoBox {
   height: 300px;
@@ -69,10 +69,12 @@ ul {
   align-items: center;
 }
 .bookImageBox {
-  height: 100px;
+  height: 120px;
+  width: 80%;
 }
 .bookImage {
   height: 100%;
+  width: 100%;
 }
 .hidden {
   display: none;
@@ -95,7 +97,6 @@ ul {
 
 /*헤더*/
 
-
 .header .menuOnTopright .headerMenu li a {
   color: black;
   opacity: 60%;
@@ -109,7 +110,6 @@ ul {
   font-weight: 500;
   margin-left: 15px;
 }
-
 
 .menuOnTopright .headerMenu {
   display: flex;
@@ -172,4 +172,7 @@ ul {
 
 .finalFooter {
   margin-bottom: 3rem;
+}
+.inputBox {
+  width: 85%;
 }

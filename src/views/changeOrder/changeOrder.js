@@ -2,7 +2,6 @@ import * as Api from '/api.js';
 import * as useful from '/useful-functions.js';
 
 function orderListTemplate(id, bookList, totalPrice, orderStatus) {
-
   if (orderStatus == '주문취소') {
     return `<li class="orderInfo" data-id=${id}>
     <div class="orderNumber">
@@ -21,13 +20,11 @@ function orderListTemplate(id, bookList, totalPrice, orderStatus) {
       <span class="tag is-danger is-light is-medium">${orderStatus}</span>
     </div>
     <div class="editOrder">
-    <span class="editOrderBtn tag is-link is-medium">주문수정</span>
+    <span class="editOrderBtn tag is-link is-medium">상세정보</span>
     </div>
   </li>`;
-  
-  }
-  
-  else return `<li class="orderInfo" data-id=${id}>
+  } else
+    return `<li class="orderInfo" data-id=${id}>
     <div class="orderNumber">
       <div class="orderNum">주문번호</div>
       <div>${id}</div>
@@ -44,11 +41,10 @@ function orderListTemplate(id, bookList, totalPrice, orderStatus) {
       <span class="tag is-link is-light is-medium">${orderStatus}</span>
     </div>
     <div class="editOrder">
-    <span class="editOrderBtn tag is-link is-medium">주문수정</span>
+    <span class="editOrderBtn tag is-link is-medium">상세정보</span>
     </div>
   </li>`;
 }
-
 
 function orderInfoTemplate(id, img, title, count, price) {
   return `<li class="product" data-id=${id}>
@@ -73,6 +69,7 @@ function createDeatailOrderInfo(targetId) {
   <div class="modal-background"></div>
   <div class="modal-content">
     <div class="productInfoBox">
+      <div class="delBtnBox"><button class="delete" aria-label="close"></button></div>
       <div class="productLi">
         상세정보
       </div>
@@ -142,6 +139,12 @@ function createDeatailOrderInfo(targetId) {
   });
 
   document.querySelector('.modal-background').addEventListener('click', () => {
+    const modal = document.querySelector('.modal');
+    modal.classList.remove('is-active');
+    document.querySelector('body').removeChild(modal);
+    ischeck = true;
+  });
+  document.querySelector('.delete').addEventListener('click', () => {
     const modal = document.querySelector('.modal');
     modal.classList.remove('is-active');
     document.querySelector('body').removeChild(modal);

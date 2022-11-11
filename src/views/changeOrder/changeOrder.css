@@ -76,8 +76,6 @@ ul {
   align-items: center;
 }
 
-
-
 /*헤더*/
 
 .bookLogo {
@@ -98,7 +96,6 @@ ul {
   font-weight: 500;
   margin-left: 15px;
 }
-
 
 .menuOnTopright .headerMenu {
   display: flex;
@@ -233,4 +230,8 @@ ul {
 
 .orderBtnBox button:last-child {
   cursor: pointer;
+}
+.delBtnBox {
+  display: flex;
+  justify-content: flex-end;
 }
