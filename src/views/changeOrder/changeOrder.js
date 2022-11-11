@@ -2,7 +2,9 @@ import * as Api from '/api.js';
 import * as useful from '/useful-functions.js';
 
 function orderListTemplate(id, bookList, totalPrice, orderStatus) {
-  return `<li class="orderInfo" data-id=${id}>
+
+  if (orderStatus == '주문취소') {
+    return `<li class="orderInfo" data-id=${id}>
     <div class="orderNumber">
       <div class="orderNum">주문번호</div>
       <div>${id}</div>
@@ -16,13 +18,37 @@ function orderListTemplate(id, bookList, totalPrice, orderStatus) {
       <div>${useful.addCommas(totalPrice)} 원</div>
     </div>
     <div class="orderStatus">
-      <span class="tag is-info is-medium">${orderStatus}</span>
+      <span class="tag is-danger is-light is-medium">${orderStatus}</span>
     </div>
-    <div class-"editOrder">
+    <div class="editOrder">
+    <span class="editOrderBtn tag is-link is-medium">주문수정</span>
+    </div>
+  </li>`;
+  
+  }
+  
+  else return `<li class="orderInfo" data-id=${id}>
+    <div class="orderNumber">
+      <div class="orderNum">주문번호</div>
+      <div>${id}</div>
+    </div>
+    <div class="orderDetail">
+      <div>주문내역</div>
+      <div>${bookList}</div>
+    </div>
+    <div class="totalPrice">
+      <div>총 결제금액</div>
+      <div>${useful.addCommas(totalPrice)} 원</div>
+    </div>
+    <div class="orderStatus">
+      <span class="tag is-link is-light is-medium">${orderStatus}</span>
+    </div>
+    <div class="editOrder">
     <span class="editOrderBtn tag is-link is-medium">주문수정</span>
     </div>
   </li>`;
 }
+
 
 function orderInfoTemplate(id, img, title, count, price) {
   return `<li class="product" data-id=${id}>

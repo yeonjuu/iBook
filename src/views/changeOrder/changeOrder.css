@@ -2,6 +2,10 @@ ul {
   list-style: none;
 }
 
+* {
+  font-family: 'Trispace', sans-serif;
+}
+
 /*메인영역*/
 
 .mainContents {
@@ -58,6 +62,10 @@ ul {
   align-items: center;
 }
 
+.editOrder span:first-child {
+  cursor: pointer;
+}
+
 .closeBtn {
   height: 15px;
   width: 15px;
@@ -68,9 +76,7 @@ ul {
   align-items: center;
 }
 
-* {
-  font-family: 'Trispace', sans-serif;
-}
+
 
 /*헤더*/
 
@@ -196,4 +202,12 @@ ul {
 .orderBtnBox {
   display: flex;
   justify-content: space-around;
+}
+
+.orderBtnBox button:first-child {
+  cursor: pointer;
+}
+
+.orderBtnBox button:last-child {
+  cursor: pointer;
 }
