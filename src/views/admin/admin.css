@@ -6,20 +6,39 @@ body {
   width: 90%;
   margin: 0 auto;
 }
+.navbar > .container {
+  height: 100px;
+  justify-content: space-between;
+}
 .bookLogo {
   width: 150px;
   height: 90px;
 }
-
+.user {
+  font-size: large;
+  font-weight: bold;
+  line-height: 100px;
+}
 .hidden {
   display: none !important;
 }
 
 /*상단 메뉴*/
 #categoryMenu {
-  margin-left: 5rem;
   display: flex;
   height: 50px;
+  position: relative;
+}
+
+#categoryMenu::after {
+  display: inline-block;
+  content: ' ';
+  width: 100%;
+  height: 3px;
+  position: absolute;
+  left: 0px;
+  bottom: 0px;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 #categoryMenu li {
@@ -28,6 +47,10 @@ body {
   font-size: 18px;
   color: black;
   cursor: pointer;
+  font-weight: bold;
+}
+#categoryMenu li:hover {
+  color: #9c0000;
 }
 
 /*메인영역*/
@@ -106,40 +129,4 @@ body {
 
 .finalFooter {
   margin-bottom: 3rem;
-}
-
-/*카테고리 수정*/
-
-.addCategoryInputDiv {
-  width: 300px;
-  height: 50px;
-}
-
-.addCategory {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 1rem;
-}
-
-.addCategory button {
-  width: 130px;
-}
-
-.editDeleteCategory {
-  display: flex;
-  flex-direction: column;
-}
-
-.editDeleteDiv {
-  display: flex;
-  flex-direction: row;
-  margin-bottom: 1rem;
-}
-
-.editDeleteDiv {
-  height: 50px;
-}
-
-.editDeleteDiv .editBtn {
-  margin-right: 5px;
 }

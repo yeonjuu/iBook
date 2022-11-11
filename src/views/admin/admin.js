@@ -2,7 +2,6 @@ import * as Api from '/api.js';
 
 import { inquiryProduct } from './inquiryProduct.js';
 import { getAddProduct } from './addProduct.js';
-import * as Api from '../api.js';
 
 //관리자 권한확인하기
 try {

@@ -108,9 +108,30 @@ div.btn-wrap > .del {
   font-weight: bold;
   border-style: none;
 }
-div.btn-wrap > .update:hover {
+div.btn-wrap > .update:hover,
+div.product-explain > .check:hover {
   background-color: #3274aa;
 }
 div.btn-wrap > .del:hover {
   background-color: #bd3651;
+}
+div.product-wrap {
+  display: flex;
+}
+div.product-explain {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1rem;
+  padding: 1rem 0 0 1rem;
+}
+div.product-explain > .check {
+  width: 90px;
+  height: 40px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  background-color: #3f8ed0;
+  color: antiquewhite;
+  font-size: medium;
+  font-weight: bold;
+  border-style: none;
 }

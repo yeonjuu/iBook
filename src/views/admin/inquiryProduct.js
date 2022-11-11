@@ -5,6 +5,7 @@ import {
   productTemplate,
   getProductAddTemplate,
   curtImage,
+  getProductTemplate,
 } from './productTemplate.js';
 import { getOptionsCategory, previewImage } from './addProduct.js';
 
@@ -80,6 +81,9 @@ async function renderProdcutList(products) {
     } else if (target.classList.contains('del')) {
       //delete
       await del(targetProduct);
+    } else if (target.classList.contains('title')) {
+      console.log('개별 도서 조회');
+      await getProduct(targetProduct);
     }
   };
 }
@@ -193,4 +197,32 @@ async function del(targetProduct) {
   } else {
     alert('도서삭제취소');
   }
+}
+
+async function getProduct(targetProduct) {
+  const id = targetProduct.dataset.id;
+  const product = await Api.get('/api/products', id);
+  const productHtml = getProductTemplate(product);
+  landing.innerHTML = productHtml;
+
+  const checkBtn = document.querySelector('.check');
+  const categoryEl = document.querySelector('.categoryName');
+  const preview = document.querySelector('.preview');
+
+  preview.insertAdjacentHTML(
+    'beforeend',
+    curtImage(product.images[0], product.title)
+  );
+
+  const categoryName = await Api.get('/api/categories', product.category);
+  categoryEl.textContent = categoryName.name;
+
+  checkBtn.addEventListener('click', function () {
+    window.location.href = '/admin';
+  });
+}
+
+export async function getCategoryName(categoryId) {
+  const category = await Api.get('/api/categories', categoryId);
+  return category;
 }
