@@ -60,10 +60,8 @@ async function renderProduct() {
 }
 
 async function getCategoryName() {
-  const categories = await Api.get('/api/categories');
-  // const curtCategory = await Api.get('/api/categories', category);
-  const curtCategory = categories.filter((c) => c._id == category);
-  return curtCategory[0].name;
+  const categoryName = await Api.get('/api/categories', category._id);
+  return categoryName.name;
 }
 
 //이벤트 처리
