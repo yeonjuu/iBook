@@ -214,7 +214,7 @@ input::-webkit-inner-spin-button {
 }
 
 .buyWrap {
-  margin-top: 110px;
+  margin-top: 30%;
   width: 100%;
   display: flex;
   justify-content: center;
@@ -275,7 +275,6 @@ input::-webkit-inner-spin-button {
   font-weight: 500;
   margin-left: 15px;
 }
-
 
 .menuOnTopright .headerMenu {
   display: flex;
