@@ -81,8 +81,10 @@ https://youtu.be/TFE89cpHwgQ
 | -------------------------------------------- | -------------------------------------------- |
 | ![image](https://i.ibb.co/vJVz9jj/image.png) | ![image](https://i.ibb.co/q5RWmY3/image.png) |
 | 메인 페이지                                  | 회원가입 화면                                |
-| ![image](https://i.ibb.co/gDwBy5P/image.png) |                                              |
-| 로그인 페이지                                | 앞으로 추가할 페이지                         |
+| ![image](https://i.ibb.co/gDwBy5P/image.png) | <img width="300" alt="관리자도서조회" src="https://user-images.githubusercontent.com/46666765/201366327-65f1f00a-b192-434f-9e8d-eccdfc6c8b76.png">
+| 로그인 페이지                                |      관리자페이지 - 도서조회              |
+| <img width="300" src="https://user-images.githubusercontent.com/46666765/201366341-38f3639a-19d0-45f2-92e3-469c4f26e8f0.png"> | <img width="300" alt="관리자주문조회" src="https://user-images.githubusercontent.com/46666765/201366348-96750029-7fac-40d2-820e-e0c4893ce43f.png">
+| 관리자도서수정                              |      관리자주문조회              |
 
 <br />
 
@@ -95,9 +97,6 @@ https://youtu.be/TFE89cpHwgQ
 ### 2-1. 프론트엔드
 
 - **Vanilla javascript**, html, css (**Bulma css**)
-- Font-awesome
-- Daum 도로명 주소 api
-- 이외
 
 ### 2-2. 백엔드
 
@@ -122,7 +121,11 @@ https://youtu.be/TFE89cpHwgQ
 
 | 이름   | 담당 업무 |
 | ------ | --------- |
-| 엘리스 | 팀장/개발 |
+| 이지현 | 팀장/백엔드 |
+| 홍정완 | 백엔드 |
+| 김민경 | 프론트엔드 |
+| 박지찬 | 프론트엔드 |
+| 신연주 | 프론트엔드 |
 
 <br />
 
