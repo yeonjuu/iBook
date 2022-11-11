@@ -218,7 +218,7 @@ async function getProduct(targetProduct) {
   );
 
   const categoryName = await Api.get('/api/categories', product.category._id);
-  categoryEl.textContent = categoryName[0].name;
+  categoryEl.textContent = categoryName.name;
 
   checkBtn.addEventListener('click', function () {
     window.location.href = '/admin';

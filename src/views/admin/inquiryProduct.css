@@ -122,6 +122,7 @@ div.btn-wrap > .del:hover {
 }
 div.product-wrap {
   display: flex;
+  width: 90%;
 }
 div.product-explain {
   display: flex;
