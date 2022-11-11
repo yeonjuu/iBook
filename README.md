@@ -47,11 +47,7 @@ https://youtu.be/r_hdWoW8CwE
 </details>
 
 <details><summary>제품 추가 및 반영</summary>
-
-추후 관련 영상을 삽입하세요 (하기 2가지 방법 가능)
-
-1. 화면녹화 -> 유튜브 업로드 -> 유튜브 링크 삽입
-2. 화면움짤녹화 -> 움짤삽입 (https://www.screentogif.com/ 활용가능)
+https://youtu.be/zS4_ErTgk5s
 
 </details>
 
@@ -64,6 +60,11 @@ https://youtu.be/TFE89cpHwgQ
 </details>
 
 <details><summary>관리자 페이지</summary>
+카테고리관리 : https://youtu.be/jqAAhPTktpI
+주문관리 : https://youtu.be/asf0ic48b1U
+도서조회 : https://youtu.be/rwXChVFDHBw
+</details>
+
 
 추후 관련 영상을 삽입하세요 (하기 2가지 방법 가능)
 
