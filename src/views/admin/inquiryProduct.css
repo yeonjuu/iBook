@@ -122,12 +122,15 @@ div.btn-wrap > .del:hover {
 }
 div.product-wrap {
   display: flex;
+  width: 100%;
 }
 div.product-explain {
+  width: 60%;
   display: flex;
   flex-direction: column;
   margin-left: 1rem;
   padding: 1rem 0 0 1rem;
+  max-width: 500px;
 }
 div.product-explain > span {
   margin-bottom: 1rem;
