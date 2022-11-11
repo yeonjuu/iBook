@@ -78,9 +78,23 @@ ul {
 
 /*헤더*/
 
-.bookLogo {
-  width: 150px;
-  height: 90px;
+.header nav {
+  display: flex;
+  flex-direction: row;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header nav .menuOnTopright {
+  /* background-color: antiquewhite; */
 }
 
 .header .menuOnTopright .headerMenu li a {
@@ -97,9 +111,15 @@ ul {
   margin-left: 15px;
 }
 
+
 .menuOnTopright .headerMenu {
   display: flex;
   flex-direction: row;
+}
+
+.bookLogo {
+  width: 150px;
+  height: 90px;
 }
 
 .hidden {

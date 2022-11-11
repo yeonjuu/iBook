@@ -8,14 +8,23 @@ a {
   color: #000000;
 }
 
-.bookLogo {
-  width: 150px;
-  height: 90px;
+.header nav {
+  display: flex;
+  flex-direction: row;
+  top: 0;
+  left: 0;
+  right: 0;
 }
 
-.hidden {
-  display: none !important;
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
 
+.header nav .menuOnTopright {
+  /* background-color: antiquewhite; */
 }
 
 .header .menuOnTopright .headerMenu li a {
@@ -32,9 +41,19 @@ a {
   margin-left: 15px;
 }
 
+
 .menuOnTopright .headerMenu {
   display: flex;
   flex-direction: row;
+}
+
+.bookLogo {
+  width: 150px;
+  height: 90px;
+}
+
+.hidden {
+  display: none !important;
 }
 
 /*카테고리*/
@@ -47,7 +66,7 @@ a {
   margin-left: 15px;
   font-size: 18px;
   font-weight: bold;
-  color: rgba(0,0,0,0.8);
+  color: rgba(0, 0, 0, 0.8);
 }
 
 #categoryMenu a:hover {
@@ -62,9 +81,7 @@ a {
 
 .hidden {
   display: none !important;
-
 }
-
 
 /*푸터*/
 * {
@@ -76,7 +93,6 @@ a {
   width: 150px;
   height: 90px;
 }
-
 
 .footerbody {
   margin-top: 3rem;
@@ -131,6 +147,7 @@ a {
   display: flex;
   justify-content: center;
   align-content: center;
+  height: 1500px;
 }
 
 .product {
@@ -156,7 +173,7 @@ a {
   justify-content: space-around;
 }
 
-.img-wrap > img{
+.img-wrap > img {
   width: 350px;
   height: 470px;
 }
@@ -178,14 +195,13 @@ a {
   align-items: center;
 }
 
-
 .count-wrap {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
   margin-left: 2rem;
-  border: 2px solid rgba(0,0,0,0.1);
+  border: 2px solid rgba(0, 0, 0, 0.1);
   border-radius: 2px;
 }
 
@@ -229,7 +245,6 @@ a {
   background-color: #3274aa;
 }
 
-
 .cart a {
   text-decoration: none;
   color: inherit;
@@ -261,7 +276,7 @@ a {
   margin-top: 2.5rem;
   width: 90%;
   height: 3px;
-  background-color: rgba(0,0,0,0.1);
+  background-color: rgba(0, 0, 0, 0.1);
   border-radius: 10px;
   margin-bottom: 1rem;
 }

@@ -68,7 +68,6 @@ input[type='number'] {
   text-indent: 10px;
 }
 
-/* 화살표 제거 후 백그라운드 주기 */
 div.right > select {
   width: 360px;
   height: 30px;
@@ -81,7 +80,7 @@ div.right > textarea {
   width: 360px;
   height: 100px;
   border-radius: 5px;
-  font-size: 12px;
+  font-size: 10px;
   padding: 5px 0 0 5px;
 }
 #submit-info {
