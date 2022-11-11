@@ -1,4 +1,4 @@
-import { model } from 'mongoose';
+import { model, Types } from 'mongoose';
 import { CategorySchema } from '../schemas/category-schema';
 
 const Category = model('categories', CategorySchema);
@@ -9,7 +9,21 @@ export class CategoryModel {
   }
 
   findById(categoryId) {
-    return Category.findOne({ _id: categoryId });
+    return Category.aggregate([
+      {
+        $lookup: {
+          from: 'products',
+          localField: '_id',
+          foreignField: 'category',
+          as: 'products',
+        },
+      },
+      {
+        $match: {
+          _id: Types.ObjectId(categoryId),
+        },
+      },
+    ]);
   }
 
   create({ name }) {
@@ -17,7 +31,16 @@ export class CategoryModel {
   }
 
   findAll() {
-    return Category.find({});
+    return Category.aggregate([
+      {
+        $lookup: {
+          from: 'products',
+          localField: '_id',
+          foreignField: 'category',
+          as: 'products',
+        },
+      },
+    ]);
   }
 
   async update({ categoryId, update }) {
