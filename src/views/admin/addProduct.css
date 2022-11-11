@@ -65,8 +65,8 @@ input[type='number'] {
   height: 30px;
   border-radius: 5px;
   text-indent: 10px;
-  border: 1px solid #000000;
 }
+
 /* 화살표 제거 후 백그라운드 주기 */
 div.right > select {
   -webkit-appearance: none;
@@ -78,7 +78,6 @@ div.right > select {
     calc(100% - 5px) center no-repeat;
   background-size: 20px;
   border-radius: 5px;
-  border: 1px solid #000000;
   text-indent: 10px;
 }
 div.right > textarea {
@@ -87,13 +86,12 @@ div.right > textarea {
   border-radius: 5px;
   font-size: 12px;
   padding: 5px 0 0 5px;
-  border: 1px solid #000000;
 }
 #submit-info {
   display: inline-block;
   width: 100px;
   height: 35px;
-  margin-right: 10px;
+  margin: 5px 0 0 0;
   border-radius: 5px;
   background-color: #3f8ed0;
   color: antiquewhite;
