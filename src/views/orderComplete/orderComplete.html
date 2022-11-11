@@ -33,7 +33,7 @@
     <title>주문완료</title>
   </head>
   <body>
-    <header>
+    <header class="header">
       <nav class="navbar" role="navigation" aria-label="main navigation">
         <div class="container mt-3">
           <div class="navbar-brand">
@@ -53,20 +53,22 @@
   
             <a class="mainLogo" href="/">
               <!-- <span class="has-text-link">IBOOK</span> -->
-              <img class="bookLogo" src="../main-logo.png" />
+              <img class="bookLogo" src="/api/../main-logo.png" />
             </a>
           </div>
   
-          <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
+          <div class="menuOnTopright navbar-end my-auto" aria-label="breadcrumbs">
             <ul class="headerMenu" id="navbar">
               <li id="login"><a href="/login">로그인</a></li>
               <li id="logout" class="hidden"><a href="/">로그아웃</a></li>
-              <li id="adminPage" class="hidden"><a href="/admin">관리자 페이지</a></li>
+              <li id="adminPage" class="hidden">
+                <a href="/admin">관리자 페이지</a>
+              </li>
               <li id="edit" class="hidden">
                 <a href="/edit">회원정보수정</a>
               </li>
               <li id="seeOrder" class="hidden">
-                <a href="/order">주문정보조회</a>
+                <a href="/changeOrder">주문정보조회</a>
               </li>
   
               <li id="register">
@@ -78,8 +80,7 @@
                 <a href="/cart" aria-current="page">
                   <span class="icon">
                     <i class="fas fa-cart-shopping"></i>
-                  </span>
-                  <span>장바구니</span>
+                  </span>장바구니
                 </a>
               </li>
             </ul>
