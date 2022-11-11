@@ -210,6 +210,7 @@ function clickDelBtn(cartItem) {
     }
     carts.delete(id);
     localStorage.setItem('carts', JSON.stringify(Object.fromEntries(carts)));
+    location.reload();
   }
 }
 
