@@ -67,7 +67,7 @@ body {
 
 .main-container {
   width: 90%;
-  height: 130vh;
+  height: 1200px;
   display: flex;
   justify-content: center;
   margin: 2rem auto;
