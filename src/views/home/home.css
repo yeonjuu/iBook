@@ -17,7 +17,6 @@
   margin-left: 15px;
 }
 
-
 .menuOnTopright .headerMenu {
   display: flex;
   flex-direction: row;
@@ -37,7 +36,7 @@
   margin-left: 15px;
   font-size: 18px;
   font-weight: bold;
-  color: rgba(0,0,0,0.8);
+  color: rgba(0, 0, 0, 0.8);
 }
 
 #categoryMenu a:hover {
@@ -49,11 +48,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
 }
 
 .mainBannerImage {
-  background-image: url("https://cdn.pixabay.com/photo/2016/01/20/11/54/book-wall-1151405_1280.jpg");
+  background: url('../mainbanner01.png') no-repeat center;
+  background-size: cover;
   margin: 2rem;
   width: 90%;
   height: 60vh;
@@ -86,7 +85,7 @@
 #thirdRow {
   display: flex;
   flex-direction: row;
-  align-items:center;
+  align-items: center;
   justify-content: space-around;
 
   margin: 2rem 2rem;
@@ -111,7 +110,6 @@
   height: 260px;
 }
 
-
 .navbar-brand {
   display: flex;
   flex: row;
@@ -126,7 +124,6 @@
 .has-text-link {
   color: black;
 }
-
 
 .footerbody {
   margin-top: 3rem;
