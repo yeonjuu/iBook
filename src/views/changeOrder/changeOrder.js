@@ -93,7 +93,7 @@ function createDeatailOrderInfo(targetId) {
         <ul class="orderInfoList"></ul>
       </div>
       <div class="orderBtnBox">
-        <button class="cancelOrderBtn tag is-link is-medium">주문취소</button>
+        <button class="cancelOrderBtn tag is-danger is-medium">주문취소</button>
         <button class="reviseOrderBtn tag is-link is-medium">주문수정</button>
       </div>
     </div>

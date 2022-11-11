@@ -80,7 +80,8 @@ input::-webkit-inner-spin-button {
 }
 
 .selected {
-  background-color: blue;
+  object-fit: cover;
+  background-color: #5055b1;
   opacity: 1;
 }
 
