@@ -98,3 +98,25 @@ export function curtImage(src, title) {
   </div>
   `;
 }
+
+export function getProductTemplate(product) {
+  const { title, author, price, publisher, description } = product;
+  return `
+  <h2>도서조회</h2>
+    <div class="product-wrap">
+        <div class="preview">
+        </div>
+        <div class="product-explain">
+          <span class="title">${title}</span>
+          <span class="author">${author}</span>
+          <span class="publisher">${publisher}</span>
+          <span class="categoryName">category</span>
+          <span class="price">${addCommas(price)}원</span>
+          <p class="description"></p>
+        <p>${description}</p>
+        <button class="check">확인</button>
+        </div>
+    </div>
+  
+  `;
+}
