@@ -155,8 +155,10 @@ ul {
 }
 .productLi {
   font-size: 25px;
+  font-weight: bold;
   margin-bottom: 50px;
 }
+
 .ordererInfoBox,
 .addressLocation {
   font-size: 25px;
@@ -164,6 +166,7 @@ ul {
   grid-template-columns: 40% 60%;
   margin-bottom: 40px;
 }
+
 .orderInfoBox {
   display: grid;
   grid-template-columns: 20% 70%;
