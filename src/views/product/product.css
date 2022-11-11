@@ -213,6 +213,7 @@ a {
 }
 
 .cart {
+  cursor: pointer;
   width: 110px;
   height: 50px;
   margin-right: 10px;
@@ -224,6 +225,11 @@ a {
   border-style: none;
 }
 
+.cart:hover {
+  background-color: #3274aa;
+}
+
+
 .cart a {
   text-decoration: none;
   color: inherit;
@@ -234,11 +240,15 @@ a {
   width: 110px;
   height: 50px;
   border-radius: 5px;
-  background-color: #03d1b2;
+  background-color: #5055b1;
   color: antiquewhite;
   font-size: medium;
   font-weight: bold;
   border-style: none;
+}
+
+.buyBtn:hover {
+  background-color: #424695;
 }
 
 .buyBtn a {
