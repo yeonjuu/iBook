@@ -51,10 +51,16 @@ async function showProductsList() {
     booksList.insertAdjacentHTML('beforeend', nothingToShow);
   }
 
+<<<<<<< HEAD
   for (let i = 0; i < productsList.length; i++) {
     const summary = productsList[i].description.slice(0, 62);
     console.log(summary);
     const toShow = `
+=======
+    for (let i=0; i < productsList.length; i++) {
+
+        const toShow = `
+>>>>>>> ded5247a63cd0ea88d4caefcedd240ee35c7aaa8
         <div class="categoryBooksList">
             <a href="/products/${
               productsList[i]._id
@@ -67,7 +73,11 @@ async function showProductsList() {
             <h4 class="price">${useful.addCommas(productsList[i].price)}원</h4>
             <h5 class="author">저자 : ${productsList[i].author}</h5>
             <h5 class="publisher">출판사 : ${productsList[i].publisher}</h5>
+<<<<<<< HEAD
             <h5 class="description">${summary}...</h5>
+=======
+            <h5 class="description">${productsList[i].description.slice(0,29)}...</h5>
+>>>>>>> ded5247a63cd0ea88d4caefcedd240ee35c7aaa8
             </div>
 
             <div class="buttons">
