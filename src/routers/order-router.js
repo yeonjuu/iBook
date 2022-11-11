@@ -1,18 +1,11 @@
 import { Router } from 'express';
-import is from '@sindresorhus/is';
 import { orderService } from '../services';
-import { adminCheck } from '../middlewares';
+import { adminCheck, emptyObejctCheck } from '../middlewares';
 
 const orderRouter = Router();
 
-orderRouter.post('/', async (req, res, next) => {
+orderRouter.post('/', emptyObejctCheck, async (req, res, next) => {
   try {
-    if (is.emptyObject(req.body)) {
-      throw new Error(
-        'headers의 Content-Type을 application/json으로 설정해주세요'
-      );
-    }
-
     const {
       name,
       userId,
@@ -71,14 +64,8 @@ orderRouter.get('/:orderId', async function (req, res, next) {
   }
 });
 
-orderRouter.put('/:orderId', async function (req, res, next) {
+orderRouter.put('/:orderId', emptyObejctCheck, async function (req, res, next) {
   try {
-    if (is.emptyObject(req.body)) {
-      throw new Error(
-        'headers의 Content-Type을 application/json으로 설정해주세요'
-      );
-    }
-
     const orderId = req.params.orderId;
     const {
       name,
