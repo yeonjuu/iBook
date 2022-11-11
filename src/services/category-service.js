@@ -29,7 +29,7 @@ class CategoryService {
   async getCategory(categoryId) {
     const category = await this.categoryModel.findById(categoryId);
 
-    return category;
+    return category[0];
   }
 
   async setCategory(categoryInfoRequired, toUpdate) {
