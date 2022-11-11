@@ -3,6 +3,21 @@
   text-decoration: none;
 }
 
+.header nav {
+  display: flex;
+  flex-direction: row;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .header .menuOnTopright .headerMenu li a {
   color: black;
   opacity: 60%;
@@ -51,7 +66,7 @@
 }
 
 .mainBannerImage {
-  background: url('../mainbanner01.png') no-repeat center;
+  background: url('../mainbanner.png') no-repeat center;
   background-size: cover;
   margin: 2rem;
   width: 90%;
