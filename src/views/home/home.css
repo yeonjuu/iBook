@@ -3,6 +3,18 @@
   text-decoration: none;
 }
 
+.header .menuOnTopright .headerMenu li a {
+  color: black;
+  opacity: 60%;
+  font-weight: 500;
+  margin-left: 15px;
+}
+
+.menuOnTopright .headerMenu {
+  display: flex;
+  flex-direction: row;
+}
+
 .bookLogo {
   width: 150px;
   height: 90px;
@@ -75,15 +87,15 @@
 #thirdRow div {
   width: 170px;
   height: 250px;
-  object-fit: cover;
+  /* object-fit: cover; */
   background-color: aliceblue;
 }
 
 #firstRow div img,
 #secondRow div img,
 #thirdRow div img {
-  width: 100%;
-  height: 100%;
+  width: 170px;
+  height: 250px;
   object-fit: cover;
 } 
 

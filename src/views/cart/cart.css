@@ -51,6 +51,14 @@ input::-webkit-inner-spin-button {
   text-align: center;
 }
 
+.deleteSelected {
+  font-size: medium;
+}
+
+.allDelBtn {
+  font-size: medium;
+}
+
 .select,
 .selectAll,
 .deleteBtn {
@@ -227,6 +235,18 @@ input::-webkit-inner-spin-button {
 .bookLogo {
   width: 150px;
   height: 90px;
+}
+
+.header .menuOnTopright .headerMenu li a {
+  color: black;
+  opacity: 60%;
+  font-weight: 500;
+  margin-left: 15px;
+}
+
+.menuOnTopright .headerMenu {
+  display: flex;
+  flex-direction: row;
 }
 
 /*footer*/

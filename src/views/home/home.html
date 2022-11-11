@@ -33,60 +33,62 @@
   </head>
   <body>
     <!-- 헤더 -->
-    <nav class="navbar" role="navigation" aria-label="main navigation">
-      <div class="container mt-3">
-        <div class="navbar-brand">
-          <!--햄버거 메뉴-->
-
-          <!-- <nav id="navigation">
-            <div class="hamburger">
-              <span class="bar"></span>
-              <span class="bar"></span>
-              <span class="bar"></span>
-            </div>
-
-            <ul id="hamburgerMenu" class="hidden"></ul>
-          </nav> -->
-
-          <!---->
-
-          <a class="mainLogo" href="/">
-            <!-- <span class="has-text-link">IBOOK</span> -->
-            <img class="bookLogo" src="Ibook.png" />
-          </a>
+    <header class="header">
+      <nav class="navbar" role="navigation" aria-label="main navigation">
+        <div class="container mt-3">
+          <div class="navbar-brand">
+            <!--햄버거 메뉴-->
+  
+            <!-- <nav id="navigation">
+              <div class="hamburger">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+              </div>
+  
+              <ul id="hamburgerMenu" class="hidden"></ul>
+            </nav> -->
+  
+            <!---->
+  
+            <a class="mainLogo" href="/">
+              <!-- <span class="has-text-link">IBOOK</span> -->
+              <img class="bookLogo" src="/api/../main-logo.png" />
+            </a>
+          </div>
+  
+          <div class="menuOnTopright navbar-end my-auto" aria-label="breadcrumbs">
+            <ul class="headerMenu" id="navbar">
+              <li id="login"><a href="/login">로그인</a></li>
+              <li id="logout" class="hidden"><a href="/">로그아웃</a></li>
+              <li id="adminPage" class="hidden">
+                <a href="/admin">관리자 페이지</a>
+              </li>
+              <li id="edit" class="hidden">
+                <a href="/edit">회원정보수정</a>
+              </li>
+              <li id="seeOrder" class="hidden">
+                <a href="/changeOrder">주문정보조회</a>
+              </li>
+  
+              <li id="register">
+                <a href="/register"
+                  ><i class="fa-solid fa-user-plus"></i>회원가입</a
+                >
+              </li>
+              <li>
+                <a href="/cart" aria-current="page">
+                  <span class="icon">
+                    <i class="fas fa-cart-shopping"></i>
+                  </span>장바구니
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
+      </nav>
+    </header>
 
-        <div class="navbar-end breadcrumb my-auto" aria-label="breadcrumbs">
-          <ul class="headerMenu" id="navbar">
-            <li id="login"><a href="/login">로그인</a></li>
-            <li id="logout" class="hidden"><a href="/">로그아웃</a></li>
-            <li id="adminPage" class="hidden">
-              <a href="/admin">관리자 페이지</a>
-            </li>
-            <li id="edit" class="hidden">
-              <a href="/edit">회원정보수정</a>
-            </li>
-            <li id="seeOrder" class="hidden">
-              <a href="/changeOrder">주문정보조회</a>
-            </li>
-
-            <li id="register">
-              <a href="/register"
-                ><i class="fa-solid fa-user-plus"></i>회원가입</a
-              >
-            </li>
-            <li>
-              <a href="/cart" aria-current="page">
-                <span class="icon">
-                  <i class="fas fa-cart-shopping"></i>
-                </span>
-                <span>장바구니</span>
-              </a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
 
     <ul id="categoryMenu"></ul>
 
