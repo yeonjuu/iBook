@@ -81,8 +81,8 @@ https://youtu.be/TFE89cpHwgQ
 | -------------------------------------------- | -------------------------------------------- |
 | ![image](https://i.ibb.co/vJVz9jj/image.png) | ![image](https://i.ibb.co/q5RWmY3/image.png) |
 | 메인 페이지                                  | 회원가입 화면                                |
-| ![image](https://i.ibb.co/gDwBy5P/image.png) |                                              |
-| 로그인 페이지                                | 앞으로 추가할 페이지                         |
+| ![image](https://i.ibb.co/gDwBy5P/image.png) | 
+| 로그인 페이지                                |                     |
 
 <br />
 
@@ -95,9 +95,6 @@ https://youtu.be/TFE89cpHwgQ
 ### 2-1. 프론트엔드
 
 - **Vanilla javascript**, html, css (**Bulma css**)
-- Font-awesome
-- Daum 도로명 주소 api
-- 이외
 
 ### 2-2. 백엔드
 
@@ -122,7 +119,11 @@ https://youtu.be/TFE89cpHwgQ
 
 | 이름   | 담당 업무 |
 | ------ | --------- |
-| 엘리스 | 팀장/개발 |
+| 이지현 | 팀장/백엔드 |
+| 홍정완 | 백엔드 |
+| 김민경 | 프론트엔드 |
+| 박지찬 | 프론트엔드 |
+| 신연주 | 프론트엔드 |
 
 <br />
 
