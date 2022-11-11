@@ -8,13 +8,14 @@ let mapOrdersInfo;
 const serachTemplate = function (h2) {
   return `
             <h2>${h2}</h2>
-            <div class="search-wrap">
+            <div class="search-wrap search-order">
               <input class="searchInput" placeholder="주문번호 입력.." />
               <input type="button" value="검색" class="searchBtn2" />
               <input type="button" value="전체조회" class="searchAll2" />
-            </div>
+              <button class="revise">수정</button>
+              </div>
             <ul class="list"></ul>
-            <button class="revise">수정</button>`;
+            `;
 };
 
 function orderListTemplate(id, bookList, totalPrice, orderStatus) {
@@ -139,7 +140,7 @@ landing.onclick = (event) => {
     }
   } else if (event.target.classList.contains('searchAll2')) {
     allOrderListRender();
-  } else if (event.target.classList.contains('searchBtn')) {
+  } else if (event.target.classList.contains('searchBtn2')) {
     search();
   }
 };
