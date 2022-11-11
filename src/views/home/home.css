@@ -73,16 +73,18 @@
 #firstRow div,
 #secondRow div,
 #thirdRow div {
-  width: 180px;
+  width: 170px;
   height: 250px;
+  object-fit: cover;
   background-color: aliceblue;
 }
 
 #firstRow div img,
 #secondRow div img,
 #thirdRow div img {
-  width: 180px;
-  height: 250px;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 } 
 
 
@@ -152,18 +154,3 @@
 .hidden {
   display: none !important;
 }
-
-
-/* hamburger */
-
-.hamburger .bar {
-  display: block;
-  width: 30px;
-  height: 7px;
-  margin-top: 3px;
-  border-radius: 3px;
-  background-color: gray;
-}
-
-
-/*  */
