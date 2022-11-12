@@ -1,11 +1,5 @@
 # 인터넷 서점 iBook
 
-<div>
-
-<img alt="쇼핑-데모 로고" src="http://kdt-sw3-team02.elicecoding.com/main-logo.png">
-
-</div>
-
 <br />
 
 ## 1. 서비스 소개
