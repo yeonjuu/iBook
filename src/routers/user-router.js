@@ -1,5 +1,4 @@
 import { Router } from 'express';
-import is from '@sindresorhus/is';
 import { loginRequired, adminCheck, emptyObejctCheck } from '../middlewares';
 import { userService } from '../services';
 
@@ -68,12 +67,6 @@ userRouter.put(
   emptyObejctCheck,
   async function (req, res, next) {
     try {
-      if (is.emptyObject(req.body)) {
-        throw new Error(
-          'headers의 Content-Type을 application/json으로 설정해주세요'
-        );
-      }
-
       const userId = req.params.userId;
       const { fullName, password, address, phoneNumber, currentPassword } =
         req.body;
@@ -117,7 +110,6 @@ userRouter.put(
   async function (req, res, next) {
     try {
       const userId = req.params.userId;
-      console.log(req.body);
       const {
         fullName,
         password,
