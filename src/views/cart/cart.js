@@ -60,6 +60,14 @@ function addAllEvents() {
     inputPrice(eventCartItem);
   });
   buyBtn.addEventListener('click', function () {
+    if (!isLogin) {
+      let isGo = confirm(
+        '로그인이 필요한 서비스입니다. \n로그인창으로 이동하시겠습니까?'
+      );
+      if (isGo) {
+        window.location.href = '/login';
+      }
+    } 
     localStorage.removeItem('orderId');
     localStorage.removeItem('cart');
     if (checkList.length === 0) {
