@@ -1,8 +1,8 @@
-# 쇼핑몰 웹 서비스 - 기본 코드
+# 인터넷 서점 iBook
 
 <div>
 
-<img alt="쇼핑-데모 로고" src="https://i.ibb.co/xSZHxmy/image.png">
+<img alt="쇼핑-데모 로고" src="src\views\mainbanner.png">
 
 </div>
 
@@ -10,14 +10,15 @@
 
 ## 1. 서비스 소개
 
-#### 제품 등록, 장바구니 추가, 주문하기 등 쇼핑몰의 핵심 서비스를 구현합니다.
+#### 도서 등록, 장바구니 추가, 주문하기 등 쇼핑몰의 핵심 서비스를 구현했습니다.
 
 1. 회원가입, 로그인, 회원정보 수정 등 **유저 정보 관련 CRUD**
-2. **제품 목록**을 조회 및, **제품 상세 정보**를 조회 가능함.
-3. 장바구니에 제품을 추가할 수 있으며, **장바구니에서 CRUD** 작업이 가능함.
-4. 장바구니는 서버 DB가 아닌, 프론트 단에서 저장 및 관리됨 (localStorage, indexedDB 등)
-5. 장바구니에서 주문을 진행하며, **주문 완료 후 조회 및 삭제**가 가능함.
-6. 추가 기능 ...
+2. **도서 목록**을 조회 및, **제품 상세 정보**를 조회 가능함.
+3. 도서 목록에서 검색 기능을 지원함.
+4. 장바구니에 제품을 추가할 수 있으며, **장바구니에서 CRUD** 작업이 가능함.
+5. 장바구니는 서버 DB가 아닌, 프론트 단에서 저장 및 관리됨 (localStorage, indexedDB 등)
+6. 장바구니에서 주문을 진행하며, **주문 완료 후 조회 및 삭제**가 가능함.
+7. 도서 상품의 이미지를 서버에 업로드할 수 있음.
 
 <br />
 
@@ -65,7 +66,6 @@ https://youtu.be/TFE89cpHwgQ
 도서조회 : https://youtu.be/rwXChVFDHBw
 </details>
 
-
 추후 관련 영상을 삽입하세요 (하기 2가지 방법 가능)
 
 1. 화면녹화 -> 유튜브 업로드 -> 유튜브 링크 삽입
@@ -77,14 +77,14 @@ https://youtu.be/TFE89cpHwgQ
 
 ### 1-3. 페이지 별 화면
 
-|                                              |                                              |
-| -------------------------------------------- | -------------------------------------------- |
-| ![image](https://i.ibb.co/vJVz9jj/image.png) | ![image](https://i.ibb.co/q5RWmY3/image.png) |
-| 메인 페이지                                  | 회원가입 화면                                |
-| ![image](https://i.ibb.co/gDwBy5P/image.png) | <img width="300" alt="관리자도서조회" src="https://user-images.githubusercontent.com/46666765/201366327-65f1f00a-b192-434f-9e8d-eccdfc6c8b76.png">
-| 로그인 페이지                                |      관리자페이지 - 도서조회              |
-| <img width="300" src="https://user-images.githubusercontent.com/46666765/201366341-38f3639a-19d0-45f2-92e3-469c4f26e8f0.png"> | <img width="300" alt="관리자주문조회" src="https://user-images.githubusercontent.com/46666765/201366348-96750029-7fac-40d2-820e-e0c4893ce43f.png">
-| 관리자도서수정                              |      관리자주문조회              |
+|                                                                                                                               |                                                                                                                                                    |
+| ----------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------- |
+| ![image](https://i.ibb.co/vJVz9jj/image.png)                                                                                  | ![image](https://i.ibb.co/q5RWmY3/image.png)                                                                                                       |
+| 메인 페이지                                                                                                                   | 회원가입 화면                                                                                                                                      |
+| ![image](https://i.ibb.co/gDwBy5P/image.png)                                                                                  | <img width="300" alt="관리자도서조회" src="https://user-images.githubusercontent.com/46666765/201366327-65f1f00a-b192-434f-9e8d-eccdfc6c8b76.png"> |
+| 로그인 페이지                                                                                                                 | 관리자페이지 - 도서조회                                                                                                                            |
+| <img width="300" src="https://user-images.githubusercontent.com/46666765/201366341-38f3639a-19d0-45f2-92e3-469c4f26e8f0.png"> | <img width="300" alt="관리자주문조회" src="https://user-images.githubusercontent.com/46666765/201366348-96750029-7fac-40d2-820e-e0c4893ce43f.png"> |
+| 관리자도서수정                                                                                                                | 관리자주문조회                                                                                                                                     |
 
 <br />
 
@@ -103,7 +103,7 @@ https://youtu.be/TFE89cpHwgQ
 - **Express** (nodemon, babel-node로 실행됩니다.)
 - Mongodb, Mongoose
 - cors
-- 이외
+- multer
 
 ## 3. 인프라 구조
 
@@ -119,13 +119,13 @@ https://youtu.be/TFE89cpHwgQ
 
 ## 4. 제작자
 
-| 이름   | 담당 업무 |
-| ------ | --------- |
+| 이름   | 담당 업무   |
+| ------ | ----------- |
 | 이지현 | 팀장/백엔드 |
-| 홍정완 | 백엔드 |
-| 김민경 | 프론트엔드 |
-| 박지찬 | 프론트엔드 |
-| 신연주 | 프론트엔드 |
+| 홍정완 | 백엔드      |
+| 김민경 | 프론트엔드  |
+| 박지찬 | 프론트엔드  |
+| 신연주 | 프론트엔드  |
 
 <br />
 
@@ -151,13 +151,6 @@ PORT=5000
 JWT_SECERT_KEY=<랜덤 문자열>
 ```
 
-앱을 테스트하고 싶은 경우 다음의 몽고DB URL을 이용하세요.
-
-- mongodb+srv://elice:W8RsZsSX2Xs1ydE4@cluster0.4gz9ij3.mongodb.net/?retryWrites=true&w=majority
-
-단, 해당 URL은 READ만 가능하며 회원 가입을 하거나 상품 정보를 추가하는 등의 동작은 할 수 없습니다. <br>
-주어진 URL은 테스트 용이므로 실제 개발을 할 때는 해당 URL을 사용하지 않고, 반드시 직접 설치한 몽고DB의 URL을 사용하시기를 바랍니다.
-
 4. express 앱을 실행
 
 ```bash
@@ -171,23 +164,6 @@ npm start
 ### 1.0.0
 
 <br>
-
-## 7. FAQ
-
-<details><summary>1. 배포된 페이지는 어디에서 확인할 수 있나요?</summary>
-
-  <p>
-    프로젝트 기본 코드는 따로 배포하지 않았습니다, 레포지토리를 클론하여 직접 실행해보세요.
-  </p>
-
-</details>
-<details><summary>2. env 파일이 보이지 않습니다.</summary>
-
-  <p>
-    해당 파일은 직접 만들어서 코드를 작성해야 합니다, DB를 비롯한 서비스의 계정 정보는 <b>절대로</b> Git에 함부로 공유하면 안되기 때문에 유의 바랍니다.
-  </p>
-
-</details>
 
 ---
 
