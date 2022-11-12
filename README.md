@@ -2,7 +2,7 @@
 
 <div>
 
-<img alt="쇼핑-데모 로고" src=".\src\views\mainbanner.png">
+<img alt="쇼핑-데모 로고" src="http://kdt-sw3-team02.elicecoding.com/main-logo.png">
 
 </div>
 
