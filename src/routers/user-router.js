@@ -70,7 +70,6 @@ userRouter.put(
       const userId = req.params.userId;
       const { fullName, password, address, phoneNumber, currentPassword } =
         req.body;
-      g;
       const userInfoRequired = { userId, currentPassword };
       const toUpdate = {
         ...(fullName && { fullName }),
