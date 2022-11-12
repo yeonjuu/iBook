@@ -67,7 +67,9 @@ function addAllEvents() {
       if (isGo) {
         window.location.href = '/login';
       }
-    } 
+    } else {
+
+    
     localStorage.removeItem('orderId');
     localStorage.removeItem('cart');
     if (checkList.length === 0) {
@@ -84,8 +86,8 @@ function addAllEvents() {
       );
 
       location.replace('/order');
-    }
-  });
+    } }
+  }); 
   allDelBtn.addEventListener('click', clickAllDelBtn);
 }
 
