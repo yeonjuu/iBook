@@ -37,47 +37,34 @@
 
 <details><summary>사용자 회원가입, 로그인</summary>
 
-![image](https://user-images.githubusercontent.com/91174156/172159634-1e105633-9948-464e-a540-5429200a1353.gif)
+https://www.youtube.com/watch?v=JRz-7LWK6cI
 
 </details>
 
 <details><summary>카테고리 추가 및 반영</summary>
-
-추후 관련 영상을 삽입하세요 (하기 2가지 방법 가능)
-
-1. 화면녹화 -> 유튜브 업로드 -> 유튜브 링크 삽입
-2. 화면움짤녹화 -> 움짤삽입 (https://www.screentogif.com/ 활용가능)
+https://youtu.be/r_hdWoW8CwE
 
 </details>
 
 <details><summary>제품 추가 및 반영</summary>
-
-추후 관련 영상을 삽입하세요 (하기 2가지 방법 가능)
-
-1. 화면녹화 -> 유튜브 업로드 -> 유튜브 링크 삽입
-2. 화면움짤녹화 -> 움짤삽입 (https://www.screentogif.com/ 활용가능)
+https://youtu.be/zS4_ErTgk5s
 
 </details>
 
 <details><summary>장바구니 기능</summary>
-
-추후 관련 영상을 삽입하세요 (하기 2가지 방법 가능)
-
-1. 화면녹화 -> 유튜브 업로드 -> 유튜브 링크 삽입
-2. 화면움짤녹화 -> 움짤삽입 (https://www.screentogif.com/ 활용가능)
-
+https://youtu.be/xkYeHTbvIr0
 </details>
 
 <details><summary>주문 기능</summary>
-
-추후 관련 영상을 삽입하세요 (하기 2가지 방법 가능)
-
-1. 화면녹화 -> 유튜브 업로드 -> 유튜브 링크 삽입
-2. 화면움짤녹화 -> 움짤삽입 (https://www.screentogif.com/ 활용가능)
-
+https://youtu.be/TFE89cpHwgQ
 </details>
 
 <details><summary>관리자 페이지</summary>
+카테고리관리 : https://youtu.be/jqAAhPTktpI
+주문관리 : https://youtu.be/asf0ic48b1U
+도서조회 : https://youtu.be/rwXChVFDHBw
+</details>
+
 
 추후 관련 영상을 삽입하세요 (하기 2가지 방법 가능)
 
@@ -92,10 +79,12 @@
 
 |                                              |                                              |
 | -------------------------------------------- | -------------------------------------------- |
-| ![image](https://i.ibb.co/jyxjcd3/image.png) | ![image](https://i.ibb.co/Q860RKz/image.png) |
+| ![image](https://i.ibb.co/vJVz9jj/image.png) | ![image](https://i.ibb.co/q5RWmY3/image.png) |
 | 메인 페이지                                  | 회원가입 화면                                |
-| ![image](https://i.ibb.co/RpYN379/image.png) |                                              |
-| 로그인 페이지                                | 앞으로 추가할 페이지                         |
+| ![image](https://i.ibb.co/gDwBy5P/image.png) | <img width="300" alt="관리자도서조회" src="https://user-images.githubusercontent.com/46666765/201366327-65f1f00a-b192-434f-9e8d-eccdfc6c8b76.png">
+| 로그인 페이지                                |      관리자페이지 - 도서조회              |
+| <img width="300" src="https://user-images.githubusercontent.com/46666765/201366341-38f3639a-19d0-45f2-92e3-469c4f26e8f0.png"> | <img width="300" alt="관리자주문조회" src="https://user-images.githubusercontent.com/46666765/201366348-96750029-7fac-40d2-820e-e0c4893ce43f.png">
+| 관리자도서수정                              |      관리자주문조회              |
 
 <br />
 
@@ -108,9 +97,6 @@
 ### 2-1. 프론트엔드
 
 - **Vanilla javascript**, html, css (**Bulma css**)
-- Font-awesome
-- Daum 도로명 주소 api
-- 이외
 
 ### 2-2. 백엔드
 
@@ -135,7 +121,11 @@
 
 | 이름   | 담당 업무 |
 | ------ | --------- |
-| 엘리스 | 팀장/개발 |
+| 이지현 | 팀장/백엔드 |
+| 홍정완 | 백엔드 |
+| 김민경 | 프론트엔드 |
+| 박지찬 | 프론트엔드 |
+| 신연주 | 프론트엔드 |
 
 <br />
 
