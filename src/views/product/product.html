@@ -5,37 +5,72 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="product.css" />
-    <!-- <link
+    <link
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css"
-    /> -->
+    />
+    <!-- 아이콘 -->
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="/api/../pageLogo.png"
+    />
+    <!-- 폰트 어썸: 아이콘 -->
+    <script
+      defer
+      src="https://kit.fontawesome.com/9daa42bcef.js"
+      crossorigin="anonymous"
+    ></script>
     <script src="product.js" type="module" defer></script>
-    <title>상품조회</title>
+    <title class="productTitle">상품조회</title>
   </head>
   <body>
-    <header>
-      <h2><a href="#">iBook</a></h2>
-      <div>
-        <span>Login</span>
-        <span>Cart</span>
-      </div>
+    <header class="header">
+      <nav class="" role="navigation" aria-label="main navigation">
+        <div class="container mt-3">
+          <div class="">
+  
+            <a class="mainLogo" href="/">
+              <!-- <span class="has-text-link">IBOOK</span> -->
+              <img class="bookLogo" src="/api/../main-logo.png" />
+            </a>
+          </div>
+  
+          <div class="menuOnTopright">
+            <ul class="headerMenu" id="#">
+              <li id="login"><a href="/login">로그인</a></li>
+              <li id="logout" class="hidden"><a href="/">로그아웃</a></li>
+              <li id="adminPage" class="hidden">
+                <a href="/admin">관리자 페이지</a>
+              </li>
+              <li id="edit" class="hidden">
+                <a href="/edit">회원정보수정</a>
+              </li>
+              <li id="seeOrder" class="hidden">
+                <a href="/changeOrder">주문정보조회</a>
+              </li>
+  
+              <li id="register">
+                <a href="/register"
+                  ><i class="fa-solid fa-user-plus"></i>회원가입</a
+                >
+              </li>
+              <li>
+                <a href="/cart" aria-current="page">
+                  <span class="icon">
+                    <i class="fas fa-cart-shopping"></i>
+                  </span>장바구니
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
     </header>
-    <nav>
-      <a
-        role="button"
-        class="navbar-burger"
-        aria-label="menu"
-        aria-expanded="false"
-        data-target="navbarBasicExample"
-      >
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-      </a>
-      <ul>
-        <li>Home</li>
-      </ul>
-    </nav>
+
+    <ul id="categoryMenu"></ul>
+
     <div class="main-container">
       <div class="product">
         <div class="top p-5">
@@ -46,27 +81,60 @@
             <span class="title">제목</span>
             <span class="author">작가</span>
             <span class="publisher">출판사</span>
-            <spna class="category">카테고리</spna>
+            <span class="category">카테고리</span>
             <span class="price">가격</span>
-            <span>수량</span>
-            <span class="count-wrap">
-              <button class="minus">-</button>
-              <span class="count">1</span>
-              <button class="plus">+</button>
-            </span>
+            <div class="quantity">
+              <span>수량</span>
+              <div class="count-wrap">
+                <button class="minus">−</button>
+                <span class="count">1</span>
+                <button class="plus">+</button>
+              </div>
+            </div>
+
+            <div class="order-wrap">
+              <span>총 상품 금액 : <span class="totalPrice">0</span></span>
+              <div class="btns">
+                <button class="btn cart">장바구니</button>
+                <button class="buyBtn order">바로구매</button>
+              </div>
+            </div>
           </div>
         </div>
-        <div class="order-wrap">
-          <span class="total">총 결제 금액</span>
-          <a href="/cart" class="btn cart">장바구니</a>
-          <a href="#" class="btn">바로구매</a>
-        </div>
+
+        <div class="mediumLine"></div>
+
         <div class="bottom">
           <h2>상세설명</h2>
           <p class="description"></p>
         </div>
       </div>
     </div>
-    <footer>footer 정보</footer>
+
+    <footer>
+      <div class="footerbody">
+        <div class="footerCompany">IBook</div>
+        <div class="businessInfo">사업자 정보</div>
+        <div class="footerContents">
+          <a href="#"><span>이용약관</span></a>
+          <a href="#"><span>개인정보처리방침</span></a>
+          <a href="#"><span>청소년보호정책</span></a>
+          <a href="#"><span>대량주문안내</span></a>
+          <a href="#"><span>채용공고</span></a>
+        </div>
+        <div class="businessDetailOne">
+          <span>대표이사 : iiiiii</span>
+          <span>서울특별시 종로구 종로 1</span>
+          <span>사업자등록번호 : 102-88-11234</span>
+        </div>
+        <div class="businessDetailTwo">
+          <span>대표전화 : 1234-1234(발신자 부담전화)</span>
+          <span>FAX : 0123-456-7899(지역번호 공통)</span>
+          <span>서울시 서울특별시 통신판매업신고번호 : 제 653호 </span>
+          <button>사업자 정보 확인</button>
+        </div>
+        <div class="finalFooter">©I BOOK CENTRE</div>
+      </div>
+    </footer>
   </body>
 </html>

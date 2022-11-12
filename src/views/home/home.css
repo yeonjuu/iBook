@@ -3,20 +3,59 @@
   text-decoration: none;
 }
 
+.header nav {
+  display: flex;
+  flex-direction: row;
+  top: 0;
+  left: 0;
+  right: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header .menuOnTopright .headerMenu li a {
+  color: black;
+  opacity: 60%;
+  font-weight: 500;
+  margin-left: 15px;
+}
+
+.header .menuOnTopright .headerMenu li a:hover {
+  color: #bd3651;
+  opacity: 60%;
+  font-weight: 500;
+  margin-left: 15px;
+}
+
+.menuOnTopright .headerMenu {
+  display: flex;
+  flex-direction: row;
+}
+
 .bookLogo {
   width: 150px;
   height: 90px;
 }
 
-#category {
+#categoryMenu {
   margin-left: 5rem;
   display: flex;
 }
 
-#category a {
+#categoryMenu a {
   margin-left: 15px;
   font-size: 18px;
-  color: black;
+  font-weight: bold;
+  color: rgba(0, 0, 0, 0.8);
+}
+
+#categoryMenu a:hover {
+  color: #bd3651;
 }
 
 .mainBanner {
@@ -24,11 +63,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-
 }
 
 .mainBannerImage {
-  background-image: url("https://cdn.pixabay.com/photo/2016/01/20/11/54/book-wall-1151405_1280.jpg");
+  background: url('../mainbanner.png') no-repeat center;
+  background-size: cover;
   margin: 2rem;
   width: 90%;
   height: 60vh;
@@ -44,12 +83,24 @@
   /* background-color: floralwhite; */
 }
 
+.displayBooks {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rowBooks a {
+  text-decoration: none;
+  color: inherit;
+  font-weight: 600;
+}
+
 #firstRow,
 #secondRow,
 #thirdRow {
   display: flex;
   flex-direction: row;
-  align-items:center;
+  align-items: center;
   justify-content: space-around;
 
   margin: 2rem 2rem;
@@ -57,21 +108,22 @@
   height: 40vh;
 }
 
-#firstRow div,
-#secondRow div,
-#thirdRow div {
-  width: 180px;
+.rowBooks {
+  background-color: aliceblue;
+  width: 170px;
   height: 250px;
-  background-color: hotpink;
 }
 
-#firstRow div img,
-#secondRow div img,
-#thirdRow div img {
-  width: 180px;
+.bookImages {
+  width: 170px;
   height: 250px;
-} 
+  object-fit: cover;
+}
 
+.bookImages:hover {
+  width: 180px;
+  height: 260px;
+}
 
 .navbar-brand {
   display: flex;
@@ -87,7 +139,6 @@
 .has-text-link {
   color: black;
 }
-
 
 .footerbody {
   margin-top: 3rem;
@@ -138,20 +189,4 @@
 
 .hidden {
   display: none !important;
-
 }
-
-
-/* hamburger */
-
-.hamburger .bar {
-  display: block;
-  width: 30px;
-  height: 7px;
-  margin-top: 3px;
-  border-radius: 3px;
-  background-color: gray;
-}
-
-
-/*  */

@@ -1,40 +1,62 @@
-import { model } from "mongoose";
-import { CategorySchema } from "../schemas/category-schema";
+import { model, Types } from 'mongoose';
+import { CategorySchema } from '../schemas/category-schema';
 
-const Category = model("categories", CategorySchema);
+const Category = model('categories', CategorySchema);
 
 export class CategoryModel {
-  async findByName(name) {
-    const category = await Category.findOne({ name });
-    return category;
+  findByName(name) {
+    return Category.findOne({ name });
   }
 
-  async findById(categoryId) {
-    const category = await Category.findOne({ _id: categoryId });
-    return category;
+  findById(categoryId) {
+    return Category.aggregate([
+      {
+        $lookup: {
+          from: 'products',
+          localField: '_id',
+          foreignField: 'category',
+          as: 'products',
+        },
+      },
+      {
+        $match: {
+          _id: Types.ObjectId(categoryId),
+        },
+      },
+    ]);
   }
 
-  async create(categoryInfo) {
-    const createdNewCategory = await Category.create(categoryInfo);
-    return createdNewCategory;
+  create({ name }) {
+    return Category.create({ name });
   }
 
-  async findAll() {
-    const categories = await Category.find({});
-    return categories;
+  findAll() {
+    return Category.aggregate([
+      {
+        $lookup: {
+          from: 'products',
+          localField: '_id',
+          foreignField: 'category',
+          as: 'products',
+        },
+      },
+    ]);
   }
 
   async update({ categoryId, update }) {
     const filter = { _id: categoryId };
     const option = { returnOriginal: false };
+    const updatedCategory = await Category.findOneAndUpdate(
+      filter,
+      update,
+      option
+    );
 
-    const updatedCategory = await Category.findOneAndUpdate(filter, update, option);
     return updatedCategory;
   }
 
-  async delete(categoryId) {
-    const category = await Category.deleteOne({ _id: categoryId });
-    return category
+  delete(categoryId) {
+    return Category.deleteOne({ _id: categoryId });
   }
 }
 

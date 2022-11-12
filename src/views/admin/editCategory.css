@@ -1,0 +1,47 @@
+.addCategoryInputDiv {
+  width: 300px;
+  height: 50px;
+  margin-right: 5px;
+}
+
+.addCategory {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1rem;
+}
+
+.addCategory #addBtn {
+  width: 130px;
+  background-color: #5055b1;
+}
+
+.addCategory #addBtn:hover {
+  background-color: #424695;
+}
+
+.editDeleteCategory {
+  display: flex;
+  flex-direction: column;
+  height: 800px;
+  overflow: auto;
+}
+.editDeleteCategory::-webkit-scrollbar {
+  display: none;
+}
+.list::-webkit-scrollbar {
+  display: none;
+}
+
+.editDeleteDiv {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1rem;
+}
+
+.editDeleteDiv {
+  height: 50px;
+}
+
+.editDeleteDiv .editBtn {
+  margin: 0 5px;
+}

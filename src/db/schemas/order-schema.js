@@ -1,8 +1,12 @@
-import { Schema } from "mongoose";
+import { Schema } from 'mongoose';
 
 const OrderSchema = new Schema(
   {
     name: {
+      type: String,
+      required: true,
+    },
+    userId: {
       type: String,
       required: true,
     },
@@ -20,7 +24,7 @@ const OrderSchema = new Schema(
     },
     status: {
       type: String,
-      default: "주문완료",
+      default: '주문완료',
     },
     email: {
       type: String,
@@ -31,14 +35,22 @@ const OrderSchema = new Schema(
     password: {
       type: Number,
     },
-    products: [{
-      type: Schema.Types.ObjectId,
-      required: true,
-      ref: 'products'
-    }]
+    products: [
+      {
+        productId: {
+          type: Schema.Types.ObjectId,
+          required: true,
+          ref: 'products',
+        },
+        qty: {
+          type: Number,
+          required: true,
+        },
+      },
+    ],
   },
   {
-    collection: "orders",
+    collection: 'orders',
     timestamps: true,
   }
 );

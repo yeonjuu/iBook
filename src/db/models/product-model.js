@@ -4,49 +4,46 @@ import { ProductSchema } from '../schemas/product-schema';
 const Product = model('products', ProductSchema);
 
 export class ProductModel {
-  async findByTitle(title) {
-    const product = await Product.findOne({ title });
-    return product;
+  findByTitle(title) {
+    return Product.findOne({ title });
   }
 
-  async findById(productId) {
-    const product = await Product.findOne({ _id: productId });
-    return product;
-  }
-
-  async findByCategoryId(categoryId) {
-    const products = await Product.find({ category: categoryId }).populate(
+  findById(productId) {
+    return Product.findOne({ _id: productId }).populate(
       'category',
       '_id, name'
     );
-    return products;
   }
 
-  async create(productInfo) {
-    const createdNewProduct = await Product.create(productInfo);
-    return createdNewProduct;
+  findByCategoryId(categoryId) {
+    return Product.find({ category: categoryId }).populate(
+      'category',
+      '_id, name'
+    );
   }
 
-  async findAll() {
-    const products = await Product.find({}).populate('category', '_id, name');
-    return products;
+  create(productInfo) {
+    return Product.create(productInfo);
+  }
+
+  findAll() {
+    return Product.find({}).populate('category', '_id, name');
   }
 
   async update({ productId, update }) {
     const filter = { _id: productId };
     const option = { returnOriginal: false };
-
     const updatedProduct = await Product.findOneAndUpdate(
       filter,
       update,
       option
     );
+
     return updatedProduct;
   }
 
-  async delete(productId) {
-    const product = await Product.deleteOne({ _id: productId });
-    return product;
+  delete(productId) {
+    return Product.deleteOne({ _id: productId });
   }
 }
 

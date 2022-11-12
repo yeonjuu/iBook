@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import is from '@sindresorhus/is';
 import { productService } from '../services';
+import { adminCheck, emptyObejctCheck } from '../middlewares';
 import multer from 'multer';
 
 const productRouter = Router();
@@ -25,60 +25,56 @@ productRouter.post(
     }
 
     res.json({ images });
-    console.log(req.files);
   }
 );
 
-productRouter.post('/', async (req, res, next) => {
-  try {
-    if (is.emptyObject(req.body)) {
-      throw new Error(
-        'headers의 Content-Type을 application/json으로 설정해주세요'
-      );
+productRouter.post(
+  '/',
+  adminCheck,
+  emptyObejctCheck,
+  async (req, res, next) => {
+    try {
+      const {
+        title,
+        author,
+        price,
+        publisher,
+        images,
+        description,
+        rate,
+        categoryId,
+      } = req.body;
+      const newProduct = await productService.addProduct({
+        title,
+        author,
+        price,
+        publisher,
+        images,
+        description,
+        rate,
+        category: categoryId,
+      });
+
+      res.status(201).json(newProduct);
+    } catch (error) {
+      next(error);
     }
-
-    // req (request)의 body 에서 데이터 가져오기
-    const {
-      title,
-      author,
-      price,
-      publisher,
-      images,
-      description,
-      rate,
-      categoryId,
-    } = req.body;
-
-    // 위 데이터를 상품 db에 추가하기
-    const newProduct = await productService.addProduct({
-      title,
-      author,
-      price,
-      publisher,
-      images,
-      description,
-      rate,
-      category: categoryId,
-    });
-
-    res.status(201).json(newProduct);
-  } catch (error) {
-    next(error);
   }
-});
+);
 
 productRouter.get('/', async function (req, res, next) {
   try {
     const categoryId = req.query.categoryId;
+    const page = req.query.page;
+    const perPage = req.query.perPage;
     let products;
 
     if (categoryId) {
       products = await productService.getProductsByCategoryId(categoryId);
     } else {
-      products = await productService.getProducts();
+      products = await productService.getProducts(page, perPage);
     }
 
-    // 상품 목록(배열)을 JSON 형태로 프론트에 보냄
     res.status(200).json(products);
   } catch (error) {
     next(error);
@@ -96,57 +92,59 @@ productRouter.get('/:productId', async function (req, res, next) {
   }
 });
 
-// 상품 정보 수정
-productRouter.put('/:productId', async function (req, res, next) {
-  try {
-    if (is.emptyObject(req.body)) {
-      throw new Error(
-        'headers의 Content-Type을 application/json으로 설정해주세요'
+productRouter.put(
+  '/:productId',
+  adminCheck,
+  emptyObejctCheck,
+  async function (req, res, next) {
+    try {
+      const productId = req.params.productId;
+      const {
+        title,
+        author,
+        price,
+        publisher,
+        images,
+        description,
+        rate,
+        categoryId,
+      } = req.body;
+      const productInfoRequired = { productId };
+      const toUpdate = {
+        ...(title && { title }),
+        ...(author && { author }),
+        ...(price && { price }),
+        ...(publisher && { publisher }),
+        ...(images && { images }),
+        ...(description && { description }),
+        ...(rate && { rate }),
+        ...(categoryId && { category: categoryId }),
+      };
+      const updatedProductInfo = await productService.setProduct(
+        productInfoRequired,
+        toUpdate
       );
+
+      res.status(200).json(updatedProductInfo);
+    } catch (error) {
+      next(error);
     }
-
-    const productId = req.params.productId;
-
-    const { title, author, price, publisher, images, description, rate } =
-      req.body;
-
-    const productInfoRequired = { productId };
-
-    // 위 데이터가 undefined가 아니라면, 즉, 프론트에서 업데이트를 위해
-    // 보내주었다면, 업데이트용 객체에 삽입함.
-    const toUpdate = {
-      ...(title && { title }),
-      ...(author && { author }),
-      ...(price && { price }),
-      ...(publisher && { publisher }),
-      ...(images && { images }),
-      ...(description && { description }),
-      ...(rate && { rate }),
-    };
-
-    // 상품 정보를 업데이트함.
-    const updatedProductInfo = await productService.setProduct(
-      productInfoRequired,
-      toUpdate
-    );
-
-    // 업데이트 이후의 상품 데이터를 프론트에 보내 줌
-    res.status(200).json(updatedProductInfo);
-  } catch (error) {
-    next(error);
   }
-});
+);
 
-productRouter.delete('/:productId', async function (req, res, next) {
-  try {
-    const productId = req.params.productId;
+productRouter.delete(
+  '/:productId',
+  adminCheck,
+  async function (req, res, next) {
+    try {
+      const productId = req.params.productId;
+      const product = await productService.removeProduct(productId);
 
-    const product = await productService.removeProduct(productId);
-
-    res.status(200).json(product);
-  } catch (error) {
-    next(error);
+      res.status(200).json(product);
+    } catch (error) {
+      next(error);
+    }
   }
-});
+);
 
 export { productRouter };
