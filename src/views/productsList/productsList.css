@@ -210,9 +210,10 @@
     font-size: medium;
     font-weight: bold;
     border-style: none;
+    cursor: pointer;
   }
 
-  #cartBtn.hover {
+  #cartBtn:hover {
     background-color: #3274aa;
   }
 
@@ -225,6 +226,7 @@
     font-size: medium;
     font-weight: bold;
     border-style: none;
+    cursor: pointer;
   }
 
   #buyBtn:hover {

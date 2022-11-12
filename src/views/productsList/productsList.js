@@ -73,7 +73,7 @@ async function showProductsList() {
             <button class="${
               productsList[i]._id
             }" id="cartBtn">장바구니</button>
-            <button class="${productsList[i]._id}" id="buyBtn">구매하기</button>
+            <button class="${productsList[i]._id}" id="buyBtn">바로구매</button>
             </div>
         </div>
         <div class="bottomLine"></div>

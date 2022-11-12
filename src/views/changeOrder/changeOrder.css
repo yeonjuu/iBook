@@ -111,7 +111,6 @@ ul {
   margin-left: 15px;
 }
 
-
 .menuOnTopright .headerMenu {
   display: flex;
   flex-direction: row;
@@ -246,10 +245,12 @@ ul {
 
 .orderBtnBox button:first-child {
   cursor: pointer;
+  border: none;
 }
 
 .orderBtnBox button:last-child {
   cursor: pointer;
+  border: none;
 }
 .delBtnBox {
   display: flex;
