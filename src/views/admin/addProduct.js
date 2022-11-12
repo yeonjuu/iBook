@@ -70,7 +70,7 @@ function handleSubmit() {
       preview.removeChild(preview.firstChild);
       productInfo.reset();
     } catch (err) {
-      console.log(err);
+      alert(err);
     }
   });
 }
