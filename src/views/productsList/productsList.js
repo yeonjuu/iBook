@@ -118,8 +118,20 @@ async function showProductsList() {
   const buyBtn = document.querySelectorAll('#buyBtn');
 
   async function buyHandler(e) {
+
+    if (!isLogin) {
+      let isGo = confirm(
+        '로그인이 필요한 서비스입니다. \n로그인창으로 이동하시겠습니까?'
+      );
+      if (isGo) {
+        window.location.href = '/login';
+      }
+    } else {
+      localStorage.removeItem('orderId');
+
     const id = e.target.classList[0];
     const product = await Api.get('/api/products', id);
+    
 
     const cartItem = {
       id,
@@ -131,7 +143,8 @@ async function showProductsList() {
     };
     //console.log(cartItem);
     localStorage.setItem('cart', JSON.stringify(cartItem));
-    window.location.href = '/order';
+    window.location.href = '/order';}
+
   }
 
   buyBtn.forEach((i) => i.addEventListener('click', buyHandler));
