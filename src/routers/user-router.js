@@ -110,7 +110,6 @@ userRouter.put(
   async function (req, res, next) {
     try {
       const userId = req.params.userId;
-      console.log(req.body);
       const {
         fullName,
         password,
